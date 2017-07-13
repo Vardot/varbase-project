@@ -33,8 +33,8 @@
             "docroot/modules/contrib/{$name}": [
                 "type:drupal-module"
             ],
-            "docroot/profiles/contrib/social": [
-                "goalgorilla/open_social"
+            "docroot/profiles/contrib/varbase": [
+                "vardot/varbase"
             ],
             "docroot/profiles/contrib/{$name}": [
                 "type:drupal-profile"
