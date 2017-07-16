@@ -5,6 +5,12 @@
     "license": "GPL-2.0+",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
     "require": {
         "php": ">=5.6",
         "composer/installers": "^1.2.0",
@@ -13,12 +19,6 @@
         "drupal/drupal-library-installer-plugin": "~0.3",
         "vardot/varbase": "8.4.x-dev"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
-    ],
     "scripts": {
       "post-install-cmd": [
         "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
@@ -30,10 +30,10 @@
     "extra": {
         "installer-paths": {
             "docroot/core": ["drupal/core"],
-            "docroot/profiles/varbase": ["vardot/varbase"],
-            "docroot/profiles/varbase/modules/contrib/{$name}": ["type:drupal-module"],
-            "docroot/profiles/varbase/themes/contrib/{$name}": ["type:drupal-theme"],
-            "docroot/profiles/varbase/libraries/{$name}": ["type:drupal-library"],
+            "docroot/profiles/{$name}": ["type:drupal-profile"],
+            "docroot/modules/contrib/{$name}": ["type:drupal-module"],
+            "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
+            "docroot/libraries/{$name}": ["type:drupal-library"],
             "drush/contrib/{$name}": ["type:drupal-drush"]
         },
         "enable-patching": true
