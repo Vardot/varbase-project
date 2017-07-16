@@ -30,10 +30,10 @@
     "extra": {
         "installer-paths": {
             "docroot/core": ["drupal/core"],
-            "docroot/modules/contrib/{$name}": ["type:drupal-module"],
-            "docroot/profiles/contrib/social": ["goalgorilla/open_social"],
-            "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
+            "docroot/profiles/varbase": ["vardot/varbase"],
+            "docroot/profiles/varbase/modules/contrib/{$name}": ["type:drupal-module"],
+            "docroot/profiles/varbase/themes/contrib/{$name}": ["type:drupal-theme"],
+            "docroot/profiles/varbase/libraries/{$name}": ["type:drupal-library"],
             "drush/contrib/{$name}": ["type:drupal-drush"]
         },
         "enable-patching": true
