@@ -3,8 +3,6 @@
     "description": "Varbase project template.",
     "type": "project",
     "license": "GPL-2.0+",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": [
         {
             "type": "composer",
@@ -19,13 +17,38 @@
         "drupal/drupal-library-installer-plugin": "~0.3",
         "vardot/varbase": "8.4.x-dev"
     },
+    "config": {
+        "bin-dir": "bin/",
+        "secure-http": false
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+      "autoload": {
+        "classmap": [
+          "scripts/composer/ScriptHandler.php",
+          "scripts/varbase/Procedures.php"
+        ]
+    },
     "scripts": {
-      "post-install-cmd": [
-        "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-      ],
-      "post-update-cmd": [
-        "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-      ]
+        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+        "post-drupal-scaffold-cmd": [
+          "Vardot\\Varbase\\Procedures::postDrupalScaffoldProcedure"
+        ],
+        "pre-install-cmd": [
+          "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "pre-update-cmd": [
+          "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "post-install-cmd": [
+          "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ],
+        "post-update-cmd": [
+          "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ]
     },
     "extra": {
         "installer-paths": {
