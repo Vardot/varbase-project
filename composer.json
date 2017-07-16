@@ -29,12 +29,33 @@
     },
     "extra": {
         "installer-paths": {
+<<<<<<< HEAD
             "docroot/core": ["drupal/core"],
             "docroot/modules/contrib/{$name}": ["type:drupal-module"],
             "docroot/profiles/contrib/social": ["goalgorilla/open_social"],
             "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
             "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"]
+=======
+            "docroot/core": [
+                "drupal/core"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/profiles/contrib/varbase": [
+                "vardot/varbase"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+>>>>>>> b5797299b601650ada78506ed774108fddf340ff
         },
         "enable-patching": true
     }
