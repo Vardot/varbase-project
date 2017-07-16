@@ -59,12 +59,6 @@ class Procedures {
       // Alter development.services.yml to have Varbase's Local development services.
       copy($root . '/profiles/varbase/src/assets/development.services.yml', $root . '/sites/development.services.yml');
     }
-
-    // Copy ACE librarary into /modules/contrib/ace_editor/libraries.
-    if ($fs->exists($root . '/profiles/varbase/libraries/ace/src-min-noconflict/ace.js')) {
-      mkdir($root . '/profiles/varbase/modules/contrib/ace_editor/libraries', 0777, true);
-      rename($root . '/profiles/varbase/libraries/ace', $root . '/profiles/varbase/modules/contrib/ace_editor/libraries/ace');
-    }
   }
   
 }
