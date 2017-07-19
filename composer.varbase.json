@@ -18,15 +18,9 @@
     "drupal/drupal-library-installer-plugin": "~0.3",
     "vardot/varbase": "8.4.x-dev"
   },
-  "config": {
-    "bin-dir": "bin/",
-    "secure-http": false
-  },
   "conflict": {
     "drupal/drupal": "*"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "extra": {
     "merge-plugin": {
       "include": [

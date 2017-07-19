@@ -3,23 +3,14 @@
   "description": "Varbase Project",
   "type": "project",
   "license": "GPL-2.0+",
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-    }
-  ],
   "require": {
     "php": ">=5.6",
     "composer/installers": "^1.2.0",
-    "cweagans/composer-patches": "^1.6.0",
-    "wikimedia/composer-merge-plugin": "~1.4",
-    "drupal-composer/drupal-scaffold": "^2.2.0",
-    "drupal/drupal-library-installer-plugin": "~0.3"
+    "wikimedia/composer-merge-plugin": "~1.4"
   },
   "config": {
-      "bin-dir": "bin/",
-      "secure-http": false
+    "bin-dir": "bin/",
+    "secure-http": false
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -35,15 +26,6 @@
       "merge-extra": true,
       "merge-extra-deep": false,
       "merge-scripts": true
-    },
-    "installer-paths": {
-      "docroot/core": ["drupal/core"],
-      "docroot/profiles/{$name}": ["type:drupal-profile"],
-      "docroot/modules/contrib/{$name}": ["type:drupal-module"],
-      "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
-      "docroot/libraries/{$name}": ["type:drupal-library"],
-      "drush/contrib/{$name}": ["type:drupal-drush"]
-    },
-    "enable-patching": true
+    }
   }
 }
