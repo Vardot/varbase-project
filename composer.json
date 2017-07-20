@@ -3,6 +3,17 @@
   "description": "Varbase Project",
   "type": "project",
   "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Vardot",
+      "homepage": "https://github.com/vardot",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "issues": "http://drupal.org/project/issues/varbase",
+    "source": "http://cgit.drupalcode.org/varbase"
+  },
   "require": {
     "php": ">=5.6",
     "composer/installers": "^1.2.0",
@@ -24,7 +35,7 @@
       "ignore-duplicates": false,
       "merge-dev": true,
       "merge-extra": true,
-      "merge-extra-deep": false,
+      "merge-extra-deep": true,
       "merge-scripts": true
     }
   }
