@@ -31,11 +31,7 @@
   },
   "config": {
     "bin-dir": "bin/",
-    "secure-http": false,
-    "preferred-install": "source",
-    "classmap-authoritative": true,
-    "prepend-autoloader": false,
-    "optimize-autoloader": true
+    "secure-http": false
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
