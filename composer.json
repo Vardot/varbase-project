@@ -33,7 +33,7 @@
     "bin-dir": "bin/",
     "secure-http": false,
     "sort-packages": true,
-    "preferred-install": "dist"
+    "preferred-install": "source"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
