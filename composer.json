@@ -1,6 +1,6 @@
 {
   "name": "vardot/varbase-project",
-  "description": "Varbase Project",
+  "description": "Project template for Varbase distribution.",
   "type": "project",
   "license": "GPL-2.0+",
   "authors": [
