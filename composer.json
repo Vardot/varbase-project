@@ -33,7 +33,6 @@
     "bin-dir": "bin/",
     "secure-http": false,
     "sort-packages": true,
-    "preferred-install": "source",
     "classmap-authoritative": true,
     "prepend-autoloader": false,
     "optimize-autoloader": true
@@ -48,7 +47,7 @@
       "include": [
         "docroot/profiles/varbase/composer.json"
       ],
-      "recurse": false,
+      "recurse": true,
       "replace": false,
       "merge-dev": true,
       "merge-extra": false,
