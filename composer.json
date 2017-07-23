@@ -33,7 +33,10 @@
     "bin-dir": "bin/",
     "secure-http": false,
     "sort-packages": true,
-    "preferred-install": "source"
+    "preferred-install": "source",
+    "classmap-authoritative": true,
+    "prepend-autoloader": false,
+    "optimize-autoloader": true
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
