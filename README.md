@@ -48,10 +48,10 @@ To run the automated testing with behat you will need to change the [ wd_host an
       
 Testing scenarios are tagged with the Behat tags of:
 
-@local = Local
-@development = Development server.
-@staging = Staging and testing server.
-@production = Production live server.
+* **@local = Local**
+* **@development = Development server.**
+* **@staging = Staging and testing server.**
+* **@production = Production live server.**
 
 So that we only run bin/behat --tags with the right tag for the environment.
 
