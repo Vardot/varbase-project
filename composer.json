@@ -32,8 +32,6 @@
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
-    "classmap-authoritative": true,
-    "prepend-autoloader": false,
     "optimize-autoloader": true
   },
   "minimum-stability": "dev",
