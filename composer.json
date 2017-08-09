@@ -27,7 +27,7 @@
     "wikimedia/composer-merge-plugin": "~1.4",
     "drupal-composer/drupal-scaffold": "^2.2.0",
     "drupal/drupal-library-installer-plugin": "~0.3",
-    "vardot/varbase": "8.4.x-dev"
+    "vardot/varbase": "8.4.06"
   },
   "config": {
     "bin-dir": "bin/",
