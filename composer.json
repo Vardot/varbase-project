@@ -33,6 +33,8 @@
     "bin-dir": "bin/",
     "secure-http": false,
     "preferred-install": "dist",
+    "classmap-authoritative": true,
+    "prepend-autoloader": true,
     "optimize-autoloader": true
   },
   "minimum-stability": "dev",
