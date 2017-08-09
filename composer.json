@@ -32,9 +32,6 @@
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
-    "preferred-install": "dist",
-    "classmap-authoritative": true,
-    "prepend-autoloader": true,
     "optimize-autoloader": true
   },
   "minimum-stability": "dev",
@@ -50,7 +47,7 @@
       "recurse": false,
       "replace": false,
       "merge-dev": true,
-      "merge-extra": true,
+      "merge-extra": false,
       "merge-extra-deep": false,
       "merge-scripts": false
     },
