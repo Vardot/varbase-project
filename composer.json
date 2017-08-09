@@ -52,7 +52,7 @@
       "merge-dev": true,
       "merge-extra": true,
       "merge-extra-deep": false,
-      "merge-scripts": true
+      "merge-scripts": false
     },
     "installer-paths": {
       "docroot/core": ["drupal/core"],
