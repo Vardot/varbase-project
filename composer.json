@@ -32,6 +32,7 @@
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
+    "preferred-install": "dist",
     "optimize-autoloader": true
   },
   "minimum-stability": "dev",
