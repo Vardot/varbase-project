@@ -27,11 +27,22 @@
     "wikimedia/composer-merge-plugin": "~1.4",
     "drupal-composer/drupal-scaffold": "^2.2.0",
     "drupal/drupal-library-installer-plugin": "~0.3",
-    "vardot/varbase": "8.4.x-dev"
+    "vardot/varbase": "8.4.06"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+      "find {vendor/,docroot/} -type d | grep '\\.git' | xargs rm -rf"
+    ],
+    "post-update-cmd": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+      "find {vendor/,docroot/} -type d | grep '\\.git' | xargs rm -rf"
+    ]
   },
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
+    "preferred-install": "dist",
     "optimize-autoloader": true
   },
   "minimum-stability": "dev",
