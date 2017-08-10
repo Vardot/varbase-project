@@ -33,7 +33,6 @@
     "bin-dir": "bin/",
     "secure-http": false,
     "preferred-install": "dist",
-    "discard-changes": true,
     "optimize-autoloader": true
   },
   "minimum-stability": "dev",
