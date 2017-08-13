@@ -26,7 +26,7 @@
     "cweagans/composer-patches": "^1.6.0",
     "drupal-composer/drupal-scaffold": "^2.2.0",
     "drupal/drupal-library-installer-plugin": "~0.3",
-    "vardot/varbase": "8.4.06"
+    "vardot/varbase": "8.4.x-dev"
   },
   "config": {
     "bin-dir": "bin/",
