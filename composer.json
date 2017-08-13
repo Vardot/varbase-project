@@ -24,16 +24,27 @@
     "php": ">=5.6",
     "composer/installers": "^1.2.0",
     "cweagans/composer-patches": "^1.6.0",
-    "wikimedia/composer-merge-plugin": "~1.4",
     "drupal-composer/drupal-scaffold": "^2.2.0",
     "drupal/drupal-library-installer-plugin": "~0.3",
-    "vardot/varbase": "8.4.x-dev"
+    "vardot/varbase": "8.4.06"
   },
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
-    "preferred-install": "dist",
     "optimize-autoloader": true
+  },
+  "scripts": {
+    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "post-install-cmd": [
+      "Varbase\\composer\\ScriptHandler::createRequiredFiles",
+      "Varbase\\composer\\ScriptHandler::removeGitDirectories",
+      "@composer drupal-scaffold"
+    ],
+    "post-update-cmd": [
+      "Varbase\\composer\\ScriptHandler::createRequiredFiles",
+      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
+    ],
+    "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"]
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -43,17 +54,6 @@
   "extra": {
     "branch-alias": {
       "dev-8.x-4.x": "8.4.x-dev"
-    },
-    "merge-plugin": {
-      "include": [
-        "docroot/profiles/varbase/composer.json"
-      ],
-      "recurse": true,
-      "replace": false,
-      "merge-dev": true,
-      "merge-extra": false,
-      "merge-extra-deep": false,
-      "merge-scripts": true
     },
     "installer-paths": {
       "docroot/core": ["drupal/core"],
