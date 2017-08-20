@@ -30,8 +30,7 @@
   },
   "config": {
     "bin-dir": "bin/",
-    "secure-http": false,
-    "optimize-autoloader": true
+    "secure-http": false
   },
   "scripts": {
     "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
