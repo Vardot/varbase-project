@@ -30,7 +30,8 @@ composer create-project vardot/varbase-project:8.4.x-dev PROJECT_DIR_NAME --stab
 
 
 
-## Notices
+
+# Notices
 
 ### Requiring Drupal Modules with Dev Version in varbase-project/composer.json
 You will notice that we're requiring some Drupal modules in dev state with its commit hash. This is because of a bug in Composer. And it was discussed in https://github.com/composer/composer/issues/6366 and is highlighted in Composer documentation as follows:
