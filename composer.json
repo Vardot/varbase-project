@@ -44,7 +44,8 @@
     "drupal/libraries": "3.x-dev#061ead081c92a6209b09eaf23b4e3103f360946e",
     "drupal/google_analytics_reports": "3.x-dev#2b6bb8efbc7f61ce3c1225638075aa6037b8db44",
     "drupal/login_destination": "1.x-dev#98892eb84eba6fe69d4fc48dc5b1fdaccb21c8a7",
-    "drupal/total_control": "2.x-dev#d5c4aea34daf4260a4948e1d0c2322ecfd2a973a"
+    "drupal/total_control": "2.x-dev#d5c4aea34daf4260a4948e1d0c2322ecfd2a973a",
+    "drupal/entity_clone": "1.x-dev#9265e359bd31bda693dac9ad84ad52fe63531488"
   },
   "config": {
     "bin-dir": "bin/",
