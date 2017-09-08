@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/Vardot/varbase.svg?branch=8.x-4.08)](https://travis-ci.org/Vardot/varbase/builds/273184767) Varbase 8.4.08
 
-# Varbase Project
-
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](https://www.drupal.org/project/varbase)
+
+# Varbase Project
 
 Project template for [Varbase distribution](http://www.drupal.org/project/varbase).
 
