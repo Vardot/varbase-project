@@ -22,8 +22,8 @@
   ],
   "require": {
     "composer/installers": "1.4.0",
-    "cweagans/composer-patches": "1.6.2",
-    "drupal-composer/drupal-scaffold": "2.3.0",
+    "cweagans/composer-patches": "1.6.4",
+    "drupal-composer/drupal-scaffold": "2.4.0",
     "drupal/drupal-library-installer-plugin": "0.3",
     "webflo/drupal-finder": "1.0",
     "webmozart/path-util": "2.3",
