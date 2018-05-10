@@ -22,6 +22,7 @@
   ],
   "require": {
     "composer/installers": "1.5.0",
+    "oomphinc/composer-installers-extender": "1.1.2",
     "cweagans/composer-patches": "1.6.4",
     "drupal-composer/drupal-scaffold": "2.4.0",
     "drupal/drupal-library-installer-plugin": "0.3",
