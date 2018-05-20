@@ -14,12 +14,16 @@
     "issues": "http://drupal.org/project/issues/varbase",
     "source": "http://cgit.drupalcode.org/varbase"
   },
-  "repositories": [
-    {
+  "repositories": {
+    "drupal": {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
+      },
+    "assets": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
     }
-  ],
+  },
   "require": {
     "composer/installers": "1.5.0",
     "oomphinc/composer-installers-extender": "1.1.2",
@@ -74,14 +78,20 @@
     "branch-alias": {
       "dev-8.x-5.x": "8.5.x-dev"
     },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ],
     "installer-paths": {
       "docroot/core": ["drupal/core"],
       "docroot/profiles/{$name}": ["type:drupal-profile"],
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
       "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
-      "docroot/libraries/{$name}": ["type:drupal-library"],
-      "docroot/modules/custom/{$name}": ["type:drupal-custom-module"],
-      "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"],
+      "docroot//libraries/{$name}": [
+          "type:drupal-library",
+          "type:bower-asset",
+          "type:npm-asset"
+      ],
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "enable-patching": true,
