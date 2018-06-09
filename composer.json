@@ -36,7 +36,7 @@
     "drupal/views_bootstrap": "3.x-dev#ec4e7872315db6a7287014b029c3167962647588",
     "drupal/extlink": "1.x-dev#8a773a6c5519ccb167e18cc39d68551b30b0e4b3",
     "drupal/image_resize_filter": "1.x-dev#c3f4b23b02005859092aaff746b9f21b794adc58",
-    "drupal/entity_clone": "1.x-dev#9265e359bd31bda693dac9ad84ad52fe63531488",
+    "drupal/entity_clone": "1.x-dev#6d0ce053605e9aaf8412927a9b0ea8da7a9a06e5",
     "drupal/tour_ui": "1.x-dev#5cf793c071aeddea0ecd20d80b541606bfe2aff1",
     "drupal/tour_builder": "1.x-dev#d70e898949b7ec4095efb391a0dbec56d0117558",
     "drupal/l10n_client": "1.x-dev#9bf8d597732870bdca301512c71b6e5d74d48db2",
