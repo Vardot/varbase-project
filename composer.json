@@ -27,7 +27,7 @@
     "drupal/drupal-library-installer-plugin": "0.3",
     "webflo/drupal-finder": "1.1.0",
     "webmozart/path-util": "2.3.0",
-    "vardot/varbase": "8.4.x-dev",
+    "vardot/varbase": "8.4.22",
     "drupal/views_bootstrap": "3.x-dev#ec4e7872315db6a7287014b029c3167962647588",
     "drupal/extlink": "1.x-dev#8a773a6c5519ccb167e18cc39d68551b30b0e4b3",
     "drupal/image_resize_filter": "1.x-dev#c3f4b23b02005859092aaff746b9f21b794adc58",
