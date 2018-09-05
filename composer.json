@@ -79,9 +79,7 @@
       "docroot/libraries/{$name}": ["type:drupal-library"],
       "docroot/modules/custom/{$name}": ["type:drupal-custom-module"],
       "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"],
-      "drush/contrib/{$name}": ["type:drupal-drush"],
-      "docroot/modules/custom/{$name}": ["type:drupal-custom-module"],
-      "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"]
+      "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true
