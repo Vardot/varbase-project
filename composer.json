@@ -52,7 +52,10 @@
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
-    "optimize-autoloader": true
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "drupal/core": "dist"
+    }
   },
   "scripts": {
     "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
