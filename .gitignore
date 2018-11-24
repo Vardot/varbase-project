@@ -1,11 +1,11 @@
 # Ignore paths that contain user-generated content.
-docroot/*/settings.local.php
 docroot/files
 docroot/sites/*/files
 docroot/sites/*/private
+docroot/sites/*/settings.local.php
+docroot/*/settings.local.php
 acquia-file
 /log
-docroot/sites/default/settings.local.php
 
 
 # Ignore vim swp files and gedit temp files
@@ -34,5 +34,3 @@ ehthumbs.db
 .bash_history
 .bashrc
 errors.log
-
-
