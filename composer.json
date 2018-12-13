@@ -55,6 +55,7 @@
   },
   "scripts": {
     "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "fetch-updater": "wget -O - -q https://raw.githubusercontent.com/Vardot/varbase-updater/master/scripts/update/update.php | php",
     "post-install-cmd": [
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
       "Varbase\\composer\\ScriptHandler::removeGitDirectories",
