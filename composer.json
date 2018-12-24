@@ -22,6 +22,10 @@
     "assets": {
       "type": "composer",
       "url": "https://asset-packagist.org"
+    },
+    "composer-patches": {
+      "type": "vcs",
+      "url": "https://github.com/vardot/composer-patches"
     }
   },
   "require": {
