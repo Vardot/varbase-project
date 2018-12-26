@@ -80,7 +80,7 @@
         "NOTICE: We're now using composer patches from Vardot repository to suggest",
         "several fixes and better handling of patches in your Drupal project.",
         "You'll notice that we have included (https://github.com/vardot/composer-patches)",
-        "in the this composer.json repositories. This will replace the original",
+        "in this composer.json repositories. This will replace the original",
         "library (cweagans/composer-patches) with our own from (vardot/composer-patches).",
         "See https://github.com/cweagans/composer-patches/pull/243 and more details",
         "on our changes on the composer-patches package. Once our changes get merged,",
