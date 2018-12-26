@@ -76,6 +76,20 @@
     "drupal/drupal": "*"
   },
   "extra": {
+    "_readme": [
+        "Added vardot/composer-patches repository #44",
+        "https://github.com/Vardot/varbase-project/issues/44",
+        "As it will fix issues of deleting some modules",
+        "which they do have patches over them. it will work on",
+        "composer require, composer update",
+        "as we have fixed issues with cweagans/composer-patches",
+        "https://github.com/cweagans/composer-patches/pull/243 and more.",
+        "but they still not merged yet, we went on the way of managing our own",
+        "vardot/composer-patches",
+        "https://github.com/Vardot/composer-patches/commits/master",
+        "To follow with the latest updates, you could have a look at",
+        "https://github.com/Vardot/varbase-project/blob/8.6.x/composer.json"
+    ],
     "branch-alias": {
       "dev-8.x-6.x": "8.6.x-dev"
     },
