@@ -36,7 +36,7 @@
     "drupal/drupal-library-installer-plugin": "^0.3",
     "webflo/drupal-finder": "~1.0",
     "webmozart/path-util": "~2.0",
-    "vardot/varbase": "8.6.x-dev",
+    "vardot/varbase": "~8.6.0",
     "vardot/varbase-updater": "~1.0",
     "drupal/image_resize_filter": "1.x-dev#c3f4b23b02005859092aaff746b9f21b794adc58",
     "drupal/entity_clone": "1.x-dev#6d0ce053605e9aaf8412927a9b0ea8da7a9a06e5",
@@ -77,14 +77,14 @@
   },
   "extra": {
     "_readme": [
-        "NOTICE: We're now using composer patches from Vardot repository to suggest",
-        "several fixes and better handling of patches in your Drupal project.",
-        "You'll notice that we have included (https://github.com/vardot/composer-patches)",
-        "in this composer.json repositories. This will replace the original",
-        "library (cweagans/composer-patches) with our own from (vardot/composer-patches).",
-        "See https://github.com/cweagans/composer-patches/pull/243 and more details",
-        "on our changes on the composer-patches package. Once our changes get merged,",
-        "we will revert to using (cweagans/composer-patches) without this override."
+      "NOTICE: We're now using composer patches from Vardot repository to suggest",
+      "several fixes and better handling of patches in your Drupal project.",
+      "You'll notice that we have included (https://github.com/vardot/composer-patches)",
+      "in this composer.json repositories. This will replace the original",
+      "library (cweagans/composer-patches) with our own from (vardot/composer-patches).",
+      "See https://github.com/cweagans/composer-patches/pull/243 and more details",
+      "on our changes on the composer-patches package. Once our changes get merged,",
+      "we will revert to using (cweagans/composer-patches) without this override."
     ],
     "branch-alias": {
       "dev-8.x-6.x": "8.6.x-dev"
