@@ -38,7 +38,6 @@
     "webmozart/path-util": "~2.0",
     "vardot/varbase": "8.6.x-dev",
     "vardot/varbase-updater": "~1.0",
-    "drupal/image_resize_filter": "1.x-dev#c3f4b23b02005859092aaff746b9f21b794adc58",
     "drupal/login_destination": "1.x-dev#54be8b89fdc073ca40af6b9b2eeb050e0aeb7908"
   },
   "config": {
