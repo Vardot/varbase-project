@@ -37,8 +37,7 @@
     "webflo/drupal-finder": "~1.0",
     "webmozart/path-util": "~2.0",
     "vardot/varbase": "8.6.x-dev",
-    "vardot/varbase-updater": "~1.0",
-    "drupal/login_destination": "1.x-dev#54be8b89fdc073ca40af6b9b2eeb050e0aeb7908"
+    "vardot/varbase-updater": "~1.0"
   },
   "config": {
     "bin-dir": "bin/",
