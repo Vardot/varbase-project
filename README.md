@@ -31,18 +31,3 @@ composer create-project vardot/varbase-project:8.6.x-dev PROJECT_DIR_NAME --stab
 
 ## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/8.x-6.x/UPDATE.md)
 
-
-
-
-# Notices
-
-### Requiring Drupal Modules with Dev Version in varbase-project/composer.json
-You will notice that we're requiring some Drupal modules in dev state with its commit hash. This is because of a bug in Composer. And it was discussed in https://github.com/composer/composer/issues/6366 and is highlighted in Composer documentation as follows:
-
-> Note: This feature has severe technical limitations, as the composer.json metadata will still be read from the branch name you specify before the hash. You should therefore only use this as a temporary solution during development to remediate transient issues, until you can switch to tagged releases. The Composer team does not actively support this feature and will not accept bug reports related to it.
-
-Therefore, our workaround, is to explicitly tag the commit hash we want in `varbase-project/composer.json`. This means that ALL Drupal modules dependencies which are in dev stage, are duplicated as a requirement for composer in both `varbase-project/composer.json` and `varbase/composer.json`.
-
-This workaround will remain, until either a module has a tag (that we can tag without the commit hash) or a fix is provided from composer - hopefully in the near future!
-
-Read more at: https://www.drupal.org/node/2903606#comment-12230769
