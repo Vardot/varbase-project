@@ -39,9 +39,6 @@
     "vardot/varbase": "8.6.x-dev",
     "vardot/varbase-updater": "8.1.x-dev"
   },
-  "replace": {
-    "ajaxorg/ace-builds": "*"
-  },
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
