@@ -32,7 +32,8 @@
     "composer/installers": "~1.0",
     "oomphinc/composer-installers-extender": "~1.0",
     "cweagans/composer-patches": "~1.0",
-    "drupal-composer/drupal-scaffold": "~2.0",
+    "drupal/core-composer-scaffold": "^8.8.0",
+    "drupal/core-project-message": "^8.8.0",
     "drupal/drupal-library-installer-plugin": "^0.3",
     "webflo/drupal-finder": "~1.0",
     "webmozart/path-util": "~2.0",
@@ -69,6 +70,30 @@
     "drupal/drupal": "*"
   },
   "extra": {
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "docroot/"
+      }
+    },
+    "drupal-core-project-message": {
+        "include-keys": ["homepage", "support"],
+        "post-create-project-cmd-message": [
+            "<bg=blue;fg=white>                                                         </>",
+            "<bg=blue;fg=white>  Congratulations, you’ve installed the Varbase codebase </>",
+            "<bg=blue;fg=white>  from the vardot/varbase-project template!              </>",
+            "<bg=blue;fg=white>                                                         </>",
+            "",
+            "<bg=yellow;fg=black>Next steps</>:",
+
+            "  * Install the site: https://www.drupal.org/docs/8/install",
+            "  * Read the user guide: https://docs.varbase.vardot.com",
+            "  * Get support: https://www.vardot.com/en/form/get-support-varbase",
+            "  * Join Our Slack Team for Feedback and Support:",
+            "      http://slack.varbase.vardot.com",
+            "  * Remove the plugin that prints this message:",
+            "      composer remove drupal/core-project-message"
+        ]
+    },
     "_readme": [
       "NOTICE: We're now using composer patches from Vardot repository to suggest",
       "several fixes and better handling of patches in your Drupal project.",
