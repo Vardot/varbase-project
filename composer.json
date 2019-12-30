@@ -41,7 +41,8 @@
     "vardot/varbase-updater": "1.x-dev"
   },
   "replace": {
-    "ajaxorg/ace-builds": "*"
+    "ajaxorg/ace-builds": "*",
+    "drupal-composer/drupal-scaffold": "*"
   },
   "config": {
     "bin-dir": "bin/",
@@ -55,8 +56,7 @@
     "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
     "post-install-cmd": [
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
-      "Varbase\\composer\\ScriptHandler::removeGitDirectories",
-      "@composer drupal-scaffold"
+      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
     ],
     "post-update-cmd": [
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
