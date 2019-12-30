@@ -42,7 +42,8 @@
   },
   "replace": {
     "ajaxorg/ace-builds": "*",
-    "drupal-composer/drupal-scaffold": "*"
+    "drupal-composer/drupal-scaffold": "*",
+    "drupal/core-composer-scaffold": "*"
   },
   "config": {
     "bin-dir": "bin/",
