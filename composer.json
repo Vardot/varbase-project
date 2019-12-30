@@ -65,8 +65,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "conflict": {
-    "drupal/drupal": "*",
-    "drupal/core-composer-scaffold": "*"
+    "drupal/drupal": "*"
   },
   "extra": {
     "drupal-scaffold": {
