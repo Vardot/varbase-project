@@ -66,10 +66,14 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "conflict": {
-    "drupal/drupal": "*"
+    "drupal/drupal": "*",
+    "drupal/core-composer-scaffold": "*"
   },
   "extra": {
     "drupal-scaffold": {
+      "allowed-packages": [
+        "drupal/core"
+      ],
       "locations": {
         "web-root": "docroot/"
       }
