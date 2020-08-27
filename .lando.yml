@@ -8,13 +8,13 @@ services:
   appserver:
     scanner: false
     build:
-      - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check"
+      - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check phpunit/phpunit"
       - 'export PATH="/var/www/.composer/vendor/bin"'
       - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www"
   node:
     type: node
     build:
-      - "npm install jshint csslint -g"
+      - "yarn install -y"
 tooling:
   phpcs:
     service: appserver
@@ -31,13 +31,13 @@ tooling:
     cmd: "php /var/www/twig-lint.phar"
     options:
     description: Run twig-lint for given folder or file.
-  jshint:
+  eslint:
     service: node
-    cmd: "jshint"
+    cmd: "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json"
     options:
     description: Run jshint for given folder or file.
-  csslint:
+  stylelint:
     service: node
-    cmd: "csslint"
+    cmd: "npx stylelint --config .stylelintrc.json"
     options:
-    description: Run csslint for given folder or file.
+    description: Run stylelint for given folder or file.

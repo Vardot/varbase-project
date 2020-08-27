@@ -34,3 +34,7 @@ ehthumbs.db
 .bash_history
 .bashrc
 errors.log
+
+# Ignore yarn lint dependencies.
+node_modules
+yarn.lock
