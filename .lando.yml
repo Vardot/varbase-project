@@ -15,6 +15,12 @@ services:
     type: node
     build:
       - "yarn install -y"
+#  memcache:
+#    type: memcached
+#  solr:
+#    type: solr:8.4
+#    config:
+#      dir: docroot/modules/contrib/search_api_solr/solr-conf/7.x
 tooling:
   phpcs:
     service: appserver
