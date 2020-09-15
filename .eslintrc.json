@@ -20,7 +20,9 @@
     "CKEDITOR": true
   },
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error", {
+      "trailingComma": "none"
+    }],
     "consistent-return": ["off"],
     "no-underscore-dangle": ["off"],
     "max-nested-callbacks": ["warn", 3],
@@ -43,6 +45,7 @@
     "func-names": 0,
     "no-use-before-define": 0,
     "one-var": 0,
-    "operator-linebreak": ["error", "after", { "overrides": { "?": "ignore", ":": "ignore" } }]
+    "operator-linebreak": ["error", "after", { "overrides": { "?": "ignore", ":": "ignore" } }],
+    "prefer-template": 0
   }
 }
