@@ -1,0 +1,4 @@
+**/*.min.js
+**/gulpfile.js
+**/bootstrap
+**/node_modules

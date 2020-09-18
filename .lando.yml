@@ -1,0 +1,49 @@
+name: varbase
+recipe: drupal8
+config:
+  webroot: docroot
+  php: '7.3'
+  drush: ^9
+services:
+  appserver:
+    scanner: false
+    build:
+      - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check phpunit/phpunit"
+      - 'export PATH="/var/www/.composer/vendor/bin"'
+      - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www"
+  node:
+    type: node
+    build:
+      - "yarn install -y"
+#  memcache:
+#    type: memcached
+#  solr:
+#    type: solr:8.4
+#    config:
+#      dir: docroot/modules/contrib/search_api_solr/solr-conf/7.x
+tooling:
+  phpcs:
+    service: appserver
+    cmd: "phpcs"
+    options:
+    description: Run phpcs for given folder or file.
+  drupal-check:
+    service: appserver
+    cmd: "drupal-check"
+    options:
+    description: Run drupal-check for given folder or file.
+  twig-lint:
+    service: appserver
+    cmd: "php /var/www/twig-lint.phar"
+    options:
+    description: Run twig-lint for given folder or file.
+  eslint:
+    service: node
+    cmd: "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json"
+    options:
+    description: Run jshint for given folder or file.
+  stylelint:
+    service: node
+    cmd: "npx stylelint --config .stylelintrc.json"
+    options:
+    description: Run stylelint for given folder or file.

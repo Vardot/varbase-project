@@ -1,6 +1,6 @@
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
-[![Build Status](https://travis-ci.org/Vardot/varbase.svg?branch=9.0.x)](https://travis-ci.com/github/Vardot/varbase/builds/169345649) Varbase 8.8.5
+[![Build Status](https://travis-ci.org/Vardot/varbase.svg?branch=8.x-8.6)](https://travis-ci.com/github/Vardot/varbase/builds/181054075) Varbase 8.8.6
 
 # Varbase Project
 
@@ -17,9 +17,16 @@ composer create-project vardot/varbase-project:9.0.x-dev PROJECT_DIR_NAME --stab
 
 ## [Automated Functional Testing](https://github.com/Vardot/varbase/blob/9.0.x/tests/README.md)
 
-## [Varbase Gherkin features](https://github.com/Vardot/varbase/blob/9.0.x/tests/features/varbase/README.md)
+1. Install lando locally, steps for installing can be found [here](https://docs.lando.dev/basics/installation.html).
+2. Run lando start.
 
 ## [Varbase 9.0.x Developer Guide](https://docs.varbase.vardot.com)
+
+## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/9.0.x/CHANGELOG.md)
+
+## [Varbase Gherkin features](https://github.com/Vardot/varbase/blob/9.0.x/tests/features/varbase/README.md)
+
+## [Varbase Developer Guide](https://docs.varbase.vardot.com)
 
 ## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/9.0.x/CHANGELOG.md)
 
