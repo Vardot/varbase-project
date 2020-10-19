@@ -37,7 +37,7 @@
     "drupal/drupal-library-installer-plugin": "^0.3",
     "webflo/drupal-finder": "~1.0",
     "webmozart/path-util": "~2.0",
-    "vardot/varbase": "~9.0",
+    "vardot/varbase": "9.0.x-dev",
     "vardot/varbase-updater": "2.x-dev"
   },
   "replace": {
