@@ -37,7 +37,7 @@
     "drupal/drupal-library-installer-plugin": "^0.3",
     "webflo/drupal-finder": "~1.0",
     "webmozart/path-util": "~2.0",
-    "vardot/varbase": "9.0.x-dev",
+    "vardot/varbase": "~9.0",
     "vardot/varbase-updater": "2.x-dev"
   },
   "replace": {
@@ -106,7 +106,7 @@
       "we will revert to using (cweagans/composer-patches) without this override."
     ],
     "branch-alias": {
-      "dev-8.x-8.x": "8.8.x-dev"
+      "dev-9.0.x": "9.0.x-dev"
     },
     "installer-types": [
       "bower-asset",
@@ -120,7 +120,6 @@
       "docroot/libraries/slick": ["npm-asset/slick-carousel"],
       "docroot/libraries/ace": ["npm-asset/ace-builds"],
       "docroot/libraries/jquery-ui-touch-punch": ["bower-asset/jqueryui-touch-punch"],
-      "docroot/libraries/masonry": ["npm-asset/masonry-layout"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
         "type:bower-asset",
@@ -141,7 +140,6 @@
         {"name": "c3","package": "bower-asset/c3"},
         {"name": "d3", "package": "bower-asset/d3"},
         {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
-        {"name": "masonry", "package": "npm-asset/masonry-layout"},
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
         {"name": "swagger-ui", "package": "swagger-api/swagger-ui"}
       ]
