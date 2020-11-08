@@ -1,6 +1,6 @@
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
-[![Build Status](https://travis-ci.org/Vardot/varbase.svg?branch=9.0.0-alpha1)](https://travis-ci.com/github/Vardot/varbase) Varbase 9.0.0-alpha1
+[![Build Status](https://travis-ci.org/Vardot/varbase.svg?branch=9.0.0-beta1)](https://travis-ci.com/github/Vardot/varbase) Varbase 9.0.0-alpha1
 
 # Varbase Project
 
