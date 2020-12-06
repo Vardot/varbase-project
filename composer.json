@@ -36,8 +36,8 @@
     "drupal/core-project-message": "^8.8.0",
     "webflo/drupal-finder": "~1.0",
     "webmozart/path-util": "~2.0",
-    "vardot/varbase": "~8.8.0",
-    "vardot/varbase-updater": "~1.0"
+    "vardot/varbase": "8.8.x-dev",
+    "vardot/varbase-updater": "1.x-dev"
   },
   "config": {
     "bin-dir": "bin/",
