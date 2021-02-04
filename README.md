@@ -1,6 +1,6 @@
-[![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/8.x-8.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase?branch=8.x-8.x) Varbase 8.8.x
 
-[![Build Status](https://travis-ci.org/Vardot/varbase.svg?branch=8.x-8.8)](https://travis-ci.com/github/Vardot/varbase/builds/206868303) Varbase 8.8.8
+[![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
 # Varbase Project
 
