@@ -2,7 +2,7 @@ name: varbase
 recipe: drupal8
 config:
   webroot: docroot
-  php: '7.3'
+  php: '7.4'
   drush: ^9
 services:
   appserver:
