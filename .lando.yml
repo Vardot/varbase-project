@@ -1,5 +1,5 @@
 name: varbase
-recipe: drupal8
+recipe: drupal9
 config:
   webroot: docroot
   php: '7.3'
