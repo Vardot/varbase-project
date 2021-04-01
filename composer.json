@@ -23,6 +23,10 @@
       "type": "composer",
       "url": "https://asset-packagist.org"
     },
+    "drupal-ckeditor-plugins": {
+      "type": "composer",
+      "url": "https://panopoly.gitlab.io/drupal-ckeditor-plugins"
+    },
     "composer-patches": {
       "type": "vcs",
       "url": "https://github.com/vardot/composer-patches"
@@ -138,7 +142,10 @@
         {"name": "d3", "package": "bower-asset/d3"},
         {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
-        {"name": "swagger-ui", "package": "swagger-api/swagger-ui"}
+        {"name": "swagger-ui", "package": "swagger-api/swagger-ui"},
+        {"name": "link", "package": "drupal-ckeditor-plugin/link"},
+        {"name": "fakeobjects", "package": "drupal-ckeditor-plugin/fakeobjects"}
+
       ]
     },
     "enable-patching": true,
