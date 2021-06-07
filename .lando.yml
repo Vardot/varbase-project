@@ -13,7 +13,7 @@ services:
       - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www"
     xdebug: true
     config:
-      php: .php.ini
+      php: .lando/.php.ini
   node:
     type: node
     build:
