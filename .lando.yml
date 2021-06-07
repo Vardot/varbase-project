@@ -11,6 +11,9 @@ services:
       - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check phpunit/phpunit"
       - 'export PATH="/var/www/.composer/vendor/bin"'
       - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www"
+    xdebug: true
+    config:
+      php: .lando/.php.ini
   node:
     type: node
     build:
