@@ -22,9 +22,6 @@ composer create-project vardot/varbase-project:9.0.x-dev PROJECT_DIR_NAME --stab
 
 ## [Automated Functional Testing](https://github.com/Vardot/varbase/blob/9.0.x/tests/README.md)
 
-1. Install lando locally, steps for installing can be found [here](https://docs.lando.dev/basics/installation.html).
-2. Run lando start.
-
 ## [Varbase 9.0.x Developer Guide](https://docs.varbase.vardot.com)
 
 ## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/9.0.x/CHANGELOG.md)
@@ -37,7 +34,12 @@ composer create-project vardot/varbase-project:9.0.x-dev PROJECT_DIR_NAME --stab
 
 ## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/9.0.x/UPDATE.md)
 
-## Debugging using lando
+## Local development with Lando
 
-- xDebug is enabled on lando by default for PHP debugging.
+1. Install Lando locally, steps for installing can be found [here](https://docs.lando.dev/basics/installation.html).
+2. Run Lando start.
+
+## Debugging using Lando
+
+- xDebug is enabled on Lando by default for PHP debugging.
 - The debugger is set to listen for the port 9003 but can be changed in .lando/.php.ini
