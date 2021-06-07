@@ -36,3 +36,8 @@ composer create-project vardot/varbase-project:9.0.x-dev PROJECT_DIR_NAME --stab
 ## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/9.0.x/CHANGELOG.md)
 
 ## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/9.0.x/UPDATE.md)
+
+## Debugging using lando
+
+- xDebug is enabled on lando by default for PHP debugging.
+- The debugger is set to listen for the port 9003 but can be changed in .lando/.php.ini
