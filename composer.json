@@ -142,8 +142,7 @@
         {"name": "d3", "package": "bower-asset/d3"},
         {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
-        {"name": "swagger-ui", "package": "swagger-api/swagger-ui"},
-        {"name": "fakeobjects", "package": "drupal-ckeditor-plugin/fakeobjects"}
+        {"name": "swagger-ui", "package": "swagger-api/swagger-ui"}
       ]
     },
     "enable-patching": true,
