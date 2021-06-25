@@ -17210,6 +17210,18 @@
             ]
         },
         {
+            "name": "npm-asset/swagger-ui-dist",
+            "version": "3.51.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/swagger-ui-dist/-/swagger-ui-dist-3.51.0.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "Apache-2.0"
+            ]
+        },
+        {
             "name": "oomphinc/composer-installers-extender",
             "version": "2.0.0",
             "source": {
@@ -20446,16 +20458,16 @@
         },
         {
             "name": "vardot/varbase",
-            "version": "8.8.10",
+            "version": "8.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
-                "reference": "48f32997489999214fdbf050a0c7b41447dc1dc3"
+                "reference": "1ae5d8258dbabeb13f30c24c233c79746c934cb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase/zipball/48f32997489999214fdbf050a0c7b41447dc1dc3",
-                "reference": "48f32997489999214fdbf050a0c7b41447dc1dc3",
+                "url": "https://api.github.com/repos/Vardot/varbase/zipball/1ae5d8258dbabeb13f30c24c233c79746c934cb7",
+                "reference": "1ae5d8258dbabeb13f30c24c233c79746c934cb7",
                 "shasum": ""
             },
             "require": {
@@ -20484,19 +20496,19 @@
                 "drupal/varbase_seo": "~6.0",
                 "drupal/varbase_styleguide": "~6.0",
                 "drupal/varbase_total_control": "~6.0",
-                "drupal/varbase_workflow": "~2.0.0",
+                "drupal/varbase_workflow": "~2.0",
                 "drupal/vartheme": "~6.0",
                 "drupal/vartheme_admin": "~6.0",
                 "drupal/vartheme_bs4": "~6.0",
-                "drupal/vartheme_claro": "~2.1.0",
+                "drupal/vartheme_claro": "~2.0",
                 "npm-asset/ace-builds": "~1.0",
                 "npm-asset/blazy": "~1.0",
                 "npm-asset/dropzone": "~5.0",
                 "npm-asset/imagesloaded": "~4.0",
                 "npm-asset/masonry-layout": "~4.0",
                 "npm-asset/slick-carousel": "~1.0",
+                "npm-asset/swagger-ui-dist": "~3.0",
                 "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
-                "swagger-api/swagger-ui": "~3.0",
                 "webflo/drupal-finder": "~1.0"
             },
             "require-dev": {
@@ -20543,6 +20555,9 @@
                     ],
                     "docroot/libraries/masonry": [
                         "npm-asset/masonry-layout"
+                    ],
+                    "docroot/libraries/swagger-ui/dist": [
+                        "npm-asset/swagger-ui-dist"
                     ],
                     "docroot/libraries/{$name}": [
                         "type:drupal-library",
@@ -20608,7 +20623,7 @@
                         },
                         {
                             "name": "swagger-ui",
-                            "package": "swagger-api/swagger-ui"
+                            "package": "npm-asset/swagger-ui-dist"
                         }
                     ]
                 },
@@ -20646,7 +20661,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-03-25T16:50:02+00:00"
+            "time": "2021-06-25T21:57:39+00:00"
         },
         {
             "name": "vardot/varbase-updater",
