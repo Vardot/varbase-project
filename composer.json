@@ -23,10 +23,6 @@
       "type": "composer",
       "url": "https://asset-packagist.org"
     },
-    "drupal-ckeditor-plugins": {
-      "type": "composer",
-      "url": "https://panopoly.gitlab.io/drupal-ckeditor-plugins"
-    },
     "composer-patches": {
       "type": "vcs",
       "url": "https://github.com/vardot/composer-patches"
@@ -121,6 +117,7 @@
       "docroot/libraries/slick": ["npm-asset/slick-carousel"],
       "docroot/libraries/ace": ["npm-asset/ace-builds"],
       "docroot/libraries/jquery-ui-touch-punch": ["bower-asset/jqueryui-touch-punch"],
+      "docroot/libraries/swagger-ui": ["npm-asset/swagger-ui"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
         "type:bower-asset",
@@ -133,16 +130,17 @@
     "drupal-libraries": {
       "library-directory": "docroot/libraries",
       "libraries": [
+        {"name": "objectfitpolyfill", "package": "bower-asset/objectfitpolyfill"},
+        {"name": "chartjs", "package": "bower-asset/chartjs"},
+        {"name": "c3","package": "bower-asset/c3"},
+        {"name": "d3", "package": "bower-asset/d3"},
         {"name": "dropzone","package": "npm-asset/dropzone"},
         {"name": "blazy", "package": "npm-asset/blazy"},
         {"name": "slick", "package": "npm-asset/slick-carousel"},
         {"name": "ace", "package": "npm-asset/ace-builds"},
-        {"name": "chartjs", "package": "bower-asset/chartjs"},
-        {"name": "c3","package": "bower-asset/c3"},
-        {"name": "d3", "package": "bower-asset/d3"},
         {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
-        {"name": "swagger-ui", "package": "swagger-api/swagger-ui"}
+        {"name": "swagger-ui", "package": "npm-asset/swagger-ui"}
       ]
     },
     "enable-patching": true,
