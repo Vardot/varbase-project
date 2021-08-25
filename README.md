@@ -30,8 +30,6 @@ composer create-project vardot/varbase-project:9.0.x-dev PROJECT_DIR_NAME --stab
 
 ## [Varbase Developer Guide](https://docs.varbase.vardot.com)
 
-## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/9.0.x/CHANGELOG.md)
-
 ## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/9.0.x/UPDATE.md)
 
 ## Local development with Lando
