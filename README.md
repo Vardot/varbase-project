@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/9.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/360/workflows/a7b6d975-14cb-458a-8b79-8d347a37e072) Varbase 9.0.1
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/9.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/396/workflows/8e106383-e7c5-4121-90ed-c0b846840b28) Varbase 9.0.2
 
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
@@ -41,3 +41,8 @@ composer create-project vardot/varbase-project:9.0.x-dev PROJECT_DIR_NAME --stab
 
 - xDebug is enabled on Lando by default for PHP debugging.
 - The debugger is set to listen for the port 9003 but can be changed in .lando/.php.ini
+
+Join Our Slack Team for Feedback and Support
+http://slack.varbase.vardot.com/
+
+Sponsored and developed by [Vardot](https://www.drupal.org/vardot).
