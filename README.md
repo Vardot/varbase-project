@@ -8,11 +8,6 @@ Project template for [Varbase distribution](http://www.drupal.org/project/varbas
 
 ## Create a Varbase project with [Composer](https://getcomposer.org/download/):
 
-To install the most recent stable release of Varbase 9.1.x run this command:
-```
-composer create-project Vardot/varbase-project:~9 PROJECT_DIR_NAME --no-dev --no-interaction
-```
-
 To install the dev version of Varbase 9.1.x run this command:
 ```
 composer create-project vardot/varbase-project:9.1.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
