@@ -35,8 +35,8 @@
     "drupal/core-composer-scaffold": "^9",
     "drupal/core-project-message": "^9",
     "webflo/drupal-finder": "~1.0",
-    "vardot/varbase": "~9.0.0",
-    "vardot/varbase-updater": "~2.0"
+    "vardot/varbase": "9.0.x-dev",
+    "vardot/varbase-updater": "2.x-dev"
   },
   "require-dev": {
     "drupal/core-dev": "~9.0",
