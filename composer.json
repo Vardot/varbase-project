@@ -34,6 +34,7 @@
     "cweagans/composer-patches": "~1.0",
     "drupal/core-composer-scaffold": "^9",
     "drupal/core-project-message": "^9",
+    "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "9.1.x-dev",
     "vardot/varbase-updater": "2.x-dev"
   },
@@ -113,7 +114,6 @@
     ],
     "branch-alias": {
       "dev-9.0.x": "9.0.x-dev",
-      "dev-9.1.x": "9.1.x-dev",
       "dev-10.0.x": "10.0.x-dev"
     },
     "installer-types": [
