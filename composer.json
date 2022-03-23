@@ -82,6 +82,11 @@
       ],
       "locations": {
         "web-root": "docroot/"
+      },
+      "file-mapping": {
+        "[web-root]/robots.txt": {
+          "append": "docroot/profiles/varbase/src/assets/varbase-robots-additions.txt"
+        }
       }
     },
     "drupal-core-project-message": {
