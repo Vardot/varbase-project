@@ -2,7 +2,7 @@ name: varbase
 recipe: drupal9
 config:
   webroot: docroot
-  php: '7.4'
+  php: '8.0'
   drush: ^10
 services:
   appserver:
@@ -47,6 +47,6 @@ tooling:
     description: Run jshint for given folder or file.
   stylelint:
     service: node
-    cmd: "npx stylelint --config .stylelintrc.json"
+    cmd: "npx stylelint --config=.stylelintrc.json"
     options:
     description: Run stylelint for given folder or file.

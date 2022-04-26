@@ -5,19 +5,26 @@
   "private": true,
   "engines": {
     "yarn": ">= 1.6",
-    "node": ">= 12.0"
+    "node": ">= 16.0"
+  },
+  "scripts": {
+    "phpcs": "phpcs --standard=./.phpcs.xml .",
+    "phpcbf": "phpcbf --standard=./.phpcs.xml .",
+    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
+    "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
+    "lint:css": "npx stylelint --config=.stylelintrc.json"
   },
   "devDependencies": {
-    "eslint": "^7.10.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-import": "^2.13.0",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jquery": "^1.5.1",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-yml": "^0.14.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-react-hooks": "^4.1.2",
-    "eslint-plugin-yml": "^0.10.0",
     "prettier": "^2.1.2",
     "stylelint": "^13.0.0",
     "stylelint-checkstyle-formatter": "^0.1.1",
