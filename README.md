@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/9.1.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase?branch=9.1.x) Varbase 9.1.x
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase?branch=10.0.x) Varbase 10.0.x
 
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
@@ -8,24 +8,24 @@ Project template for [Varbase distribution](http://www.drupal.org/project/varbas
 
 ## Create a Varbase project with [Composer](https://getcomposer.org/download/):
 
-To install the dev version of Varbase 9.1.x run this command:
+To install the dev version of Varbase 10.0.x run this command:
 ```
-composer create-project vardot/varbase-project:9.1.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
+composer create-project vardot/varbase-project:10.0.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
 ```
 
-## [Create a new Vartheme sub theme for a project](https://github.com/Vardot/varbase/tree/9.1.x/scripts/README.md)
+## [Create a new Vartheme sub theme for a project](https://github.com/Vardot/varbase/tree/10.0.x/scripts/README.md)
 
-## [Automated Functional Testing](https://github.com/Vardot/varbase/blob/9.1.x/tests/README.md)
+## [Automated Functional Testing](https://github.com/Vardot/varbase/blob/10.0.x/tests/README.md)
 
-## [Varbase 9.1.x Developer Guide](https://docs.varbase.vardot.com)
+## [Varbase 10.0.x Developer Guide](https://docs.varbase.vardot.com)
 
-## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/9.1.x/CHANGELOG.md)
+## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/10.0.x/CHANGELOG.md)
 
-## [Varbase Gherkin features](https://github.com/Vardot/varbase/blob/9.1.x/tests/features/varbase/README.md)
+## [Varbase Gherkin features](https://github.com/Vardot/varbase/blob/10.0.x/tests/features/varbase/README.md)
 
 ## [Varbase Developer Guide](https://docs.varbase.vardot.com)
 
-## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/9.1.x/UPDATE.md)
+## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/10.0.x/UPDATE.md)
 
 ## Local development with Lando
 
