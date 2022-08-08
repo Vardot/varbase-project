@@ -100,23 +100,21 @@
       ],
       "gitignore": true,
       "locations": {
-        "web-root": "docroot/",
-        "drupal-core-scaffold-assets": "docroot/core/assets/scaffold/files",
-        "varbase-profile-scaffold-assets": "docroot/profiles/varbase/src/assets"
+        "web-root": "docroot/"
       },
       "file-mapping": {
         "[web-root]/sites/default/default.services.yml": {
           "mode": "replace",
           "overwrite": false,
-          "path": "[drupal-core-scaffold-assets]/default.services.yml"
+          "path": "docroot/core/assets/scaffold/files/default.services.yml"
         },
         "[web-root]/sites/default/default.settings.php": {
           "mode": "replace",
           "overwrite": false,
-          "path": "[drupal-core-scaffold-assets]/default.settings.php"
+          "path": "docroot/core/assets/scaffold/files/default.settings.php"
         },
         "[web-root]/robots.txt": {
-          "append": "[varbase-profile-scaffold-assets]/varbase-robots-additions.txt"
+          "append": "docroot/profiles/varbase/src/assets/varbase-robots-additions.txt"
         }
       }
     },
