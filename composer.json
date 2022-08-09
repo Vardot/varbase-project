@@ -35,7 +35,7 @@
     "vardot/varbase-updater": "2.x-dev"
   },
   "require-dev": {
-    "drupal/core-dev": "~9.0 || ~10",
+    "drupal/core-dev": "~9.0",
     "drush/drush": "~11.0"
   },
   "config": {
