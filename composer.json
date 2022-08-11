@@ -118,7 +118,7 @@
           "append": "docroot/profiles/varbase/src/assets/varbase-robots-additions.txt"
         },
         "[web-root]/.htaccess": {
-          "mode": "skip"
+          "overwrite": false
         }
       }
     },
