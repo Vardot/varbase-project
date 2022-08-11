@@ -116,9 +116,6 @@
         },
         "[web-root]/robots.txt": {
           "append": "docroot/profiles/varbase/src/assets/varbase-robots-additions.txt"
-        },
-        "[web-root]/.htaccess": {
-          "overwrite": false
         }
       }
     },
