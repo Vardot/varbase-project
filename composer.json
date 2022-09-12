@@ -71,6 +71,9 @@
   "conflict": {
     "drupal/drupal": "*"
   },
+  "replace": {
+    "drupal/hal": "*"
+  },
   "extra": {
     "branch-alias": {
       "dev-9.0.x": "9.0.x-dev"
