@@ -21,7 +21,9 @@ services:
 #  memcache:
 #    type: memcached
 #  solr:
-#    type: solr:8.4
+#    type: solr:8.6
+#    portforward: true
+#    core: drupal-solr
 #    config:
 #      dir: docroot/modules/contrib/search_api_solr/solr-conf/7.x
 tooling:
