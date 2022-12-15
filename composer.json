@@ -113,9 +113,6 @@
           "mode": "replace",
           "overwrite": false,
           "path": "docroot/core/assets/scaffold/files/default.settings.php"
-        },
-        "[web-root]/robots.txt": {
-          "append": "docroot/profiles/varbase/src/assets/varbase-robots-additions.txt"
         }
       }
     },
@@ -162,6 +159,6 @@
     "patchLevel": {
       "drupal/core": "-p2"
     },
-    "patches": {}
+    "patches": { }
   }
 }
