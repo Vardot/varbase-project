@@ -2,12 +2,13 @@ name: varbase
 recipe: drupal9
 config:
   webroot: docroot
-  php: '7.4'
+  php: '8.1'
   drush: ^10
 services:
   appserver:
     scanner: false
     build:
+      - "composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true"
       - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check"
       - 'export PATH="/var/www/.composer/vendor/bin"'
       - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www -O twig-lint.phar"
@@ -53,6 +54,6 @@ tooling:
     description: Run jshint for given folder or file.
   stylelint:
     service: node
-    cmd: "npx stylelint --config .stylelintrc.json"
+    cmd: "npx stylelint --config=.stylelintrc.json"
     options:
     description: Run stylelint for given folder or file.
