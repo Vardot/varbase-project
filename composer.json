@@ -101,7 +101,7 @@
       ],
       "gitignore": true,
       "locations": {
-        "web-root": "docroot/"
+        "web-root": "./docroot"
       },
       "file-mapping": {
         "[web-root]/sites/default/default.services.yml": {
@@ -118,7 +118,7 @@
     },
     "installer-paths": {
       "docroot/core": ["type:drupal-core"],
-      "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
+      "docroot/profiles/{$name}": ["type:drupal-profile"],
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
       "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
       "docroot/libraries/slick": ["npm-asset/slick-carousel"],
