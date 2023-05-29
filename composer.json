@@ -31,7 +31,7 @@
     "drupal/core-composer-scaffold": "~10",
     "drupal/core-project-message": "~10",
     "webflo/drupal-finder": "~1.0",
-    "vardot/varbase": "~10.0"
+    "vardot/varbase": "10.0.x-dev"
   },
   "require-dev": {
     "drupal/core-dev": "~10",
