@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase?branch=10.0.x) Varbase 10.0.x
+Varbase 10.0.0-alpha1
 
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
@@ -7,6 +7,11 @@
 Project template for [Varbase distribution](http://www.drupal.org/project/varbase).
 
 ## Create a Varbase project with [Composer](https://getcomposer.org/download/):
+
+To install the most recent stable release of Varbase 10.0.x run this command:
+```
+composer create-project Vardot/varbase-project:10.0.0-alpha1 PROJECT_DIR_NAME --no-dev --no-interaction
+```
 
 To install the dev version of Varbase 10.0.x run this command:
 ```

@@ -31,8 +31,7 @@
     "drupal/core-composer-scaffold": "~10",
     "drupal/core-project-message": "~10",
     "webflo/drupal-finder": "~1.0",
-    "vardot/varbase": "10.0.x-dev",
-    "vardot/varbase-updater": "2.x-dev"
+    "vardot/varbase": "~10.0"
   },
   "require-dev": {
     "drupal/core-dev": "~10",
@@ -56,8 +55,7 @@
       "drupal/core-composer-scaffold": true,
       "drupal/core-project-message": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "phpstan/extension-installer": true,
-      "vardot/varbase-updater": true
+      "phpstan/extension-installer": true
     }
   },
   "scripts": {
@@ -146,7 +144,6 @@
     "drupal-libraries": {
       "library-directory": "docroot/libraries",
       "libraries": [
-        {"name": "objectfitpolyfill", "package": "bower-asset/objectfitpolyfill"},
         {"name": "chartjs", "package": "bower-asset/chartjs"},
         {"name": "c3","package": "bower-asset/c3"},
         {"name": "d3", "package": "bower-asset/d3"},
