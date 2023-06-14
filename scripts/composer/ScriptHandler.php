@@ -12,6 +12,8 @@ use DrupalFinder\DrupalFinder;
  */
 class ScriptHandler {
 
+    static $vardotSupportSettingsFilePath = 'modules/contrib/vardot_support/settings/settings.default.php';
+
   /**
    * Get the Drupal root directory.
    *
@@ -60,8 +62,8 @@ class ScriptHandler {
       }
     }
     // Prepare the settings file for installation.
-    if (!$fs->exists($drupal_root . '/sites/default/settings.php') and $fs->exists($drupal_root . '/modules/contrib/vardot_support/settings/settings.php')) {
-      $fs->copy($drupal_root . '/modules/contrib/vardot_support/settings/settings.php', $drupal_root . '/sites/default/settings.php');
+    if (!$fs->exists($drupal_root . '/sites/default/settings.php') and $fs->exists($drupal_root . '/modules/contrib/vardot_support/settings/settings.default.php')) {
+      $fs->copy($drupal_root . '/modules/contrib/vardot_support/settings/settings.default.php', $drupal_root . '/sites/default/settings.php');
       $fs->chmod($drupal_root . '/sites/default/settings.php', 0666);
       $event->getIO()
         ->write("Copied Vardot Support settings.php to sites/default/settings.php file with chmod 0666");
