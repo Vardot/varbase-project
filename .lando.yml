@@ -16,10 +16,12 @@ config:
 services:
   appserver:
     build:
-      - "composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true"
-      - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check"
-      - 'export PATH="/var/www/.composer/vendor/bin"'
-      - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www -O twig-lint.phar"
+      - composer install --prefer-source
+# If you want these tools in your lando, uncomment.
+#      - "composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true"
+#      - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check"
+#      - 'export PATH="/var/www/.composer/vendor/bin"'
+#      - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www -O twig-lint.phar"
 
     build_as_root:
       - apt update -y
