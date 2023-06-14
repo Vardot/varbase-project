@@ -34,7 +34,7 @@ services:
 
 # Node Service
 # NOTE: If you are just using Node for scripting, you don't need a separate node container.
-# Varbase includes `mouf/nodejs-installer` which puts `node` and `npm` in your `bin` dir.
+# You can `composer require mouf/nodejs-installer` which puts `node` and `npm` in your `bin` dir.
 # See https://packagist.org/packages/mouf/nodejs-installer for more infomation like how to set a specific version.
 # If you are using yarn or other node tools, require them in composer and look for their bin scripts in ./docroot/libraries.
 #
