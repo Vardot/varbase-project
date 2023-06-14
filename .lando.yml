@@ -11,6 +11,7 @@ config:
   php: '8.1'
   # @TODO: Should we remove this? Site-local drush is the recommended and supported method.
   drush: ^10
+  scanner: false
 
 # See https://docs.lando.dev/core/v3/services.html
 services:
