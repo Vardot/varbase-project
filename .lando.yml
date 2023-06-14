@@ -1,36 +1,42 @@
+# Welcome to *your* lando file.
+# If you are using varbase-project to start a website, this file is now yours to control.
+# Edit the name and other configs to match your project.
+# Feel free to customize this file to your needs.
+
+# See https://docs.lando.dev/core/v3/recipes.html
 name: varbase
 recipe: drupal9
 config:
   webroot: docroot
   php: '8.1'
+  # @TODO: Should we remove this? Site-local drush is the recommended and supported method.
   drush: ^10
+
+# See https://docs.lando.dev/core/v3/services.html
 services:
   appserver:
-    scanner: false
     build:
       - "composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true"
       - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check"
       - 'export PATH="/var/www/.composer/vendor/bin"'
       - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www -O twig-lint.phar"
-    build_as_root:
-      - apt update -y
-      - apt -y install libyaml-dev
-      - pecl install yaml
     xdebug: true
     config:
       php: .lando/.php.ini
-  node:
-    type: node
-    build:
-      - "yarn install -y"
-#  memcache:
-#    type: memcached
-#  solr:
-#    type: solr:8.6
-#    portforward: true
-#    core: drupal-solr
-#    config:
-#      dir: docroot/modules/contrib/search_api_solr/solr-conf/7.x
+
+# Node Service
+# NOTE: If you are just using Node for scripting, you don't need a separate node container.
+# Varbase includes `mouf/nodejs-installer` which puts `node` and `npm` in your `bin` dir.
+# See https://packagist.org/packages/mouf/nodejs-installer for more infomation like how to set a specific version.
+# If you are using yarn or other node tools, simply require them in composer and use `bin/yarn` or similar.
+# If you really need a Node Server, you can add it here.
+#
+#  node:
+#    type: node
+#    build:
+#      - "yarn install -y"
+
+# See https://docs.lando.dev/core/v3/tooling.html
 tooling:
   phpcs:
     service: appserver
