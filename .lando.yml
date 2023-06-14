@@ -20,6 +20,12 @@ services:
       - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check"
       - 'export PATH="/var/www/.composer/vendor/bin"'
       - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www -O twig-lint.phar"
+
+    build_as_root:
+      - apt update -y
+      - apt -y install libyaml-dev
+      - pecl install yaml
+
     xdebug: true
     config:
       php: .lando/.php.ini
