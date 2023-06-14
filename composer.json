@@ -33,7 +33,7 @@
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "9.0.x-dev",
     "vardot/varbase-updater": "2.x-dev",
-    "drupal/vardot_support": "^1.1@dev"
+    "drupal/vardot_support": "1.1.x-dev@dev"
   },
   "require-dev": {
     "drupal/core-dev": "~9.0",
