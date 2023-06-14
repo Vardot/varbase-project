@@ -58,14 +58,19 @@
       "pyrech/composer-changelogs": true
     }
   },
+  "autoload": {
+    "psr-4": {
+      "VarbaseProject\\composer\\": "scripts/composer"
+    }
+  },
   "scripts": {
     "post-install-cmd": [
-      "Varbase\\composer\\ScriptHandler::createRequiredFiles"
+      "VarbaseProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
-      "Varbase\\composer\\ScriptHandler::createRequiredFiles"
+      "VarbaseProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
-    "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"]
+    "post-drupal-scaffold-cmd": ["VarbaseProject\\composer\\ScriptHandler::postDrupalScaffoldProcedure"]
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
