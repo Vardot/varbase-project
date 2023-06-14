@@ -31,7 +31,7 @@
     "drupal/core-composer-scaffold": "^9",
     "drupal/core-project-message": "^9",
     "webflo/drupal-finder": "~1.0",
-    "vardot/varbase": "9.0.x-dev",
+    "vardot/varbase": "9.0.x-dev@dev",
     "vardot/varbase-updater": "2.x-dev",
     "drupal/vardot_support": "1.1.x-dev@dev"
   },
@@ -60,12 +60,10 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "Varbase\\composer\\ScriptHandler::createRequiredFiles",
-      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
+      "Varbase\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
-      "Varbase\\composer\\ScriptHandler::createRequiredFiles",
-      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
+      "Varbase\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"]
   },
