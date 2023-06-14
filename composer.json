@@ -32,7 +32,9 @@
     "drupal/core-project-message": "^9",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "9.0.x-dev",
-    "vardot/varbase-updater": "2.x-dev"
+    "vardot/varbase-updater": "2.x-dev",
+    "mouf/nodejs-installer": "*",
+    "npm-asset/yarn": "^2.4"
   },
   "require-dev": {
     "drupal/core-dev": "~9.0",
@@ -52,7 +54,8 @@
       "drupal/core-composer-scaffold": true,
       "drupal/core-project-message": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "vardot/varbase-updater": true
+      "vardot/varbase-updater": true,
+      "mouf/nodejs-installer": true
     }
   },
   "scripts": {
@@ -64,7 +67,12 @@
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
       "Varbase\\composer\\ScriptHandler::removeGitDirectories"
     ],
-    "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"]
+    "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"],
+    "yarn:install": [
+      "# This is an example of a composer script wrapper for NodeJS Tools. ",
+      "# The path is already set to your composer bin dir, so calling 'yarn' will call the exact version of yarn in the project",
+      "yarn install -y"
+    ]
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
