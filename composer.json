@@ -59,6 +59,9 @@
     }
   },
   "autoload": {
+    "files": [
+      "load.environment.php"
+    ],
     "psr-4": {
       "VarbaseProject\\composer\\": "scripts/composer"
     }
