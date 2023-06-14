@@ -70,7 +70,14 @@
     "post-update-cmd": [
       "VarbaseProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
-    "post-drupal-scaffold-cmd": ["VarbaseProject\\composer\\ScriptHandler::postDrupalScaffoldProcedure"]
+    "post-drupal-scaffold-cmd": ["VarbaseProject\\composer\\ScriptHandler::postDrupalScaffoldProcedure"],
+    "varbase:install": [
+      "drush site:install varbase varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true install_configure_form.enable_update_status_emails=NULL",
+      "@varbase:login"
+    ],
+    "varbase:login": [
+      "drush uli"
+    ]
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
