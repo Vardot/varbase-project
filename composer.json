@@ -28,14 +28,14 @@
     "composer/installers": "~2.0",
     "oomphinc/composer-installers-extender": "~2.0",
     "cweagans/composer-patches": "~1.0",
-    "drupal/core-composer-scaffold": "^9",
-    "drupal/core-project-message": "^9",
+    "drupal/core-composer-scaffold": "^9 || ^10",
+    "drupal/core-project-message": "^9 || ^10",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "9.0.x-dev",
     "vardot/varbase-updater": "2.x-dev"
   },
   "require-dev": {
-    "drupal/core-dev": "~9.0",
+    "drupal/core-dev": "~9.0 || ~10.0",
     "drush/drush": "~11.0"
   },
   "config": {
@@ -78,10 +78,10 @@
     "drupal-core-project-message": {
         "include-keys": ["homepage", "support"],
         "post-create-project-cmd-message": [
-            "<bg=blue;fg=white>                                                         </>",
-            "<bg=blue;fg=white>  Congratulations, you’ve installed the Varbase codebase </>",
-            "<bg=blue;fg=white>  from the vardot/varbase-project template!              </>",
-            "<bg=blue;fg=white>                                                         </>",
+            "<bg=blue;fg=white>                                                           </>",
+            "<bg=blue;fg=white>  Congratulations, you have installed the Varbase codebase </>",
+            "<bg=blue;fg=white>  from the vardot/varbase-project template!                </>",
+            "<bg=blue;fg=white>                                                           </>",
             "",
             "<bg=yellow;fg=black>Next steps</>:",
 
