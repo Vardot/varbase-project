@@ -1,0 +1,32 @@
+#
+# Vardot Support
+# Suggested Platform.sh config.
+# 
+
+name: codename
+type: 'php:8.1'
+
+# Set build.flavor to "none" so we can run our own composer command.
+build:
+    flavor: none
+
+# Set hooks to the standardized composer commands.
+# See composer.json:scripts for command definitions. 
+hooks:
+    build: |
+        set -e
+        composer deploy:build
+    deploy: |
+        set -e
+        composer deploy:update
+
+# Set cron runs to once per minute.
+crons:
+    drupal:
+        spec: '* * * * *'
+        cmd: drush core-cron
+        
+# Set common PHP configuration
+variables:
+    php:
+        memory_limit: 512M
