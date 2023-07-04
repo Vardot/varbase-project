@@ -32,7 +32,8 @@
     "drupal/core-project-message": "^9 || ^10",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "9.0.x-dev",
-    "vardot/varbase-updater": "2.x-dev"
+    "vardot/varbase-updater": "2.x-dev",
+    "drupal/vardot_support": "^1.1@beta"
   },
   "require-dev": {
     "drupal/core-dev": "~9.0 || ~10.0",
@@ -52,7 +53,9 @@
       "drupal/core-composer-scaffold": true,
       "drupal/core-project-message": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "vardot/varbase-updater": true
+      "vardot/varbase-updater": true,
+      "pyrech/composer-changelogs": true,
+      "php-http/discovery": true
     }
   },
   "scripts": {
