@@ -2,12 +2,18 @@
 const config = {
   // Change the place where storybook searched for stories.
   stories: [
-    // Uncomment the following line to start listing Vartheme BS5 components.
-    // "../docroot/themes/contrib/vartheme_ba5/components/**/*.stories.@(json|yml)",
     // Listing Varbase Components in the Storybook
     "../docroot/modules/contrib/varbase_components/components/**/*.stories.@(json|yml)",
-    // Uncomment the following line to start listing custom Vartheme components
+    // -------------------------------------------------------------------------------
+    // Uncomment the following line to start listing components Vartheme BS5 Starterkit.
     // "../docroot/themes/contrib/vartheme_ba5/components/**/*.stories.@(json|yml)",
+    // -------------------------------------------------------------------------------
+    // Uncomment the following line to start listing components from custom cloned generated theme
+    // Change `mytheme` to the name of the custom theme.  
+    // "../docroot/themes/custom/mytheme/components/**/*.stories.@(json|yml)",
+    // -------------------------------------------------------------------------------
+    // Uncomment the following line to start listing components from custom modules
+    // "../docroot/modules/custom/my_custom_module/components/**/*.stories.@(json|yml)",
   ],
   addons: [
     '@storybook/addon-links',

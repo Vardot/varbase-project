@@ -7,6 +7,9 @@ const preview = {
     drupalTheme: 'vartheme_bs5',
     supportedDrupalThemes: {
       vartheme_bs5: {title: 'Vartheme BS5'},
+      // Uncomment the following line to be able to switch to see components for a custom theme.
+      // Change `mytheme` to the name of the custom theme.
+      // -----------------------------------------------------
       // mytheme: {title: 'My Custom Theme for a Project'}
     },
   },
@@ -22,10 +25,10 @@ const preview = {
         date: /Date$/,
       },
     },
-    // Uncomment to show components in the center of the canvas.
+    // Uncomment the following line to show components in the center of the canvas.
     // layout: 'centered',
     // ------------------------------------
-    // Switch off default Storybook backgrounds, To make use of Bootstrap 5.3.0 theme color mode.
+    // Switch off default Storybook backgrounds, To switch to use Bootstrap 5.3.0 theme color mode.
     backgrounds: {
       disable: true,
     },
