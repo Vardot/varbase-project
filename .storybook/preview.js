@@ -1,0 +1,58 @@
+import { withRootAttribute } from "storybook-addon-root-attribute";
+export const decorators = [withRootAttribute];
+
+/** @type { import('@storybook/server').Preview } */
+const preview = {
+  globals: {
+    drupalTheme: 'vartheme_bs5',
+    supportedDrupalThemes: {
+      vartheme_bs5: {title: 'Vartheme BS5'},
+      // mytheme: {title: 'My Custom Theme for a Project'}
+    },
+  },
+  parameters: {
+    server: {
+      // Replace this with your Drupal site URL, or an environment variable.
+      url: 'http://varbase.local',
+    },
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+    // Uncomment to show components in the center of the canvas.
+    // layout: 'centered',
+    // ------------------------------------
+    // Switch off default Storybook backgrounds, To make use of Bootstrap 5.3.0 theme color mode.
+    backgrounds: {
+      disable: true,
+    },
+    // -------------------------------------
+    // Add data-bs-theme="dark" to the body the inner iframe in the canvas.
+    // Color modes:
+    // Bootstrap now supports color modes, or themes, as of v5.3.0.
+    // Explore our default light color mode and the new dark mode,
+    // or create your own using our styles as your template.
+    // https://getbootstrap.com/docs/5.3/customize/color-modes/
+    rootAttribute: {
+      tooltip: true,
+      root: "body",
+      attribute: "data-bs-theme",
+      defaultState: {
+        name: 'Bootstrap 5.3.0 Light Color Mode (Default)',
+        value: null
+      },
+      states: [
+        {
+          name: 'Bootstrap 5.3.0 Dark Color Mode',
+          value: 'dark'
+        }
+      ],
+    },
+  },
+};
+
+export default preview;
+
