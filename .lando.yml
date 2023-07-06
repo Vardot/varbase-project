@@ -1,9 +1,9 @@
 name: varbase
-recipe: drupal9
+recipe: drupal10
 config:
   webroot: docroot
   php: '8.1'
-  drush: ^10
+  drush: ^11
 services:
   appserver:
     scanner: false
@@ -20,7 +20,7 @@ services:
     config:
       php: .lando/.php.ini
   node:
-    type: node
+    type: node:16
     build:
       - "yarn install -y"
 #  memcache:
@@ -37,11 +37,11 @@ tooling:
     cmd: "phpcs"
     options:
     description: Run phpcs for given folder or file.
-  drupal-check:
+  phpstan:
     service: appserver
-    cmd: "drupal-check"
+    cmd: "./bin/phpstan"
     options:
-    description: Run drupal-check for given folder or file.
+    description: Run phpstan on custom modules and themes.
   twig-lint:
     service: appserver
     cmd: "php /var/www/twig-lint.phar"
