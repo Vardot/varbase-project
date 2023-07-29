@@ -1,6 +1,13 @@
 import { withRootAttribute } from "storybook-addon-root-attribute";
 export const decorators = [withRootAttribute];
 
+export const globalTypes = {
+  rtlDirection: {
+    description: 'HTML dir attribute',
+    defaultValue: 'ltr',
+  },
+};
+
 /** @type { import('@storybook/server').Preview } */
 const preview = {
   globals: {

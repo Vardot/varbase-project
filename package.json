@@ -30,6 +30,7 @@
     "@storybook/theming": "~7.0",
     "storybook-addon-root-attribute": "~1.0",
     "@lullabot/storybook-drupal-addon": "~2.0",
+    "storybook-addon-rtl-direction": "^0.0.19",
     "eslint": "^7.10.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.7.0",

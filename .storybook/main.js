@@ -21,7 +21,8 @@ const config = {
     '@lullabot/storybook-drupal-addon',
     '@storybook/manager-api',
     '@storybook/theming',
-    'storybook-addon-root-attribute/register'
+    'storybook-addon-root-attribute/register',
+    'storybook-addon-rtl-direction'
   ],
   framework: {
     name: "@storybook/server-webpack5",
