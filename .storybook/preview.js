@@ -4,7 +4,7 @@ export const decorators = [withRootAttribute];
 export const globalTypes = {
   rtlDirection: {
     description: 'HTML dir attribute',
-    defaultValue: 'ltr',
+    defaultValue: '',
   },
 };
 
