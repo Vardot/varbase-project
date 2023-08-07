@@ -9,7 +9,7 @@
   },
   "scripts": {
     "storybook": "npx kill-port --port 6006; storybook dev -p 6006 -h 'varbase.local'",
-    "build-storybook": "storybook build"
+    "build-storybook": "npx storybook build --disable-telemetry --output-dir storybook"
   },
   "devDependencies": {
     "webpack": "~5.0",
