@@ -8,7 +8,7 @@
     "node": ">= 18.0"
   },
   "scripts": {
-    "storybook": "npx kill-port --port 6006; storybook dev -p 6006 -h 'varbase.local'",
+    "storybook": "npx kill-port --port 6006; storybook dev --disable-telemetry -p 6006 -h 'varbase.local'",
     "build-storybook": "npx storybook build --disable-telemetry --output-dir storybook"
   },
   "devDependencies": {
