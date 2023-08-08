@@ -12,7 +12,7 @@
     "build-storybook": "npx storybook build --disable-telemetry --output-dir storybook"
   },
   "devDependencies": {
-    "webpack": "~5.0",
+    "webpack": "~5.76",
     "react": "~18.0",
     "react-dom": "~18.0",
     "storybook": "~7.0",
