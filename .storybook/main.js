@@ -21,6 +21,8 @@ const config = {
     '@lullabot/storybook-drupal-addon',
     '@storybook/manager-api',
     '@storybook/theming',
+    '@storybook/addon-a11y',
+    '@storybook/addon-mdx-gfm',
     'storybook-addon-root-attribute/register',
     'storybook-addon-rtl-direction'
   ],

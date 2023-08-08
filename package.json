@@ -28,6 +28,8 @@
     "@storybook/types": "~7.0",
     "@storybook/server-webpack5": "~7.0",
     "@storybook/theming": "~7.0",
+    "@storybook/addon-a11y": "~7.0",
+    "@storybook/addon-mdx-gfm": "~7.0",
     "storybook-addon-root-attribute": "~1.0",
     "@lullabot/storybook-drupal-addon": "~2.0",
     "storybook-addon-rtl-direction": "^0.0.19",
