@@ -8,25 +8,32 @@
     "node": ">= 18.0"
   },
   "scripts": {
-    "storybook": "npx kill-port --port 6006; storybook dev --disable-telemetry -p 6006 -h 'varbase.local'",
-    "build-storybook": "npx storybook build --disable-telemetry --output-dir storybook"
+    "storybook:dev": "npx kill-port --port 6006; npx storybook dev --disable-telemetry -p 6006 -h 'varbase.local'",
+    "storybook:build": "npx storybook build --disable-telemetry --output-dir storybook"
   },
-  "devDependencies": {
-    "webpack": "~5.76",
+  "resolutions": {
+    "webpack": "^5"
+  },
+  "dependencies": {
+    "webpack": "~5.0",
+    "webpack-cli": "~5.0",
+    "platformsh-config": "^2.0.0",
     "react": "~18.0",
     "react-dom": "~18.0",
     "storybook": "~7.0",
+    "@storybook/cli": "~7.0",
     "@storybook/addon-essentials": "~7.0",
     "@storybook/addon-links": "~7.0",
     "@storybook/blocks": "~7.0",
-    "@storybook/manager-api": "~7.0",
     "@storybook/react": "~7.0",
     "@storybook/server": "~7.0",
     "@storybook/components": "~7.0",
     "@storybook/core-events": "~7.0",
+    "@storybook/manager-api": "~7.0",
     "@storybook/preview-api": "~7.0",
     "@storybook/types": "~7.0",
     "@storybook/server-webpack5": "~7.0",
+    "@storybook/builder-webpack5": "~7.0",
     "@storybook/theming": "~7.0",
     "@storybook/addon-a11y": "~7.0",
     "storybook-addon-root-attribute": "~1.0",

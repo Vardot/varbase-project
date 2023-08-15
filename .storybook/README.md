@@ -69,7 +69,7 @@ $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'cl_server']
 * Replace `http://varbase.local` in the **`preview.js`** file with the base URL of your project or an environment variable representing the local or development domain.
 * Open a command terminal window and navigate to your project's directory.
 * Run the command **`yarn install`** in the terminal to install the necessary dependencies.
-* Run the command **`yarn storybook`** to build the **Storybook**.
+* Run the command **`yarn storybook:dev`** to build the **Storybook**.
 * The default browser will open, displaying the list of Default Varbase Components in the Storybook.
 
 ## Customizing Varbase Storybook for a Project:
