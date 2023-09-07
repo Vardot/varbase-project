@@ -92,7 +92,7 @@ In case of having a custom theme for a project by
 
 To include components from a custom cloned generated theme, uncomment and modify the following line in the `.storybook/main.js` file:
 
-`"../docroot/themes/custom/mytheme/components/**/*.stories.@(json|yml)",`&#x20;
+`"../docroot/themes/custom/mytheme/components/**/*.stories.@(json|yml)",`
 
 
 > Please ensure that the path to the custom theme is correct. It should be located either in `"../docroot/themes"` or `"../docroot/themes/custom"`
@@ -102,7 +102,7 @@ To include components from a custom cloned generated theme, uncomment and modify
 
 To include components from a custom module, uncomment and modify the following line in the `.storybook/main.js` file:
 
-`"../docroot/modules/custom/my_custom_module/components/**/*.stories.@(json|yml)",`&#x20;
+`"../docroot/modules/custom/my_custom_module/components/**/*.stories.@(json|yml)",`
 
 ## More Information About Bootstrap 5.3.0 Theme Color Modes
 
