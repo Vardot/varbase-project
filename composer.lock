@@ -21671,12 +21671,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
-                "reference": "d47445f55b58fc68029131ac05209c3f7422636c"
+                "reference": "f17fd7242f7d92796cd6142133bb130dd45cba75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase/zipball/d47445f55b58fc68029131ac05209c3f7422636c",
-                "reference": "d47445f55b58fc68029131ac05209c3f7422636c",
+                "url": "https://api.github.com/repos/Vardot/varbase/zipball/f17fd7242f7d92796cd6142133bb130dd45cba75",
+                "reference": "f17fd7242f7d92796cd6142133bb130dd45cba75",
                 "shasum": ""
             },
             "require": {
@@ -21864,7 +21864,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-09-10T15:19:56+00:00"
+            "time": "2023-09-10T16:09:29+00:00"
         },
         {
             "name": "webflo/drupal-finder",
