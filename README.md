@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/696/workflows/ba97d13c-bf4f-4572-bb2f-fa2ab1f2f5b2) Varbase 10.0.0-alpha2
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/729/workflows/8bd6b418-3ba0-4033-be62-19080556833c) Varbase 10.0.0-beta1
 
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
@@ -8,12 +8,12 @@ Project template for [Varbase distribution](http://www.drupal.org/project/varbas
 
 ## Create a Varbase project with [Composer](https://getcomposer.org/download/):
 
-To install the most recent stable release of Varbase 10.0.x run this command:
+To install the most recent stable release of **Varbase `10.0.x`** run this command:
 ```
-composer create-project Vardot/varbase-project:10.0.0-alpha2 PROJECT_DIR_NAME --no-dev --no-interaction
+composer create-project Vardot/varbase-project:10.0.0-beta1 PROJECT_DIR_NAME --no-dev --no-interaction
 ```
 
-To install the dev version of Varbase 10.0.x run this command:
+To install the dev version of **Varbase `10.0.x`** run this command:
 ```
 composer create-project vardot/varbase-project:10.0.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
 ```
@@ -40,7 +40,7 @@ composer create-project vardot/varbase-project:10.0.x-dev PROJECT_DIR_NAME --sta
 ## Debugging using Lando
 
 - xDebug is enabled on Lando by default for PHP debugging.
-- The debugger is set to listen for the port 9003 but can be changed in .lando/.php.ini
+- The debugger is set to listen for the port 9003 but can be changed in `.lando/.php.ini`
 
 Join Our Slack Team for Feedback and Support
 http://slack.varbase.vardot.com/
