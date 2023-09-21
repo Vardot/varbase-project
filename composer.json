@@ -31,11 +31,11 @@
     "drupal/core-composer-scaffold": "~10",
     "drupal/core-project-message": "~10",
     "webflo/drupal-finder": "~1.0",
-    "vardot/varbase": "10.0.x-dev"
+    "vardot/varbase": "~10.0.0"
   },
   "require-dev": {
     "drupal/core-dev": "~10",
-    "drush/drush": "~11.0",
+    "drush/drush": "~11.0 || ~12.0",
     "phpstan/phpstan": "~1.10.0",
     "phpstan/extension-installer": "~1.3.0",
     "mglaman/phpstan-drupal": "~1.1.0",
@@ -144,9 +144,6 @@
     "drupal-libraries": {
       "library-directory": "docroot/libraries",
       "libraries": [
-        {"name": "chartjs", "package": "bower-asset/chartjs"},
-        {"name": "c3","package": "bower-asset/c3"},
-        {"name": "d3", "package": "bower-asset/d3"},
         {"name": "dropzone","package": "npm-asset/dropzone"},
         {"name": "blazy", "package": "npm-asset/blazy"},
         {"name": "slick", "package": "npm-asset/slick-carousel"},
