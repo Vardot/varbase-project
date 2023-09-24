@@ -1,14 +1,28 @@
 <h1>Varbase Storybook</h1>
 
-<p>This is a placeholder folder to build the storybook on builds.</p>
+<p>This is a placeholder folder to build the static storybook on builds.</p>
 
-<p>Not for <code>production</code>, only for <code>development</code> or <code>staging</code>.</p>
+<blockquote>
+<p>This will show up when the setup fails to build or point in the right way.</p>
+<p>or when the auto storybook build system fails with a bug in components.</p>
+</blockquote>
 
+To build the static Storybook:
 Follow with <a href="https://docs.varbase.vardot.com/v/10.0.x/developers/theme-development-with-varbase/integration-of-varbase-with-storybook">Integration of Varbase with Storybook</a>
-
-To build the static storybook run
+Make sure that the site is configured.
 
 <code>
 yarn install
-yarn build-storybook
+yarn storybook:build
 </code>
+
+<blockquote>
+<p>From this point onward, you can easily access the static storybook,
+by going to <code>"http://PROJECT_DOMAIN/storybook"</code>.</p>
+
+<p>This applies when the main domain, like <code>"mysite.domain"</code>,
+is set up to point to the <code>"PROJECT_FOLDER/docroot"</code> directory.</p>
+
+<p>If you have configured a subdomain, like <code>"storybook.mysite.domain"</code>,
+it will instead point to the <code>"PROJECT_FOLDER/storybook"</code> directory.</p>
+</blockquote>
