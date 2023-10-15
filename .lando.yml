@@ -3,7 +3,7 @@ recipe: drupal10
 config:
   webroot: docroot
   php: '8.1'
-  drush: ^11
+  drush: ^12
 services:
   appserver:
     scanner: false
