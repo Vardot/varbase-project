@@ -43,6 +43,8 @@ services:
         DRUPAL_TEST_WEBDRIVER_CHROME_ARGS: "--disable-gpu --headless --no-sandbox --disable-dev-shm-usage"
         DRUPAL_NIGHTWATCH_OUTPUT: /app/reports/nightwatch
         DRUPAL_NIGHTWATCH_IGNORE_DIRECTORIES: node_modules,vendor,.*,sites/*/files,sites/*/private,sites/simpletest
+        # Drush
+        DRUSH_OPTIONS_URI: "https://varbase.lndo.site"
   chrome:
     type: compose
     app_mount: false
