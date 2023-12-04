@@ -125,6 +125,7 @@
       "docroot/libraries/ace": ["npm-asset/ace-builds"],
       "docroot/libraries/jquery-ui-touch-punch": ["bower-asset/jqueryui-touch-punch"],
       "docroot/libraries/swagger-ui/dist": ["npm-asset/swagger-ui-dist"],
+      "docroot/libraries/ckeditor5-anchor-drupal": ["npm-asset/northernco--ckeditor5-anchor-drupal"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
         "type:bower-asset",
@@ -147,7 +148,8 @@
         {"name": "ace", "package": "npm-asset/ace-builds"},
         {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
-        {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"}
+        {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"},
+        {"name": "ckeditor5-anchor-drupal", "package": "npm-asset/northernco--ckeditor5-anchor-drupal"}
       ]
     },
     "enable-patching": true,
