@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/9.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/763/workflows/6c407254-aafc-4bc4-9583-99a402960b75) Varbase 9.0.16
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/9.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/807/workflows/97595ba6-aff9-4e92-8d99-b0d866794f86) Varbase 9.0.17
 
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
@@ -10,7 +10,7 @@ Project template for [Varbase distribution](http://www.drupal.org/project/varbas
 
 To install the most recent stable release of Varbase 9.0.x run this command:
 ```
-composer create-project Vardot/varbase-project:~9.0 PROJECT_DIR_NAME --no-dev --no-interaction
+composer create-project Vardot/varbase-project:~9 PROJECT_DIR_NAME --no-dev --no-interaction
 ```
 
 To install the dev version of Varbase 9.0.x run this command:
