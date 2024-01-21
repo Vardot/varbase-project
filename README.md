@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/9.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/807/workflows/97595ba6-aff9-4e92-8d99-b0d866794f86) Varbase 9.0.17
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/9.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/807/workflows/97595ba6-aff9-4e92-8d99-b0d866794f86) Varbase 9.0.18
 
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
@@ -6,17 +6,16 @@
 
 Project template for [Varbase distribution](http://www.drupal.org/project/varbase).
 
+> Last release for **Varbase `~9.0.0`** for **Drupal `~9.5.0`**
+
+> Dropped support for **Drupal `9`**
+
+> Update your site to **Varbase `~9.1.0`**
+
+
 ## Create a Varbase project with [Composer](https://getcomposer.org/download/):
 
-To install the most recent stable release of Varbase 9.0.x run this command:
-```
-composer create-project Vardot/varbase-project:~9 PROJECT_DIR_NAME --no-dev --no-interaction
-```
-
-To install the dev version of Varbase 9.0.x run this command:
-```
-composer create-project vardot/varbase-project:9.0.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
-```
+Recommended to start new projects with Varbase 10
 
 ## [Create a new Vartheme sub theme for a project](https://github.com/Vardot/varbase/tree/9.0.x/scripts/README.md)
 
