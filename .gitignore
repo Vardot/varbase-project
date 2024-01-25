@@ -64,4 +64,5 @@ ehthumbs.db
 errors.log
 
 # Ignore yarn lint dependencies.
-node_modules
+/node_modules
+/docroot/**/node_modules
