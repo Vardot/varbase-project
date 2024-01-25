@@ -9,7 +9,12 @@
   },
   "scripts": {
     "storybook:dev": "npx kill-port --port 6006; npx storybook dev --disable-telemetry -p 6006 -h 'varbase.local'",
-    "storybook:build": "npx storybook build --disable-telemetry --output-dir storybook"
+    "storybook:build": "npx storybook build --disable-telemetry --output-dir storybook",
+    "phpcs": "phpcs --standard=./.phpcs.xml .",
+    "phpcbf": "phpcbf --standard=./.phpcs.xml .",
+    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
+    "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
+    "lint:css": "npx stylelint --config=.stylelintrc.json"
   },
   "resolutions": {
     "webpack": "^5"
