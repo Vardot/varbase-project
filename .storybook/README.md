@@ -104,14 +104,14 @@ To include components from a custom module, uncomment and modify the following l
 
 `"../docroot/modules/custom/my_custom_module/components/**/*.stories.@(json|yml)",`
 
-## More Information About Bootstrap 5.3.0 Theme Color Modes
+## More Information About Bootstrap Theme Color Modes
 
 
 > In the `` main.js` `` file:\
 > 
 > 
 > * Add the attribute `data-bs-theme='dark'` to the body tag of the inner iframe in the canvas only when necessary. The default value is `data-bs-theme='light'`.
-> * Bootstrap now supports color modes, or themes, starting from version **5.3.0.** You can explore the default light color mode and the new dark mode, or create your own theme using Bootstrap's styles as a template.\
+> * Bootstrap now supports color modes, or themes, starting from version **5.3.x** You can explore the default light color mode and the new dark mode, or create your own theme using Bootstrap's styles as a template.\
 >   [https://getbootstrap.com/docs/5.3/customize/color-modes/](https://getbootstrap.com/docs/5.3/customize/color-modes/)
 > *
 > 
@@ -119,6 +119,6 @@ To include components from a custom module, uncomment and modify the following l
 
 ## Related Integration Issues
 
-* [Integrate Varbase Project with Storybook using Component Libraries: Theme Server for Varbase Components and Vartheme BS5 with and Bootstrap 5.3.0 #182](https://github.com/Vardot/varbase-project/issues/182)
-* [#3372551: Integrate Varbase Components with Storybook using Component Libraries: Theme Server and Bootstrap 5.3.0](https://www.drupal.org/project/varbase\_components/issues/3372551)
+* [Integrate Varbase Project with Storybook using Component Libraries: Theme Server for Varbase Components and Vartheme BS5 with and Bootstrap #182](https://github.com/Vardot/varbase-project/issues/182)
+* [#3372551: Integrate Varbase Components with Storybook using Component Libraries: Theme Server and Bootstrap](https://www.drupal.org/project/varbase\_components/issues/3372551)
 * [#3372546: Integrate Vartheme BS5 with Storybook using Component Libraries: Theme Server for Varbase Components](https://www.drupal.org/project/vartheme\_bs5/issues/3372546)

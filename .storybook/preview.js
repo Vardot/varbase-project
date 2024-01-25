@@ -35,7 +35,7 @@ const preview = {
     // Uncomment the following line to show components in the center of the canvas.
     // layout: 'centered',
     // ------------------------------------
-    // Switch off default Storybook backgrounds, To switch to use Bootstrap 5.3.0 theme color mode.
+    // Switch off default Storybook backgrounds, To switch to use Bootstrap theme color mode.
     backgrounds: {
       disable: true,
     },
@@ -51,12 +51,12 @@ const preview = {
       root: "body",
       attribute: "data-bs-theme",
       defaultState: {
-        name: 'Bootstrap 5.3.0 Light Color Mode (Default)',
+        name: 'Light Color Mode',
         value: null
       },
       states: [
         {
-          name: 'Bootstrap 5.3.0 Dark Color Mode',
+          name: 'Dark Color Mode',
           value: 'dark'
         }
       ],
