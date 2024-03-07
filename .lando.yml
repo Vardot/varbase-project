@@ -11,7 +11,7 @@ services:
       - "composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true"
       - "composer global require drupal/coder dealerdirect/phpcodesniffer-composer-installer mglaman/drupal-check"
       - 'export PATH="/var/www/.composer/vendor/bin"'
-      - "wget https://asm89.github.io/d/twig-lint.phar -P /var/www -O twig-lint.phar"
+      - "wget https://asm89.github.io/d/twig-lint.phar -O /var/www/twig-lint.phar"
     build_as_root:
       - apt update -y
       - apt -y install libyaml-dev ca-certificates curl gnupg
