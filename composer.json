@@ -3,7 +3,7 @@
   "description": "Project template for Varbase distribution.",
   "type": "project",
   "license": "GPL-2.0-or-later",
-  "version": "9.1.2",
+  "version": "9.1.x-dev",
   "homepage": "https://www.drupal.org/project/varbase",
   "authors": [
     {
@@ -32,9 +32,9 @@
     "webflo/drupal-finder": "~1",
     "cweagans/composer-patches": "~1", 
     "drupal/core": "~10",
-    "vardot/varbase": "~9.1.0",
-    "vardot/varbase-patches": "~9.1.0",
-    "vardot/varbase-updater": "~2.0"
+    "vardot/varbase": "9.1.x-dev",
+    "vardot/varbase-patches": "9.1.x-dev",
+    "vardot/varbase-updater": "2.x-dev"
   },
   "require-dev": {
     "drupal/core-dev": "~10",
