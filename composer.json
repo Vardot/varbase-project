@@ -123,6 +123,7 @@
       "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
       "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
+      "docroot/recipes/contrib/{$name}": ["type:drupal-recipe"],
       "docroot/libraries/slick": ["npm-asset/slick-carousel"],
       "docroot/libraries/ace": ["npm-asset/ace-builds"],
       "docroot/libraries/jquery-ui-touch-punch": ["bower-asset/jqueryui-touch-punch"],
@@ -138,6 +139,7 @@
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "installer-types": [
+      "drupal-recipe",
       "bower-asset",
       "npm-asset"
     ],
