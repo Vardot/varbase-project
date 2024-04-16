@@ -8,6 +8,7 @@
 /docroot/profiles/contrib/
 /docroot/profiles/varbase/
 /docroot/libraries/
+/docroot/recipes/
 
 # Ignore sensitive information
 /docroot/sites/*/settings.php
