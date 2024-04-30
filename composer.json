@@ -33,8 +33,8 @@
     "cweagans/composer-patches": "~1", 
     "drupal/core": "~10",
     "vardot/varbase": "9.1.x-dev",
-    "vardot/varbase-patches": "9.1.x-dev",
-    "vardot/varbase-updater": "2.x-dev"
+    "vardot/varbase-patches": "~9.2.0",
+    "vardot/varbase-updater": "~2.0"
   },
   "require-dev": {
     "drupal/core-dev": "~10",
