@@ -3,7 +3,7 @@
   "description": "Project template for Varbase distribution.",
   "type": "project",
   "license": "GPL-2.0-or-later",
-  "version": "10.0.x-dev",
+  "version": "9.1.x-dev",
   "homepage": "https://www.drupal.org/project/varbase",
   "authors": [
     {
@@ -33,7 +33,7 @@
     "cweagans/composer-patches": "~1", 
     "drupal/core": "~10",
     "vardot/varbase": "9.1.x-dev",
-    "vardot/varbase-patches": "~9.2.0",
+    "vardot/varbase-patches": "9.2.x-dev",
     "vardot/varbase-updater": "~2.0"
   },
   "require-dev": {
@@ -123,7 +123,7 @@
     },
     "installer-paths": {
       "docroot/core": ["type:drupal-core"],
-      "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
+      "docroot/profiles/{$name}": ["type:drupal-profile"],
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
       "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
       "docroot/recipes/contrib/{$name}": ["type:drupal-recipe"],
@@ -150,6 +150,10 @@
     "drupal-libraries": {
       "library-directory": "docroot/libraries",
       "libraries": [
+        {"name": "objectfitpolyfill", "package": "bower-asset/objectfitpolyfill"},
+        {"name": "chartjs", "package": "bower-asset/chartjs"},
+        {"name": "c3","package": "bower-asset/c3"},
+        {"name": "d3", "package": "bower-asset/d3"},
         {"name": "dropzone","package": "npm-asset/dropzone"},
         {"name": "blazy", "package": "npm-asset/blazy"},
         {"name": "slick", "package": "npm-asset/slick-carousel"},
