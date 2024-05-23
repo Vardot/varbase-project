@@ -2,7 +2,7 @@ name: varbase
 recipe: drupal10
 config:
   webroot: docroot
-  php: '8.3'
+  php: '8.2'
   drush: ^12
 services:
   appserver:
@@ -19,6 +19,7 @@ services:
       - curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
       - echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" > /etc/apt/sources.list.d/nodesource.list
       - pecl install yaml
+      - docker-php-ext-enable yaml
       - apt update -y
       - apt-get install -y nodejs
       - npm install --global yarn
@@ -45,6 +46,8 @@ services:
         DRUPAL_NIGHTWATCH_IGNORE_DIRECTORIES: node_modules,vendor,.*,sites/*/files,sites/*/private,sites/simpletest
         # Drush
         DRUSH_OPTIONS_URI: "https://varbase.lndo.site"
+    config:
+      php: .lando/.php.ini
   chrome:
     type: compose
     app_mount: false
