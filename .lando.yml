@@ -16,6 +16,7 @@ services:
       - apt update -y
       - apt -y install libyaml-dev
       - pecl install yaml
+      - docker-php-ext-enable yaml
     xdebug: true
     config:
       php: .lando/.php.ini
