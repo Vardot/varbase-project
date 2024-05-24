@@ -9,6 +9,8 @@ composer_version: "2.1"
 web_environment: []
 php_version: "8.3"
 nodejs_version: "18"
+webimage_extra_packages: ["php${DDEV_PHP_VERSION}-yaml"]
+dbimage_extra_packages: [sudo]
 
 # Key features of ddev's config.yaml:
 
