@@ -32,7 +32,7 @@ composer create-project vardot/varbase-project:9.1.x-dev PROJECT_DIR_NAME --stab
 
 ## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/9.1.x/UPDATE.md)
 
-## [Local development with Lando](https://docs.varbase.vardot.com/developers/installing-varbase/installing-varbase-with-landoo)
+## [Local development with Lando](https://docs.varbase.vardot.com/developers/installing-varbase/installing-varbase-with-lando)
 
 1. Install Lando locally, steps for installing can be found [here](https://docs.lando.dev/basics/installation.html).
 2. Run `lando start`.
