@@ -2,8 +2,8 @@ type: drupal10
 docroot: docroot
 webserver_type: apache-fpm
 database:
-  type: mysql
-  version: "8.0"
+  type: mariadb
+  version: "10.1"
 mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
