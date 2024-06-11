@@ -3,7 +3,7 @@ docroot: docroot
 webserver_type: apache-fpm
 database:
   type: mariadb
-  version: "10.4"
+  version: "10.11"
 mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
