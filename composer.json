@@ -131,6 +131,7 @@
       "docroot/libraries/swagger-ui/dist": ["npm-asset/swagger-ui-dist"],
       "docroot/libraries/ckeditor5-anchor-drupal": ["npm-asset/northernco--ckeditor5-anchor-drupal"],
       "docroot/libraries/ckeditor5/plugins/media-embed": ["npm-asset/ckeditor--ckeditor5-media-embed"],
+      "docroot/libraries/fancytree": ["npm-asset/jquery.fancytree"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
         "type:bower-asset",
@@ -156,7 +157,8 @@
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
         {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"},
         {"name": "ckeditor5-anchor-drupal", "package": "npm-asset/northernco--ckeditor5-anchor-drupal"},
-        {"name": "ckeditor5-media-embed", "package": "npm-asset/ckeditor--ckeditor5-media-embed"}
+        {"name": "ckeditor5-media-embed", "package": "npm-asset/ckeditor--ckeditor5-media-embed"},
+        {"name": "fancytree", "package": "npm-asset/jquery.fancytree"}
       ]
     },
     "enable-patching": true,
