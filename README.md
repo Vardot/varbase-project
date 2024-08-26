@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/945/workflows/55b6033a-abf7-4e95-a45f-385645dba0eb) [![Ceasefire Now](https://badge.techforpalestine.org/ceasefire-now)](https://techforpalestine.org/learn-more) Varbase 10.0.0
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/962/workflows/2db99fe0-e3a4-4400-a0a5-fd8d92ac1612) [![Ceasefire Now](https://badge.techforpalestine.org/ceasefire-now)](https://techforpalestine.org/learn-more) Varbase 10.0.1
 
 [![](https://www.drupal.org/files/project-images/varbase-medium-logo-color-with-padding.png)](https://www.drupal.org/project/varbase)
 
@@ -22,13 +22,13 @@ composer create-project vardot/varbase-project:10.0.x-dev PROJECT_DIR_NAME --sta
 
 ## [Automated Functional Testing](https://github.com/Vardot/varbase/blob/10.0.x/tests/README.md)
 
-## [Varbase 10.0.x Developer Guide](https://docs.varbase.vardot.com)
+## [Varbase 10.0.x Developer Guide](https://docs.varbase.vardot.com/v/10.0.x)
 
 ## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/10.0.x/CHANGELOG.md)
 
 ## [Varbase Gherkin features](https://github.com/Vardot/varbase/blob/10.0.x/tests/features/varbase/README.md)
 
-## [Varbase Developer Guide](https://docs.varbase.vardot.com)
+## [Varbase Developer Guide](https://docs.varbase.vardot.com/v/10.0.x/developers)
 
 ## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/10.0.x/UPDATE.md)
 
