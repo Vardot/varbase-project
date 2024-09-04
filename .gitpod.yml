@@ -11,11 +11,8 @@ tasks:
       ddev drush pm:enable social_auth_linkedin --yes
       ddev drush pm:enable varbase_update_helper --yes
       ddev drush cache:rebuild
-      ddev echo "Set the API key and org for OpenAI."
-      ddev openai_api_key="sk-change-this"
-      ddev openai_api_org="org-change-this"
-      ddev drush -y config:set openai.settings api_key ${openai_api_key};
-      ddev drush -y config:set openai.settings api_org ${openai_api_org};
+      ddev drush -y config:set openai.settings api_key "sk-change-this"
+      ddev drush -y config:set openai.settings api_org "org-change-this"
     command: |
       ddev start -y
       gp ports await 8080 && gp preview $(gp url 8080)
