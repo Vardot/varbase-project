@@ -4,7 +4,7 @@ tasks:
   - init: |
       ddev start -y
       ddev composer install -vvv
-      ddev drush site-install varbase --yes --account-name="webmaster" --account-pass="d" --account-mail="webmaster@vardot.com" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.varbase_demo=true varbase_extra_components.editoria11y=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true varbase_extra_components.varbase_ai=true varbase_extra_components.varbase_api=true install_configure_form.enable_update_status_emails=NULL -vvv
+      ddev drush site-install varbase --yes --account-name="webmaster" --account-pass="webmaster" --account-mail="webmaster@vardot.com" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.varbase_demo=true varbase_extra_components.editoria11y=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true varbase_extra_components.varbase_ai=true varbase_extra_components.varbase_api=true install_configure_form.enable_update_status_emails=NULL -vvv
       ddev drush pm:enable varbase_development --yes
       ddev drush pm:enable social_auth_facebook --yes
       ddev drush pm:enable social_auth_twitter --yes
