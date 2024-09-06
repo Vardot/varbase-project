@@ -9,7 +9,6 @@ tasks:
       ddev drush pm:enable social_auth_facebook --yes
       ddev drush pm:enable social_auth_twitter --yes
       ddev drush pm:enable social_auth_linkedin --yes
-      ddev drush pm:enable varbase_update_helper --yes
       ddev drush cache:rebuild
       ddev drush -y config:set openai.settings api_key "sk-change-this"
       ddev drush -y config:set openai.settings api_org "org-change-this"
