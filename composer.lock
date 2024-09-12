@@ -180,16 +180,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.321.9",
+            "version": "3.321.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5de5099cfe0e17cb3eb2fe51de0101c99bc9442a"
+                "reference": "a81a9a2cb5f451e03f8ef68b02ebfecfbf1fa7f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5de5099cfe0e17cb3eb2fe51de0101c99bc9442a",
-                "reference": "5de5099cfe0e17cb3eb2fe51de0101c99bc9442a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a81a9a2cb5f451e03f8ef68b02ebfecfbf1fa7f2",
+                "reference": "a81a9a2cb5f451e03f8ef68b02ebfecfbf1fa7f2",
                 "shasum": ""
             },
             "require": {
@@ -272,9 +272,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.10"
             },
-            "time": "2024-09-11T18:15:49+00:00"
+            "time": "2024-09-12T18:08:32+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -10118,7 +10118,7 @@
                     "role": "Developer"
                 },
                 {
-                    "name": "Dave Reid",
+                    "name": "dave reid",
                     "homepage": "https://www.drupal.org/user/53892"
                 }
             ],
@@ -12285,20 +12285,21 @@
         },
         {
             "name": "drupal/schemata",
-            "version": "1.0.0-beta3",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/schemata.git",
-                "reference": "8.x-1.0-beta3"
+                "reference": "8.x-1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/schemata-8.x-1.0-beta3.zip",
-                "reference": "8.x-1.0-beta3",
-                "shasum": "be2cbbf357c3f4d126c8ffbf926432b5fe44e4ff"
+                "url": "https://ftp.drupal.org/files/projects/schemata-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "7fd1a15385ec57672c405633ae716fbf7cbde221"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10"
+                "drupal/core": "^9.5 || ^10 || ^11",
+                "php": ">=8.1"
             },
             "require-dev": {
                 "drupal/coder": "^8.2",
@@ -12309,11 +12310,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-beta3",
-                    "datestamp": "1670337727",
+                    "version": "8.x-1.0",
+                    "datestamp": "1726164272",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
@@ -12389,19 +12390,19 @@
         },
         {
             "name": "drupal/schemata_json_schema",
-            "version": "1.0.0-beta3",
+            "version": "1.0.0",
             "require": {
-                "drupal/core": "^8 || ^9 || ^10",
+                "drupal/core": "^9.5 || ^10 || ^11",
                 "drupal/schemata": "*"
             },
             "type": "metapackage",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-beta3",
-                    "datestamp": "1670337727",
+                    "version": "8.x-1.0",
+                    "datestamp": "1726164272",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
@@ -27242,16 +27243,16 @@
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "10.0.55",
+            "version": "10.0.56",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "ec4883958cb38241f434b26f80fad61f2567a90a"
+                "reference": "832f119cf86c91fb3b0e2bbca9cb5c13fbbb117e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/ec4883958cb38241f434b26f80fad61f2567a90a",
-                "reference": "ec4883958cb38241f434b26f80fad61f2567a90a",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/832f119cf86c91fb3b0e2bbca9cb5c13fbbb117e",
+                "reference": "832f119cf86c91fb3b0e2bbca9cb5c13fbbb117e",
                 "shasum": ""
             },
             "require": {
@@ -27390,6 +27391,9 @@
                     },
                     "drupal/security_review": {
                         "Issue #3463712: Fix fatal error when pressing Run checklist button": "https://raw.githubusercontent.com/Vardot/varbase-patches/patches/security_review--2024-07-25--3463712--mr-76.patch"
+                    },
+                    "drupal/jsonapi_extras": {
+                        "Issue #3473990: Fix PHP Fatal error on  Declaration of the normalize function must be compatible with normalize function return type after Schemata 8.x-1.0 was released": "https://git.drupalcode.org/project/jsonapi_extras/-/commit/d7ab37658999b5fae74769ade4155ec7310aa468.diff"
                     }
                 }
             },
@@ -27416,9 +27420,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/10.0.55"
+                "source": "https://github.com/Vardot/varbase-patches/tree/10.0.56"
             },
-            "time": "2024-09-12T10:17:25+00:00"
+            "time": "2024-09-12T20:21:55+00:00"
         },
         {
             "name": "webflo/drupal-finder",
