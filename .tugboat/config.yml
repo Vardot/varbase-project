@@ -1,0 +1,58 @@
+services:
+  webdb:
+    image: tugboatqa/mariadb:10.5
+    commands:
+      init:
+        - mysql -e "SET GLOBAL max_allowed_packet=536870912;"
+        - echo "max_allowed_packet=536870912" >> /etc/mysql/conf.d/tugboat.cnf
+      update:
+      build: []
+  webapp:
+    image: tugboatqa/php:8.3-apache
+    default: true
+    http: false
+    depends: webdb
+    commands:
+      init:
+        - docker-php-ext-install sodium apcu yaml imagick
+        - a2enmod headers rewrite
+        - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
+        # Install NodeJS
+        - curl -fsSL https://deb.nodesource.com/setup_$(cat $TUGBOAT_ROOT/ui/.nvmrc).x -o nodesource_setup.sh
+        - bash nodesource_setup.sh
+        - apt-get install -y nodejs
+      update:
+        - composer install
+        - |
+          set -eux
+          cd ${TUGBOAT_ROOT}/docroot
+          # Install Varbase.
+          vendor/bin/drush site-install varbase --yes --account-name="webmaster" --account-pass="webmaster" --account-mail="webmaster@vardot.com" --db-url="mysql://tugboat:tugboat@mysql:3306/tugboat" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.varbase_demo=true varbase_extra_components.editoria11y=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true varbase_extra_components.varbase_ai=true varbase_extra_components.varbase_api=true
+          vendor/bin/drush pm:enable varbase_development --yes
+          vendor/bin/drush pm:enable varbase_content_planner --yes
+          vendor/bin/drush pm:enable varbase_media_instagram --yes
+          vendor/bin/drush pm:enable varbase_media_twitter --yes
+          vendor/bin/drush pm:enable social_auth_facebook --yes
+          vendor/bin/drush pm:enable social_auth_twitter --yes
+          vendor/bin/drush pm:enable social_auth_linkedin --yes
+          vendor/bin/drush pm:enable varbase_update_helper --yes
+          vendor/bin/drush cache:rebuild
+          echo "Set the API key and org for OpenAI."
+          openai_api_key="sk-change-this"
+          openai_api_org="org-change-this"
+          vendor/bin/drush -y config:set openai.settings api_key ${openai_api_key};
+          vendor/bin/drush -y config:set openai.settings api_org ${openai_api_org};
+
+          # Add tugboat URLs to the Drupal trusted host patterns.
+          echo "\$settings['trusted_host_patterns'] = ['\.tugboatqa\.com\$'];" >> ${TUGBOAT_ROOT}/docroot/sites/default/settings.php
+
+          # Set up the files directory permissions.
+          mkdir -p ${TUGBOAT_ROOT}/docroot/sites/default/files
+          chgrp -R www-data ${TUGBOAT_ROOT}/docroot/sites/default/files
+          chmod 2775 ${TUGBOAT_ROOT}/docroot/sites/default/files
+          chmod -R g+w ${TUGBOAT_ROOT}/docroot/sites/default/files
+      build:
+        - vendor/bin/drush cache:rebuild
+        - vendor/bin/drush updatedb --yes
+        - vendor/bin/drush cache:rebuild
+  
