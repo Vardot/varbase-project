@@ -17,14 +17,14 @@ services:
         - |
           set -eux
           find / -name "php.ini"
-          echo -e "memory_limit = -1" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
-          echo -e "max_execution_time = 1200" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
-          echo -e "error_reporting = E_ALL" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
-          echo -e "max_input_time = 180" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
-          echo -e "max_input_vars = 10000" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
-          echo -e "post_max_size = 64M" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
-          echo -e "upload_max_filesize = 32M" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
-          echo -e "max_file_uploads = 40" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          echo -e "memory_limit = -1" | sudo tee /usr/local/etc/php/conf.d/my-php.ini > /dev/null
+          echo -e "max_execution_time = 1200" | sudo tee /usr/local/etc/php/conf.d/my-php.ini > /dev/null
+          echo -e "error_reporting = E_ALL" | sudo tee /usr/local/etc/php/conf.d/my-php.ini > /dev/null
+          echo -e "max_input_time = 180" | sudo tee /usr/local/etc/php/conf.d/my-php.ini > /dev/null
+          echo -e "max_input_vars = 10000" | sudo tee /usr/local/etc/php/conf.d/my-php.ini > /dev/null
+          echo -e "post_max_size = 64M" | sudo tee /usr/local/etc/php/conf.d/my-php.ini > /dev/null
+          echo -e "upload_max_filesize = 32M" | sudo tee /usr/local/etc/php/conf.d/my-php.ini > /dev/null
+          echo -e "max_file_uploads = 40" | sudo tee /usr/local/etc/php/conf.d/my-php.ini > /dev/null
           sudo service apache2 restart
           php --version
           composer --version
