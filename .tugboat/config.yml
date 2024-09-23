@@ -14,22 +14,15 @@ services:
       init:
         - a2enmod headers rewrite env mime expires ssl
         - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
-        - |
-          set -eux
-          echo "memory_limit = -1" >> /usr/local/etc/php/conf.d/my-php.ini > /dev/null
-          echo "max_execution_time = 1200" >> /usr/local/etc/php/conf.d/my-php.ini > /dev/null
-          echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/my-php.ini > /dev/null
-          echo "max_input_time = 180" >> /usr/local/etc/php/conf.d/my-php.ini > /dev/null
-          echo "max_input_vars = 10000" >> /usr/local/etc/php/conf.d/my-php.ini > /dev/null
-          echo "post_max_size = 64M" >> /usr/local/etc/php/conf.d/my-php.ini > /dev/null
-          echo "upload_max_filesize = 32M" >> /usr/local/etc/php/conf.d/my-php.ini > /dev/null
-          echo "max_file_uploads = 40" >> /usr/local/etc/php/conf.d/my-php.ini > /dev/null
+        - echo "memory_limit = -1" >> /usr/local/etc/php/conf.d/my-php.ini
+        - echo "max_execution_time = 1200" >> /usr/local/etc/php/conf.d/my-php.ini
+        - echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/my-php.ini
+        - echo "max_input_time = 180" >> /usr/local/etc/php/conf.d/my-php.ini
+        - echo "max_input_vars = 10000" >> /usr/local/etc/php/conf.d/my-php.ini
+        - echo "post_max_size = 64M" >> /usr/local/etc/php/conf.d/my-php.ini
+        - echo "upload_max_filesize = 32M" >> /usr/local/etc/php/conf.d/my-php.ini
+        - echo "max_file_uploads = 40" >> /usr/local/etc/php/conf.d/my-php.ini
           sudo service apache2 restart
-          php --version
-          composer --version
-          php -m
-          php -i | grep "Loaded Configuration File"
-          php --ini
       update:
         - composer install
         - |
