@@ -5,8 +5,6 @@ services:
       init:
         - mysql -e "SET GLOBAL max_allowed_packet=536870912;"
         - echo "max_allowed_packet=536870912" >> /etc/mysql/conf.d/tugboat.cnf
-      update:
-      build: []
   webapp:
     image: tugboatqa/php:8.3-apache
     default: true
@@ -14,8 +12,24 @@ services:
     depends: webdb
     commands:
       init:
-        - a2enmod headers rewrite
+        - a2enmod headers rewrite env mime expires ssl
         - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
+        - |
+          set -eux
+          echo -e "memory_limit = -1" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          echo -e "max_execution_time = 1200" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          echo -e "error_reporting = E_ALL" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          echo -e "max_input_time = 180" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          echo -e "max_input_vars = 10000" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          echo -e "post_max_size = 64M" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          echo -e "upload_max_filesize = 32M" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          echo -e "max_file_uploads = 40" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
+          sudo service apache2 restart
+          php --version
+          composer --version
+          php -m
+          php -i | grep "Loaded Configuration File"
+          php --ini
       update:
         - composer install
         - |
