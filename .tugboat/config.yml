@@ -23,7 +23,7 @@ services:
         - echo "upload_max_filesize = 32M" >> /usr/local/etc/php/conf.d/my-php.ini
         - echo "max_file_uploads = 40" >> /usr/local/etc/php/conf.d/my-php.ini
       update:
-        - COMPOSER_MEMORY_LIMIT=-1 composer install -vvv
+        - COMPOSER_MEMORY_LIMIT=-1 composer install --optimize-autoloader -vvv
         - |
           set -eux
           cd ${TUGBOAT_ROOT}/docroot
