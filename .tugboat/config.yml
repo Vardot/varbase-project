@@ -20,7 +20,6 @@ services:
         - echo "max_file_uploads = 40" >> /usr/local/etc/php/conf.d/my-php.ini
       update:
         - COMPOSER_MEMORY_LIMIT=-1 composer install -vvv
-        - COMPOSER_MEMORY_LIMIT=-1 composer update -vvv
         # Install Varbase.
         - ./bin/drush site-install varbase --yes --account-name="webmaster" --account-pass="webmaster" --account-mail="webmaster@vardot.com" --db-url="mysql://tugboat:tugboat@mysql:3306/tugboat" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.varbase_demo=true varbase_extra_components.editoria11y=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true varbase_extra_components.varbase_ai=true varbase_extra_components.varbase_api=true install_configure_form.enable_update_status_emails=NULL -vvv
         - ./bin/drush pm:enable varbase_development --yes
