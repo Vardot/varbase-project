@@ -22,7 +22,6 @@ services:
         - echo "post_max_size = 64M" >> /usr/local/etc/php/conf.d/my-php.ini
         - echo "upload_max_filesize = 32M" >> /usr/local/etc/php/conf.d/my-php.ini
         - echo "max_file_uploads = 40" >> /usr/local/etc/php/conf.d/my-php.ini
-        - sudo service apache2 restart
       update:
         - COMPOSER_MEMORY_LIMIT=-1 composer install -vvv
         - |
