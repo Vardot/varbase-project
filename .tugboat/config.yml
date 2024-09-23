@@ -16,10 +16,6 @@ services:
       init:
         - a2enmod headers rewrite
         - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
-        # Install NodeJS
-        - curl -fsSL https://deb.nodesource.com/setup_$(cat $TUGBOAT_ROOT/ui/.nvmrc).x -o nodesource_setup.sh
-        - bash nodesource_setup.sh
-        - apt-get install -y nodejs
       update:
         - composer install
         - |
