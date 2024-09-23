@@ -14,7 +14,7 @@ services:
     depends: webdb
     commands:
       init:
-        - docker-php-ext-install sodium apcu yaml imagick
+        - docker-php-ext-install yaml
         - a2enmod headers rewrite
         - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
         # Install NodeJS
