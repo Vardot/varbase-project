@@ -16,6 +16,7 @@ services:
         - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
         - |
           set -eux
+          find / -name "php.ini"
           echo -e "memory_limit = -1" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
           echo -e "max_execution_time = 1200" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
           echo -e "error_reporting = E_ALL" | sudo tee /etc/php/8.3/apache2/php.ini > /dev/null
