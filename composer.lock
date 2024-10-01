@@ -8635,27 +8635,28 @@
         },
         {
             "name": "drupal/jsonapi_extras",
-            "version": "3.25.0",
+            "version": "3.26.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/jsonapi_extras.git",
-                "reference": "8.x-3.25"
+                "reference": "8.x-3.26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/jsonapi_extras-8.x-3.25.zip",
-                "reference": "8.x-3.25",
-                "shasum": "ba557127ca560dbf3fae68f76c7720137857f167"
+                "url": "https://ftp.drupal.org/files/projects/jsonapi_extras-8.x-3.26.zip",
+                "reference": "8.x-3.26",
+                "shasum": "344fe5580f27ef4527ddb3e2eb8ef73bdf34bd82"
             },
             "require": {
-                "drupal/core": "^9.2 || ^10",
-                "e0ipso/shaper": "^1"
+                "drupal/core": "^9.5 || ^10 || ^11",
+                "e0ipso/shaper": "^1",
+                "php": ">=8.1"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.25",
-                    "datestamp": "1717340217",
+                    "version": "8.x-3.26",
+                    "datestamp": "1727787963",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -18954,16 +18955,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v11.25.0",
+            "version": "v11.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "465044f988f9a07c901388beeb15201d711387aa"
+                "reference": "4d333ea19a27230b424b9af56f34cd658b5bbce2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/465044f988f9a07c901388beeb15201d711387aa",
-                "reference": "465044f988f9a07c901388beeb15201d711387aa",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/4d333ea19a27230b424b9af56f34cd658b5bbce2",
+                "reference": "4d333ea19a27230b424b9af56f34cd658b5bbce2",
                 "shasum": ""
             },
             "require": {
@@ -19005,11 +19006,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-09-25T15:08:32+00:00"
+            "time": "2024-09-27T14:54:48+00:00"
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v11.25.0",
+            "version": "v11.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -19055,7 +19056,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v11.25.0",
+            "version": "v11.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -19103,7 +19104,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v11.25.0",
+            "version": "v11.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -27192,12 +27193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "aaaadbb0a716138f6c42749d57cb4c211bccec5a"
+                "reference": "ae8f5c79a00374b2a88695a47364172ee211e58b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/aaaadbb0a716138f6c42749d57cb4c211bccec5a",
-                "reference": "aaaadbb0a716138f6c42749d57cb4c211bccec5a",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/ae8f5c79a00374b2a88695a47364172ee211e58b",
+                "reference": "ae8f5c79a00374b2a88695a47364172ee211e58b",
                 "shasum": ""
             },
             "require": {
@@ -27337,9 +27338,6 @@
                     },
                     "drupal/security_review": {
                         "Issue #3463712: Fix fatal error when pressing Run checklist button": "https://raw.githubusercontent.com/Vardot/varbase-patches/patches/security_review--2024-07-25--3463712--mr-76.patch"
-                    },
-                    "drupal/jsonapi_extras": {
-                        "Issue #3473990: Fix PHP Fatal error on  Declaration of the normalize function must be compatible with normalize function return type after Schemata 8.x-1.0 was released": "https://git.drupalcode.org/project/jsonapi_extras/-/commit/d7ab37658999b5fae74769ade4155ec7310aa468.diff"
                     }
                 }
             },
@@ -27366,9 +27364,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/10.0.58"
+                "source": "https://github.com/Vardot/varbase-patches/tree/10.0.59"
             },
-            "time": "2024-09-16T16:43:00+00:00"
+            "time": "2024-10-01T14:16:39+00:00"
         },
         {
             "name": "webflo/drupal-finder",
