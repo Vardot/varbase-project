@@ -5683,26 +5683,26 @@
         },
         {
             "name": "drupal/drimage",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/drimage.git",
-                "reference": "2.3.1"
+                "reference": "2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/drimage-2.3.1.zip",
-                "reference": "2.3.1",
-                "shasum": "89ae40f56b821ea4ef1d32014e9b2e46a8fec279"
+                "url": "https://ftp.drupal.org/files/projects/drimage-2.3.2.zip",
+                "reference": "2.3.2",
+                "shasum": "18ac930752975ed260ca5946449c6ff5b5fd8a21"
             },
             "require": {
-                "drupal/core": "^9.3 || ^10"
+                "drupal/core": "^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.3.1",
-                    "datestamp": "1718289824",
+                    "version": "2.3.2",
+                    "datestamp": "1727874519",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5715,7 +5715,7 @@
             ],
             "authors": [
                 {
-                    "name": "DieterHolvoet",
+                    "name": "dieterholvoet",
                     "homepage": "https://www.drupal.org/user/3567222"
                 },
                 {
@@ -27268,12 +27268,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "ae8f5c79a00374b2a88695a47364172ee211e58b"
+                "reference": "bed9802bac806d91144c07f2ec6005ed7af2b29e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/ae8f5c79a00374b2a88695a47364172ee211e58b",
-                "reference": "ae8f5c79a00374b2a88695a47364172ee211e58b",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/bed9802bac806d91144c07f2ec6005ed7af2b29e",
+                "reference": "bed9802bac806d91144c07f2ec6005ed7af2b29e",
                 "shasum": ""
             },
             "require": {
@@ -27393,9 +27393,6 @@
                         "Issue #3392780: Fix not valid context for entity context when editing the default layout entity types or bundles": "https://www.drupal.org/files/issues/2023-12-15/not_valid_context-3392780-reroll_patch_from_4-7_0.patch",
                         "Issue #3471460: Fix users having access to the layout builder on entities regardless of whether the layout is enabled": "https://www.drupal.org/files/issues/2024-09-02/access_layout_builder_entities_regardless_whether_layout_enabled-3471460-9.patch"
                     },
-                    "drupal/drimage": {
-                        "Issue #3456085: Fix Drupal 10.3 compatibility for Too few arguments to function deliver() 3 passed in Drimage": "https://www.drupal.org/files/issues/2024-08-01/3456085-13.patch"
-                    },
                     "drupal/cl_server": {
                         "Issue #3456661: Update Drupal core to ^10.3 and ^11 and drop the use of the SDC experimental module": "https://www.drupal.org/files/issues/2024-06-25/cl_server--2024-06-25--3456661-9--mr-32.patch"
                     },
@@ -27439,9 +27436,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/10.0.59"
+                "source": "https://github.com/Vardot/varbase-patches/tree/10.0.60"
             },
-            "time": "2024-10-01T14:16:39+00:00"
+            "time": "2024-10-02T13:27:43+00:00"
         },
         {
             "name": "webflo/drupal-finder",
