@@ -180,16 +180,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.322.9",
+            "version": "3.322.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "0bd7513a7dd9b5330cb92575da99d9057f79b39c"
+                "reference": "0adb58bc7989068b489d320970951163847b520b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0bd7513a7dd9b5330cb92575da99d9057f79b39c",
-                "reference": "0bd7513a7dd9b5330cb92575da99d9057f79b39c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0adb58bc7989068b489d320970951163847b520b",
+                "reference": "0adb58bc7989068b489d320970951163847b520b",
                 "shasum": ""
             },
             "require": {
@@ -272,9 +272,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.322.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.322.10"
             },
-            "time": "2024-10-01T18:23:10+00:00"
+            "time": "2024-10-02T18:14:16+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -5512,17 +5512,17 @@
         },
         {
             "name": "drupal/diff",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/diff.git",
-                "reference": "8.x-1.7"
+                "reference": "8.x-1.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/diff-8.x-1.7.zip",
-                "reference": "8.x-1.7",
-                "shasum": "d282bdf3350ac71f95b38576a9f397bdbab8d249"
+                "url": "https://ftp.drupal.org/files/projects/diff-8.x-1.8.zip",
+                "reference": "8.x-1.8",
+                "shasum": "a104bf731a282f06ff0d5a7fb861c01b5b933765"
             },
             "require": {
                 "drupal/core": "^10 || ^11",
@@ -5537,13 +5537,13 @@
                 "phpstan/phpstan-deprecation-rules": "*",
                 "phpstan/phpstan-phpunit": "1.4.x-dev",
                 "phpstan/phpstan-strict-rules": "^1@stable",
-                "previousnext/coding-standard": "^1"
+                "previousnext/coding-standard": "1.0.1"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.7",
-                    "datestamp": "1718073570",
+                    "version": "8.x-1.8",
+                    "datestamp": "1727892285",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -11253,17 +11253,17 @@
         },
         {
             "name": "drupal/persistent_login",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/persistent_login.git",
-                "reference": "2.2.1"
+                "reference": "2.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/persistent_login-2.2.1.zip",
-                "reference": "2.2.1",
-                "shasum": "24212d2e627b345b27afb965ac0ef11e4fa59ff2"
+                "url": "https://ftp.drupal.org/files/projects/persistent_login-2.2.2.zip",
+                "reference": "2.2.2",
+                "shasum": "e1da4ad2a123ee9d12bb126b7aa1ca6f7b2cca03"
             },
             "require": {
                 "drupal/core": "^10 || ^11"
@@ -11271,8 +11271,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.2.1",
-                    "datestamp": "1721689503",
+                    "version": "2.2.2",
+                    "datestamp": "1727892309",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -27068,12 +27068,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
-                "reference": "72f459e53f097ed95305e99aebf96c2dc996cd8c"
+                "reference": "21e50277f02cb9628558b4e34d3f2487b5974de1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase/zipball/72f459e53f097ed95305e99aebf96c2dc996cd8c",
-                "reference": "72f459e53f097ed95305e99aebf96c2dc996cd8c",
+                "url": "https://api.github.com/repos/Vardot/varbase/zipball/21e50277f02cb9628558b4e34d3f2487b5974de1",
+                "reference": "21e50277f02cb9628558b4e34d3f2487b5974de1",
                 "shasum": ""
             },
             "require": {
@@ -27260,7 +27260,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-10-02T12:22:29+00:00"
+            "time": "2024-10-02T15:09:55+00:00"
         },
         {
             "name": "vardot/varbase-patches",
