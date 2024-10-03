@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "253efd387986fba7ec676016404acecf",
+    "content-hash": "5a7d8ecff17a10317b107e7499cfcc6d",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -27064,7 +27064,7 @@
         },
         {
             "name": "vardot/varbase",
-            "version": "10.0.x-dev",
+            "version": "10.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
@@ -27120,7 +27120,6 @@
                 "drush/drush": "~12 || ~13",
                 "webship/behat-html-formatter": "~1"
             },
-            "default-branch": true,
             "type": "drupal-profile",
             "extra": {
                 "drupal-scaffold": {
@@ -27264,7 +27263,7 @@
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "10.0.x-dev",
+            "version": "10.0.61",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
@@ -27282,7 +27281,6 @@
                 "drupal/core": "~10.3.0",
                 "oomphinc/composer-installers-extender": "~2"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "enable-patching": true,
@@ -31689,10 +31687,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "vardot/varbase": 20,
-        "vardot/varbase-patches": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
