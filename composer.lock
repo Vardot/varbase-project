@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e0854a65cae1b8edc7b9ca6c98a2e1f",
+    "content-hash": "253efd387986fba7ec676016404acecf",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -15223,17 +15223,11 @@
         },
         {
             "name": "drupal/varbase_ai",
-            "version": "1.0.0-beta1",
+            "version": "dev-1.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_ai.git",
-                "reference": "1.0.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_ai-1.0.0-beta1.zip",
-                "reference": "1.0.0-beta1",
-                "shasum": "07597525339d316c52aae11e3e267e8c78b26766"
+                "reference": "c10476b345eba111b213fa59d5c5df4a39331999"
             },
             "require": {
                 "drupal/ai_interpolator": "~1",
@@ -15249,12 +15243,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
                 "drupal": {
-                    "version": "1.0.0-beta1",
-                    "datestamp": "1719134722",
+                    "version": "1.0.0-alpha2+2-dev",
+                    "datestamp": "1718911445",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15282,17 +15279,11 @@
         },
         {
             "name": "drupal/varbase_api",
-            "version": "10.0.6",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_api.git",
-                "reference": "10.0.6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_api-10.0.6.zip",
-                "reference": "10.0.6",
-                "shasum": "68571051933451ac0f4b54c48368268d8fa89b9f"
+                "reference": "61b5d0abe820c10fb3201fbced5fb4a45cb017bc"
             },
             "require": {
                 "drupal/consumers": "~1",
@@ -15312,12 +15303,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.6",
-                    "datestamp": "1719130444",
+                    "version": "10.0.5+4-dev",
+                    "datestamp": "1718911578",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15349,17 +15343,11 @@
         },
         {
             "name": "drupal/varbase_auth",
-            "version": "10.0.4",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_auth.git",
-                "reference": "10.0.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_auth-10.0.4.zip",
-                "reference": "10.0.4",
-                "shasum": "b200ab11d539b289c7ffa498071250dba0062ab7"
+                "reference": "c2d7b58d25e49fcb0c71fd4cf100029b641ad831"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -15375,12 +15363,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.4",
-                    "datestamp": "1719736825",
+                    "version": "10.0.3+1-dev",
+                    "datestamp": "1719733701",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15408,17 +15399,11 @@
         },
         {
             "name": "drupal/varbase_blog",
-            "version": "10.0.4",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_blog.git",
-                "reference": "10.0.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_blog-10.0.4.zip",
-                "reference": "10.0.4",
-                "shasum": "d35024ccd16ad0bfcd4409bcd8f00ee5637c6abf"
+                "reference": "d4cd9591701a8bbf36c7a2ae73148856c4abf80f"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -15437,12 +15422,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.4",
-                    "datestamp": "1724329986",
+                    "version": "10.0.3+3-dev",
+                    "datestamp": "1724329765",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15470,17 +15458,11 @@
         },
         {
             "name": "drupal/varbase_bootstrap_paragraphs",
-            "version": "10.0.10",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_bootstrap_paragraphs.git",
-                "reference": "10.0.10"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_bootstrap_paragraphs-10.0.10.zip",
-                "reference": "10.0.10",
-                "shasum": "ebdd73ed9fdc0eb9bfb6b59095bd0ec4d6e1688b"
+                "reference": "1b5f03790e61f4aa4d64bf14ae87b9f2a81f40d9"
             },
             "require": {
                 "drupal/advanced_text_formatter": "~3",
@@ -15500,12 +15482,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.10",
-                    "datestamp": "1722174669",
+                    "version": "10.0.8+1-dev",
+                    "datestamp": "1721912695",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15575,17 +15560,11 @@
         },
         {
             "name": "drupal/varbase_carousels",
-            "version": "10.0.0-rc1",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_carousels.git",
-                "reference": "10.0.0-rc1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_carousels-10.0.0-rc1.zip",
-                "reference": "10.0.0-rc1",
-                "shasum": "6e6a43c155e8da52e2ed8503407cbba9d5921434"
+                "reference": "7ed477e387c42d51242ab867eb3e8aec94dd0a31"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -15599,12 +15578,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.0-rc1",
-                    "datestamp": "1719164164",
+                    "version": "10.0.0-beta5+1-dev",
+                    "datestamp": "1719162320",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15632,17 +15614,11 @@
         },
         {
             "name": "drupal/varbase_components",
-            "version": "2.0.5",
+            "version": "dev-2.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_components.git",
-                "reference": "2.0.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_components-2.0.5.zip",
-                "reference": "2.0.5",
-                "shasum": "e1f638c4917bc72f27b866a2b258921dae15ff71"
+                "reference": "e462f5e9fb68f750d2be3fc10c102c43ea2d64ac"
             },
             "require": {
                 "drupal/cl_block": "~1",
@@ -15667,12 +15643,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-2.0.x": "2.0.x-dev"
+                },
                 "drupal": {
-                    "version": "2.0.5",
-                    "datestamp": "1725271702",
+                    "version": "2.0.4+2-dev",
+                    "datestamp": "1725269381",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15700,17 +15679,11 @@
         },
         {
             "name": "drupal/varbase_core",
-            "version": "10.0.35",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_core.git",
-                "reference": "10.0.35"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_core-10.0.35.zip",
-                "reference": "10.0.35",
-                "shasum": "0a88ebe04e39dd6ee292ccc5efc7376cf032b138"
+                "reference": "7b697f49574d7849c417ed75d6d8ceded68f158e"
             },
             "require": {
                 "drupal/admin_audit_trail": "~1",
@@ -15827,12 +15800,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.35",
-                    "datestamp": "1727778309",
+                    "version": "10.0.34+1-dev",
+                    "datestamp": "1727776290",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15899,17 +15875,11 @@
         },
         {
             "name": "drupal/varbase_dashboards",
-            "version": "1.0.4",
+            "version": "dev-1.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_dashboards.git",
-                "reference": "1.0.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_dashboards-1.0.4.zip",
-                "reference": "1.0.4",
-                "shasum": "cb1ae8a34a0beb6bce5e739bdaf3162077e806a1"
+                "reference": "faec0e10d1db3b2df8c5ae28a5cc292536a8e9e1"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -15921,9 +15891,12 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
                 "drupal": {
-                    "version": "1.0.4",
-                    "datestamp": "1719245167",
+                    "version": "1.0.3+1-dev",
+                    "datestamp": "1719243847",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -15954,17 +15927,11 @@
         },
         {
             "name": "drupal/varbase_demo",
-            "version": "1.0.4",
+            "version": "dev-1.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_demo.git",
-                "reference": "1.0.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_demo-1.0.4.zip",
-                "reference": "1.0.4",
-                "shasum": "2a9540e82b86241ed7a9c9fa53b32303a24f8ad9"
+                "reference": "27d07d4d1c4bfb06ba47e57b96ec75287b364acd"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -15977,12 +15944,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
                 "drupal": {
-                    "version": "1.0.4",
-                    "datestamp": "1719523164",
+                    "version": "1.0.3+2-dev",
+                    "datestamp": "1719520455",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16010,17 +15980,11 @@
         },
         {
             "name": "drupal/varbase_editor",
-            "version": "10.0.8",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_editor.git",
-                "reference": "10.0.8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_editor-10.0.8.zip",
-                "reference": "10.0.8",
-                "shasum": "2b5baf21d2ca9adbc3155a826bf45a6f03ad37b6"
+                "reference": "79fd12c501c4910a84ce2158412792ff5a472d6f"
             },
             "require": {
                 "drupal/ace_editor": "~2",
@@ -16049,12 +16013,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.8",
-                    "datestamp": "1727082863",
+                    "version": "10.0.7+2-dev",
+                    "datestamp": "1727025096",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16082,17 +16049,11 @@
         },
         {
             "name": "drupal/varbase_email",
-            "version": "10.0.5",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_email.git",
-                "reference": "10.0.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_email-10.0.5.zip",
-                "reference": "10.0.5",
-                "shasum": "a2f6fabafabec7f32f8e350c307106a8ad5e072a"
+                "reference": "e47262467dccc3cce98388d4ddfd3de2a26a43b0"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -16103,12 +16064,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.5",
-                    "datestamp": "1724167988",
+                    "version": "10.0.4+1-dev",
+                    "datestamp": "1724143861",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16254,17 +16218,11 @@
         },
         {
             "name": "drupal/varbase_heroslider",
-            "version": "1.0.0-beta1",
+            "version": "dev-1.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_heroslider.git",
-                "reference": "1.0.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_heroslider-1.0.0-beta1.zip",
-                "reference": "1.0.0-beta1",
-                "shasum": "20abc36176869856aa06cdf3823269e10a9765a6"
+                "reference": "5a473589bf0c66f4f2c14f16a8d1e3f8ecfcb986"
             },
             "require": {
                 "drupal/advanced_text_formatter": "~3",
@@ -16280,9 +16238,12 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
                 "drupal": {
-                    "version": "1.0.0-beta1",
-                    "datestamp": "1719329483",
+                    "version": "1.0.0-alpha3+2-dev",
+                    "datestamp": "1719257438",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -16314,17 +16275,11 @@
         },
         {
             "name": "drupal/varbase_heroslider_media",
-            "version": "10.0.3",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_heroslider_media.git",
-                "reference": "10.0.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_heroslider_media-10.0.3.zip",
-                "reference": "10.0.3",
-                "shasum": "b3649d738bf567ab963f2fd43db4821d5769d052"
+                "reference": "09c18ebef47d649501f1b4e16ef74ce38c7d4cf0"
             },
             "require": {
                 "drupal/advanced_text_formatter": "~3",
@@ -16344,12 +16299,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.3",
-                    "datestamp": "1719765451",
+                    "version": "10.0.2+2-dev",
+                    "datestamp": "1719764622",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16454,17 +16412,11 @@
         },
         {
             "name": "drupal/varbase_landing",
-            "version": "10.0.4",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_landing.git",
-                "reference": "10.0.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_landing-10.0.4.zip",
-                "reference": "10.0.4",
-                "shasum": "d4de1953f14d875ccfefeecb235a719c431147c5"
+                "reference": "9d91adcb6fc472eec90daa36486c92b8fa00b8ca"
             },
             "require": {
                 "drupal/advanced_text_formatter": "~3",
@@ -16483,12 +16435,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.4",
-                    "datestamp": "1724344600",
+                    "version": "10.0.3+1-dev",
+                    "datestamp": "1724153737",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16516,17 +16471,11 @@
         },
         {
             "name": "drupal/varbase_layout_builder",
-            "version": "10.1.3",
+            "version": "dev-10.1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_layout_builder.git",
-                "reference": "10.1.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_layout_builder-10.1.3.zip",
-                "reference": "10.1.3",
-                "shasum": "99828ebc1e94db31265e5b8afdc1adbe10fee564"
+                "reference": "84acf393e5548a855b52d78727ec738cb4860faf"
             },
             "require": {
                 "drupal/block_form_alter": "~2",
@@ -16577,12 +16526,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.1.x": "10.1.x-dev"
+                },
                 "drupal": {
-                    "version": "10.1.3",
-                    "datestamp": "1725296074",
+                    "version": "10.1.2+1-dev",
+                    "datestamp": "1725279622",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16610,17 +16562,11 @@
         },
         {
             "name": "drupal/varbase_media",
-            "version": "10.0.8",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_media.git",
-                "reference": "10.0.8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_media-10.0.8.zip",
-                "reference": "10.0.8",
-                "shasum": "749d1a504b20bdd1ba661c94db6f051029bf810e"
+                "reference": "37c9dfba36cde820aed0cd5de95909db2470658b"
             },
             "require": {
                 "drupal/advanced_text_formatter": "~3",
@@ -16671,12 +16617,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.8",
-                    "datestamp": "1727083366",
+                    "version": "10.0.7+3-dev",
+                    "datestamp": "1727019163",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16869,17 +16818,11 @@
         },
         {
             "name": "drupal/varbase_search",
-            "version": "10.0.3",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_search.git",
-                "reference": "10.0.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_search-10.0.3.zip",
-                "reference": "10.0.3",
-                "shasum": "cdb0638d8253783b8bb5152f4f9d8e6b60b52acd"
+                "reference": "d4c690b893a27af0d4714c8500736eb87ddefc1d"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -16890,12 +16833,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.3",
-                    "datestamp": "1719499449",
+                    "version": "10.0.2+2-dev",
+                    "datestamp": "1719497017",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16923,17 +16869,11 @@
         },
         {
             "name": "drupal/varbase_seo",
-            "version": "10.0.5",
+            "version": "dev-10.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_seo.git",
-                "reference": "10.0.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_seo-10.0.5.zip",
-                "reference": "10.0.5",
-                "shasum": "d11f051e5f755fe2268f0e7438ec2ac2bf86c9f6"
+                "reference": "ff5a2508066f5e14e72222d345c8ca6fc547e858"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -16953,12 +16893,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-10.0.x": "10.0.x-dev"
+                },
                 "drupal": {
-                    "version": "10.0.5",
-                    "datestamp": "1724258360",
+                    "version": "10.0.4+3-dev",
+                    "datestamp": "1724254519",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16986,17 +16929,11 @@
         },
         {
             "name": "drupal/varbase_workflow",
-            "version": "3.0.9",
+            "version": "dev-3.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_workflow.git",
-                "reference": "3.0.9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/varbase_workflow-3.0.9.zip",
-                "reference": "3.0.9",
-                "shasum": "e43d90fecbf363b870aa98dd4a874ad960aaccab"
+                "reference": "8de808d05e4e12e556294a8e68ce3711629a3870"
             },
             "require": {
                 "drupal/access_unpublished": "~1",
@@ -17018,12 +16955,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-3.0.x": "3.0.x-dev"
+                },
                 "drupal": {
-                    "version": "3.0.9",
-                    "datestamp": "1726148984",
+                    "version": "3.0.8+1-dev",
+                    "datestamp": "1726144240",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -17055,17 +16995,11 @@
         },
         {
             "name": "drupal/vartheme_bs5",
-            "version": "3.0.4",
+            "version": "dev-3.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/vartheme_bs5.git",
-                "reference": "3.0.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/vartheme_bs5-3.0.4.zip",
-                "reference": "3.0.4",
-                "shasum": "f83e19670bb0cb4e9949df6e320a66409d58d25e"
+                "reference": "d1f6bf0dcffc5b0bd7f6021703a9eddc64c1defc"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -17074,9 +17008,12 @@
             },
             "type": "drupal-theme",
             "extra": {
+                "branch-alias": {
+                    "dev-3.0.x": "3.0.x-dev"
+                },
                 "drupal": {
-                    "version": "3.0.4",
-                    "datestamp": "1727625429",
+                    "version": "3.0.3+1-dev",
+                    "datestamp": "1727622702",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -17107,17 +17044,11 @@
         },
         {
             "name": "drupal/vartheme_claro",
-            "version": "4.0.10",
+            "version": "dev-4.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/vartheme_claro.git",
-                "reference": "4.0.10"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/vartheme_claro-4.0.10.zip",
-                "reference": "4.0.10",
-                "shasum": "48599a22f5dc3ce3e9586797e0a7441787b8bc63"
+                "reference": "01ae6197d0b4e774c437e20f9ccfc9725c4fc0e8"
             },
             "require": {
                 "drupal/core": "~10.3.0 || ~11.0.0",
@@ -17128,12 +17059,15 @@
             },
             "type": "drupal-theme",
             "extra": {
+                "branch-alias": {
+                    "dev-4.0.x": "4.0.x-dev"
+                },
                 "drupal": {
-                    "version": "4.0.10",
-                    "datestamp": "1719146036",
+                    "version": "4.0.9+1-dev",
+                    "datestamp": "1719136897",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -27064,42 +26998,42 @@
         },
         {
             "name": "vardot/varbase",
-            "version": "10.0.2",
+            "version": "10.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
-                "reference": "21e50277f02cb9628558b4e34d3f2487b5974de1"
+                "reference": "31369ff30bc647343c6de8ac7345ffa334673c5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase/zipball/21e50277f02cb9628558b4e34d3f2487b5974de1",
-                "reference": "21e50277f02cb9628558b4e34d3f2487b5974de1",
+                "url": "https://api.github.com/repos/Vardot/varbase/zipball/31369ff30bc647343c6de8ac7345ffa334673c5b",
+                "reference": "31369ff30bc647343c6de8ac7345ffa334673c5b",
                 "shasum": ""
             },
             "require": {
                 "bower-asset/jqueryui-touch-punch": "dev-master",
-                "drupal/varbase_ai": "~1",
-                "drupal/varbase_api": "~10",
-                "drupal/varbase_auth": "~10",
-                "drupal/varbase_blog": "~10",
-                "drupal/varbase_bootstrap_paragraphs": "~10",
-                "drupal/varbase_carousels": "~10",
-                "drupal/varbase_components": "~2",
-                "drupal/varbase_core": "~10",
-                "drupal/varbase_dashboards": "~1",
-                "drupal/varbase_demo": "~1",
-                "drupal/varbase_editor": "~10",
-                "drupal/varbase_email": "~10",
-                "drupal/varbase_heroslider": "~1",
-                "drupal/varbase_heroslider_media": "~10",
-                "drupal/varbase_landing": "~10",
-                "drupal/varbase_layout_builder": "~10",
-                "drupal/varbase_media": "~10",
-                "drupal/varbase_search": "~10",
-                "drupal/varbase_seo": "~10",
-                "drupal/varbase_workflow": "~3",
-                "drupal/vartheme_bs5": "~3",
-                "drupal/vartheme_claro": "~4",
+                "drupal/varbase_ai": "1.0.x-dev",
+                "drupal/varbase_api": "10.0.x-dev",
+                "drupal/varbase_auth": "10.0.x-dev",
+                "drupal/varbase_blog": "10.0.x-dev",
+                "drupal/varbase_bootstrap_paragraphs": "10.0.x-dev",
+                "drupal/varbase_carousels": "10.0.x-dev",
+                "drupal/varbase_components": "2.0.x-dev",
+                "drupal/varbase_core": "10.0.x-dev",
+                "drupal/varbase_dashboards": "1.0.x-dev",
+                "drupal/varbase_demo": "1.0.x-dev",
+                "drupal/varbase_editor": "10.0.x-dev",
+                "drupal/varbase_email": "10.0.x-dev",
+                "drupal/varbase_heroslider": "1.0.x-dev",
+                "drupal/varbase_heroslider_media": "10.0.x-dev",
+                "drupal/varbase_landing": "10.0.x-dev",
+                "drupal/varbase_layout_builder": "10.1.x-dev",
+                "drupal/varbase_media": "10.0.x-dev",
+                "drupal/varbase_search": "10.0.x-dev",
+                "drupal/varbase_seo": "10.0.x-dev",
+                "drupal/varbase_workflow": "3.0.x-dev",
+                "drupal/vartheme_bs5": "3.0.x-dev",
+                "drupal/vartheme_claro": "4.0.x-dev",
                 "npm-asset/ace-builds": "~1",
                 "npm-asset/blazy": "~1",
                 "npm-asset/ckeditor--ckeditor5-media-embed": "*",
@@ -27120,6 +27054,7 @@
                 "drush/drush": "~12 || ~13",
                 "webship/behat-html-formatter": "~1"
             },
+            "default-branch": true,
             "type": "drupal-profile",
             "extra": {
                 "drupal-scaffold": {
@@ -27259,11 +27194,11 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-10-02T15:09:55+00:00"
+            "time": "2024-10-03T12:00:38+00:00"
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "10.0.61",
+            "version": "10.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
@@ -27281,6 +27216,7 @@
                 "drupal/core": "~10.3.0",
                 "oomphinc/composer-installers-extender": "~2"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "enable-patching": true,
@@ -31687,7 +31623,10 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "vardot/varbase": 20,
+        "vardot/varbase-patches": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
