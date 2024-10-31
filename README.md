@@ -1,5 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/978/workflows/9ff70b3a-e33e-4ae6-8fce-8da4ca4bb439) [![Ceasefire Now](https://badge.techforpalestine.org/ceasefire-now)](https://techforpalestine.org/learn-more) Varbase 10.0.2
-
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.1.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase?branch=10.1.x) [![Ceasefire Now](https://badge.techforpalestine.org/ceasefire-now)](https://techforpalestine.org/learn-more) Varbase 10.1.x
 [![](https://www.drupal.org/files/project-images/varbase-medium-logo-color-with-padding.png)](https://www.drupal.org/project/varbase)
 
 # Varbase Project
