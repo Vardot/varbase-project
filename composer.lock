@@ -4055,26 +4055,26 @@
         },
         {
             "name": "drupal/coffee",
-            "version": "1.4.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/coffee.git",
-                "reference": "8.x-1.4"
+                "reference": "2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/coffee-8.x-1.4.zip",
-                "reference": "8.x-1.4",
-                "shasum": "9e32a5890d42a2a0312635bd5e3bf91cc2aa07ce"
+                "url": "https://ftp.drupal.org/files/projects/coffee-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "e18bf87d466e4c8213a2dff51449caad6728394e"
             },
             "require": {
-                "drupal/core": "^9.2 || ^10"
+                "drupal/core": "^10.2 || ^11.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.4",
-                    "datestamp": "1709147080",
+                    "version": "2.0.0",
+                    "datestamp": "1731340397",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4086,7 +4086,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -4117,6 +4117,9 @@
             ],
             "description": "Provides an Alfred like search box to navigate within your site.",
             "homepage": "https://drupal.org/project/coffee",
+            "keywords": [
+                "Drupal"
+            ],
             "support": {
                 "source": "https://git.drupalcode.org/project/coffee",
                 "issues": "https://drupal.org/project/issues/coffee",
@@ -15757,7 +15760,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_core.git",
-                "reference": "ddf5e47e1945fd8ad207da834b75274cf59d41ea"
+                "reference": "961c3abe4e0652dc29dcfa309a88f3e246f4bf7d"
             },
             "require": {
                 "drupal/admin_audit_trail": "~1",
@@ -15771,7 +15774,7 @@
                 "drupal/bootstrap_layouts": "~5",
                 "drupal/captcha": "~2",
                 "drupal/checklistapi": "~2",
-                "drupal/coffee": "~1",
+                "drupal/coffee": "~2",
                 "drupal/config_ignore": "~3",
                 "drupal/config_inspector": "~2",
                 "drupal/config_perms": "~2",
@@ -15878,8 +15881,8 @@
                     "dev-10.0.x": "10.0.x-dev"
                 },
                 "drupal": {
-                    "version": "10.0.36+1-dev",
-                    "datestamp": "1730630766",
+                    "version": "10.0.37+1-dev",
+                    "datestamp": "1731432170",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
