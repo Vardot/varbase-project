@@ -180,16 +180,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.325.6",
+            "version": "3.325.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9e4be60c907ce5ef05ee36dafd42afd9944591c6"
+                "reference": "55852104253172e66c3358bf4c35281bbd8622b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9e4be60c907ce5ef05ee36dafd42afd9944591c6",
-                "reference": "9e4be60c907ce5ef05ee36dafd42afd9944591c6",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/55852104253172e66c3358bf4c35281bbd8622b2",
+                "reference": "55852104253172e66c3358bf4c35281bbd8622b2",
                 "shasum": ""
             },
             "require": {
@@ -272,9 +272,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.325.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.325.7"
             },
-            "time": "2024-11-11T19:05:26+00:00"
+            "time": "2024-11-12T19:27:31+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -22569,16 +22569,16 @@
         },
         {
             "name": "openai-php/client",
-            "version": "v0.10.2",
+            "version": "v0.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/client.git",
-                "reference": "efa92628ba9fb56f7877c0d616f5221c4a447856"
+                "reference": "4a565d145e0fb3ea1baba8fffe39d86c56b6dc2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/client/zipball/efa92628ba9fb56f7877c0d616f5221c4a447856",
-                "reference": "efa92628ba9fb56f7877c0d616f5221c4a447856",
+                "url": "https://api.github.com/repos/openai-php/client/zipball/4a565d145e0fb3ea1baba8fffe39d86c56b6dc2c",
+                "reference": "4a565d145e0fb3ea1baba8fffe39d86c56b6dc2c",
                 "shasum": ""
             },
             "require": {
@@ -22596,11 +22596,10 @@
                 "laravel/pint": "^1.18.1",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/collision": "^7.11.0|^8.5.0",
-                "pestphp/pest": "^2.36.0|^3.4.1",
+                "pestphp/pest": "^2.36.0|^3.5.0",
                 "pestphp/pest-plugin-arch": "^2.7|^3.0",
                 "pestphp/pest-plugin-type-coverage": "^2.8.7|^3.1.0",
-                "phpstan/phpstan": "^1.12.6",
-                "rector/rector": "^1.2.7",
+                "phpstan/phpstan": "^1.12.7",
                 "symfony/var-dumper": "^6.4.11|^7.1.5"
             },
             "type": "library",
@@ -22641,7 +22640,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openai-php/client/issues",
-                "source": "https://github.com/openai-php/client/tree/v0.10.2"
+                "source": "https://github.com/openai-php/client/tree/v0.10.3"
             },
             "funding": [
                 {
@@ -22657,7 +22656,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-17T20:28:25+00:00"
+            "time": "2024-11-12T20:51:16+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -27078,12 +27077,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
-                "reference": "31369ff30bc647343c6de8ac7345ffa334673c5b"
+                "reference": "d81ddef5ad2ba3e34008e57c0167faa1018d2e5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase/zipball/31369ff30bc647343c6de8ac7345ffa334673c5b",
-                "reference": "31369ff30bc647343c6de8ac7345ffa334673c5b",
+                "url": "https://api.github.com/repos/Vardot/varbase/zipball/d81ddef5ad2ba3e34008e57c0167faa1018d2e5b",
+                "reference": "d81ddef5ad2ba3e34008e57c0167faa1018d2e5b",
                 "shasum": ""
             },
             "require": {
@@ -27270,7 +27269,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-10-03T12:00:38+00:00"
+            "time": "2024-11-12T22:47:05+00:00"
         },
         {
             "name": "vardot/varbase-patches",
@@ -27278,12 +27277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "d040b39fa89666ea2986ac46bb33a50f7d451eb6"
+                "reference": "59bcbd8165e8706fe170f04fdf7e8b3f1b95b192"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/d040b39fa89666ea2986ac46bb33a50f7d451eb6",
-                "reference": "d040b39fa89666ea2986ac46bb33a50f7d451eb6",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/59bcbd8165e8706fe170f04fdf7e8b3f1b95b192",
+                "reference": "59bcbd8165e8706fe170f04fdf7e8b3f1b95b192",
                 "shasum": ""
             },
             "require": {
@@ -27324,7 +27323,7 @@
                         "Issue #3465033: Fix not saving addItemToToolbar recipe action for divider | (vertical separator) or wrapping - items to CKEditor 5": "https://raw.githubusercontent.com/Vardot/varbase-patches/patches/drupal-core--2024-08-01--3465033--mr-9003.patch"
                     },
                     "drupal/default_content": {
-                        "Issue #3160146: Add Layout Builder Normalizer and Denormalize": "https://www.drupal.org/files/issues/2021-04-07/3160146-37.patch"
+                        "Issue #3160146: Add Layout Builder Normalizer and Denormalize": "https://www.drupal.org/files/issues/2024-11-13/default_content--2024-11-13--3160146--mr-15.patch"
                     },
                     "drupal/gin": {
                         "Issue #3325263: Fix user.data ServiceNotFoundException when using Gin as distribution installer theme": "https://raw.githubusercontent.com/Vardot/varbase-patches/refs/heads/patches/gin--2024-11-12--3325263.patch",
@@ -27439,9 +27438,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/10.0.65"
+                "source": "https://github.com/Vardot/varbase-patches/tree/10.0.66"
             },
-            "time": "2024-11-12T12:16:06+00:00"
+            "time": "2024-11-12T22:24:55+00:00"
         },
         {
             "name": "webflo/drupal-finder",
