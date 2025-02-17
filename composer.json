@@ -28,20 +28,16 @@
   },
   "require": {
     "composer/installers": "~2",
-    "drupal/core-composer-scaffold": "~10",
-    "drupal/core-project-message": "~10",
-    "cweagans/composer-patches": "~1",
+    "drupal/core-composer-scaffold": "~11",
+    "drupal/core-project-message": "~11",
+    "cweagans/composer-patches": "~2",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "10.1.x-dev",
     "vardot/varbase-patches": "10.1.x-dev"
   },
   "require-dev": {
-    "drupal/core-dev": "~10",
-    "drush/drush": "~13",
-    "phpstan/phpstan": "~1.10.0",
-    "phpstan/extension-installer": "~1.3.0",
-    "mglaman/phpstan-drupal": "~1.1.0",
-    "phpstan/phpstan-deprecation-rules": "~1.1.0"
+    "drupal/core-dev": "~11",
+    "drush/drush": "~13"
   },
   "config": {
     "bin-dir": "bin/",
