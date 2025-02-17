@@ -33,10 +33,7 @@
     "cweagans/composer-patches": "~2",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "10.1.x-dev",
-    "vardot/varbase-patches": "10.1.x-dev"
-  },
-  "require-dev": {
-    "drupal/core-dev": "~11",
+    "vardot/varbase-patches": "10.1.x-dev",
     "drush/drush": "~13"
   },
   "config": {
