@@ -30,7 +30,7 @@
     "composer/installers": "~2",
     "drupal/core-composer-scaffold": "~11",
     "drupal/core-project-message": "~11",
-    "cweagans/composer-patches": "~2",
+    "cweagans/composer-patches": "~1",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "10.1.x-dev",
     "vardot/varbase-patches": "10.1.x-dev",
