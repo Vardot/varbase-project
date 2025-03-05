@@ -4,9 +4,8 @@ const preview: Preview = {
   parameters: {
     server: {
       // Replace this with your Drupal site URL, or an environment variable.
-      url: 'https://varbase.ddev.site/storybook/stories/render',
+      url: process.env.STORYBOOK_SERVER_RENDER_URL || 'https://varbase.ddev.site/storybook/stories/render',
     },
-    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
        color: /(background|color)$/i,
@@ -33,12 +32,12 @@ const preview: Preview = {
         root: "body",
         attribute: "data-bs-theme",
         defaultState: {
-          name: "Light Color Mode",
+          name: "Light",
           value: null,
         },
         states: [
           {
-            name: "Dark Color Mode",
+            name: "Dark",
             value: "dark",
           }
         ],
