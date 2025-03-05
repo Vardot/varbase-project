@@ -11,14 +11,7 @@ web_environment: []
 php_version: "8.3"
 nodejs_version: "20"
 dbimage_extra_packages: [sudo]
-webimage_extra_packages:
-  - "php${DDEV_PHP_VERSION}-yaml"
-  - xdg-utils
-  - pkg-config
-  - libpixman-1-dev
-  - libcairo2-dev
-  - libpango1.0-dev
-  - make
+webimage_extra_packages: ["php${DDEV_PHP_VERSION}-yaml", "xdg-utils", "pkg-config", "libpixman-1-dev", "libcairo2-dev", "libpango1.0-dev", "make"]
 web_extra_exposed_ports:
   - name: storybook
     container_port: 6006
