@@ -1,0 +1,44 @@
+#!/bin/bash
+
+## Description: Install Varbase using drush.
+## Usage: install-varbase
+## Example: ddev install-varbase minimal\nddev install-varbase full\nddev install-varbase demo
+## Aliases: varbase:install,si
+## Flags: [{"Name":"type","Shorthand":"t","Usage":"Varbase installation type"}]
+## AutocompleteTerms: ["minimal","full","demo"]
+
+echo "Installing Varbase..."
+
+webmaster_password="$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13; echo)";
+
+# Install Varbase.
+drush site-install varbase --yes \
+  --account-name="webmaster" \
+  --account-pass="${webmaster_password}" \
+  --account-mail="webmaster@vardot.com" \
+  --locale="en" \
+  varbase_multilingual_configuration.enable_multilingual=true \
+  varbase_extra_components.varbase_demo=true \
+  varbase_extra_components.editoria11y=true \
+  varbase_extra_components.vmi=true \
+  varbase_extra_components.varbase_heroslider=true \
+  varbase_extra_components.varbase_carousels=true \
+  varbase_extra_components.varbase_search=true \
+  varbase_extra_components.varbase_blog=true \
+  varbase_extra_components.varbase_auth=true \
+  varbase_extra_components.varbase_ai=true \
+  varbase_extra_components.varbase_api=true ;
+
+drush pm:enable varbase_development --yes
+drush pm:enable varbase_landing --yes
+drush pm:enable varbase_content_planner --yes
+drush pm:enable varbase_media_instagram --yes
+drush pm:enable varbase_media_twitter --yes
+drush pm:enable social_auth_facebook --yes
+drush pm:enable social_auth_linkedin --yes
+drush pm:enable varbase_update_helper --yes
+drush cache:rebuild
+
+echo "Varbase installation completed!"
+echo " Username: webmaster"
+echo " Password: ${webmaster_password}"

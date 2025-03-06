@@ -4,7 +4,7 @@ const preview: Preview = {
   parameters: {
     server: {
       // Replace this with your Drupal site URL, or an environment variable.
-      url: process.env.STORYBOOK_SERVER_RENDER_URL || 'https://varbase.ddev.site/storybook/stories/render',
+      url: process.env.STORYBOOK_SERVER_RENDER_URL,
     },
     controls: {
       matchers: {

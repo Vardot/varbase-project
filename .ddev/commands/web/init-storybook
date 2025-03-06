@@ -1,0 +1,22 @@
+#!/bin/bash
+
+## Description: Initialize Storybook for Varbase.
+## Usage: init-storybook
+## Example: ddev init-storybook
+## Aliases: varbase:storybook
+
+echo "Initializing Storybook for Varbase..."
+
+yarn install
+
+current_path=$(pwd);
+
+drush pm:enable storybook
+drush role:perm:add anonymous 'render storybook stories'
+drush role:perm:add authenticated 'render storybook stories'
+
+cp ${current_path}/.ddev/commands/web/assets/development.local.services.yml ${current_path}/docroot/sites/default/
+echo "Copied the development.local.services.yml asset file to the ${current_path}/docroot/sites/default/ directory."
+
+grep -qxF "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" ${current_path}/docroot/sites/default/settings.ddev.php || echo ; echo "// Enable the development local services for Storybook." ; echo ; echo "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" >> ${current_path}/docroot/sites/default/settings.ddev.php
+echo "Enabled the development local services for Storybook in the \`settings.ddev.php\` file."
