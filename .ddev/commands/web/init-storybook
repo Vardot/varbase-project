@@ -7,16 +7,31 @@
 
 echo "Initializing Storybook for Varbase..."
 
+# Install necessary dependencies for Storybook.
 yarn install
 
+# Store the current working directory path for later use.
 current_path=$(pwd);
 
+# Enable the Storybook module in Drupal.
 drush pm:enable storybook
+
+# Grant "render storybook stories" permission to both anonymous and authenticated users.
 drush role:perm:add anonymous 'render storybook stories'
 drush role:perm:add authenticated 'render storybook stories'
 
+# Copy the `development.local.services.yml` file to "docroot/sites/default/" directory.
 cp ${current_path}/.ddev/commands/web/assets/development.local.services.yml ${current_path}/docroot/sites/default/
 echo "Copied the development.local.services.yml asset file to the ${current_path}/docroot/sites/default/ directory."
 
-grep -qxF "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" ${current_path}/docroot/sites/default/settings.ddev.php || echo >> ${current_path}/docroot/sites/default/settings.ddev.php; echo "// Enable the development local services for Storybook." >> ${current_path}/docroot/sites/default/settings.ddev.php; echo  >> ${current_path}/docroot/sites/default/settings.ddev.php; echo "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" >> ${current_path}/docroot/sites/default/settings.ddev.php
-echo "Enabled the development local services for Storybook in the \`settings.ddev.php\` file."
+# When settings.ddev.php exists and is not empty, ensure development.local.services.yml is included in container settings.
+if [[ -f "${current_path}/docroot/sites/default/settings.ddev.php" && -s "${current_path}/docroot/sites/default/settings.ddev.php" ]]; then 
+  grep -qxF "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" ${current_path}/docroot/sites/default/settings.ddev.php || echo >> ${current_path}/docroot/sites/default/settings.ddev.php; echo "// Enable the development local services for Storybook." >> ${current_path}/docroot/sites/default/settings.ddev.php; echo  >> ${current_path}/docroot/sites/default/settings.ddev.php; echo "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" >> ${current_path}/docroot/sites/default/settings.ddev.php
+  echo "Enabled the development local services for Storybook in the \`settings.ddev.php\` file."
+fi
+
+# When settings.platformsh.php exists and is not empty, ensure development.local.services.yml is included in container settings.
+if [[ -f "${current_path}/docroot/sites/default/settings.platformsh.php" && -s "${current_path}/docroot/sites/default/settings.platformsh.php" ]]; then 
+  grep -qxF "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" ${current_path}/docroot/sites/default/settings.platformsh.php || echo >> ${current_path}/docroot/sites/default/settings.platformsh.php; echo "// Enable the development local services for Storybook." >> ${current_path}/docroot/sites/default/settings.platformsh.php; echo  >> ${current_path}/docroot/sites/default/settings.platformsh.php; echo "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" >> ${current_path}/docroot/sites/default/settings.platformsh.php
+  echo "Enabled the development local services for Storybook in the \`settings.platformsh.php\` file."
+fi
