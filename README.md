@@ -7,6 +7,14 @@ Project template for [Varbase distribution](http://www.drupal.org/project/varbas
 
 ## Create a Varbase project with [Composer](https://getcomposer.org/download/):
 
+# Install with Composer
+
+
+To install the most recent stable release of **Varbase `10.1.x`** run this command:
+```
+composer create-project Vardot/varbase-project:10.1.0-alpha1 PROJECT_DIR_NAME --no-dev --no-interaction
+```
+
 To install the dev version of **Varbase `10.1.x`** run this command:
 ```
 composer create-project vardot/varbase-project:10.1.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
@@ -25,16 +33,6 @@ composer create-project vardot/varbase-project:10.1.x-dev PROJECT_DIR_NAME --sta
 ## [Varbase Developer Guide](https://docs.varbase.vardot.com/v/10.1.x/developers)
 
 ## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/10.1.x/UPDATE.md)
-
-## [Local development with Lando](https://docs.varbase.vardot.com/v/10.1.x/developers/installing-varbase/installing-varbase-with-lando)
-
-1. Install Lando locally, steps for installing can be found [here](https://docs.lando.dev/basics/installation.html).
-2. Run `lando start`.
-
-## Debugging using Lando
-
-- xDebug is enabled on Lando by default for PHP debugging.
-- The debugger is set to listen for the port 9003 but can be changed in `.lando/.php.ini`
 
 ## [Local development with DDEV](https://docs.varbase.vardot.com/v/10.1.x/developers/installing-varbase/installing-varbase-with-ddev)
 
