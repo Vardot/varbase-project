@@ -2,6 +2,11 @@ import type { Preview } from '@storybook/server'
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ['Getting Started', ['Welcome', 'About Varbase'], 'Foundation', ['Logos', 'Colors', 'Typography', 'Spacing & Grids', 'Interaction Guideline', 'Icons', 'Images'], 'Blocks', ['*'], 'Components', ['*'], 'Atoms', ['*'], 'Molecules', ['*'], 'Organisms', ['*'], 'Templates', ['*'], 'Pages', ['*']],
+      }
+    },
     server: {
       // Replace this with your Drupal site URL, or an environment variable.
       url: process.env.STORYBOOK_SERVER_RENDER_URL,
