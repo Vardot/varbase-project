@@ -31,7 +31,7 @@
     "drupal/core-project-message": "~10",
     "webflo/drupal-finder": "~1",
     "cweagans/composer-patches": "~1", 
-    "drupal/core": "~10.4.0",
+    "drupal/core": "~10.5.0",
     "vardot/varbase": "9.1.x-dev",
     "vardot/varbase-patches": "9.2.x-dev",
     "vardot/varbase-updater": "~2.0"
