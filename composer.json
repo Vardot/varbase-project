@@ -34,6 +34,8 @@
     "drupal/core": "~10.5.0",
     "vardot/varbase": "9.1.x-dev",
     "vardot/varbase-patches": "9.2.x-dev",
+    "vardot/varbase-libraries": "9.2.x-dev",
+    "vardot/varbase-replaces": "9.2.x-dev",
     "vardot/varbase-updater": "~2.0"
   },
   "require-dev": {
@@ -46,7 +48,7 @@
   },
   "config": {
     "bin-dir": "bin/",
-    "secure-http": false,
+    "secure-http": true,
     "optimize-autoloader": true,
     "preferred-install": {
       "drupal/core": "dist"
@@ -106,7 +108,7 @@
       ],
       "gitignore": true,
       "locations": {
-        "web-root": "./docroot"
+        "web-root": "docroot/"
       },
       "file-mapping": {
         "[web-root]/sites/default/default.services.yml": {
