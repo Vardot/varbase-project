@@ -33,7 +33,9 @@
     "cweagans/composer-patches": "~1",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "10.0.x-dev",
-    "vardot/varbase-patches": "10.0.x-dev"
+    "vardot/varbase-patches": "10.0.x-dev",
+    "vardot/varbase-libraries": "10.0.x-dev",
+    "vardot/varbase-replaces": "10.0.x-dev"
   },
   "require-dev": {
     "drupal/core-dev": "~10",
