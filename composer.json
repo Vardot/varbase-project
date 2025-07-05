@@ -23,7 +23,21 @@
     },
     "assets": {
       "type": "composer",
-      "url": "https://asset-packagist.org"
+      "url": "https://asset-packagist.org",
+      "only": [
+        "bower-asset/objectfitpolyfill",
+        "bower-asset/chartjs",
+        "bower-asset/c3",
+        "bower-asset/d3",
+        "npm-asset/masonry-layout",
+        "npm-asset/imagesloaded",
+        "npm-asset/dropzone",
+        "npm-asset/blazy",
+        "npm-asset/slick-carousel",
+        "npm-asset/ace-builds",
+        "npm-asset/swagger-ui-dist",
+        "npm-asset/aos"
+      ]
     }
   },
   "require": {
