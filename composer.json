@@ -23,7 +23,16 @@
     },
     "assets": {
       "type": "composer",
-      "url": "https://asset-packagist.org"
+      "url": "https://asset-packagist.org",
+      "only": [
+        "npm-asset/dropzone", 
+        "npm-asset/blazy",
+        "npm-asset/slick-carousel",
+        "npm-asset/ace-builds",
+        "npm-asset/swagger-ui-dist",
+        "npm-asset/aos",
+        "npm-asset/jquery.fancytree"
+      ]
     }
   },
   "require": {
