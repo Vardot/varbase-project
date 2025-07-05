@@ -145,7 +145,6 @@
       "docroot/recipes/contrib/{$name}": ["type:drupal-recipe"],
       "docroot/libraries/slick": ["npm-asset/slick-carousel"],
       "docroot/libraries/ace": ["npm-asset/ace-builds"],
-      "docroot/libraries/jquery-ui-touch-punch": ["bower-asset/jqueryui-touch-punch"],
       "docroot/libraries/swagger-ui/dist": ["npm-asset/swagger-ui-dist"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
@@ -172,7 +171,6 @@
         {"name": "blazy", "package": "npm-asset/blazy"},
         {"name": "slick", "package": "npm-asset/slick-carousel"},
         {"name": "ace", "package": "npm-asset/ace-builds"},
-        {"name": "jquery-ui-touch-punch", "package": "bower-asset/jqueryui-touch-punch"},
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
         {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"}
       ]
