@@ -36,7 +36,7 @@
         "npm-asset/slick-carousel",
         "npm-asset/ace-builds",
         "npm-asset/swagger-ui-dist",
-        "npm-asset/ckeditor--ckeditor5-media-embed library",
+        "npm-asset/ckeditor--ckeditor5-media-embed",
         "npm-asset/aos"
       ]
     }
