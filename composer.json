@@ -175,7 +175,7 @@
         {"name": "ace", "package": "npm-asset/ace-builds"},
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
         {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"},
-        {"name": "ckeditor5-media-embed", "package": "npm-asset/ckeditor--ckeditor5-media-embed"},
+        {"name": "ckeditor5-media-embed", "package": "npm-asset/ckeditor--ckeditor5-media-embed"}
       ]
     },
     "enable-patching": true,
