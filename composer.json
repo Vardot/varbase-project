@@ -30,6 +30,7 @@
         "npm-asset/slick-carousel",
         "npm-asset/ace-builds",
         "npm-asset/swagger-ui-dist",
+        "npm-asset/ckeditor--ckeditor5-media-embed library",
         "npm-asset/aos",
         "npm-asset/jquery.fancytree"
       ]
@@ -108,7 +109,7 @@
       ],
       "gitignore": true,
       "locations": {
-        "web-root": "./docroot"
+        "web-root": "docroot/"
       },
       "file-mapping": {
         "[web-root]/sites/default/default.services.yml": {
@@ -132,6 +133,7 @@
       "docroot/libraries/slick": ["npm-asset/slick-carousel"],
       "docroot/libraries/ace": ["npm-asset/ace-builds"],
       "docroot/libraries/swagger-ui/dist": ["npm-asset/swagger-ui-dist"],
+      "docroot/libraries/ckeditor5/plugins/media-embed": ["npm-asset/ckeditor--ckeditor5-media-embed"],
       "docroot/libraries/jquery.fancytree": ["npm-asset/jquery.fancytree"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
@@ -156,6 +158,7 @@
         {"name": "ace", "package": "npm-asset/ace-builds"},
         {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
         {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"},
+        {"name": "ckeditor5-media-embed", "package": "npm-asset/ckeditor--ckeditor5-media-embed"},
         {"name": "jquery.fancytree", "package": "npm-asset/jquery.fancytree"}
       ]
     },
