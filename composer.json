@@ -30,6 +30,8 @@
         "bower-asset/c3",
         "bower-asset/d3",
         "npm-asset/masonry-layout",
+        "npm-asset/get-size",
+        "npm-asset/outlayer",
         "npm-asset/imagesloaded",
         "npm-asset/dropzone",
         "npm-asset/blazy",
