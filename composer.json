@@ -37,6 +37,16 @@
         "npm-asset/ace-builds",
         "npm-asset/swagger-ui-dist",
         "npm-asset/ckeditor--ckeditor5-media-embed",
+        "npm-asset/ckeditor--ckeditor5-clipboard",
+        "npm-asset/ckeditor--ckeditor5-core",
+        "npm-asset/ckeditor--ckeditor5-engine",
+        "npm-asset/ckeditor--ckeditor5-icons",
+        "npm-asset/ckeditor--ckeditor5-typing",
+        "npm-asset/ckeditor--ckeditor5-ui",
+        "npm-asset/ckeditor--ckeditor5-undo",
+        "npm-asset/ckeditor--ckeditor5-utils",
+        "npm-asset/ckeditor--ckeditor5-widget",
+        "npm-asset/es-toolkit",
         "npm-asset/aos"
       ]
     }
