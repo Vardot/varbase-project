@@ -3,9 +3,6 @@ import type { StorybookConfig } from '@storybook/server-webpack5';
 const config: StorybookConfig = {
   // Change the place where storybook searched for stories.
   "stories": [
-    // Listing Varbase Components in the Storybook
-    "../docroot/modules/contrib/varbase_components/components/**/*.mdx",
-    "../docroot/modules/contrib/varbase_components/components/**/*.stories.@(json)",
     // -------------------------------------------------------------------------------
     // Listing components Vartheme BS5 Starterkit. ( Comment when using a custom theme for a project)
     "../docroot/themes/contrib/vartheme_bs5/components/**/*.mdx",
