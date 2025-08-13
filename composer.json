@@ -70,7 +70,7 @@
       "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
     ],
     "post-create-project-cmd": [
-      "drupal-libraries-yarn-sync"
+      "@drupal-libraries-yarn-sync"
     ]
   },
   "minimum-stability": "dev",
