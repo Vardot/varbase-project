@@ -20,15 +20,63 @@
     "phpcbf": "phpcbf --standard=./.phpcs.xml .",
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
-    "lint:css": "npx stylelint --config=.stylelintrc.json"
-  },
-  "resolutions": {
-    "webpack": "^5"
+    "lint:css": "npx stylelint --config=.stylelintrc.json",
+    "drupal-libraries-npm-sync": "node docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js",
+    "postinstall": "drupal-libraries-npm-sync"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-media-embed": "~45.2.0",
+    "ace-builds": "~1",
+    "aos": "~2",
+    "blazy": "~1",
+    "dropzone": "~5",
+    "jquery.fancytree": "~2",
+    "slick-carousel": "~1",
+    "swagger-ui-dist": "~3"
+  },
+  "drupal-libraries": {
+    "library-directory": "docroot/libraries",
+    "libraries": [
+      {
+        "name": "dropzone",
+        "package": "dropzone"
+      },
+      {
+        "name": "blazy",
+        "package": "blazy"
+      },
+      {
+        "name": "slick",
+        "package": "slick-carousel/dist"
+      },
+      {
+        "name": "ace",
+        "package": "ace-builds/src-min"
+      },
+      {
+        "name": "swagger-ui",
+        "package": "swagger-ui-dist"
+      },
+      {
+        "name": "ckeditor5-media-embed",
+        "package": "@ckeditor/ckeditor5-media-embed"
+      },
+      {
+        "name": "aos",
+        "package": "aos/dist"
+      },
+      {
+        "name": "jquery.fancytree",
+        "package": "jquery.fancytree/dist"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.4",
     "@storybook/addon-a11y": "~8",
     "@storybook/addon-essentials": "~8",
     "@storybook/addon-links": "~8",
+    "@storybook/addon-webpack5-compiler-swc": "^2.1.0",
     "@storybook/blocks": "~8",
     "@storybook/builder-webpack5": "~8",
     "@storybook/cli": "~8",
@@ -39,8 +87,10 @@
     "@storybook/react": "~8",
     "@storybook/server": "~8",
     "@storybook/server-webpack5": "~8",
+    "@storybook/test": "^8.6.0",
     "@storybook/theming": "~8",
     "@storybook/types": "~8",
+    "eslint-plugin-storybook": "^0.11.3",
     "fork-ts-checker-webpack-plugin": "~8 || ~9",
     "prettier": "^2.1.2",
     "storybook": "~8",
@@ -51,11 +101,8 @@
     "webpack": "~5",
     "webpack-cli": "~5"
   },
-  "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.4",
-    "@storybook/addon-webpack5-compiler-swc": "^2.1.0",
-    "@storybook/test": "^8.6.0",
-    "eslint-plugin-storybook": "^0.11.3"
+  "resolutions": {
+    "webpack": "^5"
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.9.2"
 }
