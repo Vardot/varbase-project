@@ -21,8 +21,8 @@
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
     "lint:css": "npx stylelint --config=.stylelintrc.json",
-    "drupal-libraries-npm-sync": "node docroot/profiles/contrib/varbase/scripts/drupal-libraries-npm-sync.js",
-    "postinstall": "drupal-libraries-npm-sync"
+    "drupal-libraries-sync": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js",
+    "postinstall": "drupal-libraries-sync"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-media-embed": "~45.2.0",
@@ -47,7 +47,7 @@
       },
       {
         "name": "slick",
-        "package": "slick-carousel/dist"
+        "package": "slick-carousel/slick"
       },
       {
         "name": "ace",
