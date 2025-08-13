@@ -62,10 +62,10 @@
     ],
     "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"],
     "drupal-libraries-npm-sync": [
-      "node docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
+      "node docroot/profiles/contrib/varbase/scripts/drupal-libraries-npm-sync.js"
     ],
     "post-create-project-cmd": [
-      "drupal-libraries-sync"
+      "drupal-libraries-npm-sync"
     ]
   },
   "minimum-stability": "dev",

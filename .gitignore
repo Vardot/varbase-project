@@ -7,7 +7,7 @@
 /docroot/themes/contrib/
 /docroot/profiles/contrib/
 /docroot/profiles/varbase/
-/docroot/recipes/
+/docroot/recipes/contrib/
 
 # Ignore sensitive information
 /docroot/sites/*/settings.php

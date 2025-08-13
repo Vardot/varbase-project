@@ -21,7 +21,7 @@
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
     "lint:css": "npx stylelint --config=.stylelintrc.json",
-    "drupal-libraries-npm-sync": "node docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js",
+    "drupal-libraries-npm-sync": "node docroot/profiles/contrib/varbase/scripts/drupal-libraries-npm-sync.js",
     "postinstall": "drupal-libraries-npm-sync"
   },
   "dependencies": {
