@@ -54,7 +54,7 @@
         "package": "ace-builds/src-min"
       },
       {
-        "name": "swagger-ui",
+        "name": "swagger-ui/dist",
         "package": "swagger-ui-dist"
       },
       {
