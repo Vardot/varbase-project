@@ -22,7 +22,7 @@
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
     "lint:css": "npx stylelint --config=.stylelintrc.json",
     "drupal-libraries-sync": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js",
-    "postinstall": "drupal-libraries-sync"
+    "postinstall": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-media-embed": "~45.2.0",
@@ -90,14 +90,19 @@
     "@storybook/test": "^8.6.0",
     "@storybook/theming": "~8",
     "@storybook/types": "~8",
+    "eslint": "^8.0.0",
     "eslint-plugin-storybook": "^0.11.3",
     "fork-ts-checker-webpack-plugin": "~8 || ~9",
+    "jquery": "^3.7.0",
     "prettier": "^2.1.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "storybook": "~8",
     "storybook-addon-root-attributes": "~2",
     "stylelint": "~16",
     "stylelint-checkstyle-formatter": "^0.1.2",
     "stylelint-order": "~6.0",
+    "typescript": "^5.0.0",
     "webpack": "~5",
     "webpack-cli": "~5"
   },

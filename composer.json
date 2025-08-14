@@ -61,12 +61,12 @@
       "Varbase\\composer\\ScriptHandler::removeGitDirectories"
     ],
     "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"],
-    "drupal-libraries-npm-sync": [
-      "npm install",
-      "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
-    ],
     "drupal-libraries-yarn-sync": [
       "yarn install",
+      "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
+    ],
+    "drupal-libraries-npm-sync": [
+      "npm install",
       "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
     ],
     "post-create-project-cmd": [
