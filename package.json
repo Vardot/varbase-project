@@ -40,7 +40,7 @@
     "dropzone": "~5",
     "jquery.fancytree": "~2",
     "slick-carousel": "~1",
-    "swagger-ui-dist": "~4"
+    "swagger-ui-dist": "~3"
   },
   "drupal-libraries": {
     "library-directory": "docroot/libraries",
