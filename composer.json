@@ -61,6 +61,9 @@
       "Varbase\\composer\\ScriptHandler::removeGitDirectories"
     ],
     "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"],
+    "drupal-libraries-sync": [
+      "@drupal-libraries-yarn-sync"
+    ],
     "drupal-libraries-yarn-sync": [
       "yarn install",
       "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
@@ -70,7 +73,7 @@
       "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
     ],
     "post-create-project-cmd": [
-      "@drupal-libraries-yarn-sync"
+      "@drupal-libraries-sync"
     ]
   },
   "minimum-stability": "dev",
