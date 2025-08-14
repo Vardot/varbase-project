@@ -58,12 +58,12 @@
         "package": "swagger-ui-dist"
       },
       {
-        "name": "ckeditor5-media-embed",
+        "name": "ckeditor5/plugins/media-embed",
         "package": "@ckeditor/ckeditor5-media-embed"
       },
       {
         "name": "aos",
-        "package": "aos/dist"
+        "package": "aos"
       },
       {
         "name": "jquery.fancytree",
