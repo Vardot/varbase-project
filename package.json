@@ -25,7 +25,15 @@
     "postinstall": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-clipboard": "~45.2.0",
+    "@ckeditor/ckeditor5-engine": "~45.2.0",
+    "@ckeditor/ckeditor5-icons": "~45.2.0",
     "@ckeditor/ckeditor5-media-embed": "~45.2.0",
+    "@ckeditor/ckeditor5-typing": "~45.2.0",
+    "@ckeditor/ckeditor5-ui": "~45.2.0",
+    "@ckeditor/ckeditor5-undo": "~45.2.0",
+    "@ckeditor/ckeditor5-utils": "~45.2.0",
+    "@ckeditor/ckeditor5-widget": "~45.2.0",
     "ace-builds": "~1",
     "aos": "~2",
     "blazy": "~1",
@@ -38,36 +46,68 @@
     "library-directory": "docroot/libraries",
     "libraries": [
       {
-        "name": "dropzone",
-        "package": "dropzone"
+        "name": "ckeditor5/plugins/media-embed",
+        "package": "@ckeditor/ckeditor5-media-embed"
       },
       {
-        "name": "blazy",
-        "package": "blazy"
+        "name": "ckeditor5/plugins/clipboard",
+        "package": "@ckeditor/ckeditor5-clipboard"
       },
       {
-        "name": "slick",
-        "package": "slick-carousel/slick"
+        "name": "ckeditor5/engine",
+        "package": "@ckeditor/ckeditor5-engine"
+      },
+      {
+        "name": "ckeditor5/icons",
+        "package": "@ckeditor/ckeditor5-icons"
+      },
+      {
+        "name": "ckeditor5/typing",
+        "package": "@ckeditor/ckeditor5-typing"
+      },
+      {
+        "name": "ckeditor5/ui",
+        "package": "@ckeditor/ckeditor5-ui"
+      },
+      {
+        "name": "ckeditor5/undo",
+        "package": "@ckeditor/ckeditor5-undo"
+      },
+      {
+        "name": "ckeditor5/utils",
+        "package": "@ckeditor/ckeditor5-utils"
+      },
+      {
+        "name": "ckeditor5/widget",
+        "package": "@ckeditor/ckeditor5-widget"
       },
       {
         "name": "ace",
         "package": "ace-builds/src-min"
       },
       {
-        "name": "swagger-ui/dist",
-        "package": "swagger-ui-dist"
-      },
-      {
-        "name": "ckeditor5/plugins/media-embed",
-        "package": "@ckeditor/ckeditor5-media-embed"
-      },
-      {
         "name": "aos",
         "package": "aos"
       },
       {
+        "name": "blazy",
+        "package": "blazy"
+      },
+      {
+        "name": "dropzone",
+        "package": "dropzone"
+      },
+      {
         "name": "jquery.fancytree",
         "package": "jquery.fancytree/dist"
+      },
+      {
+        "name": "slick",
+        "package": "slick-carousel/slick"
+      },
+      {
+        "name": "swagger-ui/dist",
+        "package": "swagger-ui-dist"
       }
     ]
   },
