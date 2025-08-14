@@ -40,7 +40,7 @@
     "dropzone": "~5",
     "jquery.fancytree": "~2",
     "slick-carousel": "~1",
-    "swagger-ui-dist": "~3"
+    "swagger-ui-dist": "~4"
   },
   "drupal-libraries": {
     "library-directory": "docroot/libraries",
@@ -50,40 +50,8 @@
         "package": "@ckeditor/ckeditor5-media-embed"
       },
       {
-        "name": "ckeditor5/plugins/clipboard",
-        "package": "@ckeditor/ckeditor5-clipboard"
-      },
-      {
-        "name": "ckeditor5/engine",
-        "package": "@ckeditor/ckeditor5-engine"
-      },
-      {
-        "name": "ckeditor5/icons",
-        "package": "@ckeditor/ckeditor5-icons"
-      },
-      {
-        "name": "ckeditor5/typing",
-        "package": "@ckeditor/ckeditor5-typing"
-      },
-      {
-        "name": "ckeditor5/ui",
-        "package": "@ckeditor/ckeditor5-ui"
-      },
-      {
-        "name": "ckeditor5/undo",
-        "package": "@ckeditor/ckeditor5-undo"
-      },
-      {
-        "name": "ckeditor5/utils",
-        "package": "@ckeditor/ckeditor5-utils"
-      },
-      {
-        "name": "ckeditor5/widget",
-        "package": "@ckeditor/ckeditor5-widget"
-      },
-      {
         "name": "ace",
-        "package": "ace-builds/src-min"
+        "package": "ace-builds"
       },
       {
         "name": "aos",
@@ -99,7 +67,7 @@
       },
       {
         "name": "jquery.fancytree",
-        "package": "jquery.fancytree/dist"
+        "package": "jquery.fancytree"
       },
       {
         "name": "slick",
