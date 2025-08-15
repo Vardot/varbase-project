@@ -20,41 +20,6 @@
     "drupal": {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
-    },
-    "assets": {
-      "type": "composer",
-      "url": "https://asset-packagist.org",
-      "only": [
-        "bower-asset/objectfitpolyfill",
-        "bower-asset/chartjs",
-        "bower-asset/c3",
-        "bower-asset/d3",
-        "npm-asset/masonry-layout",
-        "npm-asset/get-size",
-        "npm-asset/outlayer",
-        "npm-asset/fizzy-ui-utils",
-        "npm-asset/desandro-matches-selector",
-        "npm-asset/imagesloaded",
-        "npm-asset/wolfy87-eventemitter",
-        "npm-asset/ev-emitter",
-        "npm-asset/dropzone",
-        "npm-asset/blazy",
-        "npm-asset/slick-carousel",
-        "npm-asset/ace-builds",
-        "npm-asset/swagger-ui-dist",
-        "npm-asset/ckeditor--ckeditor5-media-embed",
-        "npm-asset/ckeditor--ckeditor5-clipboard",
-        "npm-asset/ckeditor--ckeditor5-core",
-        "npm-asset/ckeditor--ckeditor5-engine",
-        "npm-asset/ckeditor--ckeditor5-icons",
-        "npm-asset/ckeditor--ckeditor5-typing",
-        "npm-asset/ckeditor--ckeditor5-ui",
-        "npm-asset/ckeditor--ckeditor5-undo",
-        "npm-asset/ckeditor--ckeditor5-utils",
-        "npm-asset/ckeditor--ckeditor5-widget",
-        "npm-asset/es-toolkit",
-        "npm-asset/aos"
-      ]
     }
   },
   "require": {
@@ -65,13 +30,10 @@
     "drupal/core": "~10.5.0",
     "vardot/varbase": "9.1.x-dev",
     "vardot/varbase-patches": "9.2.x-dev",
-    "vardot/varbase-libraries": "9.2.x-dev",
-    "vardot/varbase-replaces": "9.2.x-dev",
-    "vardot/varbase-updater": "~2.0"
+    "drush/drush": "~13"
   },
   "require-dev": {
     "drupal/core-dev": "~10",
-    "drush/drush": "~13",
     "phpstan/phpstan": "~1.10.0",
     "phpstan/extension-installer": "~1.3.0",
     "mglaman/phpstan-drupal": "~1.1.0",
@@ -105,7 +67,21 @@
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
       "Varbase\\composer\\ScriptHandler::removeGitDirectories"
     ],
-    "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"]
+    "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"],
+    "drupal-libraries-sync": [
+      "@drupal-libraries-yarn-sync"
+    ],
+    "drupal-libraries-yarn-sync": [
+      "yarn install",
+      "node ./docroot/profiles/varbase/scripts/drupal-libraries-sync.js"
+    ],
+    "drupal-libraries-npm-sync": [
+      "npm install",
+      "node ./docroot/profiles/varbase/scripts/drupal-libraries-sync.js"
+    ],
+    "post-create-project-cmd": [
+      "@drupal-libraries-sync"
+    ]
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -160,40 +136,14 @@
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
       "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
       "docroot/recipes/contrib/{$name}": ["type:drupal-recipe"],
-      "docroot/libraries/slick": ["npm-asset/slick-carousel"],
-      "docroot/libraries/ace": ["npm-asset/ace-builds"],
-      "docroot/libraries/swagger-ui/dist": ["npm-asset/swagger-ui-dist"],
-      "docroot/libraries/ckeditor5/plugins/media-embed": ["npm-asset/ckeditor--ckeditor5-media-embed"],
-      "docroot/libraries/{$name}": [
-        "type:drupal-library",
-        "type:bower-asset",
-        "type:npm-asset"
-      ],
+      "docroot/libraries/{$name}": ["type:drupal-library"],
       "docroot/modules/custom/{$name}": ["type:drupal-custom-module"],
       "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"],
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "installer-types": [
-      "drupal-recipe",
-      "bower-asset",
-      "npm-asset"
+      "drupal-recipe"
     ],
-    "drupal-libraries": {
-      "library-directory": "docroot/libraries",
-      "libraries": [
-        {"name": "objectfitpolyfill", "package": "bower-asset/objectfitpolyfill"},
-        {"name": "chartjs", "package": "bower-asset/chartjs"},
-        {"name": "c3","package": "bower-asset/c3"},
-        {"name": "d3", "package": "bower-asset/d3"},
-        {"name": "dropzone","package": "npm-asset/dropzone"},
-        {"name": "blazy", "package": "npm-asset/blazy"},
-        {"name": "slick", "package": "npm-asset/slick-carousel"},
-        {"name": "ace", "package": "npm-asset/ace-builds"},
-        {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
-        {"name": "swagger-ui", "package": "npm-asset/swagger-ui-dist"},
-        {"name": "ckeditor5-media-embed", "package": "npm-asset/ckeditor--ckeditor5-media-embed"}
-      ]
-    },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true,
     "patchLevel": {
