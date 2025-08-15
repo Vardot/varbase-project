@@ -1372,7 +1372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ckeditor/ckeditor5-clipboard@npm:45.2.1, @ckeditor/ckeditor5-clipboard@npm:~45.2.0":
+"@ckeditor/ckeditor5-clipboard@npm:45.2.1":
   version: 45.2.1
   resolution: "@ckeditor/ckeditor5-clipboard@npm:45.2.1"
   dependencies:
@@ -1526,7 +1526,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ckeditor/ckeditor5-engine@npm:45.2.1, @ckeditor/ckeditor5-engine@npm:~45.2.0":
+"@ckeditor/ckeditor5-engine@npm:45.2.1":
   version: 45.2.1
   resolution: "@ckeditor/ckeditor5-engine@npm:45.2.1"
   dependencies:
@@ -1681,7 +1681,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ckeditor/ckeditor5-icons@npm:45.2.1, @ckeditor/ckeditor5-icons@npm:~45.2.0":
+"@ckeditor/ckeditor5-icons@npm:45.2.1":
   version: 45.2.1
   resolution: "@ckeditor/ckeditor5-icons@npm:45.2.1"
   checksum: 10c0/e9143fc027fd2a8f23fd4a3553d8ff07398a5f65c442dea0a35d86e3c1df03a4a74f15630eaecfc0736c3f37f83894f24f54ce57341a7317f42812fb65a8e806
@@ -1997,7 +1997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ckeditor/ckeditor5-typing@npm:45.2.1, @ckeditor/ckeditor5-typing@npm:~45.2.0":
+"@ckeditor/ckeditor5-typing@npm:45.2.1":
   version: 45.2.1
   resolution: "@ckeditor/ckeditor5-typing@npm:45.2.1"
   dependencies:
@@ -2009,7 +2009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ckeditor/ckeditor5-ui@npm:45.2.1, @ckeditor/ckeditor5-ui@npm:~45.2.0":
+"@ckeditor/ckeditor5-ui@npm:45.2.1":
   version: 45.2.1
   resolution: "@ckeditor/ckeditor5-ui@npm:45.2.1"
   dependencies:
@@ -2027,7 +2027,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ckeditor/ckeditor5-undo@npm:45.2.1, @ckeditor/ckeditor5-undo@npm:~45.2.0":
+"@ckeditor/ckeditor5-undo@npm:45.2.1":
   version: 45.2.1
   resolution: "@ckeditor/ckeditor5-undo@npm:45.2.1"
   dependencies:
@@ -2050,7 +2050,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ckeditor/ckeditor5-utils@npm:45.2.1, @ckeditor/ckeditor5-utils@npm:~45.2.0":
+"@ckeditor/ckeditor5-utils@npm:45.2.1":
   version: 45.2.1
   resolution: "@ckeditor/ckeditor5-utils@npm:45.2.1"
   dependencies:
@@ -2073,7 +2073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ckeditor/ckeditor5-widget@npm:45.2.1, @ckeditor/ckeditor5-widget@npm:~45.2.0":
+"@ckeditor/ckeditor5-widget@npm:45.2.1":
   version: 45.2.1
   resolution: "@ckeditor/ckeditor5-widget@npm:45.2.1"
   dependencies:
@@ -5501,9 +5501,9 @@ __metadata:
   linkType: hard
 
 "flow-parser@npm:0.*":
-  version: 0.278.0
-  resolution: "flow-parser@npm:0.278.0"
-  checksum: 10c0/53d30c1e9ee1b0fa6901fd784cdd8aaed9a19720add66213837d9c9aaca3d53226ee8d587b81e3d03e53461733590b76e0bf9ad2c6ca33491ff92f6b97f0b75c
+  version: 0.279.0
+  resolution: "flow-parser@npm:0.279.0"
+  checksum: 10c0/fd5077150b32417c0a018e81c2d952c1d42203af6e87a69a77346625c924d4cb64b8d47f4576354e00e8b62b88b1eaca0f3b595068beabd3e6aa1973feb10000
   languageName: node
   linkType: hard
 
@@ -6362,9 +6362,9 @@ __metadata:
   linkType: hard
 
 "jsdoc-type-pratt-parser@npm:^4.0.0":
-  version: 4.1.0
-  resolution: "jsdoc-type-pratt-parser@npm:4.1.0"
-  checksum: 10c0/7700372d2e733a32f7ea0a1df9cec6752321a5345c11a91b2ab478a031a426e934f16d5c1f15c8566c7b2c10af9f27892a29c2c789039f595470e929a4aa60ea
+  version: 4.8.0
+  resolution: "jsdoc-type-pratt-parser@npm:4.8.0"
+  checksum: 10c0/c2b77751d35e3931db9da96720b544b215830722b748b58ee8ce51ec72092006a4a03c5a59c86a4552d0094975c8d3bcc21a7241a0e47860e127d3fba5b55f33
   languageName: node
   linkType: hard
 
@@ -8823,15 +8823,7 @@ __metadata:
   resolution: "varbase-project@workspace:."
   dependencies:
     "@chromatic-com/storybook": "npm:^3.2.4"
-    "@ckeditor/ckeditor5-clipboard": "npm:~45.2.0"
-    "@ckeditor/ckeditor5-engine": "npm:~45.2.0"
-    "@ckeditor/ckeditor5-icons": "npm:~45.2.0"
     "@ckeditor/ckeditor5-media-embed": "npm:~45.2.0"
-    "@ckeditor/ckeditor5-typing": "npm:~45.2.0"
-    "@ckeditor/ckeditor5-ui": "npm:~45.2.0"
-    "@ckeditor/ckeditor5-undo": "npm:~45.2.0"
-    "@ckeditor/ckeditor5-utils": "npm:~45.2.0"
-    "@ckeditor/ckeditor5-widget": "npm:~45.2.0"
     "@storybook/addon-a11y": "npm:~8"
     "@storybook/addon-essentials": "npm:~8"
     "@storybook/addon-links": "npm:~8"

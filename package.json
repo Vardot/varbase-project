@@ -1,7 +1,7 @@
 {
   "name": "varbase-project",
   "description": "Varbase project is a composer starterkit for new projects.",
-  "license": "GPL-2.0",
+  "license": "GPL-2.0-or-later",
   "private": true,
   "engines": {
     "yarn": ">= 4.6.0",
@@ -25,15 +25,7 @@
     "postinstall": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-clipboard": "~45.2.0",
-    "@ckeditor/ckeditor5-engine": "~45.2.0",
-    "@ckeditor/ckeditor5-icons": "~45.2.0",
     "@ckeditor/ckeditor5-media-embed": "~45.2.0",
-    "@ckeditor/ckeditor5-typing": "~45.2.0",
-    "@ckeditor/ckeditor5-ui": "~45.2.0",
-    "@ckeditor/ckeditor5-undo": "~45.2.0",
-    "@ckeditor/ckeditor5-utils": "~45.2.0",
-    "@ckeditor/ckeditor5-widget": "~45.2.0",
     "ace-builds": "~1",
     "aos": "~2",
     "blazy": "~1",
