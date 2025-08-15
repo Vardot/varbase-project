@@ -14,7 +14,9 @@
     "phpcbf": "phpcbf --standard=./.phpcs.xml .",
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
-    "lint:css": "npx stylelint --config=.stylelintrc.json"
+    "lint:css": "npx stylelint --config=.stylelintrc.json",
+    "drupal-libraries-sync": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js",
+    "postinstall": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-media-embed": "~45.2.0",
@@ -29,38 +31,14 @@
   "drupal-libraries": {
     "library-directory": "docroot/libraries",
     "libraries": [
-      {
-        "name": "ckeditor5/plugins/media-embed",
-        "package": "@ckeditor/ckeditor5-media-embed"
-      },
-      {
-        "name": "ace",
-        "package": "ace-builds"
-      },
-      {
-        "name": "aos",
-        "package": "aos"
-      },
-      {
-        "name": "blazy",
-        "package": "blazy"
-      },
-      {
-        "name": "dropzone",
-        "package": "dropzone"
-      },
-      {
-        "name": "jquery.fancytree",
-        "package": "jquery.fancytree"
-      },
-      {
-        "name": "slick",
-        "package": "slick-carousel/slick"
-      },
-      {
-        "name": "swagger-ui/dist",
-        "package": "swagger-ui-dist"
-      }
+      {"name": "ckeditor5/plugins/media-embed", "package": "@ckeditor/ckeditor5-media-embed"},
+      {"name": "ace", "package": "ace-builds"},
+      {"name": "aos", "package": "aos"},
+      {"name": "blazy", "package": "blazy"},
+      {"name": "dropzone", "package": "dropzone"},
+      {"name": "jquery.fancytree", "package": "jquery.fancytree"},
+      {"name": "slick", "package": "slick-carousel/slick"},
+      {"name": "swagger-ui/dist", "package": "swagger-ui-dist"}
     ]
   },
   "devDependencies": {
