@@ -30,7 +30,6 @@
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "10.1.x-dev",
     "vardot/varbase-patches": "10.1.x-dev",
-    "vardot/varbase-replaces": "10.1.x-dev",
     "drush/drush": "~13"
   },
   "config": {
