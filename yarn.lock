@@ -8400,10 +8400,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swagger-ui-dist@npm:~3":
-  version: 3.52.5
-  resolution: "swagger-ui-dist@npm:3.52.5"
-  checksum: 10c0/513ebca33f55ac90d69e05e751a035fa6edeab8b5d5d14ec6d470154f0f680622587600b7760d2a176e9ad0fabf46fdecb0d76ca943a597ee4f7ed9351f91e27
+"swagger-ui-dist@npm:~4":
+  version: 4.19.1
+  resolution: "swagger-ui-dist@npm:4.19.1"
+  checksum: 10c0/36757c222b3c078483489b2eb797232241a96f0e9a6335d4c8168dd57024987bc146180632fa04680f0e8726a97870eaa91de0bf4c3b616c82225988984926b7
   languageName: node
   linkType: hard
 
@@ -8859,7 +8859,7 @@ __metadata:
     stylelint: "npm:~16"
     stylelint-checkstyle-formatter: "npm:^0.1.2"
     stylelint-order: "npm:~6.0"
-    swagger-ui-dist: "npm:~3"
+    swagger-ui-dist: "npm:~4"
     typescript: "npm:^5.0.0"
     webpack: "npm:~5"
     webpack-cli: "npm:~5"
