@@ -29,6 +29,7 @@
     "cweagans/composer-patches": "~1", 
     "drupal/core": "~10.5.0",
     "vardot/varbase": "9.1.x-dev",
+    "vardot/varbase-patches": "9.2.x-dev",
     "drush/drush": "~13"
   },
   "config": {
