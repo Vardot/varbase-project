@@ -37,38 +37,14 @@
   "drupal-libraries": {
     "library-directory": "docroot/libraries",
     "libraries": [
-      {
-        "name": "ckeditor5/plugins/media-embed",
-        "package": "@ckeditor/ckeditor5-media-embed"
-      },
-      {
-        "name": "ace",
-        "package": "ace-builds"
-      },
-      {
-        "name": "aos",
-        "package": "aos"
-      },
-      {
-        "name": "blazy",
-        "package": "blazy"
-      },
-      {
-        "name": "dropzone",
-        "package": "dropzone"
-      },
-      {
-        "name": "jquery.fancytree",
-        "package": "jquery.fancytree"
-      },
-      {
-        "name": "slick",
-        "package": "slick-carousel/slick"
-      },
-      {
-        "name": "swagger-ui/dist",
-        "package": "swagger-ui-dist"
-      }
+      {"name": "ckeditor5/plugins/media-embed", "package": "@ckeditor/ckeditor5-media-embed"},
+      {"name": "ace", "package": "ace-builds"},
+      {"name": "aos", "package": "aos"},
+      {"name": "blazy", "package": "blazy"},
+      {"name": "dropzone", "package": "dropzone"},
+      {"name": "jquery.fancytree", "package": "jquery.fancytree"},
+      {"name": "slick", "package": "slick-carousel/slick"},
+      {"name": "swagger-ui/dist", "package": "swagger-ui-dist"}
     ]
   },
   "devDependencies": {
