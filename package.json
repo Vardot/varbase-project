@@ -4,7 +4,7 @@
   "license": "GPL-2.0-or-later",
   "private": true,
   "engines": {
-    "yarn": ">= 4.6.0",
+    "yarn": ">= 4.9.3",
     "node": ">= 20.0"
   },
   "scripts": {
@@ -35,19 +35,58 @@
   "drupal-libraries": {
     "library-directory": "docroot/libraries",
     "libraries": [
-      {"name": "ckeditor5/plugins/media-embed", "package": "@ckeditor/ckeditor5-media-embed"},
-      {"name": "ace", "package": "ace-builds"},
-      {"name": "aos", "package": "aos"},
-      {"name": "blazy", "package": "blazy"},
-      {"name": "chartjs", "package": "chart.js"},
-      {"name": "c3", "package": "c3"},
-      {"name": "d3", "package": "d3"},
-      {"name": "dropzone", "package": "dropzone"},
-      {"name": "imagesloaded", "package": "imagesloaded"},
-      {"name": "jquery.fancytree", "package": "jquery.fancytree"},
-      {"name": "objectfitpolyfill", "package": "objectFitPolyfill"},
-      {"name": "slick", "package": "slick-carousel/slick"},
-      {"name": "swagger-ui/dist", "package": "swagger-ui-dist"}
+      {
+        "name": "ckeditor5/plugins/media-embed",
+        "package": "@ckeditor/ckeditor5-media-embed"
+      },
+      {
+        "name": "ace",
+        "package": "ace-builds"
+      },
+      {
+        "name": "aos",
+        "package": "aos"
+      },
+      {
+        "name": "blazy",
+        "package": "blazy"
+      },
+      {
+        "name": "chartjs",
+        "package": "chart.js"
+      },
+      {
+        "name": "c3",
+        "package": "c3"
+      },
+      {
+        "name": "d3",
+        "package": "d3"
+      },
+      {
+        "name": "dropzone",
+        "package": "dropzone"
+      },
+      {
+        "name": "imagesloaded",
+        "package": "imagesloaded"
+      },
+      {
+        "name": "jquery.fancytree",
+        "package": "jquery.fancytree"
+      },
+      {
+        "name": "objectfitpolyfill",
+        "package": "objectFitPolyfill"
+      },
+      {
+        "name": "slick",
+        "package": "slick-carousel/slick"
+      },
+      {
+        "name": "swagger-ui/dist",
+        "package": "swagger-ui-dist"
+      }
     ]
   },
   "devDependencies": {
@@ -71,5 +110,5 @@
   "resolutions": {
     "webpack": "^5"
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.9.3"
 }
