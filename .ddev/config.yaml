@@ -7,8 +7,22 @@ database:
 mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
-web_environment: []
+corepack_enable: true
 php_version: "8.3"
-nodejs_version: "18"
-webimage_extra_packages: ["php${DDEV_PHP_VERSION}-yaml"]
+nodejs_version: "20"
 dbimage_extra_packages: [sudo]
+webimage_extra_packages:
+  - php${DDEV_PHP_VERSION}-yaml
+  - xdg-utils
+  - pkg-config
+  - libpixman-1-dev
+  - libcairo2-dev
+  - libpango1.0-dev
+  - make
+web_extra_daemons:
+  - name: node.js
+    command: "tail -F package.json > /dev/null"
+    directory: /var/www/html
+hooks:
+  post-start:
+    - exec: yarn set version berry
