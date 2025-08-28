@@ -29,7 +29,6 @@
     "cweagans/composer-patches": "~1",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "10.0.x-dev",
-    "vardot/varbase-patches": "10.0.x-dev",
     "drush/drush": "~13"
   },
   "config": {
@@ -108,7 +107,7 @@
       ],
       "gitignore": true,
       "locations": {
-        "web-root": "docroot"
+        "web-root": "docroot/"
       },
       "file-mapping": {
         "[web-root]/sites/default/default.services.yml": {
