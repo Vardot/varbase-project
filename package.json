@@ -55,7 +55,7 @@
       },
       {
         "name": "dropzone",
-        "package": "dropzone"
+        "package": "dropzone/dist"
       },
       {
         "name": "jquery.fancytree",
