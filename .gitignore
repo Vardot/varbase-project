@@ -73,3 +73,14 @@ errors.log
 # Ignore editor config and gitattributes
 /.editorconfig
 /.gitattributes
+
+# Ignore common AI assistant metadata
+CLAUDE.md
+CURSOR.md
+
+.claude/
+.cursor/
+.copilot*
+.gemini/
+.codex/
+.warp/
