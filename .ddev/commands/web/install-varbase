@@ -1,0 +1,106 @@
+#!/bin/bash
+
+## Description: Install Varbase using drush.
+## Usage: install-varbase minimal|full
+## Example: ddev install-varbase minimal\nddev install-varbase full
+## Aliases: varbase:install
+## Flags: []
+## AutocompleteTerms: ["minimal","full"]
+
+# Configuration
+ADMIN_USER="webmaster"
+ADMIN_EMAIL="webmaster@vardot.com"
+DEFAULT_LOCALE="en"
+
+# Validate arguments.
+if [[ $# -eq 0 ]]; then
+  echo "Error: Install type is required"
+  echo "Usage: install-varbase minimal|full"
+  exit 1
+fi
+
+if [[ $# -gt 1 ]]; then
+  echo "Error: Too many arguments"
+  echo "Usage: install-varbase minimal|full"
+  exit 1
+fi
+
+if [[ "$1" == "minimal" || "$1" == "full" ]]; then
+  INSTALL_TYPE="$1"
+else
+  echo "Error: Invalid install type '$1'"
+  echo "Usage: install-varbase minimal|full"
+  exit 1
+fi
+
+echo "Installing Varbase ($INSTALL_TYPE)..."
+
+# Generate a password for the webmaster user.
+webmaster_password="$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13; echo)";
+
+# Install Varbase based on type.
+install_varbase_by_type() {
+  local install_type="$1"
+
+  if [[ "$install_type" == "minimal" ]]; then
+    drush site-install varbase --yes \
+      --account-name="$ADMIN_USER" \
+      --account-pass="$webmaster_password" \
+      --account-mail="$ADMIN_EMAIL" \
+      --locale="$DEFAULT_LOCALE" \
+      varbase_multilingual_configuration.enable_multilingual=NULL \
+      varbase_extra_components.vmi=NULL \
+      varbase_extra_components.varbase_heroslider_media=NULL \
+      varbase_extra_components.varbase_carousels=NULL \
+      varbase_extra_components.varbase_search=NULL \
+      varbase_extra_components.varbase_blog=NULL \
+      varbase_extra_components.varbase_auth=NULL \
+      install_configure_form.enable_update_status_emails=NULL \
+      --no-interaction \
+      --debug \
+      -vvv
+  elif [[ "$install_type" == "full" ]]; then
+    drush site-install varbase --yes \
+      --account-name="$ADMIN_USER" \
+      --account-pass="$webmaster_password" \
+      --account-mail="$ADMIN_EMAIL" \
+      --locale="$DEFAULT_LOCALE" \
+      varbase_multilingual_configuration.enable_multilingual=true \
+      varbase_extra_components.vmi=true \
+      varbase_extra_components.varbase_heroslider_media=true \
+      varbase_extra_components.varbase_carousels=true \
+      varbase_extra_components.varbase_search=true \
+      varbase_extra_components.varbase_blog=true \
+      varbase_extra_components.varbase_auth=true \
+      install_configure_form.enable_update_status_emails=NULL \
+      --no-interaction \
+      --debug \
+      -vvv
+
+    # Enable additional modules for full installation.
+    drush pm:enable varbase_development --yes
+    drush pm:enable varbase_styleguide --yes
+    drush pm:enable varbase_landing --yes
+    drush pm:enable varbase_api --yes
+    drush pm:enable varbase_content_planner --yes
+    drush pm:enable varbase_media_instagram --yes
+    drush pm:enable varbase_media_twitter --yes
+    drush pm:enable social_auth_google --yes
+    drush pm:enable social_auth_facebook --yes
+    drush pm:enable social_auth_twitter --yes
+    drush pm:enable social_auth_linkedin --yes
+    drush pm:enable editoria11y --yes
+  fi
+
+}
+
+# Install Varbase based on type
+install_varbase_by_type "$INSTALL_TYPE"
+
+# Clear cache function
+drush cache:rebuild
+
+# Show completion message
+echo "Varbase installation completed!"
+echo " Username: $ADMIN_USER"
+echo " Password: $webmaster_password"
