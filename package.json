@@ -62,7 +62,7 @@
         "package": "jquery.fancytree"
       },
       {
-        "name": "slick",
+        "name": "slick/slick",
         "package": "slick-carousel/slick"
       },
       {
