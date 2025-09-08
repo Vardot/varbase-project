@@ -80,7 +80,7 @@
         "package": "objectFitPolyfill"
       },
       {
-        "name": "slick",
+        "name": "slick/slick",
         "package": "slick-carousel/slick"
       },
       {
