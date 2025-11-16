@@ -102,8 +102,7 @@
     },
     "drupal-scaffold": {
       "allowed-packages": [
-        "drupal/core",
-        "vardot/varbase"
+        "drupal/core"
       ],
       "gitignore": true,
       "locations": {
