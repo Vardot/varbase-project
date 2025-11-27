@@ -34,6 +34,7 @@ else
 fi
 
 echo "Installing Varbase ($INSTALL_TYPE)..."
+echo " Project Basename: $DDEV_PROJECT"
 
 # Generate a password for the webmaster user.
 webmaster_password="$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13; echo)";
@@ -41,9 +42,10 @@ webmaster_password="$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </de
 # Install Varbase based on type.
 install_varbase_by_type() {
   local install_type="$1"
-  
+
   if [[ "$install_type" == "minimal" ]]; then
     drush site-install varbase --yes \
+      --site-name="$DDEV_PROJECT" \
       --account-name="$ADMIN_USER" \
       --account-pass="$webmaster_password" \
       --account-mail="$ADMIN_EMAIL" \
@@ -65,6 +67,7 @@ install_varbase_by_type() {
       -vvv
   elif [[ "$install_type" == "full" ]]; then
     drush site-install varbase --yes \
+      --site-name="$DDEV_PROJECT" \
       --account-name="$ADMIN_USER" \
       --account-pass="$webmaster_password" \
       --account-mail="$ADMIN_EMAIL" \
@@ -95,6 +98,7 @@ install_varbase_by_type() {
     drush pm:enable social_auth_linkedin --yes
   elif [[ "$install_type" == "demo" ]]; then
     drush site-install varbase --yes \
+      --site-name="$DDEV_PROJECT" \
       --account-name="$ADMIN_USER" \
       --account-pass="$webmaster_password" \
       --account-mail="$ADMIN_EMAIL" \
@@ -120,7 +124,7 @@ install_varbase_by_type() {
     drush pm:enable social_auth_facebook --yes
     drush pm:enable social_auth_linkedin --yes
   fi
-  
+
 }
 
 # Install Varbase based on type
@@ -131,5 +135,7 @@ drush cache:rebuild
 
 # Show completion message
 echo "Varbase installation completed!"
+echo " Project Basename: $DDEV_PROJECT"
+echo " Project Primary URL: $DDEV_PRIMARY_URL"
 echo " Username: $ADMIN_USER"
 echo " Password: $webmaster_password"
