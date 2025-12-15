@@ -10,7 +10,7 @@ composer_version: "2"
 corepack_enable: true
 web_environment:
   - "STORYBOOK_SERVER_RENDER_URL='https://${DDEV_PROJECT}.${DDEV_TLD}/storybook/stories/render'"
-php_version: "8.3"
+php_version: "8.4"
 nodejs_version: "20"
 dbimage_extra_packages: [sudo]
 webimage_extra_packages:
