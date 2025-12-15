@@ -2,7 +2,7 @@ services:
   mysql:
     image: tugboatqa/mariadb
   webapp:
-    image: tugboatqa/php:8.3-apache
+    image: tugboatqa/php:8.4-apache
     default: true
     http: false
     depends: webdb
