@@ -28,6 +28,7 @@
     "webflo/drupal-finder": "~1",
     "cweagans/composer-patches": "~1", 
     "vardot/varbase": "9.1.x-dev",
+    "vardot/varbase-patches": "9.1.x-dev",
     "drush/drush": "~13"
   },
   "config": {
