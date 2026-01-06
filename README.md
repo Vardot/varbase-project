@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg)](https://app.circleci.com/pipelines/github/Vardot/varbase/1227/workflows/0346f0f4-236c-4f40-8e0c-3596f06baf99) **Varbase 10.0.8**
+[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/10.0.x.svg)](https://app.circleci.com/pipelines/github/Vardot/varbase/1269/workflows/1af8f940-b437-4155-a639-d7475e3714f8) **Varbase 10.0.9**
 
 [![Ceasefire Now](https://badge.techforpalestine.org/ceasefire-now)](https://techforpalestine.org/learn-more)
 
