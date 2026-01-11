@@ -1,0 +1,97 @@
+{
+    "name": "drupal/varbase_project",
+    "version": "11.0.x-dev",
+    "description": "Project template for Varbase distribution.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/cms",
+    "support": {
+        "docs": "https://new.drupal.org/docs/drupal-cms",
+        "chat": "https://drupal.org/node/314178"
+    },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "require": {
+        "composer/composer": "^2.9",
+        "composer/installers": "^2.3",
+        "drupal/core-composer-scaffold": "~11.3",
+        "drupal/core-project-message": "~11.3",
+        "drupal/core-recipe-unpack": "~11.3",
+        "drupal/core-recommended": "~11.3",
+        "drupal/core-vendor-hardening": "~11.3",
+        "drupal/varbase": "11.0.x-dev",
+        "drupal/vartheme_bs5": "5.0.x-dev",
+        "drupal/recipe_installer_kit": "~1"
+    },
+    "require-dev": {
+        "drush/drush": "~13"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "drupal/core-recipe-unpack": true,
+            "drupal/core-vendor-hardening": true,
+            "php-http/discovery": true
+        },
+        "bin-dir": "vendor/bin",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            },
+            "file-mapping": {
+                "[web-root]/example.gitignore": false
+            }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "./drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
+            "./recipes/{$name}": ["type:drupal-recipe"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        },
+        "drupal-core-project-message": {
+            "include-keys": ["homepage", "support"],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                           </>",
+                "<bg=blue;fg=white>  Congratulations, you have installed the Varbase codebase </>",
+                "<bg=blue;fg=white>                                                           </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+
+                "  * Install the site: https://www.drupal.org/docs/installing-drupal",
+                "  * Read the user guide: https://docs.varbase.vardot.com",
+                "  * Get support: https://www.vardot.com/en/form/get-support-varbase",
+                "  * Join Our Slack Team for Feedback and Support:",
+                "      http://slack.varbase.vardot.com"
+            ]
+        },
+        "drupal-core-vendor-hardening": {
+            "composer/composer": false
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@php -r \"@unlink('vendor/bin/composer');\""
+        ]
+    }
+}
