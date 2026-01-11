@@ -4,10 +4,17 @@
     "description": "Project template for Varbase distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
-    "homepage": "https://www.drupal.org/project/cms",
+    "homepage": "https://www.drupal.org/project/varbase",
+    "authors": [
+        {
+        "name": "Vardot",
+        "homepage": "https://github.com/vardot",
+        "role": "Maintainer"
+        }
+    ],
     "support": {
-        "docs": "https://new.drupal.org/docs/drupal-cms",
-        "chat": "https://drupal.org/node/314178"
+        "issues": "http://drupal.org/project/issues/varbase",
+        "source": "http://cgit.drupalcode.org/varbase"
     },
     "repositories": {
         "drupal": {
