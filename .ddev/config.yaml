@@ -1,5 +1,5 @@
 type: drupal11
-docroot: docroot
+docroot: web
 webserver_type: apache-fpm
 database:
   type: mariadb
