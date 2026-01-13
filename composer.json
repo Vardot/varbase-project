@@ -30,9 +30,7 @@
         "drupal/core-recipe-unpack": "~11.3",
         "drupal/core-recommended": "~11.3",
         "drupal/core-vendor-hardening": "~11.3",
-        "vardot/varbase": "11.0.x-dev",
-        "drupal/vartheme_bs5": "5.0.x-dev",
-        "drupal/recipe_installer_kit": "~1"
+        "drupal/varbase": "11.0.x-dev"
     },
     "require-dev": {
         "drush/drush": "~13"
