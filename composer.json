@@ -25,12 +25,12 @@
     "require": {
         "composer/composer": "^2.9",
         "composer/installers": "^2.3",
+        "cweagans/composer-patches": "~1.0",
         "drupal/core-composer-scaffold": "~11.3",
         "drupal/core-project-message": "~11.3",
         "drupal/core-recipe-unpack": "~11.3",
         "drupal/core-recommended": "~11.3",
         "drupal/core-vendor-hardening": "~11.3",
-        "cweagans/composer-patches": "~2",
         "drupal/core": "~11.3.0",
         "drush/drush": "~13",
         "vardot/varbase": "11.0.x-dev",
@@ -44,10 +44,12 @@
     "config": {
         "allow-plugins": {
             "composer/installers": true,
+            "cweagans/composer-patches": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "drupal/core-recipe-unpack": true,
             "drupal/core-vendor-hardening": true,
+            "oomphinc/composer-installers-extender": true,
             "php-http/discovery": true
         },
         "bin-dir": "vendor/bin",
@@ -97,7 +99,7 @@
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
-        "drupal/core": "-p2"
+          "drupal/core": "-p2"
         },
         "patches": {  }
     },
