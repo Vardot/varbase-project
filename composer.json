@@ -30,10 +30,11 @@
         "drupal/core-recipe-unpack": "~11.3",
         "drupal/core-recommended": "~11.3",
         "drupal/core-vendor-hardening": "~11.3",
-        "vardot/varbase": "11.0.x-dev"
-    },
-    "require-dev": {
-        "drush/drush": "~13"
+        "cweagans/composer-patches": "~2",
+        "drupal/core": "~11.3.0",
+        "drush/drush": "~13",
+        "vardot/varbase": "11.0.x-dev",
+        "vardot/varbase-patches": "11.0.x-dev"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -92,7 +93,13 @@
         },
         "drupal-core-vendor-hardening": {
             "composer/composer": false
-        }
+        },
+        "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+        "drupal/core": "-p2"
+        },
+        "patches": {  }
     },
     "scripts": {
         "post-update-cmd": [
