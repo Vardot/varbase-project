@@ -63,10 +63,7 @@
             },
             "file-mapping": {
                 "[web-root]/example.gitignore": false
-            },
-            "allowed-packages": [
-                "drupal/drupal_cms_seo_tools"
-            ]
+            }
         },
         "installer-paths": {
             "web/core": ["type:drupal-core"],
