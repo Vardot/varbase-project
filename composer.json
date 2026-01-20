@@ -26,7 +26,7 @@
     "composer/installers": "~2",
     "drupal/core-composer-scaffold": "~10",
     "drupal/core-project-message": "~10",
-    "cweagans/composer-patches": "~1",
+    "cweagans/composer-patches": "~2",
     "webflo/drupal-finder": "~1.0",
     "vardot/varbase": "10.0.x-dev",
     "vardot/varbase-patches": "10.0.x-dev",
@@ -135,9 +135,6 @@
     },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true,
-    "patchLevel": {
-      "drupal/core": "-p2"
-    },
     "patches": {  }
   }
 }
