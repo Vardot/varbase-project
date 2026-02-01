@@ -1,0 +1,59 @@
+{
+  "name": "varbase_project",
+  "description": "Project template for Varbase distribution.",
+  "license": "GPL-2.0-or-later",
+  "private": true,
+  "engines": {
+    "yarn": ">= 4.9.3",
+    "node": ">= 20.0"
+  },
+  "scripts": {
+    "phpcs": "phpcs --standard=./.phpcs.xml .",
+    "phpcbf": "phpcbf --standard=./.phpcs.xml .",
+    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
+    "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
+    "lint:css": "npx stylelint --config=.stylelintrc.json",
+    "drupal-libraries-sync": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js",
+    "postinstall": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-media-embed": "~45.2.0",
+    "ace-builds": "~1",
+    "dropzone": "~5",
+    "jquery.fancytree": "~2",
+    "swagger-ui-dist": "~3"
+  },
+  "drupal-libraries": {
+    "library-directory": "web/libraries",
+    "libraries": [
+      {
+        "name": "ckeditor5/plugins/media-embed",
+        "package": "@ckeditor/ckeditor5-media-embed"
+      },
+      {
+        "name": "ace",
+        "package": "ace-builds"
+      },
+      {
+        "name": "dropzone",
+        "package": "dropzone/dist"
+      },
+      {
+        "name": "jquery.fancytree",
+        "package": "jquery.fancytree"
+      },
+      {
+        "name": "swagger-ui/dist",
+        "package": "swagger-ui-dist"
+      }
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.1.2",
+    "stylelint": "~16",
+    "stylelint-checkstyle-formatter": "^0.1.2",
+    "stylelint-order": "~6.0"
+  },
+  "packageManager": "yarn@4.9.3"
+}
