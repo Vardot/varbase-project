@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "eslint": "^8.0.0",
+    "jquery": "^3.7.0",
     "prettier": "^2.1.2",
     "stylelint": "~16",
     "stylelint-checkstyle-formatter": "^0.1.2",
