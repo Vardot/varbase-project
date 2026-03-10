@@ -7,8 +7,8 @@ parameters:
   level: 1
 
   paths:
-    - docroot/modules/custom
-    - docroot/themes/custom
+    - web/modules/custom
+    - web/themes/custom
 
   excludePaths:
     # Skip test fixtures.

@@ -8,6 +8,8 @@ mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
 corepack_enable: true
+web_environment:
+  - "STORYBOOK_SERVER_RENDER_URL='https://${DDEV_PROJECT}.${DDEV_TLD}/storybook/stories/render'"
 php_version: "8.4"
 nodejs_version: "20"
 dbimage_extra_packages: [sudo]
@@ -19,6 +21,11 @@ webimage_extra_packages:
   - libcairo2-dev
   - libpango1.0-dev
   - make
+web_extra_exposed_ports:
+  - name: storybook
+    container_port: 6006
+    http_port: 6007
+    https_port: 6006
 web_extra_daemons:
   - name: node.js
     command: "tail -F package.json > /dev/null"
@@ -26,4 +33,3 @@ web_extra_daemons:
 hooks:
   post-start:
     - exec: yarn set version berry
-

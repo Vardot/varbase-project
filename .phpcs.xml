@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="custom_code">
   <description>Default PHP CodeSniffer configuration for custom code.</description>
-  <file>docroot/modules/custom</file>
-  <file>docroot/themes/custom</file>
+  <file>web/modules/custom</file>
+  <file>web/themes/custom</file>
   <arg name="extensions" value="inc,install,module,php,profile,test,theme,yml,css"/>
 
   <!--Exclude third party code.-->

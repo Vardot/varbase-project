@@ -8,6 +8,14 @@
     "node": ">= 20.0"
   },
   "scripts": {
+    "storybook:generate-all-stories": "drush storybook:generate-all-stories --force",
+    "storybook:gen": "drush storybook:generate-all-stories --force",
+    "storybook:gen-new": "drush storybook:generate-all-stories",
+    "storybook:dev": "npx kill-port --port 6006; npx storybook dev --disable-telemetry -p 6006",
+    "storybook:build": "npx storybook build --disable-telemetry --output-dir storybook",
+    "storybook:kill": "npx kill-port --port 6006;",
+    "storybook": "storybook:dev",
+    "build-storybook": "storybook:build",
     "phpcs": "phpcs --standard=./.phpcs.xml .",
     "phpcbf": "phpcbf --standard=./.phpcs.xml .",
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
@@ -49,12 +57,42 @@
     ]
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.0",
+    "@storybook/addon-a11y": "~10",
+    "@storybook/addon-essentials": "~10",
+    "@storybook/addon-links": "~10",
+    "@storybook/addon-webpack5-compiler-swc": "~4",
+    "@storybook/blocks": "~10",
+    "@storybook/builder-webpack5": "~10",
+    "@storybook/cli": "~10",
+    "@storybook/components": "~10",
+    "@storybook/core-events": "~10",
+    "@storybook/manager-api": "~10",
+    "@storybook/preview-api": "~10",
+    "@storybook/react": "~10",
+    "@storybook/server": "~10",
+    "@storybook/server-webpack5": "~10",
+    "@storybook/test": "~10",
+    "@storybook/theming": "~10",
+    "@storybook/types": "~10",
     "eslint": "^8.0.0",
+    "eslint-plugin-storybook": "^10.0.0",
+    "fork-ts-checker-webpack-plugin": "~8 || ~9",
     "jquery": "^3.7.0",
     "prettier": "^2.1.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "storybook": "~10",
+    "storybook-addon-root-attributes": "~2",
     "stylelint": "~16",
     "stylelint-checkstyle-formatter": "^0.1.2",
-    "stylelint-order": "~6.0"
+    "stylelint-order": "~6.0",
+    "typescript": "^5.0.0",
+    "webpack": "~5",
+    "webpack-cli": "~5"
+  },
+  "resolutions": {
+    "webpack": "^5"
   },
   "packageManager": "yarn@4.9.3"
 }
