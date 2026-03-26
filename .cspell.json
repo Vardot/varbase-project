@@ -1,0 +1,13 @@
+{
+  "extends": "./web/core/.cspell.json",
+  "dictionaries": [
+    "local",
+    "php"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "local",
+      "path": "./.cspell/dictionary.txt"
+    }
+  ]
+}
