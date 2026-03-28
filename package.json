@@ -21,7 +21,6 @@
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
     "lint:css": "npx stylelint --config=.stylelintrc.json",
-    "test": "node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:chromium": "BROWSER=chromium node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:firefox": "BROWSER=firefox node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:webkit": "BROWSER=webkit node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",

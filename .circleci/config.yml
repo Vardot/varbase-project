@@ -103,6 +103,8 @@ commands:
             sudo chmod 775 -R .
             sudo chown www-data:circleci -R .
             composer install --no-interaction -vvv
+            yarn install
+            composer drupal-libraries-sync
             sudo chmod 775 -R .
             sudo chown www-data:circleci -R .
       - run:
@@ -124,6 +126,8 @@ commands:
             ../bin/drush recipe ../recipes/varbase_i18n_base
             ../bin/drush recipe ../recipes/varbase_api_base
             ../bin/drush recipe ../recipes/varbase_auth_base
+            ../bin/drush pm:enable social_auth_facebook --yes
+            ../bin/drush pm:enable social_auth_linkedin --yes
             ../bin/drush cache:rebuild
       - run:
           name: Add testing users.
@@ -143,8 +147,7 @@ commands:
       - run:
           name: Install Playwright browsers
           command: |
-            cd /home/circleci/project
-            yarn install
+            cd /var/www/html/test/varbase
             npx playwright install --with-deps chromium
 
 jobs:
@@ -156,6 +159,7 @@ jobs:
           name: Automated Functional Acceptance Testing
           no_output_timeout: 30m
           command: |
+            cd /var/www/html/test/varbase
             LAUNCH_URL=http://varbase.test yarn test:chromium
 
 workflows:
