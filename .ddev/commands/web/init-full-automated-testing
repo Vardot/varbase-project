@@ -1,0 +1,109 @@
+#!/bin/bash
+
+## Description: Full initialization for automated testing - applies optional Varbase recipes, adds testing users, and prepares the site
+## Usage: init-full-automated-testing
+## Example: ddev init-full-automated-testing
+## Aliases: varbase:init-full-automated-testing
+
+echo "=== Full automated testing initialization for Varbase ==="
+
+# ------------------------------------------------------------------
+# 1. Apply optional Varbase recipes
+# ------------------------------------------------------------------
+echo ""
+echo "--- Applying optional Varbase recipes ---"
+
+echo ""
+echo "  Applying recipe: varbase_dev_base"
+drush recipe /var/www/html/recipes/varbase_dev_base --yes
+
+echo ""
+echo "  Applying recipe: varbase_i18n_base"
+drush recipe /var/www/html/recipes/varbase_i18n_base --yes
+
+echo ""
+echo "  Applying recipe: varbase_api_base"
+drush recipe /var/www/html/recipes/varbase_api_base --yes
+
+echo ""
+echo "  Applying recipe: varbase_auth_base"
+drush recipe /var/www/html/recipes/varbase_auth_base --yes
+
+echo ""
+echo "--- Rebuilding cache after recipes ---"
+drush cache:rebuild
+
+# ------------------------------------------------------------------
+# 2. Add testing users
+# ------------------------------------------------------------------
+echo ""
+echo "--- Adding testing users ---"
+
+TESTING_USERS_SCRIPT="/var/www/html/recipes/varbase_starter/scripts/add-testing-users.sh"
+if [ -f "${TESTING_USERS_SCRIPT}" ]; then
+  cd /var/www/html/recipes/varbase_starter/scripts
+  bash add-testing-users.sh
+  cd /var/www/html
+else
+  echo "  add-testing-users.sh not found, adding users with drush directly"
+
+  declare -a USERS=(
+    "Normal user|test.authenticated@vardot.com|dD.123123ddd|_none_"
+    "Content editor|test.content_editor@vardot.com|dD.123123ddd|content_editor"
+    "Content admin|test.content_admin@vardot.com|dD.123123ddd|content_admin"
+    "SEO admin|test.seo_admin@vardot.com|dD.123123ddd|seo_admin"
+    "Site admin|test.site_admin@vardot.com|dD.123123ddd|site_admin"
+    "Super admin|test.super_admin@vardot.com|dD.123123ddd|administrator"
+  )
+
+  for user_entry in "${USERS[@]}"; do
+    IFS='|' read -r user_name user_mail user_password user_role <<< "${user_entry}"
+
+    echo " ---------------------------------------------------------------- "
+    echo "      User name: ${user_name}"
+    echo "      User mail: ${user_mail}"
+    echo "  User password: ${user_password}"
+    echo "      User role: ${user_role}"
+    echo " ================================================================= "
+
+    drush user:create "${user_name}" --mail="${user_mail}" --password="${user_password}"
+    if [ "${user_role}" != '_none_' ]; then
+      drush user:role:add "${user_role}" "${user_name}"
+    else
+      echo "   No user role for this user"
+    fi
+  done
+fi
+
+# ------------------------------------------------------------------
+# 3. Prepare site for automated testing
+# ------------------------------------------------------------------
+echo ""
+echo "--- Disabling antibot module ---"
+drush pm:uninstall antibot --yes 2>/dev/null || echo "  Antibot module not found or already disabled"
+
+echo ""
+echo "--- Disabling CSS/JS aggregation ---"
+drush config:set system.performance css.preprocess 0 --yes
+drush config:set system.performance js.preprocess 0 --yes
+
+echo ""
+echo "--- Setting verbose error logging ---"
+drush config:set system.logging error_level all --yes
+
+echo ""
+echo "--- Clearing flood table ---"
+drush sqlq "DELETE FROM flood;"
+
+echo ""
+echo "--- Rebuilding cache ---"
+drush cache:rebuild
+
+echo ""
+echo "=== Full automated testing initialization complete ==="
+echo ""
+echo "Now run on the host:"
+echo "  yarn install"
+echo "  npx playwright install chromium"
+echo "  yarn test:chromium"
+echo ""

@@ -21,6 +21,10 @@
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
     "lint:css": "npx stylelint --config=.stylelintrc.json",
+    "test": "node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
+    "test:chromium": "BROWSER=chromium node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
+    "test:firefox": "BROWSER=firefox node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
+    "test:webkit": "BROWSER=webkit node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "drupal-libraries-sync": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js",
     "postinstall": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
   },
@@ -75,6 +79,7 @@
     "@storybook/test": "^8.6.0",
     "@storybook/theming": "~8",
     "@storybook/types": "~8",
+    "@types/node": "^25.5.0",
     "eslint": "^8.0.0",
     "eslint-plugin-storybook": "^0.11.3",
     "fork-ts-checker-webpack-plugin": "~8 || ~9",
@@ -89,12 +94,14 @@
     "stylelint": "~16",
     "stylelint-checkstyle-formatter": "^0.1.2",
     "stylelint-order": "~6.0",
-    "typescript": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2",
     "webpack": "~5",
-    "webpack-cli": "~5"
+    "webpack-cli": "~5",
+    "webship-js": "^2"
   },
   "resolutions": {
     "webpack": "^5"
   },
-  "packageManager": "yarn@4.9.3"
+  "packageManager": "yarn@4.13.0"
 }

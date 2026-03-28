@@ -1,0 +1,15 @@
+#ddev-generated
+hooks:
+  pre-start:
+    # If webship-js is enabled, make sure we get any changes.
+    - exec-host: |
+        ([[ -f .ddev/web-build/Dockerfile.webship-js ]] && \
+          cp .ddev/web-build/disabled.Dockerfile.webship-js .ddev/web-build/Dockerfile.webship-js) || true
+  post-start:
+    # Install webship-js dependencies via npm
+    - exec: |
+        if [ ! -d /var/www/html/node_modules/webship-js ]; then
+          cd /var/www/html && npm install --no-save webship-js
+        fi
+web_environment:
+  - LAUNCH_URL=${DDEV_PRIMARY_URL}

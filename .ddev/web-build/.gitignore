@@ -1,0 +1,7 @@
+#ddev-generated
+
+webship-js
+
+# This file is optionally copied to enable webship-js from
+# disabled.Dockerfile.webship-js.
+Dockerfile.webship-js

@@ -79,3 +79,5 @@ CURSOR.md
 .gemini/
 .codex/
 .warp/
+.playwright-mcp
+.easy_encryption
