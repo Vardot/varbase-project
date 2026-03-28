@@ -1,76 +1,31 @@
 #!/bin/bash
 
-## Description: Full initialization for automated testing - installs Varbase if needed, applies optional recipes, adds testing users, and prepares the site
-## Usage: init-full-automated-testing
-## Example: ddev init-full-automated-testing
-## Aliases: varbase:init-full-automated-testing
+## Description: Minimal initialization for automated testing on an already installed site - adds testing users and prepares the site without applying extra recipes
+## Usage: init-minimal-automated-testing
+## Example: ddev init-minimal-automated-testing
+## Aliases: varbase:init-minimal-automated-testing
 
-echo "=== Full automated testing initialization for Varbase ==="
+echo "=== Minimal automated testing initialization for Varbase ==="
 
 # ------------------------------------------------------------------
-# 0. Check and install Drupal if not already installed
+# 0. Check that Drupal is installed
 # ------------------------------------------------------------------
 echo ""
 echo "--- Checking if Drupal is installed ---"
 
 BOOTSTRAP=$(drush status --field=bootstrap 2>/dev/null)
 if [ "$BOOTSTRAP" != "Successful" ]; then
-  echo "  Drupal is not installed. Running full Varbase install..."
+  echo "  Error: Drupal is not installed."
+  echo "  Please install Varbase first:"
+  echo "    ddev install-varbase minimal"
+  echo "    ddev install-varbase full"
   echo ""
-
-  drush site:install varbase --yes \
-    --account-name=webmaster \
-    --account-pass="dD.123123ddd" \
-    --account-mail="webmaster@vardot.com" \
-    --site-name="$DDEV_PROJECT" \
-    --no-interaction \
-    -vvv
-
-  if [[ $? -ne 0 ]]; then
-    echo "  Error: Varbase installation failed."
-    exit 1
-  fi
-
-  echo ""
-  echo "  Rebuilding cache after install..."
-  drush cache:rebuild
-else
-  echo "  Drupal is already installed. Skipping site install."
+  exit 1
 fi
+echo "  Drupal is installed. Proceeding..."
 
 # ------------------------------------------------------------------
-# 1. Apply optional Varbase recipes
-# ------------------------------------------------------------------
-echo ""
-echo "--- Applying optional Varbase recipes ---"
-
-echo ""
-echo "  Applying recipe: varbase_dev_base"
-drush recipe /var/www/html/recipes/varbase_dev_base --yes
-
-echo ""
-echo "  Applying recipe: varbase_i18n_base"
-drush recipe /var/www/html/recipes/varbase_i18n_base --yes
-
-echo ""
-echo "  Applying recipe: varbase_api_base"
-drush recipe /var/www/html/recipes/varbase_api_base --yes
-
-echo ""
-echo "  Applying recipe: varbase_auth_base"
-drush recipe /var/www/html/recipes/varbase_auth_base --yes
-
-echo ""
-echo "--- Enabling social auth modules ---"
-drush pm:enable social_auth_facebook --yes
-drush pm:enable social_auth_linkedin --yes
-
-echo ""
-echo "--- Rebuilding cache after recipes ---"
-drush cache:rebuild
-
-# ------------------------------------------------------------------
-# 2. Add testing users
+# 1. Add testing users
 # ------------------------------------------------------------------
 echo ""
 echo "--- Adding testing users ---"
@@ -93,7 +48,7 @@ drush user:create "Super admin" --mail="test.super_admin@vardot.com" --password=
 drush user:role:add "administrator" "Super admin"
 
 # ------------------------------------------------------------------
-# 3. Prepare site for automated testing
+# 2. Prepare site for automated testing
 # ------------------------------------------------------------------
 echo ""
 echo "--- Disabling antibot module ---"
@@ -117,7 +72,7 @@ echo "--- Rebuilding cache ---"
 drush cache:rebuild
 
 echo ""
-echo "=== Full automated testing initialization complete ==="
+echo "=== Minimal automated testing initialization complete ==="
 echo ""
 echo "Now run on the host:"
 echo "  yarn install"

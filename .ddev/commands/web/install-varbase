@@ -1,0 +1,109 @@
+#!/bin/bash
+
+## Description: Install Varbase using drush with Drupal recipes.
+## Usage: install-varbase minimal|full
+## Example: ddev install-varbase minimal\nddev install-varbase full
+## Aliases: varbase:install
+## Flags: []
+## AutocompleteTerms: ["minimal","full"]
+
+# Configuration
+ADMIN_USER="webmaster"
+ADMIN_EMAIL="webmaster@vardot.com"
+DEFAULT_LOCALE="en"
+
+# Validate arguments.
+if [[ $# -eq 0 ]]; then
+  echo "Error: Install type is required"
+  echo "Usage: install-varbase minimal|full"
+  exit 1
+fi
+
+if [[ $# -gt 1 ]]; then
+  echo "Error: Too many arguments"
+  echo "Usage: install-varbase minimal|full"
+  exit 1
+fi
+
+if [[ "$1" == "minimal" || "$1" == "full" ]]; then
+  INSTALL_TYPE="$1"
+else
+  echo "Error: Invalid install type '$1'"
+  echo "Usage: install-varbase minimal|full"
+  exit 1
+fi
+
+echo "Installing Varbase ($INSTALL_TYPE)..."
+echo " Project Basename: $DDEV_PROJECT"
+
+# Generate a password for the webmaster user.
+webmaster_password="$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13; echo)"
+
+# ------------------------------------------------------------------
+# Install Varbase with the Varbase profile
+# ------------------------------------------------------------------
+echo ""
+echo "--- Installing Varbase with drush site:install ---"
+drush site:install varbase --yes \
+  --site-name="$DDEV_PROJECT" \
+  --account-name="$ADMIN_USER" \
+  --account-pass="$webmaster_password" \
+  --account-mail="$ADMIN_EMAIL" \
+  --locale="$DEFAULT_LOCALE" \
+  --no-interaction \
+  -vvv
+
+if [[ $? -ne 0 ]]; then
+  echo "Error: Varbase installation failed."
+  exit 1
+fi
+
+echo ""
+echo "--- Rebuilding cache after install ---"
+drush cache:rebuild
+
+# ------------------------------------------------------------------
+# Apply optional Varbase recipes based on install type
+# ------------------------------------------------------------------
+if [[ "$INSTALL_TYPE" == "full" ]]; then
+  echo ""
+  echo "--- Applying optional Varbase recipes for full install ---"
+
+  echo ""
+  echo "  Applying recipe: varbase_dev_base"
+  drush recipe /var/www/html/recipes/varbase_dev_base --yes
+
+  echo ""
+  echo "  Applying recipe: varbase_i18n_base"
+  drush recipe /var/www/html/recipes/varbase_i18n_base --yes
+
+  echo ""
+  echo "  Applying recipe: varbase_api_base"
+  drush recipe /var/www/html/recipes/varbase_api_base --yes
+
+  echo ""
+  echo "  Applying recipe: varbase_auth_base"
+  drush recipe /var/www/html/recipes/varbase_auth_base --yes
+
+  echo ""
+  echo "--- Enabling social auth modules ---"
+  drush pm:enable social_auth_facebook --yes
+  drush pm:enable social_auth_linkedin --yes
+
+  echo ""
+  echo "--- Rebuilding cache after recipes ---"
+  drush cache:rebuild
+fi
+
+# ------------------------------------------------------------------
+# Show completion message
+# ------------------------------------------------------------------
+echo ""
+echo "========================================"
+echo " Varbase installation completed! ($INSTALL_TYPE)"
+echo "========================================"
+echo " Project Basename: $DDEV_PROJECT"
+echo " Project Primary URL: $DDEV_PRIMARY_URL"
+echo " Username: $ADMIN_USER"
+echo " Password: $webmaster_password"
+echo ""
