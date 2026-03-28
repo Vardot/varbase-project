@@ -52,7 +52,7 @@
             "oomphinc/composer-installers-extender": true,
             "php-http/discovery": true
         },
-        "bin-dir": "vendor/bin",
+        "bin-dir": "bin/",
         "sort-packages": true,
         "optimize-autoloader": true
     },
