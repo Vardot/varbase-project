@@ -14,6 +14,9 @@ const chromiumArgs: string[] = [
   '--incognito',
   '--disable-infobars',
   '--start-maximized',
+  '--disable-gpu',
+  '--allow-insecure-localhost',
+  '--no-first-run',
 ];
 
 interface PlaywrightConfig {
@@ -25,7 +28,7 @@ interface PlaywrightConfig {
 const config: PlaywrightConfig = {
   browser,
   launchOptions: {
-    headless: false,
+    headless: true,
     slowMo: 300,
     args: browser === 'chromium' ? chromiumArgs : [],
   },
