@@ -49,10 +49,6 @@ echo "--- Setting verbose error logging ---"
 drush config:set system.logging error_level all --yes
 
 echo ""
-echo "--- Clearing flood table ---"
-drush sqlq "DELETE FROM flood;" 2>/dev/null || echo "  Flood table does not exist yet (fresh install)"
-
-echo ""
 echo "--- Rebuilding cache ---"
 drush cache:rebuild
 
@@ -61,6 +57,6 @@ echo "=== Minimal automated testing initialization complete ==="
 echo ""
 echo "Now run on the host:"
 echo "  ddev yarn install"
-echo "  ddevnpx playwright install chromium"
+echo "  ddev exec npx playwright install-deps chromium"
 echo "  ddev yarn test:chromium"
 echo ""

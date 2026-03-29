@@ -35,40 +35,41 @@ if [ "$BOOTSTRAP" != "Successful" ]; then
   echo ""
   echo "  Rebuilding cache after install..."
   drush cache:rebuild
+
+  # ------------------------------------------------------------------
+  # 1. Apply optional Varbase recipes
+  # ------------------------------------------------------------------
+  echo ""
+  echo "--- Applying optional Varbase recipes ---"
+
+  echo ""
+  echo "  Applying recipe: varbase_dev_base"
+  drush recipe /var/www/html/recipes/varbase_dev_base --yes
+
+  echo ""
+  echo "  Applying recipe: varbase_i18n_base"
+  drush recipe /var/www/html/recipes/varbase_i18n_base --yes
+
+  echo ""
+  echo "  Applying recipe: varbase_api_base"
+  drush recipe /var/www/html/recipes/varbase_api_base --yes
+
+  echo ""
+  echo "  Applying recipe: varbase_auth_base"
+  drush recipe /var/www/html/recipes/varbase_auth_base --yes
+
+  echo ""
+  echo "--- Enabling social auth modules ---"
+  drush pm:enable social_auth_facebook --yes
+  drush pm:enable social_auth_linkedin --yes
+
+  echo ""
+  echo "--- Rebuilding cache after recipes ---"
+  drush cache:rebuild
 else
   echo "  Drupal is already installed. Skipping site install."
 fi
 
-# ------------------------------------------------------------------
-# 1. Apply optional Varbase recipes
-# ------------------------------------------------------------------
-echo ""
-echo "--- Applying optional Varbase recipes ---"
-
-echo ""
-echo "  Applying recipe: varbase_dev_base"
-drush recipe /var/www/html/recipes/varbase_dev_base --yes
-
-echo ""
-echo "  Applying recipe: varbase_i18n_base"
-drush recipe /var/www/html/recipes/varbase_i18n_base --yes
-
-echo ""
-echo "  Applying recipe: varbase_api_base"
-drush recipe /var/www/html/recipes/varbase_api_base --yes
-
-echo ""
-echo "  Applying recipe: varbase_auth_base"
-drush recipe /var/www/html/recipes/varbase_auth_base --yes
-
-echo ""
-echo "--- Enabling social auth modules ---"
-drush pm:enable social_auth_facebook --yes
-drush pm:enable social_auth_linkedin --yes
-
-echo ""
-echo "--- Rebuilding cache after recipes ---"
-drush cache:rebuild
 
 # ------------------------------------------------------------------
 # 2. Add testing users
@@ -107,6 +108,6 @@ echo "=== Full automated testing initialization complete ==="
 echo ""
 echo "Now run on the host:"
 echo "  ddev yarn install"
-echo "  ddev npx playwright install chromium"
+echo "  ddev exec npx playwright install-deps chromium"
 echo "  ddev yarn test:chromium"
 echo ""

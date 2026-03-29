@@ -50,7 +50,7 @@ ddev init-full-automated-testing
 
 # 3. Install host dependencies
 ddev yarn install
-ddev npx playwright install chromium
+ddev exec npx playwright install-deps chromium
 
 # 4. Run tests
 ddev yarn test:chromium
@@ -64,7 +64,7 @@ ddev init-minimal-automated-testing
 
 # 2. Install host dependencies
 ddev yarn install
-ddev npx playwright install chromium
+ddev exec npx playwright install-deps chromium
 
 # 3. Run tests
 ddev yarn test:chromium

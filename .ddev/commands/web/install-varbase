@@ -51,6 +51,7 @@ drush site:install varbase --yes \
   --account-mail="$ADMIN_EMAIL" \
   --locale="$DEFAULT_LOCALE" \
   --no-interaction \
+  --debug \
   -vvv
 
 if [[ $? -ne 0 ]]; then
