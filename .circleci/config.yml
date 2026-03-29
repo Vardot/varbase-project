@@ -115,6 +115,8 @@ commands:
             sudo a2ensite varbase.test
             echo 127.0.0.1 varbase.test | sudo tee -a /etc/hosts
             sudo service apache2 restart
+            cd /var/www/html/test/varbase
+            sed -i "s|'https://localhost'|'http://varbase.test'|g" cucumber.js
       - run:
           name: Install Varbase with drush
           command: |

@@ -11,7 +11,7 @@ module.exports = {
       '@cucumber/pretty-formatter',
     ],
     worldParameters: {
-      launchUrl: process.env.LAUNCH_URL || process.env.DDEV_PRIMARY_URL || 'http://varbase.test' || 'http://localhost:8080',
+      launchUrl: 'https://localhost',
       minWaitTime: {
         page: 3000,
         before_scenario: 0,

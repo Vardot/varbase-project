@@ -30,22 +30,7 @@ echo "  Drupal is installed. Proceeding..."
 echo ""
 echo "--- Adding testing users ---"
 
-drush user:create "Normal user" --mail="test.authenticated@vardot.com" --password="dD.123123ddd"
-
-drush user:create "Content editor" --mail="test.content_editor@vardot.com" --password="dD.123123ddd"
-drush user:role:add "content_editor" "Content editor"
-
-drush user:create "Content admin" --mail="test.content_admin@vardot.com" --password="dD.123123ddd"
-drush user:role:add "content_admin" "Content admin"
-
-drush user:create "SEO admin" --mail="test.seo_admin@vardot.com" --password="dD.123123ddd"
-drush user:role:add "seo_admin" "SEO admin"
-
-drush user:create "Site admin" --mail="test.site_admin@vardot.com" --password="dD.123123ddd"
-drush user:role:add "site_admin" "Site admin"
-
-drush user:create "Super admin" --mail="test.super_admin@vardot.com" --password="dD.123123ddd"
-drush user:role:add "administrator" "Super admin"
+bash add-testing-users ;
 
 # ------------------------------------------------------------------
 # 2. Prepare site for automated testing
@@ -75,7 +60,7 @@ echo ""
 echo "=== Minimal automated testing initialization complete ==="
 echo ""
 echo "Now run on the host:"
-echo "  yarn install"
-echo "  npx playwright install chromium"
-echo "  yarn test:chromium"
+echo "  ddev yarn install"
+echo "  ddevnpx playwright install chromium"
+echo "  ddev yarn test:chromium"
 echo ""

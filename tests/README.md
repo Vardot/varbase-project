@@ -49,11 +49,11 @@ ddev delete -y -O && ddev start
 ddev init-full-automated-testing
 
 # 3. Install host dependencies
-yarn install
-npx playwright install chromium
+ddev yarn install
+ddev npx playwright install chromium
 
 # 4. Run tests
-LAUNCH_URL=https://vp.ddev.site:8443 yarn test:chromium
+ddev yarn test:chromium
 ```
 
 ## Quick Start (Already Installed Site)
@@ -63,18 +63,18 @@ LAUNCH_URL=https://vp.ddev.site:8443 yarn test:chromium
 ddev init-minimal-automated-testing
 
 # 2. Install host dependencies
-yarn install
-npx playwright install chromium
+ddev yarn install
+ddev npx playwright install chromium
 
 # 3. Run tests
-LAUNCH_URL=https://vp.ddev.site:8443 yarn test:chromium
+ddev yarn test:chromium
 ```
 
 ## DDEV Commands
 
 ### `ddev install-varbase` (web command)
 
-Installs Varbase from scratch using `drush site:install` with the Varbase profile and Drupal recipes.
+Installs Varbase from scratch using `drush site:install varbase` with the Varbase profile and Drupal recipes.
 
 ```bash
 # Minimal install: core Varbase only (no extra recipes)
@@ -122,25 +122,25 @@ Manage testing user accounts individually.
 
 ## Running Tests
 
-All test commands require `LAUNCH_URL` to point to the DDEV site:
+Change commands require `LAUNCH_URL` to point to the DDEV site:
 
 ```bash
 # Run all tests with Chromium
-LAUNCH_URL=https://vp.ddev.site:8443 yarn test:chromium
+LAUNCH_URL=https://VARBASE_PROJECT.ddev.site yarn test:chromium
 
 # Run all tests with Firefox
-LAUNCH_URL=https://vp.ddev.site:8443 yarn test:firefox
+LAUNCH_URL=https://VARBASE_PROJECT.ddev.site yarn test:firefox
 
 # Run all tests with WebKit
-LAUNCH_URL=https://vp.ddev.site:8443 yarn test:webkit
+LAUNCH_URL=https://VARBASE_PROJECT.ddev.site yarn test:webkit
 
 # Run specific scenarios by name (regex filter)
-LAUNCH_URL=https://vp.ddev.site:8443 BROWSER=chromium \
+LAUNCH_URL=https://VARBASE_PROJECT.ddev.site BROWSER=chromium \
   node ./node_modules/@cucumber/cucumber/bin/cucumber.js \
   --config cucumber.js --name "Canvas editor"
 
 # Run tests by tag
-LAUNCH_URL=https://vp.ddev.site:8443 BROWSER=chromium \
+LAUNCH_URL=https://VARBASE_PROJECT.ddev.site BROWSER=chromium \
   node ./node_modules/@cucumber/cucumber/bin/cucumber.js \
   --config cucumber.js --tags "@check"
 ```
