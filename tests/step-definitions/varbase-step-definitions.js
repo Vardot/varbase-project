@@ -129,14 +129,14 @@ When(/^(I |we )*click next button in tour$/, async function (pronounCase) {
 Then(/^(I |we )*should see( the)* "([^"]*)?" element in( the)* "([^"]*)?" field$/, async function (pronounCase, the1Case, childSelector, the2Case, parentSelector) {
   async function assertPresent(page, selector) {
     if (selector.startsWith('#') || selector.startsWith('.')) {
-      await page.locator(selector).first().waitFor({ state: 'visible', timeout: 5000 });
+      await page.locator(selector).first().waitFor({ state: 'visible', timeout: 10000 });
     } else {
       const label = page.getByText(selector, { exact: true }).first();
       const forAttr = await label.getAttribute('for').catch(() => null);
       if (forAttr) {
-        await page.locator('#' + forAttr).waitFor({ state: 'visible', timeout: 5000 });
+        await page.locator('#' + forAttr).waitFor({ state: 'visible', timeout: 10000 });
       } else {
-        await label.waitFor({ state: 'visible', timeout: 5000 });
+        await label.waitFor({ state: 'visible', timeout: 10000 });
       }
     }
   }

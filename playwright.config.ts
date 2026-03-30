@@ -29,7 +29,7 @@ const config: PlaywrightConfig = {
   browser,
   launchOptions: {
     headless: true,
-    slowMo: 300,
+    slowMo: 400,
     args: browser === 'chromium' ? chromiumArgs : [],
   },
   contextOptions: {

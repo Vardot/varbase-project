@@ -44,15 +44,12 @@ Moving with modern automated functional testing setup for end-to-end testing.
 ```bash
 # 1. Start a fresh Varbase site
 ddev delete -y -O && ddev start
+# Do not appy, If the ddev already started.
 
 # 2. Install Varbase and initialize testing
 ddev init-full-automated-testing
 
-# 3. Install host dependencies
-ddev yarn install
-ddev exec npx playwright install-deps chromium
-
-# 4. Run tests
+# 3. Run tests
 ddev yarn test:chromium
 ```
 
@@ -62,11 +59,7 @@ ddev yarn test:chromium
 # 1. Initialize testing on an existing site (adds users, prepares settings)
 ddev init-minimal-automated-testing
 
-# 2. Install host dependencies
-ddev yarn install
-ddev exec npx playwright install-deps chromium
-
-# 3. Run tests
+# 2. Run tests
 ddev yarn test:chromium
 ```
 
