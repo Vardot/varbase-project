@@ -52,13 +52,12 @@ echo ""
 echo "--- Rebuilding cache ---"
 drush cache:rebuild
 
-yarn install
-npx playwright install-deps
-npx playwright install
-
 echo ""
 echo "=== Minimal automated testing initialization complete ==="
 echo ""
 echo "Now run on the host:"
+echo "  ddev yarn install"
+echo "  ddev npx playwright install-deps"
+echo "  ddev npx playwright install"
 echo "  ddev yarn test:chromium"
 echo ""
