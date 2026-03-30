@@ -53,8 +53,8 @@ echo "--- Rebuilding cache ---"
 drush cache:rebuild
 
 yarn install
-yarn playwright install-deps
-yarn playwright install
+npx playwright install-deps
+npx playwright install
 
 echo ""
 echo "=== Minimal automated testing initialization complete ==="
