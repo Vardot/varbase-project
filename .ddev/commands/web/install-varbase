@@ -71,6 +71,10 @@ if [[ "$INSTALL_TYPE" == "full" ]]; then
   echo "--- Applying optional Varbase recipes for full install ---"
 
   echo ""
+  echo "  Applying recipe: varbase_users_base"
+  drush recipe /var/www/html/recipes/varbase_users_base --yes
+
+  echo ""
   echo "  Applying recipe: varbase_dev_base"
   drush recipe /var/www/html/recipes/varbase_dev_base --yes
 
@@ -90,6 +94,10 @@ if [[ "$INSTALL_TYPE" == "full" ]]; then
   echo "--- Enabling social auth modules ---"
   drush pm:enable social_auth_facebook --yes
   drush pm:enable social_auth_linkedin --yes
+
+  echo ""
+  echo "  Applying recipe: varbase_ai_base"
+  drush recipe /var/www/html/recipes/varbase_ai_base --yes
 
   echo ""
   echo "--- Rebuilding cache after recipes ---"
