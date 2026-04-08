@@ -8,10 +8,10 @@
     "node": ">= 20.0"
   },
   "scripts": {
-    "storybook:generate-all-stories": "drush storybook:generate-all-stories --force",
-    "storybook:gen": "drush storybook:generate-all-stories --force",
-    "storybook:gen-new": "drush storybook:generate-all-stories",
-    "storybook:dev": "npx kill-port --port 6006; sh -c 'set -a; [ -f ./.env.storybook ] && . ./.env.storybook; set +a; exec npx storybook dev --disable-telemetry -p 6006 --host 0.0.0.0'",
+    "storybook:generate-all-stories": "drush storybook:generate-all-stories --omit-server-url --force",
+    "storybook:gen": "drush storybook:generate-all-stories --omit-server-url --force",
+    "storybook:gen-new": "drush storybook:generate-all-stories --omit-server-url",
+    "storybook:dev": "npx kill-port --port 6006; sh -c 'set -a; [ -f ./.env.storybook ] && . ./.env.storybook; set +a; exec npx storybook dev --disable-telemetry -p 6006'",
     "storybook:build": "sh -c 'set -a; [ -f ./.env.storybook ] && . ./.env.storybook; set +a; exec npx storybook build --disable-telemetry --output-dir storybook'",
     "storybook:kill": "npx kill-port --port 6006;",
     "storybook": "storybook:dev",

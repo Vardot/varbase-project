@@ -38,4 +38,4 @@ const config: PlaywrightConfig = {
   },
 };
 
-export = config;
+export default config;
