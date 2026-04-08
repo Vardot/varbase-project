@@ -1,4 +1,7 @@
 import type { StorybookConfig } from '@storybook/server-webpack5';
+import { createRequire } from 'module';
+
+const _require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   // Change the place where storybook searched for stories.
@@ -19,13 +22,9 @@ const config: StorybookConfig = {
   ],
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/manager-api",
-    "@storybook/theming",
+    "@storybook/addon-docs",
     "@storybook/addon-a11y",
     "@storybook/addon-webpack5-compiler-swc",
-    "@storybook/blocks",
-    "storybook-addon-root-attributes",
     "@chromatic-com/storybook"
   ],
   "framework": {
@@ -38,6 +37,18 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: "tag",
-  }
+  },
+  // Alias @storybook/blocks to @storybook/addon-docs/blocks for Storybook 10
+  // compatibility. In v10, the separate @storybook/blocks package was merged
+  // into @storybook/addon-docs. MDX story files that still import from
+  // @storybook/blocks are resolved here.
+  webpackFinal: async (webpackConfig) => {
+    webpackConfig.resolve = webpackConfig.resolve || {};
+    webpackConfig.resolve.alias = {
+      ...webpackConfig.resolve.alias,
+      '@storybook/blocks': _require.resolve('@storybook/addon-docs/blocks'),
+    };
+    return webpackConfig;
+  },
 };
 export default config;

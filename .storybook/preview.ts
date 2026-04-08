@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/server'
+import type { Preview, Decorator } from '@storybook/server'
 
 /**
  * Returns the Drupal base URL (no trailing slash, port included only when non-443).
@@ -91,7 +91,69 @@ async function fetchStoryHtml(
   return html;
 }
 
+/**
+ * Decorator: applies Bootstrap color mode (data-bs-theme) and text direction (dir)
+ * to the preview iframe's <body> and <html> elements based on Storybook globals.
+ *
+ * Replaces storybook-addon-root-attributes (not compatible with Storybook 10).
+ * Toolbar controls are defined via globalTypes below.
+ */
+const rootAttributesDecorator: Decorator = (storyFn, context) => {
+  const { bsTheme, textDir } = context.globals as { bsTheme?: string; textDir?: string };
+
+  if (typeof document !== 'undefined') {
+    // Apply Bootstrap color mode to <body>
+    if (bsTheme && bsTheme !== 'light') {
+      document.body.setAttribute('data-bs-theme', bsTheme);
+    } else {
+      document.body.removeAttribute('data-bs-theme');
+    }
+
+    // Apply text direction to <html>
+    document.documentElement.setAttribute('dir', textDir || 'ltr');
+  }
+
+  return storyFn();
+};
+
 const preview: Preview = {
+  // ---------------------------------------------------------------------------
+  // Toolbar globals for Bootstrap color mode and text direction.
+  // ---------------------------------------------------------------------------
+  globalTypes: {
+    bsTheme: {
+      description: 'Bootstrap color mode (data-bs-theme on <body>)',
+      toolbar: {
+        title: 'Theme',
+        icon: 'paintbrush',
+        items: [
+          { value: 'light', title: 'Light', icon: 'sun' },
+          { value: 'dark', title: 'Dark', icon: 'moon' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+    textDir: {
+      description: 'Text direction (dir attribute on <html>)',
+      toolbar: {
+        title: 'Direction',
+        icon: 'paragraph',
+        items: [
+          { value: 'ltr', title: 'LTR' },
+          { value: 'rtl', title: 'RTL' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+
+  initialGlobals: {
+    bsTheme: 'light',
+    textDir: 'ltr',
+  },
+
+  decorators: [rootAttributesDecorator],
+
   parameters: {
     options: {
       storySort: {
@@ -198,8 +260,7 @@ const preview: Preview = {
       // Drupal Storybook render endpoint. The URL + port are set at build/dev time
       // via STORYBOOK_SERVER_RENDER_URL written by the DDEV post-start hook.
       url: getServerRenderUrl(),
-      // Custom fetch: rewrites relative Drupal asset paths to absolute URLs so
-      // CSS, JS and fonts load from Drupal's port, not Storybook's port.
+      // Custom fetch: cleans params and rewrites Drupal asset paths.
       fetchStoryHtml,
     },
     controls: {
@@ -208,51 +269,10 @@ const preview: Preview = {
        date: /Date$/i,
       },
     },
-    // Uncomment the following line to show components in the center of the canvas.
-    // layout: 'centered',
-    // ------------------------------------
-    // Switch off default Storybook backgrounds, To switch to use Bootstrap theme color mode.
+    // Switch off default Storybook backgrounds — Bootstrap color mode is used instead.
     backgrounds: {
       disable: true,
     },
-    // -------------------------------------
-    // Add data-bs-theme="dark" to the body the inner iframe in the canvas.
-    // Color modes:
-    // Bootstrap now supports color modes, or themes, as of v5.3.0.
-    // Explore our default light color mode and the new dark mode,
-    // or create your own using our styles as your template.
-    // https://getbootstrap.com/docs/5.3/customize/color-modes/
-    rootAttributesTooltip: true,
-    rootAttributes: [
-      {
-        root: "body",
-        attribute: "data-bs-theme",
-        defaultState: {
-          name: "Light",
-          value: null,
-        },
-        states: [
-          {
-            name: "Dark",
-            value: "dark",
-          }
-        ],
-      },
-      {
-        root: "html",
-        attribute: "dir",
-        defaultState: {
-          name: "LTR",
-          value: "ltr",
-        },
-        states: [
-          {
-            name: "RTL",
-            value: "rtl",
-          },
-        ],
-      },
-    ],
   },
 };
 
