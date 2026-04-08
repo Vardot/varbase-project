@@ -33,3 +33,21 @@ web_extra_daemons:
 hooks:
   post-start:
     - exec: yarn set version berry
+    # Write .env.storybook with correct Drupal URLs for Storybook.
+    # Port is included only when non-default (not 443):
+    #   DDEV only (port 443):       https://myproject.ddev.site
+    #   Local LAMP + DDEV (8443):   https://myproject.ddev.site:8443
+    - exec: >-
+        bash -c '
+          PORT="${DDEV_ROUTER_HTTPS_PORT:-443}";
+          BASE="${DDEV_PRIMARY_URL_WITHOUT_PORT}";
+          if [ "$PORT" = "443" ]; then
+            URL="${BASE}";
+          else
+            URL="${BASE}:${PORT}";
+          fi;
+          echo "STORYBOOK_SERVER_URL=${URL}" > /var/www/html/.env.storybook;
+          echo "STORYBOOK_SERVER_RENDER_URL=${URL}/storybook/stories/render" >> /var/www/html/.env.storybook;
+          echo "Storybook URLs written to .env.storybook:";
+          cat /var/www/html/.env.storybook;
+        '

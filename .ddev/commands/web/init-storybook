@@ -20,18 +20,68 @@ drush pm:enable storybook
 drush role:perm:add anonymous 'render storybook stories'
 drush role:perm:add authenticated 'render storybook stories'
 
-# Copy the `development.local.services.yml` file to "web/sites/default/" directory.
-cp ${current_path}/.ddev/commands/web/assets/development.local.services.yml ${current_path}/web/sites/default/
-echo "Copied the development.local.services.yml asset file to the ${current_path}/web/sites/default/ directory."
+# ---------------------------------------------------------------------------
+# Switch on the development local services for Storybook.
+# Copies development.local.services.yml and enables it in settings.ddev.php.
+# This file enables CORS (all origins), Twig debug, and storybook.development.
+# ---------------------------------------------------------------------------
 
-# When settings.ddev.php exists and is not empty, ensure development.local.services.yml is included in container settings.
-if [[ -f "${current_path}/web/sites/default/settings.ddev.php" && -s "${current_path}/web/sites/default/settings.ddev.php" ]]; then
-  grep -qxF "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" ${current_path}/web/sites/default/settings.ddev.php || echo >> ${current_path}/web/sites/default/settings.ddev.php; echo "// Enable the development local services for Storybook." >> ${current_path}/web/sites/default/settings.ddev.php; echo  >> ${current_path}/web/sites/default/settings.ddev.php; echo "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" >> ${current_path}/web/sites/default/settings.ddev.php
-  echo "Enabled the development local services for Storybook in the \`settings.ddev.php\` file."
+SERVICES_SRC="${current_path}/.ddev/commands/web/assets/development.local.services.yml"
+SERVICES_DST="${current_path}/web/sites/default/development.local.services.yml"
+SETTINGS_DDEV="${current_path}/web/sites/default/settings.ddev.php"
+SETTINGS_PLATFORMSH="${current_path}/web/sites/default/settings.platformsh.php"
+SERVICES_LINE="\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';"
+
+# Copy the development.local.services.yml file.
+cp "${SERVICES_SRC}" "${SERVICES_DST}"
+echo "Copied development.local.services.yml to ${SERVICES_DST}"
+
+# Enable it in settings.ddev.php (if exists and not empty).
+if [[ -f "${SETTINGS_DDEV}" && -s "${SETTINGS_DDEV}" ]]; then
+  if ! grep -qxF "${SERVICES_LINE}" "${SETTINGS_DDEV}"; then
+    echo "" >> "${SETTINGS_DDEV}"
+    echo "// Enable the development local services for Storybook." >> "${SETTINGS_DDEV}"
+    echo "" >> "${SETTINGS_DDEV}"
+    echo "${SERVICES_LINE}" >> "${SETTINGS_DDEV}"
+    echo "Enabled development.local.services.yml in settings.ddev.php"
+  else
+    echo "development.local.services.yml already enabled in settings.ddev.php"
+  fi
 fi
 
-# When settings.platformsh.php exists and is not empty, ensure development.local.services.yml is included in container settings.
-if [[ -f "${current_path}/web/sites/default/settings.platformsh.php" && -s "${current_path}/web/sites/default/settings.platformsh.php" ]]; then
-  grep -qxF "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" ${current_path}/web/sites/default/settings.platformsh.php || echo >> ${current_path}/web/sites/default/settings.platformsh.php; echo "// Enable the development local services for Storybook." >> ${current_path}/web/sites/default/settings.platformsh.php; echo  >> ${current_path}/web/sites/default/settings.platformsh.php; echo "\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';" >> ${current_path}/web/sites/default/settings.platformsh.php
-  echo "Enabled the development local services for Storybook in the \`settings.platformsh.php\` file."
+# Enable it in settings.platformsh.php (if exists and not empty).
+if [[ -f "${SETTINGS_PLATFORMSH}" && -s "${SETTINGS_PLATFORMSH}" ]]; then
+  if ! grep -qxF "${SERVICES_LINE}" "${SETTINGS_PLATFORMSH}"; then
+    echo "" >> "${SETTINGS_PLATFORMSH}"
+    echo "// Enable the development local services for Storybook." >> "${SETTINGS_PLATFORMSH}"
+    echo "" >> "${SETTINGS_PLATFORMSH}"
+    echo "${SERVICES_LINE}" >> "${SETTINGS_PLATFORMSH}"
+    echo "Enabled development.local.services.yml in settings.platformsh.php"
+  else
+    echo "development.local.services.yml already enabled in settings.platformsh.php"
+  fi
 fi
+
+# ---------------------------------------------------------------------------
+# Write .env.storybook with the correct Drupal server URLs (port-aware).
+# STORYBOOK_SERVER_URL      — Drupal base URL (with port when non-443)
+# STORYBOOK_SERVER_RENDER_URL — Drupal Storybook render endpoint
+# These are loaded by storybook:dev and storybook:build scripts via sh.
+# ---------------------------------------------------------------------------
+
+PORT="${DDEV_ROUTER_HTTPS_PORT:-443}"
+BASE="${DDEV_PRIMARY_URL_WITHOUT_PORT}"
+if [ "$PORT" = "443" ]; then
+  DRUPAL_URL="${BASE}"
+else
+  DRUPAL_URL="${BASE}:${PORT}"
+fi
+
+echo "STORYBOOK_SERVER_URL=${DRUPAL_URL}" > "${current_path}/.env.storybook"
+echo "STORYBOOK_SERVER_RENDER_URL=${DRUPAL_URL}/storybook/stories/render" >> "${current_path}/.env.storybook"
+echo "Storybook URLs written to .env.storybook:"
+cat "${current_path}/.env.storybook"
+
+# Rebuild Drupal cache to apply service changes.
+drush cache:rebuild
+echo "Drupal cache rebuilt."
