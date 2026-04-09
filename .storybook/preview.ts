@@ -41,7 +41,7 @@ async function fetchStoryHtml(
   // JS and images load from the Drupal server instead of 404-ing on the
   // static host. Skips protocol-relative "//..." URLs.
   if (process.env.NODE_ENV !== 'development') {
-    const drupalBase = getServerBase();
+    const drupalBase = new URL(url).origin;
     html = html.replace(
       /(href|src|action)="(\/[^"]*?)"/g,
       (_match, attr, assetPath) => {
