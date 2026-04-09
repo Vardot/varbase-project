@@ -8,7 +8,7 @@
  * Solution: Proxy all Drupal asset paths through the Storybook dev server
  * so the browser sees them as same-origin (:6006) requests.
  *
- * Proxied paths: /themes/, /modules/, /core/, /libraries/, /sites/
+ * Proxied paths: /themes/, /modules/, /core/, /libraries/, /sites/, /storybook/
  */
 
 const httpProxy = require('http-proxy');
@@ -30,6 +30,7 @@ const DRUPAL_ASSET_PREFIXES = [
   '/core/',
   '/libraries/',
   '/sites/',
+  '/storybook/',
 ];
 
 module.exports = function expressMiddleware(app) {

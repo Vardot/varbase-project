@@ -1,43 +1,6 @@
 import type { Preview, Decorator } from '@storybook/server'
 
 /**
- * Returns the Drupal base URL (no trailing slash, port included only when non-443).
- *
- * Priority:
- * 1. STORYBOOK_SERVER_URL — injected at webpack build/dev time from .env.storybook,
- *    written by the DDEV post-start hook using DDEV_PRIMARY_URL_WITHOUT_PORT and
- *    DDEV_ROUTER_HTTPS_PORT. Port is omitted when it equals 443.
- *    - DDEV only (port 443):       https://myproject.ddev.site
- *    - Local LAMP + DDEV (8443):   https://myproject.ddev.site:8443
- * 2. Dynamic runtime fallback via window.location (appends :8443 for non-localhost).
- * 3. http://localhost — last resort.
- */
-function getServerBase(): string {
-  if (typeof process !== 'undefined' && process.env['STORYBOOK_SERVER_URL']) {
-    return process.env['STORYBOOK_SERVER_URL'];
-  }
-  if (typeof window !== 'undefined' && window.location?.hostname) {
-    const hostname = window.location.hostname;
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      return `https://${hostname}:8443`;
-    }
-  }
-  return 'http://localhost';
-}
-
-/**
- * Returns the Drupal Storybook render endpoint URL.
- * STORYBOOK_SERVER_RENDER_URL is written by the DDEV post-start hook with the
- * correct port included.
- */
-function getServerRenderUrl(): string {
-  if (typeof process !== 'undefined' && process.env['STORYBOOK_SERVER_RENDER_URL']) {
-    return process.env['STORYBOOK_SERVER_RENDER_URL'];
-  }
-  return `${getServerBase()}/storybook/stories/render`;
-}
-
-/**
  * Custom fetch function for @storybook/server.
  *
  * 1. Cleans up params before sending to Drupal:
@@ -257,9 +220,8 @@ const preview: Preview = {
       }
     },
     server: {
-      // Drupal Storybook render endpoint. The URL + port are set at build/dev time
-      // via STORYBOOK_SERVER_RENDER_URL written by the DDEV post-start hook.
-      url: getServerRenderUrl(),
+      // Replace this with your Drupal site URL, or an environment variable.
+      url: process.env.STORYBOOK_SERVER_RENDER_URL,
       // Custom fetch: cleans params and rewrites Drupal asset paths.
       fetchStoryHtml,
     },

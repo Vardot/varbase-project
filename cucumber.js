@@ -13,7 +13,7 @@ module.exports = {
     worldParameters: {
       launchUrl: process.env.LAUNCH_URL || process.env.DDEV_PRIMARY_URL || 'https://localhost',
       minWaitTime: {
-        page: 10000,
+        page: 3000,
         before_scenario: 0,
         after_scenario: 0,
         before_step: 0,
