@@ -6,6 +6,8 @@ database:
   version: "11.8"
 mutagen_enabled: false
 use_dns_when_possible: true
+additional_fqdns:
+  - storybook.varbase.ddev.site
 composer_version: "2"
 corepack_enable: true
 web_environment:
@@ -28,8 +30,8 @@ web_extra_exposed_ports:
     http_port: 6007
     https_port: 6006
 web_extra_daemons:
-  - name: node.js
-    command: "tail -F package.json > /dev/null"
+  - name: storybook
+    command: "yarn storybook:ddev"
     directory: /var/www/html
 hooks:
   post-start:

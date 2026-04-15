@@ -12,6 +12,7 @@
     "storybook:gen": "drush storybook:generate-all-stories --omit-server-url --force",
     "storybook:gen-new": "drush storybook:generate-all-stories --omit-server-url",
     "storybook:dev": "npx kill-port --port 6006; npx storybook dev --disable-telemetry -p 6006",
+    "storybook:ddev": "npx kill-port --port 6006; npx storybook dev --disable-telemetry -p 6006 -h 0.0.0.0",
     "storybook:build": "npx storybook build --disable-telemetry --output-dir storybook",
     "storybook:kill": "npx kill-port --port 6006;",
     "storybook": "storybook:dev",

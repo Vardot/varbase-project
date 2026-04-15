@@ -13,6 +13,17 @@ yarn install
 # Store the current working directory path for later use.
 current_path=$(pwd);
 
+# Resolve dynamic host names for this project.
+# Example: DDEV_HOSTNAME=varbase.ddev.site -> STORYBOOK_HOST=storybook.varbase.ddev.site
+CURRENT_HOST="${DDEV_HOSTNAME:-${DDEV_PRIMARY_URL_WITHOUT_PORT#https://}}"
+# DDEV_HOSTNAME may contain a comma-separated list; use only the first host.
+CURRENT_HOST="${CURRENT_HOST%%,*}"
+CURRENT_HOST="${CURRENT_HOST#https://}"
+CURRENT_HOST="${CURRENT_HOST#http://}"
+CURRENT_HOST="${CURRENT_HOST%%/*}"
+CURRENT_HOST="${CURRENT_HOST%%:*}"
+STORYBOOK_HOST="storybook.${CURRENT_HOST#storybook.}"
+
 # Enable the Storybook module in Drupal.
 drush pm:enable storybook
 
@@ -63,6 +74,67 @@ if [[ -f "${SETTINGS_PLATFORMSH}" && -s "${SETTINGS_PLATFORMSH}" ]]; then
 fi
 
 # ---------------------------------------------------------------------------
+# Update Storybook hostname in DDEV config and Apache proxy config.
+# This keeps subdomain routing aligned with the current project hostname.
+# ---------------------------------------------------------------------------
+
+DDEV_CONFIG_FILE="${current_path}/.ddev/config.yaml"
+APACHE_PROXY_FILE="${current_path}/.ddev/apache/storybook-proxy.conf"
+
+if [[ -f "${DDEV_CONFIG_FILE}" ]]; then
+  if grep -qE '^[[:space:]]*additional_fqdns:[[:space:]]*$' "${DDEV_CONFIG_FILE}"; then
+    awk -v host="${STORYBOOK_HOST}" '
+      /^[[:space:]]*additional_fqdns:[[:space:]]*$/ {
+        print $0;
+        in_fqdns=1;
+        next;
+      }
+      in_fqdns && /^[[:space:]]*-[[:space:]]*/ {
+        if ($0 ~ /^[[:space:]]*-[[:space:]]*storybook\./) {
+          if (!done) {
+            print "  - " host;
+            done=1;
+          }
+          next;
+        }
+        print $0;
+        next;
+      }
+      in_fqdns && !/^[[:space:]]*-[[:space:]]*/ {
+        if (!done) {
+          print "  - " host;
+          done=1;
+        }
+        in_fqdns=0;
+      }
+      { print $0 }
+      END {
+        if (in_fqdns && !done) {
+          print "  - " host;
+        }
+      }
+    ' "${DDEV_CONFIG_FILE}" > "${DDEV_CONFIG_FILE}.tmp" && mv "${DDEV_CONFIG_FILE}.tmp" "${DDEV_CONFIG_FILE}"
+  else
+    awk -v host="${STORYBOOK_HOST}" '
+      /^[[:space:]]*use_dns_when_possible:[[:space:]]*/ && !done {
+        print $0;
+        print "additional_fqdns:";
+        print "  - " host;
+        done=1;
+        next;
+      }
+      { print $0 }
+    ' "${DDEV_CONFIG_FILE}" > "${DDEV_CONFIG_FILE}.tmp" && mv "${DDEV_CONFIG_FILE}.tmp" "${DDEV_CONFIG_FILE}"
+  fi
+  echo "Configured additional_fqdns host: ${STORYBOOK_HOST}"
+fi
+
+if [[ -f "${APACHE_PROXY_FILE}" ]]; then
+  sed -i -E "s#^([[:space:]]*ServerName[[:space:]]+)storybook\.[[:alnum:].-]+#\\1${STORYBOOK_HOST}#" "${APACHE_PROXY_FILE}"
+  echo "Updated Apache Storybook ServerName to: ${STORYBOOK_HOST}"
+fi
+
+# ---------------------------------------------------------------------------
 # Write .env.storybook with the correct Drupal server URLs (port-aware).
 # STORYBOOK_SERVER_URL      — Drupal base URL (with port when non-443)
 # STORYBOOK_SERVER_RENDER_URL — Drupal Storybook render endpoint
@@ -85,3 +157,5 @@ cat "${current_path}/.env.storybook"
 # Rebuild Drupal cache to apply service changes.
 drush cache:rebuild
 echo "Drupal cache rebuilt."
+
+echo "If hostname settings changed, run 'ddev restart' to apply updated routing."
