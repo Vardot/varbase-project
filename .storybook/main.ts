@@ -38,6 +38,12 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  staticDirs: [
+    {
+      from: "../web/themes/contrib/vartheme_bs5/components",
+      to: "/components",
+    },
+  ],
   // Alias @storybook/blocks to @storybook/addon-docs/blocks for Storybook 10
   // compatibility. In v10, the separate @storybook/blocks package was merged
   // into @storybook/addon-docs. MDX story files that still import from
