@@ -44,7 +44,7 @@ Moving with modern automated functional testing setup for end-to-end testing.
 ```bash
 # 1. Start a fresh Varbase site
 ddev delete -y -O && ddev start
-# Do not appy, If the ddev already started.
+# Do not apply, if DDEV is already started.
 
 # 2. Install Varbase and initialize testing
 ddev init-full-automated-testing
@@ -115,9 +115,10 @@ Manage testing user accounts individually.
 
 ## Running Tests
 
-Change commands require `LAUNCH_URL` to point to the DDEV site:
-
 ```bash
+# Run all tests (default: Chromium)
+LAUNCH_URL=https://VARBASE_PROJECT.ddev.site yarn test
+
 # Run all tests with Chromium
 LAUNCH_URL=https://VARBASE_PROJECT.ddev.site yarn test:chromium
 
@@ -129,14 +130,76 @@ LAUNCH_URL=https://VARBASE_PROJECT.ddev.site yarn test:webkit
 
 # Run specific scenarios by name (regex filter)
 LAUNCH_URL=https://VARBASE_PROJECT.ddev.site BROWSER=chromium \
-  node ./node_modules/@cucumber/cucumber/bin/cucumber.js \
-  --config cucumber.js --name "Canvas editor"
+  cucumber-js --config cucumber.js --name "Canvas editor"
 
 # Run tests by tag
 LAUNCH_URL=https://VARBASE_PROJECT.ddev.site BROWSER=chromium \
-  node ./node_modules/@cucumber/cucumber/bin/cucumber.js \
-  --config cucumber.js --tags "@check"
+  cucumber-js --config cucumber.js --tags "@check"
 ```
+
+## Generating Reports
+
+After a test run, an HTML report is auto-generated from `tests/reports/cucumber_report.json`.
+To generate it manually:
+
+```bash
+yarn generate-reports
+```
+
+The report opens from `tests/reports/cucumber_report.html`.
+
+To disable the auto-generated report on exit, set:
+
+```bash
+WEBSHIP_REPORT_DISABLE=1 yarn test:chromium
+```
+
+## Screenshots
+
+Screenshots are saved to the `screenshots/` directory.
+
+- **On failure** (default): captured automatically when a step fails, prefixed with `failed_`.
+- **On every step**: set `onEveryStep: true` in `cucumber.js` worldParameters.
+- **Filename pattern**: `{datetime}.{feature_file}.feature_{step_line}.{ext}`
+
+Configure in `cucumber.js` under `worldParameters.screenshot`:
+
+| Option              | Default    | Description                                  |
+|---------------------|------------|----------------------------------------------|
+| `dir`               | `./screenshots` | Directory to save screenshots           |
+| `purge`             | `false`    | Delete all screenshots before each run       |
+| `onFailed`          | `true`     | Capture screenshot on step failure           |
+| `onEveryStep`       | `false`    | Capture screenshot after every step          |
+| `alwaysFullscreen`  | `false`    | Always capture full-page screenshots         |
+| `failedPrefix`      | `failed_`  | Prefix for failed screenshot filenames       |
+
+## Diffy Visual Regression (Optional)
+
+[Diffy](https://diffy.website) enables visual regression testing by comparing screenshots across environments.
+
+Enable by setting environment variables:
+
+```bash
+export DIFFY_API_KEY=your-api-key
+export DIFFY_PROJECT_ID=your-project-id
+```
+
+Then enable the Diffy step definitions in `cucumber.js`:
+
+```js
+'node_modules/webship-js/tests/step-definitions-diffy/**/*.js',
+```
+
+| Variable               | Default                          | Description                        |
+|------------------------|----------------------------------|------------------------------------|
+| `DIFFY_API_KEY`        | _(required)_                     | Your Diffy API key                 |
+| `DIFFY_PROJECT_ID`     | _(required)_                     | Your Diffy project ID              |
+| `DIFFY_BREAKPOINTS`    | `640,1200`                       | Comma-separated breakpoint widths  |
+| `DIFFY_WINDOW_HEIGHT`  | `2000`                           | Browser window height for captures |
+| `DIFFY_ENV1_URL`       | —                                | First environment URL              |
+| `DIFFY_ENV2_URL`       | —                                | Second environment URL             |
+| `DIFFY_MAX_WAIT`       | `30`                             | Max seconds to wait for Diffy      |
+| `DIFFY_API_BASE_URL`   | `https://app.diffy.website/api/` | Diffy API base URL                 |
 
 ## Test Structure
 
@@ -148,16 +211,20 @@ tests/
     03-admin-management/            # Admin pages, masquerade, media, JSON:API
     04-content-structure/           # Content types, Canvas pages, blog, homepage, contact us, Canvas editor, breadcrumbs
     05-content-management/          # Entityqueues, media library, content workflows, scheduling, cloning, linking, trash
+  reports/                          # Generated test reports (cucumber_report.json, cucumber_report.html)
+  selectors/                        # Custom CSS/XPath selector files
   step-definitions/
     varbase-step-definitions.js     # Varbase-specific step definitions
+    custom.js                       # Project-specific custom step definitions
 ```
 
 Step definitions from [Webship-js](https://github.com/webship/webship-js) are loaded automatically from `node_modules/webship-js/tests/step-definitions/`.
 
 ## Configuration
 
-- **`cucumber.js`** -- Cucumber configuration, user credentials, and world parameters
-- **`playwright.config.ts`** -- Browser launch options (headless mode, viewport, slowMo)
+- **`cucumber.js`** — Cucumber configuration, user credentials, world parameters (selectors, screenshot, diffy)
+- **`playwright.config.ts`** — Browser launch options (headless mode, viewport, slowMo)
+- **`tsconfig.json`** — TypeScript config (Storybook + ts-node/CommonJS override for tests)
 
 ## Testing Users
 

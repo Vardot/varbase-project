@@ -1,8 +1,18 @@
 {
   "compilerOptions": {
+    "target": "ES2020",
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
     "types": ["node"]
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "moduleResolution": "Node"
+    },
+    "ignore": ["node_modules/(?!webship-js/)"]
   }
 }

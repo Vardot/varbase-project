@@ -31,35 +31,6 @@ Given(/^I am a logged in user with( the)*( username)* "([^"]*)?"( user)*$/, asyn
 });
 
 /**
- * Navigate as an anonymous user.
- *
- * Example: Given I am an anonymous user
- */
-Given(/^I am an anonymous user$/, async function () {
-  await this.page.goto(this.launchUrl, { waitUntil: 'domcontentloaded' });
-});
-
-/**
- * Check a checkbox by its label text.
- *
- * Example: When I check the box "Remember me"
- */
-When(/^(I|we)* check( the)* box "([^"]*)?"$/, async function (pronounCase, theCase, label) {
-  const byLabel = this.page.getByLabel(label, { exact: true });
-  if (await byLabel.count() > 0) {
-    await byLabel.check();
-  } else {
-    const labelEl = this.page.getByText(label, { exact: true }).first();
-    const forAttr = await labelEl.getAttribute('for').catch(() => null);
-    if (forAttr) {
-      await this.page.locator('#' + forAttr).check();
-    } else {
-      await labelEl.click();
-    }
-  }
-});
-
-/**
  * Assert a checkbox is checked by its label.
  *
  * Example: Then I should see the "Remember me" checkbox checked
@@ -97,16 +68,6 @@ Then(/^(I |we )*should see( the)* "([^"]*)?" checkbox unchecked$/, async functio
       assert.ok(!isChecked, `Checkbox "${label}" should be unchecked but it is checked.`);
     }
   }
-});
-
-/**
- * Simple wait for body to be present.
- *
- * Example: And wait
- */
-When(/^wait$/, async function () {
-  await this.page.waitForSelector('body', { state: 'attached', timeout: 10000 });
-  await this.page.waitForLoadState('domcontentloaded');
 });
 
 /**

@@ -8,6 +8,7 @@
 /web/profiles/varbase/
 /web/recipes/contrib/
 /recipes/
+/tests/screenshots
 
 # Ignore sensitive information
 /web/sites/*/settings.php
