@@ -15,7 +15,7 @@ Feature: Content Management - Media Library permissions
     Given I am a logged in user with the "Normal user" user
      When I go to "/admin/content/media"
       And wait
-     Then I should see "Access denied"
+     Then I should see "You are not authorized to access this page."
 
   @javascript @check @local @development @staging @production
   Scenario: Check that Content editor users can access the Media Library

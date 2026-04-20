@@ -1,7 +1,4 @@
 import type { StorybookConfig } from '@storybook/server-webpack5';
-import { createRequire } from 'module';
-
-const _require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   // Change the place where storybook searched for stories.
@@ -44,17 +41,5 @@ const config: StorybookConfig = {
       to: "/components",
     },
   ],
-  // Alias @storybook/blocks to @storybook/addon-docs/blocks for Storybook 10
-  // compatibility. In v10, the separate @storybook/blocks package was merged
-  // into @storybook/addon-docs. MDX story files that still import from
-  // @storybook/blocks are resolved here.
-  webpackFinal: async (webpackConfig) => {
-    webpackConfig.resolve = webpackConfig.resolve || {};
-    webpackConfig.resolve.alias = {
-      ...webpackConfig.resolve.alias,
-      '@storybook/blocks': _require.resolve('@storybook/addon-docs/blocks'),
-    };
-    return webpackConfig;
-  },
 };
 export default config;

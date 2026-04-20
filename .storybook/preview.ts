@@ -123,13 +123,13 @@ const preview: Preview = {
         order: [
           'Getting Started', ['Welcome', 'About Varbase'],
           'Foundation', [
+            'Logos',
             'Colors',
+            'Typography',
+            'Spacing & Grids',
+            'Interaction Guideline',
             'Icons',
             'Images',
-            'Interaction Guideline',
-            'Logos',
-            'Spacing & Grids',
-            'Typography',
             '*'
           ],
           'Base', [
