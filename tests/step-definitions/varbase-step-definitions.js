@@ -31,6 +31,16 @@ Given(/^I am a logged in user with( the)*( username)* "([^"]*)?"( user)*$/, asyn
 });
 
 /**
+ * Simple wait for body to be present.
+ *
+ * Example: And wait
+ */
+When(/^wait$/, async function () {
+  await this.page.waitForSelector('body', { state: 'attached', timeout: 10000 });
+  await this.page.waitForLoadState('domcontentloaded');
+});
+
+/**
  * Assert a checkbox is checked by its label.
  *
  * Example: Then I should see the "Remember me" checkbox checked
