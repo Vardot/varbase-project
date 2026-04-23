@@ -31,10 +31,10 @@
   "dependencies": {
     "@ckeditor/ckeditor5-media-embed": "^47.6.0",
     "ace-builds": "~1",
+    "aos": "~2",
     "dropzone": "~5",
     "jquery.fancytree": "~2",
-    "swagger-ui-dist": "~3",
-    "aos": "^2.3.1"
+    "swagger-ui-dist": "~3"
   },
   "drupal-libraries": {
     "library-directory": "web/libraries",
