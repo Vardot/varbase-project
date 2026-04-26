@@ -4,6 +4,19 @@ Feature: Content Management - Content Lock
       So that multiple editors do not overwrite each other's changes.
 
   @javascript @check @local @development @staging @production
+  Scenario: Set up content lock test content as the webmaster
+    Given I am a logged in user with the "webmaster" user
+     When I go to "/node/add/blog"
+      And wait
+     Then I should see "Create Blog post"
+     When I fill in "Test Content Lock Blog Post" for "Title"
+      And I fill in "Test description for content lock blog post." for "#edit-field-description-0-value" by attr
+      And I scroll to the bottom
+      And I press the "Save" button
+      And wait
+     Then I should see "Test Content Lock Blog Post"
+
+  @javascript @check @local @development @staging @production
   Scenario: Check that the webmaster can access and verify Content Lock settings
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/content/content_lock"

@@ -4,6 +4,28 @@ Feature: Content Management - Access Unpublished
       So that editors and reviewers can preview content before it goes live.
 
   @javascript @check @local @development @staging @production
+  Scenario: Set up unpublished test content as the webmaster
+    Given I am a logged in user with the "webmaster" user
+     When I go to "/node/add/page"
+      And wait
+     Then I should see "Create Utility page"
+     When I fill in "Test Unpublished Page" for "Title"
+      And I fill in "Test description for unpublished page." for "#edit-field-description-0-value" by attr
+      And I scroll to the bottom
+      And I press the "Save" button
+      And wait
+     Then I should see "Test Unpublished Page"
+     When I go to "/node/add/blog"
+      And wait
+     Then I should see "Create Blog post"
+     When I fill in "Test Unpublished Blog Post" for "Title"
+      And I fill in "Test description for unpublished blog post." for "#edit-field-description-0-value" by attr
+      And I scroll to the bottom
+      And I press the "Save" button
+      And wait
+     Then I should see "Test Unpublished Blog Post"
+
+  @javascript @check @local @development @staging @production
   Scenario: Check that the webmaster can access the Access Unpublished configuration and token list
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/content/access_unpublished"
