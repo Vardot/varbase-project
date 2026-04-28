@@ -39,30 +39,35 @@ drush role:perm:add authenticated 'render storybook stories'
 
 SERVICES_SRC="${current_path}/.ddev/commands/web/assets/development.local.services.yml"
 SERVICES_DST="${current_path}/web/sites/default/development.local.services.yml"
-SETTINGS_DDEV="${current_path}/web/sites/default/settings.ddev.php"
+SETTINGS_PHP="${current_path}/web/sites/default/settings.php"
 SETTINGS_PLATFORMSH="${current_path}/web/sites/default/settings.platformsh.php"
 SERVICES_LINE="\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';"
+SERVICES_GUARD="// Enable the development local services for Storybook (CORS, Twig debug)."
 
 # Copy the development.local.services.yml file.
 cp "${SERVICES_SRC}" "${SERVICES_DST}"
 echo "Copied development.local.services.yml to ${SERVICES_DST}"
 
-# Enable it in settings.ddev.php (if exists and not empty).
-if [[ -f "${SETTINGS_DDEV}" && -s "${SETTINGS_DDEV}" ]]; then
-  if ! grep -qxF "${SERVICES_LINE}" "${SETTINGS_DDEV}"; then
-    echo "" >> "${SETTINGS_DDEV}"
-    echo "// Enable the development local services for Storybook." >> "${SETTINGS_DDEV}"
-    echo "" >> "${SETTINGS_DDEV}"
-    echo "${SERVICES_LINE}" >> "${SETTINGS_DDEV}"
-    echo "Enabled development.local.services.yml in settings.ddev.php"
+# Enable it in settings.php using a file_exists guard so it is safe and
+# survives ddev restart (settings.ddev.php is regenerated on every restart).
+if [[ -f "${SETTINGS_PHP}" && -s "${SETTINGS_PHP}" ]]; then
+  if ! grep -qF "development.local.services.yml" "${SETTINGS_PHP}"; then
+    cat >> "${SETTINGS_PHP}" <<'PHPBLOCK'
+
+// Enable the development local services for Storybook (CORS, Twig debug).
+if (file_exists($app_root . '/' . $site_path . '/development.local.services.yml')) {
+  $settings['container_yamls'][] = $app_root . '/' . $site_path . '/development.local.services.yml';
+}
+PHPBLOCK
+    echo "Enabled development.local.services.yml in settings.php"
   else
-    echo "development.local.services.yml already enabled in settings.ddev.php"
+    echo "development.local.services.yml already enabled in settings.php"
   fi
 fi
 
 # Enable it in settings.platformsh.php (if exists and not empty).
 if [[ -f "${SETTINGS_PLATFORMSH}" && -s "${SETTINGS_PLATFORMSH}" ]]; then
-  if ! grep -qxF "${SERVICES_LINE}" "${SETTINGS_PLATFORMSH}"; then
+  if ! grep -qF "development.local.services.yml" "${SETTINGS_PLATFORMSH}"; then
     echo "" >> "${SETTINGS_PLATFORMSH}"
     echo "// Enable the development local services for Storybook." >> "${SETTINGS_PLATFORMSH}"
     echo "" >> "${SETTINGS_PLATFORMSH}"
@@ -158,4 +163,5 @@ cat "${current_path}/.env.storybook"
 drush cache:rebuild
 echo "Drupal cache rebuilt."
 
+echo "Storybook initialized. Run 'ddev storybook:ddev' to start the dev server."
 echo "If hostname settings changed, run 'ddev restart' to apply updated routing."
