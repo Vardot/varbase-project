@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19f30a7ac56fdd438f866ab6f82d2f3f",
+    "content-hash": "770c89e9f2807fab5db1127cc3914816",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -24599,16 +24599,16 @@
         },
         {
             "name": "vardot/varbase",
-            "version": "11.0.x-dev",
+            "version": "11.0.0-alpha2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
-                "reference": "9743fcdc2cc3e9e19a9ac2ec6c7e6b1bab0b64da"
+                "reference": "bc8c8dd50f17a9ffb6237de8e1d94683cec6ee3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase/zipball/9743fcdc2cc3e9e19a9ac2ec6c7e6b1bab0b64da",
-                "reference": "9743fcdc2cc3e9e19a9ac2ec6c7e6b1bab0b64da",
+                "url": "https://api.github.com/repos/Vardot/varbase/zipball/bc8c8dd50f17a9ffb6237de8e1d94683cec6ee3d",
+                "reference": "bc8c8dd50f17a9ffb6237de8e1d94683cec6ee3d",
                 "shasum": ""
             },
             "require": {
@@ -24639,7 +24639,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-04-29T10:14:31+00:00"
+            "time": "2026-04-29T14:01:15+00:00"
         },
         {
             "name": "vardot/varbase-patches",

@@ -1,6 +1,6 @@
 {
     "name": "drupal/varbase_project",
-    "version": "11.0.x-dev",
+    "version": "11.0.0",
     "description": "Project template for Varbase distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",

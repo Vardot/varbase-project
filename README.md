@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/11.0.x.svg)](https://app.circleci.com/pipelines/github/Vardot/varbase) **Varbase 11.0.0-alpha1**
+[![Vardot](https://circleci.com/gh/Vardot/varbase-project/tree/11.0.x.svg)](https://app.circleci.com/pipelines/github/Vardot/varbase) **Varbase 11.0.0-alpha2**
 
 
 [![](https://www.drupal.org/files/project-images/varbase-medium-logo-color-with-padding.png)](https://www.drupal.org/project/varbase)
@@ -31,7 +31,7 @@ instructions.
 
 To install the most recent stable release of **Varbase `11.0.x`** run this command:
 ```
-composer create-project drupal/varbase_project:~11.0.0-alpha1 PROJECT_DIR_NAME --no-dev --no-interaction
+composer create-project drupal/varbase_project:~11.0.0 PROJECT_DIR_NAME --no-dev --no-interaction
 ```
 
 To install the dev version of **Varbase `11.0.x`** run this command:
