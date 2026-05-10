@@ -45,6 +45,7 @@
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,
+            "vardot/varbase-patches": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "drupal/core-recipe-unpack": true,
@@ -96,8 +97,9 @@
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "composer-patches": {
-            "ignore-dependency-patches": ["drupal/ai_context"]
+            "allowed-dependency-patches": ["vardot/varbase-patches"]
         },
+        "patches-ignore": { },
         "patches": {  }
     },
     "scripts": {
