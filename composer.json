@@ -96,7 +96,7 @@
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "composer-patches": {
-            "ignore-dependency-patches": ["drupal/*"]
+            "ignore-dependency-patches": ["drupal/ai_context"]
         },
         "patches": {  }
     },
