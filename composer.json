@@ -41,6 +41,7 @@
     "allow-plugins": {
       "composer/installers": true,
       "cweagans/composer-patches": true,
+      "vardot/varbase-patches": true,
       "oomphinc/composer-installers-extender": true,
       "drupal/core-composer-scaffold": true,
       "drupal/core-project-message": true,
@@ -134,6 +135,10 @@
     },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true,
+    "composer-patches": {
+      "allowed-dependency-patches": ["vardot/varbase-patches"]
+    },
+    "patches-ignore": { },
     "patches": {  }
   }
 }
