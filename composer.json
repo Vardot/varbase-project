@@ -23,10 +23,13 @@
     }
   },
   "require": {
+    "composer/composer": "^2.9",
+    "composer/installers": "^2.3",
+    "cweagans/composer-patches": "~2.0",
     "drupal/core-composer-scaffold": "~10",
     "drupal/core-project-message": "~10",
     "webflo/drupal-finder": "~1",
-    "cweagans/composer-patches": "~2", 
+    "oomphinc/composer-installers-extender": "~2", 
     "vardot/varbase": "9.1.x-dev",
     "vardot/varbase-patches": "9.2.x-dev",
     "drush/drush": "~13"
