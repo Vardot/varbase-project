@@ -1,4 +1,4 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase-project/tree/11.0.x.svg)](https://app.circleci.com/pipelines/github/Vardot/varbase) **Varbase 11.0.0-alpha2**
+[![pipeline status](https://git.drupalcode.org/project/varbase/badges/11.0.x/pipeline.svg)](https://git.drupalcode.org/project/varbase/-/pipelines) **Varbase 11.0.0-alpha2**
 
 
 [![](https://www.drupal.org/files/project-images/varbase-medium-logo-color-with-padding.png)](https://www.drupal.org/project/varbase)
@@ -18,7 +18,7 @@ in every project.
 * Speeds up development.
 * Offers standardized configuration and best-practices.
 * Comes with a lot of needed functionalities/modules for every-day Drupal site.
-* [Tested, tested, and tested.](https://app.circleci.com/pipelines/github/Vardot/varbase)
+* [Tested, tested, and tested.](https://git.drupalcode.org/project/varbase/-/pipelines)
 
 Starting a new project? Consider **Varbase** for **Drupal 11**.
 Installing **Varbase `11.0.x`** comes with several extra automated installation

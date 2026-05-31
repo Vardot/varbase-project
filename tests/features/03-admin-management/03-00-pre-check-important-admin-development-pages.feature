@@ -6,26 +6,26 @@ Feature: Pre-check important administrator and development pages
   Background:
     Given I am a logged in user with the "webmaster" user
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check the content page
      When I go to "/admin/content"
       And wait
      Then I should see "Content"
 
 
- @javascript @check @local @development @staging @production
+ @check @local @development @staging @production
   Scenario: Check Files admin page
      When I go to "/admin/content/files"
       And wait
      Then I should see "Files"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check Media Grid admin page
      When I go to "/admin/content/media"
       And wait
      Then I should see "Media"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check Media Table admin page
      When I go to "/admin/content/media"
       And wait
@@ -38,7 +38,7 @@ Feature: Pre-check important administrator and development pages
       And I should see "Updated"
       And I should see "Operations"
 
-@javascript @check @local @development @staging @production
+@check @local @development @staging @production
   Scenario: Check the structure page
      When I go to "/admin/structure"
       And wait
@@ -53,13 +53,13 @@ Feature: Pre-check important administrator and development pages
       And I should see "Views"
       And I should see "Webforms"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check the views page
      When I go to "/admin/structure/views"
       And wait
      Then I should see "Views"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check the Appearance page
      When I go to "/admin/appearance"
       And wait
@@ -67,7 +67,7 @@ Feature: Pre-check important administrator and development pages
       And I should see "Claro"
       And I should see "Gin"
 
- @javascript @check @local @development @staging @production
+ @check @local @development @staging @production
   Scenario: Check active type of media types
      When I go to "/media/add"
       And wait
@@ -77,7 +77,7 @@ Feature: Pre-check important administrator and development pages
       And I should see "Remote video"
       And I should see "Audio"
 
-  @javascript @check @local @development @staging
+  @check @local @development @staging
   Scenario: Check password policy constraints
      When I go to "/admin/config/security/password-policy/default_policy"
       And wait

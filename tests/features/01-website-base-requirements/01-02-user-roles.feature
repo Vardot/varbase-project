@@ -3,7 +3,7 @@ Feature: Website Base Requirements - User Roles - Simple Roles
       I want to be able to see the list of User Roles
       So that they must be (Content editor, Site Admin, Content Admin, Super Admin)
 
-  @javascript @local @development @staging @production
+  @local @development @staging @production
   Scenario: Check that all default list of roles are present
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/people/roles"

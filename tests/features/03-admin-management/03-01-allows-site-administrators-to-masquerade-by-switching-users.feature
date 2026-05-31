@@ -3,7 +3,7 @@ Feature: Support Requirements - Standard Support Navigation - Allow site super a
       I want to be able to switch users and surf the site as that user with no password required
       So that I can see what is the selected user is seeing in the site then switch back to my own user account at any time.
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check if the admin user UID 1 can masquerade as any user
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/people"
@@ -61,7 +61,7 @@ Feature: Support Requirements - Standard Support Navigation - Allow site super a
       And wait
      Then I should see "Masquerade as Super admin"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check if a super admin user can masquerade as any user
     Given I am a logged in user with the "Super admin" user
      When I go to "/admin/people"
@@ -113,7 +113,7 @@ Feature: Support Requirements - Standard Support Navigation - Allow site super a
       And wait
      Then I should see "Masquerade as webmaster"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check if a site admin user can NOT masquerade as any user
     Given I am a logged in user with the "Site admin" user
      When I go to "/user/1"
@@ -154,21 +154,21 @@ Feature: Support Requirements - Standard Support Navigation - Allow site super a
       And wait
      Then I should see "Masquerade as Content admin"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check if a content admin user can NOT masquerade as the super user ID 1 the admin
     Given I am a logged in user with the "Content admin" user
      When I go to "/user/1"
       And wait
      Then I should not see "Masquerade as webmaster"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check if an editor user can NOT masquerade as the super user ID 1 the admin
     Given I am a logged in user with the "Content editor" user
      When I go to "/user/1"
       And wait
      Then I should not see "Masquerade as webmaster"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check if an authenticated user can NOT masquerade as the super user ID 1 the admin
     Given I am a logged in user with the "Normal user" user
      When I go to "/user/1"

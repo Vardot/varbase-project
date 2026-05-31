@@ -72,6 +72,14 @@ if [ "$BOOTSTRAP" != "Successful" ]; then
   drush recipe /var/www/html/recipes/varbase_ai_base --yes
 
   echo ""
+  echo "  Applying recipe: varbase_ai_context"
+  drush recipe /var/www/html/recipes/varbase_ai_context --yes
+
+  echo ""
+  echo "  Applying recipe: varbase_ai_safety"
+  drush recipe /var/www/html/recipes/varbase_ai_safety --yes
+
+  echo ""
   echo "--- Rebuilding cache after recipes ---"
   drush cache:rebuild
 else
@@ -122,6 +130,31 @@ done
 echo ""
 echo "--- Disabling antibot module ---"
 drush pm:uninstall antibot --yes 2>/dev/null || echo "  Antibot module not found or already disabled"
+
+echo ""
+echo "--- Relaxing login flood limits for automated testing ---"
+# The webship-js suite logs in many times in a row; the default flood
+# limits (ip_limit 5 / user_limit 4) trip "Too many failed login attempts"
+# and cascade-fail every login-dependent scenario. Raise the ceilings and
+# clear any existing flood events so the suite starts from a clean slate.
+drush config:set user.flood ip_limit 1000000 --yes
+drush config:set user.flood user_limit 1000000 --yes
+drush sql:query "TRUNCATE flood;" 2>/dev/null || drush sql:query "DELETE FROM flood;" 2>/dev/null || echo "  Could not clear flood table"
+
+echo ""
+echo "--- Disabling Honeypot time trap for automated testing ---"
+# Honeypot's time_limit rejects fast form submissions ("Please wait N seconds
+# and try again"), which breaks scripted form posts. Zero it out; the hidden
+# honeypot field protection stays in place.
+drush config:set honeypot.settings time_limit 0 --yes
+
+echo ""
+echo "--- Disabling the AI chatbot floating widget for automated testing ---"
+# The ai_chatbot (Deepchat) block floats over every page and intercepts
+# clicks on buttons/links near it (login submit, row "Edit" actions, etc.),
+# causing 30-45s actionability timeouts. Disable the block; the AI modules
+# and their admin pages stay fully installed.
+drush php:eval '$b=\Drupal::entityTypeManager()->getStorage("block")->load("ai_chatbot"); if($b){$b->disable()->save();}'
 
 echo ""
 echo "--- Disabling CSS/JS aggregation ---"

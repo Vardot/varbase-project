@@ -22,9 +22,13 @@
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
     "lint:css": "npx stylelint --config=.stylelintrc.json",
+    "test": "node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:chromium": "BROWSER=chromium node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:firefox": "BROWSER=firefox node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:webkit": "BROWSER=webkit node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
+    "test:headed": "HEADLESS=false node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
+    "test:fast": "SLOW_MO=0 node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
+    "generate-reports": "node ./node_modules/webship-js/bin/generate-reports.js",
     "drupal-libraries-sync": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js",
     "postinstall": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
   },
@@ -93,7 +97,7 @@
     "typescript": "^6.0.2",
     "webpack": "~5",
     "webpack-cli": "~5",
-    "webship-js": "^2"
+    "webship-js": "^2.0.4"
   },
   "resolutions": {
     "webpack": "^5"

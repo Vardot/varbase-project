@@ -3,7 +3,7 @@ Feature: User Management - Standard User Management - Admins can disable users
       I want to be able Block user accounts
       So that they will be disabled and not be able to use the site.
 
-  @javascript @local @development @staging @production
+  @local @development @staging @production
   Scenario: Check if the Normal user user is not blocked and can login
     Given I am on "/user/login"
       And I wait 6s
@@ -15,7 +15,7 @@ Feature: User Management - Standard User Management - Admins can disable users
       And wait
      Then I should see "Normal user"
 
-#   @javascript @local @development @staging @production
+#   @local @development @staging @production
 #   Scenario: Check if the site admin can Administer users and disable a User account Normal user from accessing the site
 #     Given I am a logged in user with the "Site admin" user
 #      When I go to "/admin/people"
@@ -33,7 +33,7 @@ Feature: User Management - Standard User Management - Admins can disable users
 #       And wait
 #      Then I should see "The changes have been saved."
 
-#   @javascript @local @development @staging @production
+#   @local @development @staging @production
 #   Scenario: Check if the blocked user with user id of Test Blocked User ID can or can not login
 #     Commented out because the blocking scenario above is also commented out.
 #     Given I am on "/user/login"
@@ -46,7 +46,7 @@ Feature: User Management - Standard User Management - Admins can disable users
 #       And wait
 #      Then I should see "1 error has been found"
 
-  @javascript @local @development @staging @production
+  @local @development @staging @production
   Scenario: Check flood control default settings
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/people/flood-control"
@@ -57,7 +57,7 @@ Feature: User Management - Standard User Management - Admins can disable users
       And I should see "Username login limit"
       And I should see "Username login time window"
 
-  @javascript @local @development @staging @production
+  @local @development @staging @production
   Scenario: Check that the Site Admin have access to the flood unblock page
     Given I am a logged in user with the "Site admin" user
      When I go to "/admin/people/flood-unblock"

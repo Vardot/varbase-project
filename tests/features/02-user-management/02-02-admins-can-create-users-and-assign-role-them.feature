@@ -3,7 +3,7 @@ Feature: User Management - Standard User Management - Admins can create users an
       I want to be able to create new user accounts and assign roles to them
       So that they will be able to use the site.
 
-  @javascript @local @development @staging @production
+  @local @development @staging @production
   Scenario: Check if admins can see all parts and filters in the People administration page
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/people"
@@ -16,7 +16,7 @@ Feature: User Management - Standard User Management - Admins can create users an
       And I should see "Username"
       And I should see "Operations"
 
- @javascript @local @development @staging @production
+ @local @development @staging @production
   Scenario: Check if admins can access the create user page
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/people/create"

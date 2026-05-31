@@ -3,15 +3,15 @@ Feature: Frontend Pages - Homepage
       I want to verify the homepage loads correctly
       So that I can confirm the site is accessible and displays expected content.
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check that the homepage loads and displays expected content
     Given I am an anonymous user
      When I go to homepage
       And wait
-     Then I should see "Home"
+     Then I should see "Try Varbase for Free"
       And I should not see "Page not found"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check that the homepage has main navigation links
     Given I am an anonymous user
      When I go to homepage
@@ -20,37 +20,39 @@ Feature: Frontend Pages - Homepage
       And I should see "Blog"
       And I should see "Contact Us"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check that the homepage has the hero section
     Given I am an anonymous user
      When I go to homepage
       And wait
-     Then I should see "Varbase; better than ever"
+     Then I should see "Varbase, Better Than Ever"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check that the homepage has the features section
     Given I am an anonymous user
      When I go to homepage
       And wait
-     Then I should see "Build Your Site Using Varbase!"
-      And I should see "Flexible Content and Fields"
-      And I should see "Powerful Landing Page Builder"
+     Then I should see "Built To Empower Organizations"
+      And I should see "AI Integration"
+      And I should see "Mobile Responsiveness"
+      And I should see "Multilingual"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check that the homepage has the statistics section
     Given I am an anonymous user
      When I go to homepage
       And wait
-     Then I should see "Varbase in Numbers"
+     Then I should see "Varbase Usage"
+      And I should see "Overall Installs"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check that the homepage has the security section
     Given I am an anonymous user
      When I go to homepage
       And wait
      Then I should see "Security Standards"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check that the homepage has the latest updates section
     Given I am an anonymous user
      When I go to homepage
@@ -58,7 +60,7 @@ Feature: Frontend Pages - Homepage
      Then I should see "Latest Updates"
       And I should see "View All Articles"
 
-  @javascript @check @local @development @staging @production
+  @check @local @development @staging @production
   Scenario: Check that the homepage has footer with support links
     Given I am an anonymous user
      When I go to homepage

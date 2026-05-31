@@ -211,10 +211,12 @@ tests/
     03-admin-management/            # Admin pages, masquerade, media, JSON:API
     04-content-structure/           # Content types, Canvas pages, blog, homepage, contact us, Canvas editor, breadcrumbs
     05-content-management/          # Entityqueues, media library, content workflows, scheduling, cloning, linking, trash
+    06-recipes-and-ai/              # Varbase base recipes + AI recipes (editor assistant, image alt, taxonomy, context, safety)
+    07-quality/                     # Accessibility (axe-core) and performance budgets
   reports/                          # Generated test reports (cucumber_report.json, cucumber_report.html)
   selectors/                        # Custom CSS/XPath selector files
   step-definitions/
-    varbase-step-definitions.js     # Varbase-specific step definitions
+    varbase.steps.js                # Varbase-specific step definitions (login, perf budget, checkbox/element asserts)
     custom.js                       # Project-specific custom step definitions
 ```
 
@@ -239,3 +241,22 @@ Step definitions from [Webship-js](https://github.com/webship/webship-js) are lo
 | Super admin     | test.super_admin@vardot.com    | administrator   |
 
 All test user passwords: `dD.123123ddd`
+
+## Continuous Integration
+
+CI runs on GitLab CI.
+
+- **`.gitlab-ci.yml`** — full pipeline: `cspell` / `eslint` / `stylelint` validation
+  jobs plus the `automated-functional-testing` browser job that builds Varbase, installs it
+  with the `varbase` profile, applies the base + AI recipes, seeds the testing
+  users, relaxes the login flood / Honeypot time limits, and runs the whole
+  `tests/features/**` suite — mirroring `ddev init-full-automated-testing`.
+- **`.gitlab-ci-local.yml`** — slim pipeline for
+  [`gitlab-ci-local`](https://github.com/firecow/gitlab-ci-local): the linter
+  jobs that are reproducible without the drupalci templates + a MySQL service.
+
+```bash
+# Run the locally-reproducible jobs with gitlab-ci-local:
+npx gitlab-ci-local --file .gitlab-ci-local.yml            # all linter jobs
+npx gitlab-ci-local --file .gitlab-ci-local.yml cspell     # one job
+```
