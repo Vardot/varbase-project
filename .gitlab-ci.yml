@@ -7,9 +7,7 @@
 # users and drives the whole site through the browser with webship-js.
 #
 # PHP linting jobs scan:
-#   - web/profiles/contrib/varbase (Varbase profile)
 #   - recipes/varbase_* (all Varbase recipes including varbase_starter)
-#   - web/modules/custom, web/themes/custom (if present)
 ################################################################################
 
 include:
@@ -33,6 +31,14 @@ variables:
   _PHPSTAN_BASELINE: ".phpstan-baseline.php"
   # Paths to scan for PHP linting (Varbase recipes only - not contrib)
   _VARBASE_PHPCS_PATHS: "recipes/varbase_admin_base recipes/varbase_ai_base recipes/varbase_ai_context recipes/varbase_ai_editor_assistant recipes/varbase_ai_image_alt recipes/varbase_ai_safety recipes/varbase_ai_taxonomy_tagging recipes/varbase_api_base recipes/varbase_auth_base recipes/varbase_blog_base recipes/varbase_content_base recipes/varbase_demo_content recipes/varbase_dev_base recipes/varbase_editor_base recipes/varbase_i18n_base recipes/varbase_media_assets recipes/varbase_media_base recipes/varbase_page_base recipes/varbase_performance_base recipes/varbase_security_base recipes/varbase_seo_base recipes/varbase_starter recipes/varbase_users_base recipes/varbase_webform_base recipes/varbase_workflow_base"
+
+# Override the default composer job to ensure composer-patches ~2.0 is used
+composer:
+  variables:
+    COMPOSER_EXTRA: "--prefer-dist"
+  before_script:
+    - composer self-update
+    - composer global require cweagans/composer-patches:^2.0 --no-interaction || true
 
 # = Validate stage =
 
