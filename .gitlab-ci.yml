@@ -1,17 +1,19 @@
 ################################################################################
 # GitLab CI for the Varbase project template.
 #
-# Validation jobs (cspell / eslint / stylelint) plus a webship-js BDD
-# browser-test job that builds Varbase, installs it with the `varbase`
-# profile, applies the base recipes, seeds the per-role testing users and
-# drives the whole site through the browser with webship-js (>= 2.0.4).
+# Validation jobs (phpcs / phpstan / cspell / eslint / stylelint) plus a
+# webship-js BDD browser-test job that builds Varbase, installs it with the
+# `varbase` profile, applies the base recipes, seeds the per-role testing
+# users and drives the whole site through the browser with webship-js.
 #
-# This mirrors the Webshare pipeline (drupalci templates + a Node/Playwright
-# browser job). Where Webshare tests a single module, this template builds
-# and installs the full Varbase distribution before running the suite.
+# PHP linting jobs scan:
+#   - web/profiles/contrib/varbase (Varbase profile)
+#   - recipes/varbase_* (all Varbase recipes including varbase_starter)
+#   - web/modules/custom, web/themes/custom (if present)
 ################################################################################
 
 include:
+  - local: '.gitlab-ci/php.yml'
   - project: $_GITLAB_TEMPLATES_REPO
     ref: $_GITLAB_TEMPLATES_REF
     file:
@@ -22,11 +24,88 @@ include:
 variables:
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
+  COMPOSER_ALLOW_SUPERUSER: 1
   # Yarn 4 defaults to immutable installs and would refuse to create a
   # lockfile in CI; allow it for every job.
   YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
+  # PHPStan configuration
+  _PHPSTAN_NEON: "phpstan.neon"
+  _PHPSTAN_BASELINE: ".phpstan-baseline.php"
+  # Paths to scan for PHP linting (Varbase recipes only - not contrib)
+  _VARBASE_PHPCS_PATHS: "recipes/varbase_admin_base recipes/varbase_ai_base recipes/varbase_ai_context recipes/varbase_ai_editor_assistant recipes/varbase_ai_image_alt recipes/varbase_ai_safety recipes/varbase_ai_taxonomy_tagging recipes/varbase_api_base recipes/varbase_auth_base recipes/varbase_blog_base recipes/varbase_content_base recipes/varbase_demo_content recipes/varbase_dev_base recipes/varbase_editor_base recipes/varbase_i18n_base recipes/varbase_media_assets recipes/varbase_media_base recipes/varbase_page_base recipes/varbase_performance_base recipes/varbase_security_base recipes/varbase_seo_base recipes/varbase_starter recipes/varbase_users_base recipes/varbase_webform_base recipes/varbase_workflow_base"
 
 # = Validate stage =
+
+# PHP Coding Standards (PHPCS) - Drupal/DrupalPractice
+'🧹 PHP Coding standards (PHPCS)':
+  stage: validate
+  needs: []
+  variables:
+    _ARTIFACTS_DIR: "test-artifacts/phpcs"
+  before_script:
+    - composer require --dev drupal/coder micheh/phpcs-gitlab --no-interaction
+    - mkdir -p $_ARTIFACTS_DIR
+  script:
+    - echo "Scanning Varbase profile and recipes..."
+    - |
+      vendor/bin/phpcs --version
+      vendor/bin/phpcs --standard=Drupal,DrupalPractice \
+        --extensions=php,module,inc,install,test,profile,theme \
+        --ignore=*/node_modules/*,*/vendor/* \
+        --report=full --report-summary \
+        --report-\\Micheh\\PhpCodeSniffer\\Report\\Gitlab=$_ARTIFACTS_DIR/phpcs-quality-report.json \
+        $_VARBASE_PHPCS_PATHS || EXIT_CODE=$?
+      if [ -n "$EXIT_CODE" ]; then
+        echo "PHPCS found issues (exit code: $EXIT_CODE)"
+        exit $EXIT_CODE
+      fi
+  artifacts:
+    when: always
+    reports:
+      codequality: $_ARTIFACTS_DIR/phpcs-quality-report.json
+    paths:
+      - $_ARTIFACTS_DIR
+    expire_in: 1 week
+  allow_failure: false
+
+# PHPStan Static Analysis
+'🧹 PHP Static Analysis (PHPStan)':
+  stage: validate
+  needs: []
+  variables:
+    _ARTIFACTS_DIR: "test-artifacts/phpstan"
+  before_script:
+    - composer require --dev phpstan/phpstan mglaman/phpstan-drupal phpstan/extension-installer --no-interaction
+    - mkdir -p $_ARTIFACTS_DIR
+  script:
+    - echo "Running PHPStan on Varbase profile and recipes..."
+    - |
+      vendor/bin/phpstan --version
+      vendor/bin/phpstan analyse --configuration=$_PHPSTAN_NEON --memory-limit=2G \
+        --error-format=gitlab > $_ARTIFACTS_DIR/phpstan-quality-report.json || EXIT_CODE=$?
+      # When PHPStan fails, regenerate a baseline file
+      if [ -n "$EXIT_CODE" ]; then
+        echo "Generating a PHPStan baseline file (available as job artifact)."
+        cp $CI_PROJECT_DIR/.gitlab-ci/scripts/.empty-phpstan-baseline.php $_PHPSTAN_BASELINE
+        vendor/bin/phpstan analyse --configuration=$_PHPSTAN_NEON --memory-limit=2G --no-progress \
+          --generate-baseline=$_PHPSTAN_BASELINE || true
+        # Report statistics on the new baseline
+        php $CI_PROJECT_DIR/.gitlab-ci/scripts/phpstan-baseline-statistics.php $_PHPSTAN_BASELINE $_ARTIFACTS_DIR/phpstan-metrics.txt
+        # Copy the baseline to artifacts
+        cp $_PHPSTAN_BASELINE $_ARTIFACTS_DIR/phpstan-baseline.php
+        echo "PHPStan found issues (exit code: $EXIT_CODE)"
+        exit $EXIT_CODE
+      fi
+  artifacts:
+    when: always
+    reports:
+      codequality: $_ARTIFACTS_DIR/phpstan-quality-report.json
+      metrics: $_ARTIFACTS_DIR/phpstan-metrics.txt
+    paths:
+      - $_ARTIFACTS_DIR
+    expire_in: 1 week
+  allow_failure: false
+
 cspell:
   stage: validate
   image: node:20
@@ -61,101 +140,6 @@ stylelint:
     - yarn lint:css || true
   after_script:
     - echo '[]' > gl-codequality.json
-  allow_failure: false
-
-# PHP coding standards check (PHPCS with Drupal/DrupalPractice rulesets)
-# Scans: web/modules/custom, web/themes/custom, web/profiles/contrib/varbase, recipes/varbase_*
-phpcs:
-  stage: validate
-  image: php:8.4-cli
-  variables:
-    _ARTIFACTS_DIR: "test-artifacts/phpcs"
-  before_script:
-    - apt-get update && apt-get install -y git unzip
-    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-    - composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
-    - composer global require drupal/coder micheh/phpcs-gitlab --no-interaction --no-progress
-    - export PATH="$PATH:$HOME/.composer/vendor/bin"
-    - mkdir -p $_ARTIFACTS_DIR
-  script:
-    - |
-      DIRS=""
-      [ -d web/modules/custom ] && DIRS="$DIRS web/modules/custom"
-      [ -d web/themes/custom ] && DIRS="$DIRS web/themes/custom"
-      [ -d web/profiles/contrib/varbase ] && DIRS="$DIRS web/profiles/contrib/varbase"
-      # Add all varbase_* recipes
-      for recipe in recipes/varbase_*; do
-        [ -d "$recipe" ] && DIRS="$DIRS $recipe"
-      done
-      if [ -n "$DIRS" ]; then
-        echo "Scanning: $DIRS"
-        $HOME/.composer/vendor/bin/phpcs --standard=Drupal,DrupalPractice \
-          --extensions=php,module,inc,install,test,profile,theme \
-          --report=full --report-summary \
-          --report-\\Micheh\\PhpCodeSniffer\\Report\\Gitlab=$_ARTIFACTS_DIR/phpcs-quality-report.json \
-          $DIRS
-      else
-        echo "No directories found to check"
-        echo '[]' > $_ARTIFACTS_DIR/phpcs-quality-report.json
-      fi
-  artifacts:
-    when: always
-    reports:
-      codequality: $_ARTIFACTS_DIR/phpcs-quality-report.json
-    paths:
-      - $_ARTIFACTS_DIR
-    expire_in: 1 week
-  allow_failure: false
-
-# PHPStan static analysis
-# Scans: web/modules/custom, web/themes/custom, web/profiles/contrib/varbase, recipes/varbase_*
-phpstan:
-  stage: validate
-  image: php:8.4-cli
-  variables:
-    _ARTIFACTS_DIR: "test-artifacts/phpstan"
-  before_script:
-    - apt-get update && apt-get install -y git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
-    - docker-php-ext-configure gd --with-freetype --with-jpeg
-    - docker-php-ext-install zip gd
-    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-    - composer config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-interaction
-    - composer config allow-plugins.phpstan/extension-installer true --no-interaction
-    - mkdir -p $_ARTIFACTS_DIR
-  script:
-    - |
-      # Check if any scannable directories exist
-      DIRS=""
-      [ -d web/modules/custom ] && DIRS="$DIRS web/modules/custom"
-      [ -d web/themes/custom ] && DIRS="$DIRS web/themes/custom"
-      [ -d web/profiles/contrib/varbase ] && DIRS="$DIRS web/profiles/contrib/varbase"
-      for recipe in recipes/varbase_*; do
-        [ -d "$recipe" ] && DIRS="$DIRS $recipe"
-      done
-      if [ -z "$DIRS" ]; then
-        echo "No directories found to analyse"
-        echo '[]' > $_ARTIFACTS_DIR/phpstan-quality-report.json
-        exit 0
-      fi
-      echo "Will analyse: $DIRS"
-      # Install dependencies
-      composer install --no-interaction --no-progress || true
-      composer require --dev phpstan/phpstan mglaman/phpstan-drupal phpstan/extension-installer --no-interaction --no-progress
-      # Run PHPStan with GitLab-compatible output
-      vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=2G \
-        --error-format=gitlab > $_ARTIFACTS_DIR/phpstan-quality-report.json || EXIT_CODE=$?
-      # Also output human-readable format
-      vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=2G || true
-      if [ -n "$EXIT_CODE" ]; then
-        exit $EXIT_CODE
-      fi
-  artifacts:
-    when: always
-    reports:
-      codequality: $_ARTIFACTS_DIR/phpstan-quality-report.json
-    paths:
-      - $_ARTIFACTS_DIR
-    expire_in: 1 week
   allow_failure: false
 
 # = Reusable before_script fragments (via !reference) =

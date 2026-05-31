@@ -1,4 +1,5 @@
 # Configuration file for PHPStan static code checking, see https://phpstan.org .
+# Only scans Varbase recipes - not contrib modules/themes/profiles or core.
 includes:
   - phar://phpstan.phar/conf/bleedingEdge.neon
 
@@ -7,40 +8,18 @@ parameters:
   level: 1
 
   paths:
-    - web/modules/custom
-    - web/themes/custom
-    - web/profiles/contrib/varbase
-    - recipes/varbase_admin_base
-    - recipes/varbase_ai_base
-    - recipes/varbase_ai_context
-    - recipes/varbase_ai_editor_assistant
-    - recipes/varbase_ai_image_alt
-    - recipes/varbase_ai_safety
-    - recipes/varbase_ai_taxonomy_tagging
-    - recipes/varbase_api_base
-    - recipes/varbase_auth_base
-    - recipes/varbase_blog_base
-    - recipes/varbase_content_base
-    - recipes/varbase_demo_content
-    - recipes/varbase_dev_base
-    - recipes/varbase_editor_base
-    - recipes/varbase_i18n_base
-    - recipes/varbase_media_assets
-    - recipes/varbase_media_base
-    - recipes/varbase_page_base
-    - recipes/varbase_performance_base
-    - recipes/varbase_security_base
-    - recipes/varbase_seo_base
     - recipes/varbase_starter
-    - recipes/varbase_users_base
-    - recipes/varbase_webform_base
-    - recipes/varbase_workflow_base
 
   excludePaths:
     # Skip test fixtures.
     - ../*/node_modules/*
     - */tests/fixtures/*.php
     - */tests/fixtures/*.php.gz
+    # Skip contrib and core
+    - web/modules/contrib
+    - web/themes/contrib
+    - web/profiles/contrib
+    - web/core
 
   ignoreErrors:
     # new static() is a best practice in Drupal, so we cannot fix that.
