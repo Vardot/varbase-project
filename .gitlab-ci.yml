@@ -36,9 +36,14 @@ variables:
 composer:
   variables:
     COMPOSER_EXTRA: "--prefer-dist"
+    # Ensure fresh package resolution
+    COMPOSER_CACHE_DIR: "/tmp/composer-cache"
   before_script:
     - composer self-update
-    - composer global require cweagans/composer-patches:^2.0 --no-interaction || true
+    # Clear any cached packages
+    - composer clear-cache || true
+    # Pre-require composer-patches 2.x before the main install
+    - composer require cweagans/composer-patches:^2.0 --no-update --no-interaction || true
 
 # = Validate stage =
 
