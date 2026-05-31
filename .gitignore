@@ -82,3 +82,6 @@ CURSOR.md
 .warp/
 .playwright-mcp
 .easy_encryption
+
+.gitlab-ci-local/
+.gitlab-ci-test.yml
