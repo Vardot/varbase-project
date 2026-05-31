@@ -64,31 +64,56 @@ stylelint:
   allow_failure: false
 
 # PHP coding standards check (PHPCS with Drupal/DrupalPractice rulesets)
+# Scans: web/modules/custom, web/themes/custom, web/profiles/contrib/varbase, recipes/varbase_*
 phpcs:
   stage: validate
   image: php:8.4-cli
+  variables:
+    _ARTIFACTS_DIR: "test-artifacts/phpcs"
   before_script:
     - apt-get update && apt-get install -y git unzip
     - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
     - composer global config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
-    - composer global require drupal/coder --no-interaction --no-progress
+    - composer global require drupal/coder micheh/phpcs-gitlab --no-interaction --no-progress
     - export PATH="$PATH:$HOME/.composer/vendor/bin"
+    - mkdir -p $_ARTIFACTS_DIR
   script:
     - |
       DIRS=""
       [ -d web/modules/custom ] && DIRS="$DIRS web/modules/custom"
       [ -d web/themes/custom ] && DIRS="$DIRS web/themes/custom"
+      [ -d web/profiles/contrib/varbase ] && DIRS="$DIRS web/profiles/contrib/varbase"
+      # Add all varbase_* recipes
+      for recipe in recipes/varbase_*; do
+        [ -d "$recipe" ] && DIRS="$DIRS $recipe"
+      done
       if [ -n "$DIRS" ]; then
-        $HOME/.composer/vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme $DIRS
+        echo "Scanning: $DIRS"
+        $HOME/.composer/vendor/bin/phpcs --standard=Drupal,DrupalPractice \
+          --extensions=php,module,inc,install,test,profile,theme \
+          --report=full --report-summary \
+          --report-\\Micheh\\PhpCodeSniffer\\Report\\Gitlab=$_ARTIFACTS_DIR/phpcs-quality-report.json \
+          $DIRS
       else
-        echo "No custom modules or themes found to check"
+        echo "No directories found to check"
+        echo '[]' > $_ARTIFACTS_DIR/phpcs-quality-report.json
       fi
+  artifacts:
+    when: always
+    reports:
+      codequality: $_ARTIFACTS_DIR/phpcs-quality-report.json
+    paths:
+      - $_ARTIFACTS_DIR
+    expire_in: 1 week
   allow_failure: false
 
 # PHPStan static analysis
+# Scans: web/modules/custom, web/themes/custom, web/profiles/contrib/varbase, recipes/varbase_*
 phpstan:
   stage: validate
   image: php:8.4-cli
+  variables:
+    _ARTIFACTS_DIR: "test-artifacts/phpstan"
   before_script:
     - apt-get update && apt-get install -y git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
     - docker-php-ext-configure gd --with-freetype --with-jpeg
@@ -96,18 +121,41 @@ phpstan:
     - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
     - composer config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true --no-interaction
     - composer config allow-plugins.phpstan/extension-installer true --no-interaction
+    - mkdir -p $_ARTIFACTS_DIR
   script:
     - |
+      # Check if any scannable directories exist
       DIRS=""
       [ -d web/modules/custom ] && DIRS="$DIRS web/modules/custom"
       [ -d web/themes/custom ] && DIRS="$DIRS web/themes/custom"
+      [ -d web/profiles/contrib/varbase ] && DIRS="$DIRS web/profiles/contrib/varbase"
+      for recipe in recipes/varbase_*; do
+        [ -d "$recipe" ] && DIRS="$DIRS $recipe"
+      done
       if [ -z "$DIRS" ]; then
-        echo "No custom modules or themes found to analyse"
+        echo "No directories found to analyse"
+        echo '[]' > $_ARTIFACTS_DIR/phpstan-quality-report.json
         exit 0
       fi
+      echo "Will analyse: $DIRS"
+      # Install dependencies
       composer install --no-interaction --no-progress || true
       composer require --dev phpstan/phpstan mglaman/phpstan-drupal phpstan/extension-installer --no-interaction --no-progress
-      vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=2G
+      # Run PHPStan with GitLab-compatible output
+      vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=2G \
+        --error-format=gitlab > $_ARTIFACTS_DIR/phpstan-quality-report.json || EXIT_CODE=$?
+      # Also output human-readable format
+      vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=2G || true
+      if [ -n "$EXIT_CODE" ]; then
+        exit $EXIT_CODE
+      fi
+  artifacts:
+    when: always
+    reports:
+      codequality: $_ARTIFACTS_DIR/phpstan-quality-report.json
+    paths:
+      - $_ARTIFACTS_DIR
+    expire_in: 1 week
   allow_failure: false
 
 # = Reusable before_script fragments (via !reference) =
