@@ -60,6 +60,9 @@ composer:
   cache: *varbase_cache
   before_script:
     - composer self-update
+    # Cached Composer VCS clones are owned by a different uid across runs;
+    # trust them so git does not reject with "detected dubious ownership".
+    - git config --global --add safe.directory '*'
   script:
     - composer validate --no-check-all --no-check-publish
     # --prefer-dist pulls dist archives instead of cloning full .git histories.
