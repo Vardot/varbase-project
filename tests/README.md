@@ -210,13 +210,22 @@ Then enable the Diffy step definitions in `cucumber.js`:
 ```
 tests/
   features/
-    01-website-base-requirements/   # Registration, roles, input formats, languages, accessibility
-    02-user-management/             # Login, passwords, role assignment, login redirect
-    03-admin-management/            # Admin pages, masquerade, media, JSON:API
-    04-content-structure/           # Content types, Canvas pages, blog, homepage, contact us, Canvas editor, breadcrumbs
-    05-content-management/          # Entityqueues, media library, content workflows, scheduling, cloning, linking, trash
-    06-recipes-and-ai/              # Varbase base recipes + AI recipes (editor assistant, image alt, taxonomy, context, safety)
-    07-quality/                     # Accessibility (axe-core) and performance budgets
+    # Each folder is one parallel CI suite (parallel: matrix over SUITE) and has
+    # its own README.md describing its feature files.
+    01-website-base-requirements/   # Welcome tour, registration, roles, input formats, languages
+    02-user-management/             # Login, passwords, persistent login, role assign, login redirect, user protect
+    03-admin-pages/                 # Admin/dev pages, media list, JSON:API, audit trail, bulk upload
+    04-admin-users/                 # Masquerade, disable users, admin keyboard navigation
+    05-content-pages/               # Utility pages, breadcrumbs
+    06-content-blog/                # Blog permissions, blog page
+    07-content-contact/             # Contact us page
+    08-content-homepage/            # Homepage
+    09-drupal-canvas/               # Canvas page permissions, Canvas editor
+    10-content-permissions/         # Entityqueue, media library, easy linking
+    11-content-workflow/            # Workflows, scheduling, cloning, trash
+    12-content-access-and-lock/     # Access unpublished, content lock
+    13-recipes-and-ai/              # Varbase base recipes + AI recipes (editor assistant, image alt, taxonomy, context, safety)
+    14-quality/                     # Editorial accessibility checker, accessibility (axe-core), performance budgets
   reports/                          # Generated test reports (cucumber_report.json, cucumber_report.html)
   selectors/                        # Custom CSS/XPath selector files
   step-definitions/

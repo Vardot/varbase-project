@@ -1,0 +1,21 @@
+# 03-admin-pages — Admin Pages
+
+Automated functional acceptance test suite (one parallel CI job: `SUITE=03-admin-pages`).
+
+Run locally:
+
+```bash
+FEATURES="tests/features/03-admin-pages/**/*.feature" ddev yarn test:chromium
+```
+
+## Features
+
+| Feature file | Description | Scenarios |
+| --- | --- | --- |
+| `03-01-pre-check-important-admin-development-pages.feature` | Pre-check important administrator and development pages | 9 |
+| `03-02-image-media-and-their-usage-list-page-for-admins.feature` | File & Media Management - Assets Management - Image media and their usage list page for site admins | 2 |
+| `03-03-json-api-admin-checks-for-the-interface-and-services.feature` | Check JSON API admin interface and services and Varbase API settings | 6 |
+| `03-04-access-admin-audit-trail-permissions.feature` | User Management - Admin audit trails access | 0 |
+| `03-05-access-media-bulk-upload-permissions.feature` | Admin management - Media bulk upload permissions | 0 |
+
+**Total: 17 scenarios across 5 feature files.**

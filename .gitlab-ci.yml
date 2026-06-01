@@ -270,11 +270,18 @@ stylelint:
       - SUITE:
           - "01-website-base-requirements"
           - "02-user-management"
-          - "03-admin-management"
-          - "04-content-structure"
-          - "05-content-management"
-          - "06-recipes-and-ai"
-          - "07-quality"
+          - "03-admin-pages"
+          - "04-admin-users"
+          - "05-content-pages"
+          - "06-content-blog"
+          - "07-content-contact"
+          - "08-content-homepage"
+          - "09-drupal-canvas"
+          - "10-content-permissions"
+          - "11-content-workflow"
+          - "12-content-access-and-lock"
+          - "13-recipes-and-ai"
+          - "14-quality"
   # Override the parent's services - we only need the database. Playwright
   # bundles its own Chromium, so Selenium and chromedriver are not needed.
   services:
@@ -337,7 +344,7 @@ stylelint:
     # Merge every folder's cucumber JSON array into one combined report.
     - jq -s 'add' tests/reports/cucumber_report_*.json > tests/reports/cucumber_report.json
     # Human-readable report name: varbase--{branch|tag}--automated-functional-testing-report--{date}--{time}
-    - export REPORT="varbase--${CI_COMMIT_REF_SLUG}--automated-functional-testing-report--$(date +%Y-%m-%d)--$(date +%H%M)"
+    - export REPORT="varbase--${CI_COMMIT_REF_SLUG}--automated-functional-testing-report--$(date +%Y-%m-%d)--$(date +%H-%M)"
     - node ./node_modules/webship-js/bin/generate-reports.js
         --json tests/reports/cucumber_report.json
         --out  "tests/reports/${REPORT}.html"
