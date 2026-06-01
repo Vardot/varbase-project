@@ -38,7 +38,12 @@ composer:
     - composer clear-cache
   script:
     - composer validate --no-check-all --no-check-publish
-    - composer update --with-all-dependencies --no-interaction --no-progress --optimize-autoloader
+    # --prefer-dist pulls dist archives instead of cloning full .git histories.
+    # Dev packages (drupal/varbase, drupal/webshare, …) cloned as source carry
+    # large .git histories that blow the build artifact past the GitLab
+    # artifact-size limit (413 Request Entity Too Large). dist keeps the
+    # artifact small without changing the installed code.
+    - composer update --with-all-dependencies --no-interaction --no-progress --optimize-autoloader --prefer-dist
 
 # = Validate stage =
 
