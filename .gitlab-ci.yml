@@ -44,6 +44,15 @@ composer:
     # artifact-size limit (413 Request Entity Too Large). dist keeps the
     # artifact small without changing the installed code.
     - composer update --with-all-dependencies --no-interaction --no-progress --optimize-autoloader --prefer-dist
+  # A full Varbase build (web/ + vendor/) exceeds the GitLab artifact-size
+  # limit (413 Request Entity Too Large), so do NOT pass the build downstream.
+  # Publish only the resolved lock file; jobs that need the codebase run their
+  # own `composer install --prefer-dist` from this lock (see the functional job).
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - composer.json
+      - composer.lock
 
 # = Validate stage =
 
@@ -142,6 +151,9 @@ automated-functional-testing:
     reports:
       junit: tests/reports/junit.xml
   before_script:
+    # Build the codebase in-job from the composer artifact's lock file (the
+    # composer job does not pass the full build - it is too large to artifact).
+    - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist
     - !reference [.fragments, web_db]
     # = Install Varbase =
     - $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT site:install varbase
