@@ -13,7 +13,7 @@ Feature: Quality - Performance budgets
     Given I am an anonymous user
      When I go to "/user/login"
       And wait
-     Then the page should load in less than 10 seconds
+     Then the page should load in less than 3 seconds
 
   @perf @local @development @staging @production
   Scenario: The homepage loads within budget

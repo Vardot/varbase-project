@@ -330,15 +330,19 @@ stylelint:
   before_script:
     - apt-get update -y && apt-get install -y jq
     - npm install --no-save webship-js
-    - ./node_modules/.bin/playwright install chromium
+    # --with-deps installs Chromium's system libraries (libnspr4 etc.) which the
+    # plain node image lacks - needed for the PDF report's headless Chromium.
+    - ./node_modules/.bin/playwright install --with-deps chromium
   script:
     # Merge every folder's cucumber JSON array into one combined report.
     - jq -s 'add' tests/reports/cucumber_report_*.json > tests/reports/cucumber_report.json
+    # Human-readable report name: varbase--{branch|tag}--automated-functional-testing-report--{date}--{time}
+    - export REPORT="varbase--${CI_COMMIT_REF_SLUG}--automated-functional-testing-report--$(date +%Y-%m-%d)--$(date +%H%M)"
     - node ./node_modules/webship-js/bin/generate-reports.js
         --json tests/reports/cucumber_report.json
-        --out  tests/reports/cucumber_report.html
+        --out  "tests/reports/${REPORT}.html"
         --format all
-        --pdf-out tests/reports/cucumber_report.pdf
+        --pdf-out "tests/reports/${REPORT}.pdf"
   artifacts:
     when: always
     paths:
