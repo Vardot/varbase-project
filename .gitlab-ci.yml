@@ -1,13 +1,12 @@
 ################################################################################
 # GitLab CI for the Varbase project template.
 #
-# Self-contained validation jobs (cspell / eslint / stylelint / PHPCS / PHPStan)
-# plus an automated-functional-testing browser job that builds Varbase, installs
-# it with the `varbase` profile, applies the base + AI recipes, seeds the
-# per-role testing users and drives the whole site through the browser.
-#
-# drupalci's own composer-artifact jobs are disabled below: a full Varbase build
-# is too large to publish as an artifact (413), so each job builds in-job.
+# Keeps drupalci's PHPCS / PHPStan / composer-lint validation jobs, adds
+# cspell / eslint / stylelint, and a pre-test -> test -> post-test browser flow
+# that builds Varbase, installs it with the `varbase` profile, applies the base
+# + AI recipes, seeds the per-role testing users and drives the whole site
+# through the browser. The heavy drupalci test jobs (phpunit / nightwatch /
+# upgrade status / deprecation) are disabled below.
 ################################################################################
 
 include:
@@ -36,10 +35,6 @@ variables:
   # Yarn 4 defaults to immutable installs and would refuse to create a
   # lockfile in CI; allow it for every job.
   YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
-  # Self-contained PHPCS / PHPStan jobs (scan the project's own recipe code).
-  _VARBASE_PHPCS_PATHS: "recipes/varbase_starter"
-  _PHPSTAN_NEON: "phpstan.neon"
-  _PHPSTAN_BASELINE: ".phpstan-baseline.php"
   # Cache locations (Composer packages, Yarn packages, Playwright browsers) so
   # the build / install / test jobs reuse downloads instead of re-fetching.
   COMPOSER_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/composer"
@@ -83,23 +78,8 @@ composer:
       - composer.json
       - composer.lock
 
-# = Disable drupalci jobs that depend on the full composer build artifact =
-#
-# A full Varbase build is too large to publish as an artifact (413), so the
-# composer job only passes composer.lock and the browser job rebuilds in-job.
-# drupalci's PHP jobs (phplint / phpcs / phpstan / phpunit / nightwatch) instead
-# expect the whole vendor/ + the composer status marker in the artifact, so they
-# fail here. Turn them off; the self-contained jobs below cover validation.
+# = Disable the heavy drupalci test jobs we do not run here =
 # (`script` is overridden too so these stay valid even if a name is absent.)
-composer-lint:
-  rules: [{ when: never }]
-  script: ["true"]
-phpcs:
-  rules: [{ when: never }]
-  script: ["true"]
-phpstan:
-  rules: [{ when: never }]
-  script: ["true"]
 phpunit:
   rules: [{ when: never }]
   script: ["true"]
@@ -153,85 +133,6 @@ stylelint:
     - echo '[]' > gl-codequality.json
   allow_failure: false
 
-# = Self-contained PHP analysis =
-#
-# These run their own `composer require --dev` (a full in-job install, needs: [])
-# so they do NOT depend on the composer build artifact - which a full Varbase
-# distribution is too large to publish (413). They replace drupalci's phpcs /
-# phpstan jobs (disabled above), scanning only the project's own recipe code.
-
-# PHP Coding Standards (PHPCS) - Drupal/DrupalPractice
-'🧹 PHP Coding standards (PHPCS)':
-  stage: validate
-  needs: []
-  variables:
-    _ARTIFACTS_DIR: "test-artifacts/phpcs"
-  before_script:
-    - composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
-    - composer require --dev drupal/coder micheh/phpcs-gitlab --no-interaction
-    - mkdir -p $_ARTIFACTS_DIR
-  script:
-    - echo "Scanning Varbase profile and recipes..."
-    - |
-      vendor/bin/phpcs --version
-      vendor/bin/phpcs --standard=Drupal,DrupalPractice \
-        --extensions=php,module,inc,install,test,profile,theme \
-        --ignore=*/node_modules/*,*/vendor/* \
-        --report=full --report-summary \
-        --report-\\Micheh\\PhpCodeSniffer\\Report\\Gitlab=$_ARTIFACTS_DIR/phpcs-quality-report.json \
-        $_VARBASE_PHPCS_PATHS || EXIT_CODE=$?
-      if [ -n "$EXIT_CODE" ]; then
-        echo "PHPCS found issues (exit code: $EXIT_CODE)"
-        exit $EXIT_CODE
-      fi
-  artifacts:
-    when: always
-    reports:
-      codequality: $_ARTIFACTS_DIR/phpcs-quality-report.json
-    paths:
-      - $_ARTIFACTS_DIR
-    expire_in: 1 week
-  allow_failure: false
-
-# PHPStan Static Analysis
-'🧹 PHP Static Analysis (PHPStan)':
-  stage: validate
-  needs: []
-  variables:
-    _ARTIFACTS_DIR: "test-artifacts/phpstan"
-  before_script:
-    - composer config --no-plugins allow-plugins.phpstan/extension-installer true
-    - composer require --dev phpstan/phpstan mglaman/phpstan-drupal phpstan/extension-installer --no-interaction
-    - mkdir -p $_ARTIFACTS_DIR
-  script:
-    - echo "Running PHPStan on Varbase profile and recipes..."
-    - |
-      vendor/bin/phpstan --version
-      vendor/bin/phpstan analyse --configuration=$_PHPSTAN_NEON --memory-limit=2G \
-        --error-format=gitlab > $_ARTIFACTS_DIR/phpstan-quality-report.json || EXIT_CODE=$?
-      # When PHPStan fails, regenerate a baseline file
-      if [ -n "$EXIT_CODE" ]; then
-        echo "Generating a PHPStan baseline file (available as job artifact)."
-        cp $CI_PROJECT_DIR/.gitlab-ci/scripts/.empty-phpstan-baseline.php $_PHPSTAN_BASELINE
-        vendor/bin/phpstan analyse --configuration=$_PHPSTAN_NEON --memory-limit=2G --no-progress \
-          --generate-baseline=$_PHPSTAN_BASELINE || true
-        # Report statistics on the new baseline
-        php $CI_PROJECT_DIR/.gitlab-ci/scripts/phpstan-baseline-statistics.php $_PHPSTAN_BASELINE $_ARTIFACTS_DIR/phpstan-metrics.txt
-        # Copy the baseline to artifacts
-        cp $_PHPSTAN_BASELINE $_ARTIFACTS_DIR/phpstan-baseline.php
-        echo "PHPStan found issues (exit code: $EXIT_CODE)"
-        exit $EXIT_CODE
-      fi
-  artifacts:
-    when: always
-    reports:
-      codequality: $_ARTIFACTS_DIR/phpstan-quality-report.json
-      metrics: $_ARTIFACTS_DIR/phpstan-metrics.txt
-    paths:
-      - $_ARTIFACTS_DIR
-    expire_in: 1 week
-  allow_failure: false
-
 # = Reusable before_script fragments (via !reference) =
 .fragments:
   # Build the codebase in-job from the composer artifact's lock file (the
@@ -243,6 +144,10 @@ stylelint:
     # The cached Composer VCS clones are owned by a different uid across jobs;
     # tell git to trust them (otherwise "detected dubious ownership").
     - git config --global --add safe.directory '*'
+    # A restored site dir is read-only (drush site:install sets sites/default to
+    # 555 / settings.php to 444); make it writable so composer scaffold + the
+    # next install steps can write there.
+    - chmod -R u+w $CI_PROJECT_DIR/$_WEB_ROOT/sites 2>/dev/null || true
     - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist
   web_db: &web_db
     - mkdir -pv $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/files
@@ -326,81 +231,57 @@ stylelint:
         --site-name="Varbase Test" --locale=en -y
     - !reference [.fragments, dump_db]
 
-# pre-test steps 2..N: one recipe per job, chained via `needs`.
-"🧩 Recipe: Users base":
+# pre-test steps 2..N: one TOP-LEVEL recipe per job, chained via `needs`.
+# Sub-recipes that another varbase_* recipe already applies (varbase_users_base
+# via varbase_starter; ai_editor_assistant / ai_image_alt / ai_taxonomy_tagging
+# via varbase_ai_base; etc.) get no job - they are applied transitively. The job
+# name is the recipe's human-readable `name:`.
+"🧩 Varbase Development Base":
   extends: .site-step
   needs: ["📦 Install Varbase"]
-  script:
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_users_base -y || true
-    - !reference [.fragments, dump_db]
-
-"🧩 Recipe: Dev base":
-  extends: .site-step
-  needs: ["🧩 Recipe: Users base"]
   script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_dev_base -y || true
     - !reference [.fragments, dump_db]
 
-"🧩 Recipe: i18n base":
+"🧩 Varbase Internationalization Base":
   extends: .site-step
-  needs: ["🧩 Recipe: Dev base"]
+  needs: ["🧩 Varbase Development Base"]
   script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_i18n_base -y || true
     - !reference [.fragments, dump_db]
 
-"🧩 Recipe: API base":
+"🧩 Varbase API Base":
   extends: .site-step
-  needs: ["🧩 Recipe: i18n base"]
+  needs: ["🧩 Varbase Internationalization Base"]
   script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_api_base -y || true
     - !reference [.fragments, dump_db]
 
-"🧩 Recipe: Auth base":
+"🧩 Varbase Auth Base":
   extends: .site-step
-  needs: ["🧩 Recipe: API base"]
+  needs: ["🧩 Varbase API Base"]
   script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_auth_base -y || true
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable social_auth_facebook social_auth_linkedin -y || true
     - !reference [.fragments, dump_db]
 
-"🧩 Recipe: AI base":
+"🧩 Varbase AI Base":
   extends: .site-step
-  needs: ["🧩 Recipe: Auth base"]
+  needs: ["🧩 Varbase Auth Base"]
   script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_base -y || true
     - !reference [.fragments, dump_db]
 
-"🧩 Recipe: AI editor assistant":
+"🧩 Varbase AI Context":
   extends: .site-step
-  needs: ["🧩 Recipe: AI base"]
-  script:
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_editor_assistant -y || true
-    - !reference [.fragments, dump_db]
-
-"🧩 Recipe: AI image alt":
-  extends: .site-step
-  needs: ["🧩 Recipe: AI editor assistant"]
-  script:
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_image_alt -y || true
-    - !reference [.fragments, dump_db]
-
-"🧩 Recipe: AI taxonomy tagging":
-  extends: .site-step
-  needs: ["🧩 Recipe: AI image alt"]
-  script:
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_taxonomy_tagging -y || true
-    - !reference [.fragments, dump_db]
-
-"🧩 Recipe: AI context":
-  extends: .site-step
-  needs: ["🧩 Recipe: AI taxonomy tagging"]
+  needs: ["🧩 Varbase AI Base"]
   script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_context -y || true
     - !reference [.fragments, dump_db]
 
-"🧩 Recipe: AI safety":
+"🧩 Varbase AI Safety":
   extends: .site-step
-  needs: ["🧩 Recipe: AI context"]
+  needs: ["🧩 Varbase AI Context"]
   script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_safety -y || true
     - !reference [.fragments, dump_db]
@@ -408,13 +289,13 @@ stylelint:
 # pre-test step: seed the per-role testing users (registry mirrors cucumber.js).
 "👥 Add testing users":
   extends: .site-step
-  needs: ["🧩 Recipe: AI safety"]
+  needs: ["🧩 Varbase AI Safety"]
   script:
     - cd $CI_PROJECT_DIR/recipes/varbase_starter/scripts && bash add-testing-users.sh && cd $CI_PROJECT_DIR
     - !reference [.fragments, dump_db]
 
 # pre-test final step: deterministic-testing tweaks, then dump for the test job.
-"⚙️ Prepare site":
+"⚙️ Prepare Varbase site":
   extends: .site-step
   needs: ["👥 Add testing users"]
   script:
@@ -440,7 +321,7 @@ stylelint:
 "🧪 Automated functional testing":
   extends: .testing-job-base
   stage: test
-  needs: [composer, "⚙️ Prepare site"]
+  needs: [composer, "⚙️ Prepare Varbase site"]
   timeout: 2h
   cache: *varbase_cache
   # Override the parent's services - we only need the database. Playwright
