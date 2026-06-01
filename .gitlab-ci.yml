@@ -99,7 +99,10 @@ stylelint:
     # Back up cucumber.js - webship-js's postinstall can clobber it under yarn 4.
     - cp cucumber.js .cucumber.js.bak
     - corepack enable
-    - yarn install --mode=skip-build
+    # Full install runs the package.json postinstall (drupal-libraries-sync),
+    # syncing the front-end libraries into web/libraries - the recipes are
+    # present here from the composer artifact (CircleCI parity).
+    - yarn install
     - cp .cucumber.js.bak cucumber.js && rm .cucumber.js.bak
     - ./node_modules/.bin/playwright install --with-deps chromium
 
