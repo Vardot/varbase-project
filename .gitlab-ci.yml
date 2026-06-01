@@ -55,9 +55,11 @@ cspell:
 eslint:
   stage: validate
   image: node:20
+  # --mode=skip-build skips the package.json postinstall (drupal-libraries-sync,
+  # which needs a composer build); linting only needs the JS dev dependencies.
   before_script:
     - corepack enable
-    - yarn install
+    - yarn install --mode=skip-build
   script:
     - node --version
     - yarn lint:js || true
@@ -71,7 +73,7 @@ stylelint:
   image: node:20
   before_script:
     - corepack enable
-    - yarn install
+    - yarn install --mode=skip-build
   script:
     - yarn lint:css || true
   after_script:
@@ -97,7 +99,7 @@ stylelint:
     # Back up cucumber.js - webship-js's postinstall can clobber it under yarn 4.
     - cp cucumber.js .cucumber.js.bak
     - corepack enable
-    - yarn install
+    - yarn install --mode=skip-build
     - cp .cucumber.js.bak cucumber.js && rm .cucumber.js.bak
     - ./node_modules/.bin/playwright install --with-deps chromium
 

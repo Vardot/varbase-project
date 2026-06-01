@@ -22,6 +22,11 @@ stages:
 variables:
   YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
 
+# The lint jobs install with `yarn install --mode=skip-build`: the package.json
+# `postinstall` runs recipes/varbase_starter/scripts/drupal-libraries-sync.js,
+# which only exists after a composer build. The lint jobs have no composer
+# build, and eslint/stylelint do not need the Drupal libraries sync.
+
 cspell:
   stage: validate
   image: node:20
@@ -36,7 +41,7 @@ eslint:
   image: node:20
   before_script:
     - corepack enable
-    - yarn install
+    - yarn install --mode=skip-build
   script:
     - node --version
     - yarn lint:js || true
@@ -48,7 +53,7 @@ stylelint:
   image: node:20
   before_script:
     - corepack enable
-    - yarn install
+    - yarn install --mode=skip-build
   script:
     - yarn lint:css || true
   allow_failure: false
