@@ -252,18 +252,29 @@ stylelint:
     - !reference [.fragments, dump_db]
   allow_failure: false
 
-# = webship-js BDD - Varbase profile =
+# = webship-js BDD - one parallel job per feature folder =
 #
-# Restores the installed site from the varbase-install artifacts (DB dump +
-# settings.php + files), installs Node + Playwright, and drives the whole
-# `tests/features/**` suite through the browser. cucumber.js auto-discovers the
-# LAUNCH_URL; in CI we pin it to the local Apache.
-"🧪 Automated functional testing":
+# Each job restores the installed site from the 📦 Install Varbase artifacts and
+# runs ONE feature folder (FEATURES) writing its own JSON (CUCUMBER_JSON). The
+# `parallel: matrix` fans the folders out into independent, parallel jobs;
+# within a folder cucumber runs sequentially so setup -> consume scenarios keep
+# their order. 📊 Create reports merges every folder's JSON.
+"🧪 Automated Functional Testing":
   extends: .testing-job-base
   stage: test
   needs: [composer, "📦 Install Varbase"]
   timeout: 2h
   cache: *varbase_cache
+  parallel:
+    matrix:
+      - SUITE:
+          - "01-website-base-requirements"
+          - "02-user-management"
+          - "03-admin-management"
+          - "04-content-structure"
+          - "05-content-management"
+          - "06-recipes-and-ai"
+          - "07-quality"
   # Override the parent's services - we only need the database. Playwright
   # bundles its own Chromium, so Selenium and chromedriver are not needed.
   services:
@@ -276,6 +287,8 @@ stylelint:
     LAUNCH_URL: "http://localhost"
     FORCE_COLOR: "1"
     WEBSHIP_REPORT_DISABLE: "1"
+    FEATURES: "tests/features/$SUITE/**/*.feature"
+    CUCUMBER_JSON: "cucumber_report_$SUITE"
   artifacts:
     when: always
     paths:
@@ -283,8 +296,6 @@ stylelint:
       - tests/screenshots/
       - tests/videos/
     expire_in: 7 days
-    reports:
-      junit: tests/reports/junit.xml
   before_script:
     - !reference [.fragments, prepare_code]
     - !reference [.fragments, web_db]
@@ -294,33 +305,35 @@ stylelint:
     # = Node.js 20 + Playwright Chromium =
     - !reference [.fragments, node_playwright]
   script:
-    # Run the suite in parallel workers. Report generation is the separate
-    # `create-reports` job; disable webship-js's auto HTML hook so it does not
-    # build a report from process.on('exit') - the JSON it leaves behind is the
-    # input for create-reports.
-    - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip" --parallel 4
+    # Run only this folder (FEATURES) -> its own JSON (CUCUMBER_JSON). Report
+    # generation is the separate create-reports job; disable webship-js's auto
+    # HTML hook so it does not build a report from process.on('exit').
+    - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
   allow_failure: false
 
 # = Create reports - own job =
 #
-# Turns the cucumber JSON (+ screenshots / videos) from the test job into the
-# HTML and PDF reports. Runs on a plain node image with just webship-js + a
-# Chromium for the PDF - no Drupal build needed.
+# Merges the per-folder cucumber JSONs from every Automated Functional Testing
+# matrix job (plus their screenshots / videos) into one HTML + PDF report. Runs
+# on a plain node image with webship-js + a Chromium for the PDF - no Drupal.
 "📊 Create reports":
   stage: post-test
   image: node:20
-  # Always build the reports, even when the test job failed - so failures are
-  # captured in the HTML/PDF. `dependencies` (not `needs`) pulls the test
-  # artifacts (JSON + screenshots + videos) without gating on its success.
+  # Always build the reports, even when a test job failed - so failures are
+  # captured. `dependencies` (not `needs`) pulls the artifacts from ALL matrix
+  # jobs of the test stage without gating on their success.
   rules:
     - when: always
   dependencies:
-    - "🧪 Automated functional testing"
+    - "🧪 Automated Functional Testing"
   cache: *varbase_cache
   before_script:
+    - apt-get update -y && apt-get install -y jq
     - npm install --no-save webship-js
     - ./node_modules/.bin/playwright install chromium
   script:
+    # Merge every folder's cucumber JSON array into one combined report.
+    - jq -s 'add' tests/reports/cucumber_report_*.json > tests/reports/cucumber_report.json
     - node ./node_modules/webship-js/bin/generate-reports.js
         --json tests/reports/cucumber_report.json
         --out  tests/reports/cucumber_report.html

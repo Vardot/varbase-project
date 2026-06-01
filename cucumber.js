@@ -28,10 +28,13 @@ module.exports = {
       // 'node_modules/webship-js/tests/step-definitions-diffy/**/*.js', // Diffy step definitions (optional).
       'tests/step-definitions/**/*.js',                                  // Your custom step definitions.
     ],
-    paths: ['tests/features/**/*.feature'],
+    // FEATURES lets CI run one feature folder per job (e.g.
+    // FEATURES="tests/features/01-website-base-requirements/**/*.feature");
+    // unset locally runs the whole suite.
+    paths: [process.env.FEATURES || 'tests/features/**/*.feature'],
     format: [
       '@cucumber/pretty-formatter',
-      'json:tests/reports/cucumber_report.json',
+      'json:tests/reports/' + (process.env.CUCUMBER_JSON || 'cucumber_report') + '.json',
     ],
     formatOptions: {
       // Colour is controlled via FORCE_COLOR (cucumber-js v10+); the old
