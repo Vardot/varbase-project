@@ -1,5 +1,9 @@
 # Varbase Automated Testing
 
+[![pipeline status](https://git.drupalcode.org/project/varbase_project/badges/11.0.x/pipeline.svg)](https://git.drupalcode.org/project/varbase_project/-/commits/11.0.x)
+[![coverage report](https://git.drupalcode.org/project/varbase_project/badges/11.0.x/coverage.svg)](https://git.drupalcode.org/project/varbase_project/-/commits/11.0.x)
+[![Latest Release](https://git.drupalcode.org/project/varbase_project/-/badges/release.svg)](https://git.drupalcode.org/project/varbase_project/-/releases)
+
 Automated functional acceptance testing for Varbase using
 [Playwright](https://playwright.dev/), [Cucumber-JS](https://github.com/cucumber/cucumber-js),
 and [Webship-js](https://github.com/webship/webship-js).

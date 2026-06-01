@@ -1,4 +1,8 @@
-[![pipeline status](https://git.drupalcode.org/project/varbase/badges/11.0.x/pipeline.svg)](https://git.drupalcode.org/project/varbase/-/pipelines) **Varbase 11.0.0-alpha2**
+[![pipeline status](https://git.drupalcode.org/project/varbase_project/badges/11.0.x/pipeline.svg)](https://git.drupalcode.org/project/varbase_project/-/commits/11.0.x)
+[![coverage report](https://git.drupalcode.org/project/varbase_project/badges/11.0.x/coverage.svg)](https://git.drupalcode.org/project/varbase_project/-/commits/11.0.x)
+[![Latest Release](https://git.drupalcode.org/project/varbase_project/-/badges/release.svg)](https://git.drupalcode.org/project/varbase_project/-/releases)
+
+**Varbase 11.0.0-alpha2**
 
 
 [![](https://www.drupal.org/files/project-images/varbase-medium-logo-color-with-padding.png)](https://www.drupal.org/project/varbase)

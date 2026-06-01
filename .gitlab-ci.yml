@@ -19,6 +19,16 @@ include:
       - "/includes/include.drupalci.variables.yml"
       - "/includes/include.drupalci.workflows.yml"
 
+# Pipeline stages. `build` / `validate` keep the drupalci jobs; the Varbase
+# browser flow runs as pre-test (install) -> test (run suite) -> post-test
+# (build reports).
+stages:
+  - build
+  - validate
+  - pre-test
+  - test
+  - post-test
+
 variables:
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
@@ -157,6 +167,7 @@ stylelint:
   variables:
     _ARTIFACTS_DIR: "test-artifacts/phpcs"
   before_script:
+    - composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
     - composer require --dev drupal/coder micheh/phpcs-gitlab --no-interaction
     - mkdir -p $_ARTIFACTS_DIR
   script:
@@ -189,6 +200,7 @@ stylelint:
   variables:
     _ARTIFACTS_DIR: "test-artifacts/phpstan"
   before_script:
+    - composer config --no-plugins allow-plugins.phpstan/extension-installer true
     - composer require --dev phpstan/phpstan mglaman/phpstan-drupal phpstan/extension-installer --no-interaction
     - mkdir -p $_ARTIFACTS_DIR
   script:
@@ -228,6 +240,9 @@ stylelint:
   # identify/convert binaries -> error 127).
   prepare_code: &prepare_code
     - apt-get update -y && apt-get install -y imagemagick
+    # The cached Composer VCS clones are owned by a different uid across jobs;
+    # tell git to trust them (otherwise "detected dubious ownership").
+    - git config --global --add safe.directory '*'
     - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist
   web_db: &web_db
     - mkdir -pv $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/files
@@ -238,6 +253,14 @@ stylelint:
     - chown -R www-data:www-data $CI_PROJECT_DIR
     - service apache2 start
     - export SIMPLETEST_DB=mysql://$MYSQL_USER:$MYSQL_PASSWORD@database/$MYSQL_DATABASE
+  # Import the installed-site DB dump produced by the previous pre-test job.
+  restore_db: &restore_db
+    - gunzip -c $CI_PROJECT_DIR/varbase-db.sql.gz | $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:cli
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
+  # Rebuild caches and dump the DB for the next pre-test job in the chain.
+  dump_db: &dump_db
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:dump --gzip --result-file=$CI_PROJECT_DIR/varbase-db.sql
   node_playwright: &node_playwright
     - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
     - apt-get install -y nodejs
@@ -261,9 +284,13 @@ stylelint:
 # exports the installed site as small artifacts (a gzipped DB dump + settings.php
 # + the files directory) so the browser-test job can restore it without
 # re-running the lengthy install - keeping each job under the runner timeout.
-varbase-install:
+# Shared template for every pre-test step. Each step rebuilds the code, restores
+# the previous step's DB dump, runs its own `script`, then dumps the DB again for
+# the next step (the chain is wired with `needs`). The installed site travels
+# between jobs as small artifacts (gzipped DB dump + settings.php + files).
+.site-step:
   extends: .testing-job-base
-  needs: [composer]
+  stage: pre-test
   timeout: 2h
   cache: *varbase_cache
   services:
@@ -282,29 +309,115 @@ varbase-install:
   before_script:
     - !reference [.fragments, prepare_code]
     - !reference [.fragments, web_db]
+    - !reference [.fragments, restore_db]
+  allow_failure: false
+
+# pre-test step 1: fresh Varbase install (no DB to restore).
+"📦 Install Varbase":
+  extends: .site-step
+  needs: [composer]
+  before_script:
+    - !reference [.fragments, prepare_code]
+    - !reference [.fragments, web_db]
   script:
-    # = Install Varbase =
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT site:install varbase
         --db-url=$SIMPLETEST_DB
         --account-name=webmaster --account-pass=dD.123123ddd --account-mail=webmaster@vardot.com
         --site-name="Varbase Test" --locale=en -y
-    # = Base + AI recipes (mirrors ddev init-full-automated-testing) =
+    - !reference [.fragments, dump_db]
+
+# pre-test steps 2..N: one recipe per job, chained via `needs`.
+"🧩 Recipe: Users base":
+  extends: .site-step
+  needs: ["📦 Install Varbase"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_users_base -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: Dev base":
+  extends: .site-step
+  needs: ["🧩 Recipe: Users base"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_dev_base -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: i18n base":
+  extends: .site-step
+  needs: ["🧩 Recipe: Dev base"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_i18n_base -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: API base":
+  extends: .site-step
+  needs: ["🧩 Recipe: i18n base"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_api_base -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: Auth base":
+  extends: .site-step
+  needs: ["🧩 Recipe: API base"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_auth_base -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable social_auth_facebook social_auth_linkedin -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: AI base":
+  extends: .site-step
+  needs: ["🧩 Recipe: Auth base"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_base -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: AI editor assistant":
+  extends: .site-step
+  needs: ["🧩 Recipe: AI base"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_editor_assistant -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: AI image alt":
+  extends: .site-step
+  needs: ["🧩 Recipe: AI editor assistant"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_image_alt -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: AI taxonomy tagging":
+  extends: .site-step
+  needs: ["🧩 Recipe: AI image alt"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_taxonomy_tagging -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: AI context":
+  extends: .site-step
+  needs: ["🧩 Recipe: AI taxonomy tagging"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_context -y || true
+    - !reference [.fragments, dump_db]
+
+"🧩 Recipe: AI safety":
+  extends: .site-step
+  needs: ["🧩 Recipe: AI context"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT recipe $CI_PROJECT_DIR/recipes/varbase_ai_safety -y || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable social_auth_facebook -y || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable social_auth_linkedin -y || true
-    # = Seed the per-role testing users (registry mirrors cucumber.js users) =
+    - !reference [.fragments, dump_db]
+
+# pre-test step: seed the per-role testing users (registry mirrors cucumber.js).
+"👥 Add testing users":
+  extends: .site-step
+  needs: ["🧩 Recipe: AI safety"]
+  script:
     - cd $CI_PROJECT_DIR/recipes/varbase_starter/scripts && bash add-testing-users.sh && cd $CI_PROJECT_DIR
-    # = Prepare site for deterministic testing =
+    - !reference [.fragments, dump_db]
+
+# pre-test final step: deterministic-testing tweaks, then dump for the test job.
+"⚙️ Prepare site":
+  extends: .site-step
+  needs: ["👥 Add testing users"]
+  script:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:uninstall antibot -y || true
     # Raise login flood ceilings so the many test logins are not blocked.
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set user.flood ip_limit 1000000 -y
@@ -316,10 +429,7 @@ varbase-install:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance css.preprocess 0 -y
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance js.preprocess 0 -y
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.logging error_level all -y
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
-    # = Export the installed site for the test job =
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:dump --gzip --result-file=$CI_PROJECT_DIR/varbase-db.sql
-  allow_failure: false
+    - !reference [.fragments, dump_db]
 
 # = webship-js BDD - Varbase profile =
 #
@@ -327,9 +437,10 @@ varbase-install:
 # settings.php + files), installs Node + Playwright, and drives the whole
 # `tests/features/**` suite through the browser. cucumber.js auto-discovers the
 # LAUNCH_URL; in CI we pin it to the local Apache.
-automated-functional-testing:
+"🧪 Automated functional testing":
   extends: .testing-job-base
-  needs: [composer, varbase-install]
+  stage: test
+  needs: [composer, "⚙️ Prepare site"]
   timeout: 2h
   cache: *varbase_cache
   # Override the parent's services - we only need the database. Playwright
@@ -374,11 +485,11 @@ automated-functional-testing:
 # Turns the cucumber JSON (+ screenshots / videos) from the test job into the
 # HTML and PDF reports. Runs on a plain node image with just webship-js + a
 # Chromium for the PDF - no Drupal build needed.
-create-reports:
-  stage: test
+"📊 Create reports":
+  stage: post-test
   image: node:20
   needs:
-    - job: automated-functional-testing
+    - job: "🧪 Automated functional testing"
       artifacts: true
   cache: *varbase_cache
   before_script:
