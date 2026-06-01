@@ -1,11 +1,13 @@
 ################################################################################
 # GitLab CI for the Varbase project template.
 #
-# PHPCS and PHPStan come from the drupalci templates (no custom duplicates).
-# This file adds: cspell / eslint / stylelint validation jobs plus an
-# automated-functional-testing browser job that builds Varbase, installs it
-# with the `varbase` profile, applies the base + AI recipes, seeds the
+# Self-contained validation jobs (cspell / eslint / stylelint / PHPCS / PHPStan)
+# plus an automated-functional-testing browser job that builds Varbase, installs
+# it with the `varbase` profile, applies the base + AI recipes, seeds the
 # per-role testing users and drives the whole site through the browser.
+#
+# drupalci's own composer-artifact jobs are disabled below: a full Varbase build
+# is too large to publish as an artifact (413), so each job builds in-job.
 ################################################################################
 
 include:
@@ -24,6 +26,23 @@ variables:
   # Yarn 4 defaults to immutable installs and would refuse to create a
   # lockfile in CI; allow it for every job.
   YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
+  # Self-contained PHPCS / PHPStan jobs (scan the project's own recipe code).
+  _VARBASE_PHPCS_PATHS: "recipes/varbase_starter"
+  _PHPSTAN_NEON: "phpstan.neon"
+  _PHPSTAN_BASELINE: ".phpstan-baseline.php"
+  # Cache locations (Composer packages, Yarn packages, Playwright browsers) so
+  # the build / install / test jobs reuse downloads instead of re-fetching.
+  COMPOSER_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/composer"
+  YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.cache/yarn"
+  PLAYWRIGHT_BROWSERS_PATH: "${CI_PROJECT_DIR}/.cache/ms-playwright"
+
+# Shared cache definition referenced by the build / install / test jobs.
+.varbase_cache: &varbase_cache
+  key: "varbase-build"
+  paths:
+    - .cache/composer
+    - .cache/yarn
+    - .cache/ms-playwright
 
 # Override composer job to build straight from this project's composer.json.
 #
@@ -33,9 +52,9 @@ variables:
 # against this composer.json resolves the documented set (composer-patches
 # 2.0.0 is a stable release) so the build matches composer.json exactly.
 composer:
+  cache: *varbase_cache
   before_script:
     - composer self-update
-    - composer clear-cache
   script:
     - composer validate --no-check-all --no-check-publish
     # --prefer-dist pulls dist archives instead of cloning full .git histories.
@@ -124,8 +143,92 @@ stylelint:
     - echo '[]' > gl-codequality.json
   allow_failure: false
 
+# = Self-contained PHP analysis =
+#
+# These run their own `composer require --dev` (a full in-job install, needs: [])
+# so they do NOT depend on the composer build artifact - which a full Varbase
+# distribution is too large to publish (413). They replace drupalci's phpcs /
+# phpstan jobs (disabled above), scanning only the project's own recipe code.
+
+# PHP Coding Standards (PHPCS) - Drupal/DrupalPractice
+'🧹 PHP Coding standards (PHPCS)':
+  stage: validate
+  needs: []
+  variables:
+    _ARTIFACTS_DIR: "test-artifacts/phpcs"
+  before_script:
+    - composer require --dev drupal/coder micheh/phpcs-gitlab --no-interaction
+    - mkdir -p $_ARTIFACTS_DIR
+  script:
+    - echo "Scanning Varbase profile and recipes..."
+    - |
+      vendor/bin/phpcs --version
+      vendor/bin/phpcs --standard=Drupal,DrupalPractice \
+        --extensions=php,module,inc,install,test,profile,theme \
+        --ignore=*/node_modules/*,*/vendor/* \
+        --report=full --report-summary \
+        --report-\\Micheh\\PhpCodeSniffer\\Report\\Gitlab=$_ARTIFACTS_DIR/phpcs-quality-report.json \
+        $_VARBASE_PHPCS_PATHS || EXIT_CODE=$?
+      if [ -n "$EXIT_CODE" ]; then
+        echo "PHPCS found issues (exit code: $EXIT_CODE)"
+        exit $EXIT_CODE
+      fi
+  artifacts:
+    when: always
+    reports:
+      codequality: $_ARTIFACTS_DIR/phpcs-quality-report.json
+    paths:
+      - $_ARTIFACTS_DIR
+    expire_in: 1 week
+  allow_failure: false
+
+# PHPStan Static Analysis
+'🧹 PHP Static Analysis (PHPStan)':
+  stage: validate
+  needs: []
+  variables:
+    _ARTIFACTS_DIR: "test-artifacts/phpstan"
+  before_script:
+    - composer require --dev phpstan/phpstan mglaman/phpstan-drupal phpstan/extension-installer --no-interaction
+    - mkdir -p $_ARTIFACTS_DIR
+  script:
+    - echo "Running PHPStan on Varbase profile and recipes..."
+    - |
+      vendor/bin/phpstan --version
+      vendor/bin/phpstan analyse --configuration=$_PHPSTAN_NEON --memory-limit=2G \
+        --error-format=gitlab > $_ARTIFACTS_DIR/phpstan-quality-report.json || EXIT_CODE=$?
+      # When PHPStan fails, regenerate a baseline file
+      if [ -n "$EXIT_CODE" ]; then
+        echo "Generating a PHPStan baseline file (available as job artifact)."
+        cp $CI_PROJECT_DIR/.gitlab-ci/scripts/.empty-phpstan-baseline.php $_PHPSTAN_BASELINE
+        vendor/bin/phpstan analyse --configuration=$_PHPSTAN_NEON --memory-limit=2G --no-progress \
+          --generate-baseline=$_PHPSTAN_BASELINE || true
+        # Report statistics on the new baseline
+        php $CI_PROJECT_DIR/.gitlab-ci/scripts/phpstan-baseline-statistics.php $_PHPSTAN_BASELINE $_ARTIFACTS_DIR/phpstan-metrics.txt
+        # Copy the baseline to artifacts
+        cp $_PHPSTAN_BASELINE $_ARTIFACTS_DIR/phpstan-baseline.php
+        echo "PHPStan found issues (exit code: $EXIT_CODE)"
+        exit $EXIT_CODE
+      fi
+  artifacts:
+    when: always
+    reports:
+      codequality: $_ARTIFACTS_DIR/phpstan-quality-report.json
+      metrics: $_ARTIFACTS_DIR/phpstan-metrics.txt
+    paths:
+      - $_ARTIFACTS_DIR
+    expire_in: 1 week
+  allow_failure: false
+
 # = Reusable before_script fragments (via !reference) =
 .fragments:
+  # Build the codebase in-job from the composer artifact's lock file (the
+  # composer job does not pass the full build - too large to artifact) and
+  # install ImageMagick (Varbase's image toolkit; the drupalci image lacks the
+  # identify/convert binaries -> error 127).
+  prepare_code: &prepare_code
+    - apt-get update -y && apt-get install -y imagemagick
+    - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist
   web_db: &web_db
     - mkdir -pv $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/files
     - mkdir -pv $CI_PROJECT_DIR/$_WEB_ROOT/sites/simpletest
@@ -150,49 +253,36 @@ stylelint:
     - cp .cucumber.js.bak cucumber.js && rm .cucumber.js.bak
     - ./node_modules/.bin/playwright install --with-deps chromium
 
-# = webship-js BDD - Varbase profile =
+# = Varbase install - own job =
 #
-# Builds the project (drupalci's `composer` artefact), installs Varbase with
-# the `varbase` profile, applies the base recipes, seeds the testing users
-# and runs the full `tests/features/**` suite. cucumber.js auto-discovers the
-# DDEV/LAUNCH_URL; in CI we pin LAUNCH_URL to the local Apache.
-automated-functional-testing:
+# Builds the codebase, installs Varbase with the `varbase` profile, applies the
+# base + AI recipes, seeds the per-role testing users and prepares the site for
+# deterministic testing (mirrors ddev init-full-automated-testing). It then
+# exports the installed site as small artifacts (a gzipped DB dump + settings.php
+# + the files directory) so the browser-test job can restore it without
+# re-running the lengthy install - keeping each job under the runner timeout.
+varbase-install:
   extends: .testing-job-base
   needs: [composer]
-  # In-job composer build + recipes + the full browser suite exceed drupalci's
-  # 30-minute default job timeout. Allow up to 2h (capped by the runner/project
-  # maximum). Tighten once the suite is profiled.
   timeout: 2h
-  # Override the parent's services - we only need the database. Playwright
-  # bundles its own Chromium, so Selenium and chromedriver are not needed.
+  cache: *varbase_cache
   services:
     - name: $_CONFIG_DOCKERHUB_ROOT/$_TARGET_DB_TYPE-$_TARGET_DB_VERSION:$_TARGET_DB_IMAGE_TAG
       alias: database
   variables:
     DRUPAL_ADMIN_USERNAME: "webmaster"
     DRUPAL_ADMIN_PASSWORD: "dD.123123ddd"
-    DRUPAL_TEST_BASE_URL: "http://localhost"
-    LAUNCH_URL: "http://localhost"
-    FORCE_COLOR: "1"
-    WEBSHIP_REPORT_DISABLE: "1"
   artifacts:
-    when: always
+    when: on_success
+    expire_in: 1 day
     paths:
-      - tests/reports/
-      - tests/screenshots/
-      - tests/videos/
-    expire_in: 7 days
-    reports:
-      junit: tests/reports/junit.xml
+      - varbase-db.sql.gz
+      - $_WEB_ROOT/sites/default/settings.php
+      - $_WEB_ROOT/sites/default/files
   before_script:
-    # ImageMagick: Varbase sets the image toolkit to imagemagick; the drupalci
-    # image ships without the `identify`/`convert` binaries (error 127). Install
-    # it so image styles + media processing work (CircleCI parity).
-    - apt-get update -y && apt-get install -y imagemagick
-    # Build the codebase in-job from the composer artifact's lock file (the
-    # composer job does not pass the full build - it is too large to artifact).
-    - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist
+    - !reference [.fragments, prepare_code]
     - !reference [.fragments, web_db]
+  script:
     # = Install Varbase =
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT site:install varbase
         --db-url=$SIMPLETEST_DB
@@ -217,7 +307,6 @@ automated-functional-testing:
     # = Prepare site for deterministic testing =
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:uninstall antibot -y || true
     # Raise login flood ceilings so the many test logins are not blocked.
-    # (No flood table to clear on a fresh CI install.)
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set user.flood ip_limit 1000000 -y
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set user.flood user_limit 1000000 -y
     # Drop Honeypot's time trap (rejects scripted form posts) - keep field protection.
@@ -228,16 +317,82 @@ automated-functional-testing:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance js.preprocess 0 -y
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.logging error_level all -y
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
+    # = Export the installed site for the test job =
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:dump --gzip --result-file=$CI_PROJECT_DIR/varbase-db.sql
+  allow_failure: false
+
+# = webship-js BDD - Varbase profile =
+#
+# Restores the installed site from the varbase-install artifacts (DB dump +
+# settings.php + files), installs Node + Playwright, and drives the whole
+# `tests/features/**` suite through the browser. cucumber.js auto-discovers the
+# LAUNCH_URL; in CI we pin it to the local Apache.
+automated-functional-testing:
+  extends: .testing-job-base
+  needs: [composer, varbase-install]
+  timeout: 2h
+  cache: *varbase_cache
+  # Override the parent's services - we only need the database. Playwright
+  # bundles its own Chromium, so Selenium and chromedriver are not needed.
+  services:
+    - name: $_CONFIG_DOCKERHUB_ROOT/$_TARGET_DB_TYPE-$_TARGET_DB_VERSION:$_TARGET_DB_IMAGE_TAG
+      alias: database
+  variables:
+    DRUPAL_ADMIN_USERNAME: "webmaster"
+    DRUPAL_ADMIN_PASSWORD: "dD.123123ddd"
+    DRUPAL_TEST_BASE_URL: "http://localhost"
+    LAUNCH_URL: "http://localhost"
+    FORCE_COLOR: "1"
+    WEBSHIP_REPORT_DISABLE: "1"
+  artifacts:
+    when: always
+    paths:
+      - tests/reports/
+      - tests/screenshots/
+      - tests/videos/
+    expire_in: 7 days
+    reports:
+      junit: tests/reports/junit.xml
+  before_script:
+    - !reference [.fragments, prepare_code]
+    - !reference [.fragments, web_db]
+    # = Restore the installed site (settings.php + files came via artifacts) =
+    - gunzip -c $CI_PROJECT_DIR/varbase-db.sql.gz | $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:cli
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
     # = Node.js 20 + Playwright Chromium =
     - !reference [.fragments, node_playwright]
   script:
-    # Disable webship-js's auto HTML hook (it cannot await PDF generation from
-    # process.on('exit')) and run `generate-reports` explicitly after the run
-    # so HTML + PDF land next to the JSON in tests/reports/.
+    # Run the suite only - report generation is a separate `create-reports`
+    # job. Disable webship-js's auto HTML hook so it does not try to build a
+    # report from process.on('exit'); the JSON it leaves behind is the input
+    # for create-reports.
     - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
+  allow_failure: false
+
+# = Create reports - own job =
+#
+# Turns the cucumber JSON (+ screenshots / videos) from the test job into the
+# HTML and PDF reports. Runs on a plain node image with just webship-js + a
+# Chromium for the PDF - no Drupal build needed.
+create-reports:
+  stage: test
+  image: node:20
+  needs:
+    - job: automated-functional-testing
+      artifacts: true
+  cache: *varbase_cache
+  before_script:
+    - npm install --no-save webship-js
+    - ./node_modules/.bin/playwright install chromium
+  script:
     - node ./node_modules/webship-js/bin/generate-reports.js
         --json tests/reports/cucumber_report.json
         --out  tests/reports/cucumber_report.html
         --format all
         --pdf-out tests/reports/cucumber_report.pdf
+  artifacts:
+    when: always
+    paths:
+      - tests/reports/
+    expire_in: 7 days
   allow_failure: false
