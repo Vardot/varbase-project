@@ -255,8 +255,34 @@ CI runs on GitLab CI.
   [`gitlab-ci-local`](https://github.com/firecow/gitlab-ci-local): the linter
   jobs that are reproducible without the drupalci templates + a MySQL service.
 
+### Test the CI locally with gitlab-ci-local
+
+Requires Docker running (it pulls the `node:20` image; the first run downloads it).
+
 ```bash
-# Run the locally-reproducible jobs with gitlab-ci-local:
-npx gitlab-ci-local --file .gitlab-ci-local.yml            # all linter jobs
-npx gitlab-ci-local --file .gitlab-ci-local.yml cspell     # one job
+cd /path/to/varbase_project
+
+# All linter jobs (cspell, eslint, stylelint)
+npx gitlab-ci-local --file .gitlab-ci-local.yml
+
+# A single job
+npx gitlab-ci-local --file .gitlab-ci-local.yml cspell
+npx gitlab-ci-local --file .gitlab-ci-local.yml eslint
+npx gitlab-ci-local --file .gitlab-ci-local.yml stylelint
+
+# List jobs / preview the merged config
+npx gitlab-ci-local --file .gitlab-ci-local.yml --list
+npx gitlab-ci-local --file .gitlab-ci-local.yml --preview
+```
+
+Only `.gitlab-ci-local.yml` runs locally. The full `.gitlab-ci.yml` cannot: it
+`include:`s the drupalci templates (`$_GITLAB_TEMPLATES_REPO`) and its
+`automated-functional-testing` job needs a real composer build + a MySQL
+service, which gitlab-ci-local does not reproduce. Run the full browser suite
+against a live site instead:
+
+```bash
+ddev drush sql:drop -y
+ddev init-full-automated-testing
+ddev yarn test:chromium
 ```
