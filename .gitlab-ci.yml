@@ -1,13 +1,11 @@
 ################################################################################
 # GitLab CI for the Varbase project template.
 #
-# Validation jobs (phpcs / phpstan / cspell / eslint / stylelint) plus a
-# webship-js BDD browser-test job that builds Varbase, installs it with the
-# `varbase` profile, applies the base recipes, seeds the per-role testing
-# users and drives the whole site through the browser with webship-js.
-#
-# PHP linting jobs scan:
-#   - recipes/varbase_* (all Varbase recipes including varbase_starter)
+# PHPCS and PHPStan come from the drupalci templates (no custom duplicates).
+# This file adds: cspell / eslint / stylelint validation jobs plus an
+# automated-functional-testing browser job that builds Varbase, installs it
+# with the `varbase` profile, applies the base + AI recipes, seeds the
+# per-role testing users and drives the whole site through the browser.
 ################################################################################
 
 include:
@@ -26,11 +24,21 @@ variables:
   # Yarn 4 defaults to immutable installs and would refuse to create a
   # lockfile in CI; allow it for every job.
   YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
-  # PHPStan configuration
-  _PHPSTAN_NEON: "phpstan.neon"
-  _PHPSTAN_BASELINE: ".phpstan-baseline.php"
 
-
+# Override composer job to build straight from this project's composer.json.
+#
+# drupalci's default composer job resolves against its own pinned package set
+# and only sees cweagans/composer-patches 1.7.3, which fails the project's
+# `~2.0` constraint. Clearing the cache and running a fresh `composer update`
+# against this composer.json resolves the documented set (composer-patches
+# 2.0.0 is a stable release) so the build matches composer.json exactly.
+composer:
+  before_script:
+    - composer self-update
+    - composer clear-cache
+  script:
+    - composer validate --no-check-all --no-check-publish
+    - composer update --with-all-dependencies --no-interaction --no-progress --optimize-autoloader
 
 # = Validate stage =
 
