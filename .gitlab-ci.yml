@@ -294,11 +294,11 @@ stylelint:
     # = Node.js 20 + Playwright Chromium =
     - !reference [.fragments, node_playwright]
   script:
-    # Run the suite only - report generation is a separate `create-reports`
-    # job. Disable webship-js's auto HTML hook so it does not try to build a
-    # report from process.on('exit'); the JSON it leaves behind is the input
-    # for create-reports.
-    - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
+    # Run the suite in parallel workers. Report generation is the separate
+    # `create-reports` job; disable webship-js's auto HTML hook so it does not
+    # build a report from process.on('exit') - the JSON it leaves behind is the
+    # input for create-reports.
+    - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip" --parallel 4
   allow_failure: false
 
 # = Create reports - own job =
@@ -309,9 +309,13 @@ stylelint:
 "📊 Create reports":
   stage: post-test
   image: node:20
-  needs:
-    - job: "🧪 Automated functional testing"
-      artifacts: true
+  # Always build the reports, even when the test job failed - so failures are
+  # captured in the HTML/PDF. `dependencies` (not `needs`) pulls the test
+  # artifacts (JSON + screenshots + videos) without gating on its success.
+  rules:
+    - when: always
+  dependencies:
+    - "🧪 Automated functional testing"
   cache: *varbase_cache
   before_script:
     - npm install --no-save webship-js
@@ -326,5 +330,7 @@ stylelint:
     when: always
     paths:
       - tests/reports/
-    expire_in: 7 days
+      - tests/screenshots/
+      - tests/videos/
+    expire_in: 30 days
   allow_failure: false
