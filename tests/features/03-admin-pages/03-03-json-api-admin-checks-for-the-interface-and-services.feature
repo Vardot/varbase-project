@@ -8,6 +8,7 @@ Feature: Check JSON API admin interface and services and Varbase API settings
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config"
       And wait
+      And I wait for the text "JSON:API" to appear
      Then I should see "JSON:API"
 
   @check @local @development @staging @production

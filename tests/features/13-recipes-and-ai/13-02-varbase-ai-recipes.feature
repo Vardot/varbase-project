@@ -18,12 +18,14 @@ Feature: Varbase AI Recipes - AI recipes are applied and their admin pages work
   Scenario: Varbase AI Base - the AI setup and configuration page is available
      When I go to "/admin/config/ai"
       And wait
+      And I wait for the text "AI Setup and Configuration" to appear
      Then I should see "AI Setup and Configuration"
 
   @check @ai @recipes @local @development @staging @production
   Scenario: Varbase AI Base - the AI providers page lists the configured providers
      When I go to "/admin/config/ai/providers"
       And wait
+      And I wait for the text "AI Providers" to appear
      Then I should see "AI Providers"
       And I should see "OpenAI"
       And I should see "Anthropic"
@@ -32,12 +34,14 @@ Feature: Varbase AI Recipes - AI recipes are applied and their admin pages work
   Scenario: Varbase AI Base - the OpenAI provider settings page is available
      When I go to "/admin/config/ai/providers/openai"
       And wait
+      And I wait for the text "Setup OpenAI Authentication" to appear
      Then I should see "Setup OpenAI Authentication"
 
   @check @ai @recipes @local @development @staging @production
   Scenario: Varbase AI Base - the AI image alt text settings page is available
      When I go to "/admin/config/ai/ai_image_alt_text"
       And wait
+      And I wait for the text "AI Image Alt Text Settings" to appear
      Then I should see "AI Image Alt Text Settings"
 
   # = Varbase AI Safety =
@@ -46,22 +50,26 @@ Feature: Varbase AI Recipes - AI recipes are applied and their admin pages work
   Scenario: Varbase AI Safety - the Safety & Compliance section is available
      When I go to "/admin/config/ai/safety-compliance"
       And wait
+      And I wait for the text "Safety & Compliance" to appear
      Then I should see "Safety & Compliance"
 
   @check @ai @recipes @local @development @staging @production
   Scenario: Varbase AI Safety - the global AI guardrails page is available
      When I go to "/admin/config/ai/guardrails/global"
       And wait
+      And I wait for the text "Global AI guardrails" to appear
      Then I should see "Global AI guardrails"
 
   @check @ai @recipes @local @development @staging @production
   Scenario: Varbase AI Safety - the AI logging page is available
      When I go to "/admin/config/ai/logging"
       And wait
+      And I wait for the text "AI Logging" to appear
      Then I should see "AI Logging"
 
   @check @ai @recipes @local @development @staging @production
   Scenario: Varbase AI Safety - the AI observability settings page is available
      When I go to "/admin/config/ai/observability"
       And wait
+      And I wait for the text "AI Observability Settings" to appear
      Then I should see "AI Observability Settings"

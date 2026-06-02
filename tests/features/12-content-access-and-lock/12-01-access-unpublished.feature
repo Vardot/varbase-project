@@ -8,21 +8,25 @@ Feature: Content Management - Access Unpublished
     Given I am a logged in user with the "webmaster" user
      When I go to "/node/add/page"
       And wait
+      And I wait for the text "Create Utility page" to appear
      Then I should see "Create Utility page"
      When I fill in "Test Unpublished Page" for "Title"
       And I fill in "Test description for unpublished page." for "#edit-field-description-0-value" by attr
       And I scroll to the bottom
       And I press the "Save" button
       And wait
+      And I wait for the text "Test Unpublished Page" to appear
      Then I should see "Test Unpublished Page"
      When I go to "/node/add/blog"
       And wait
+      And I wait for the text "Create Blog post" to appear
      Then I should see "Create Blog post"
      When I fill in "Test Unpublished Blog Post" for "Title"
       And I fill in "Test description for unpublished blog post." for "#edit-field-description-0-value" by attr
       And I scroll to the bottom
       And I press the "Save" button
       And wait
+      And I wait for the text "Test Unpublished Blog Post" to appear
      Then I should see "Test Unpublished Blog Post"
 
   @check @local @development @staging @production
@@ -30,11 +34,13 @@ Feature: Content Management - Access Unpublished
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/content/access_unpublished"
       And wait
+      And I wait for the text "Access Unpublished" to appear
      Then I should see "Access Unpublished"
       And I should see "Hash key"
       And I should see "Lifetime"
      When I go to "/admin/content/access_token"
       And wait
+      And I wait for the text "Access Unpublished" to appear
      Then I should see "Access Unpublished"
       And I should see "Expire date"
 
@@ -63,16 +69,20 @@ Feature: Content Management - Access Unpublished
     Given I am a logged in user with the "webmaster" user
      When I go to "/test-unpublished-page"
       And wait
+      And I wait for the text "Test Unpublished Page" to appear
      Then I should see "Test Unpublished Page"
      When I go to "/admin/content"
       And wait
+      And I wait for the text "Content" to appear
      Then I should see "Content"
      When I fill in "Test Unpublished Page" for "Title"
       And I press the "Filter" button
       And wait
+      And I wait for the text "Test Unpublished Page" to appear
      Then I should see "Test Unpublished Page"
      When I click "Edit" in the "Test Unpublished Page" row
       And wait
+      And I wait for the text "Test Unpublished Page" to appear
      Then I should see "Test Unpublished Page"
       And I should see "Temporary unpublished access"
 
@@ -81,16 +91,20 @@ Feature: Content Management - Access Unpublished
     Given I am a logged in user with the "webmaster" user
      When I go to "/blog/test-unpublished-blog-post"
       And wait
+      And I wait for the text "Test Unpublished Blog Post" to appear
      Then I should see "Test Unpublished Blog Post"
      When I go to "/admin/content"
       And wait
+      And I wait for the text "Content" to appear
      Then I should see "Content"
      When I fill in "Test Unpublished Blog Post" for "Title"
       And I press the "Filter" button
       And wait
+      And I wait for the text "Test Unpublished Blog Post" to appear
      Then I should see "Test Unpublished Blog Post"
      When I click "Edit" in the "Test Unpublished Blog Post" row
       And wait
+      And I wait for the text "Test Unpublished Blog Post" to appear
      Then I should see "Test Unpublished Blog Post"
       And I should see "Temporary unpublished access"
 
@@ -99,9 +113,11 @@ Feature: Content Management - Access Unpublished
     Given I am a logged in user with the "Content editor" user
      When I go to "/test-unpublished-page"
       And wait
+      And I wait for the text "Test Unpublished Page" to appear
      Then I should see "Test Unpublished Page"
      When I go to "/blog/test-unpublished-blog-post"
       And wait
+      And I wait for the text "Test Unpublished Blog Post" to appear
      Then I should see "Test Unpublished Blog Post"
 
   @check @local @development @staging @production
@@ -109,9 +125,11 @@ Feature: Content Management - Access Unpublished
     Given I am a logged in user with the "Content admin" user
      When I go to "/test-unpublished-page"
       And wait
+      And I wait for the text "Test Unpublished Page" to appear
      Then I should see "Test Unpublished Page"
      When I go to "/blog/test-unpublished-blog-post"
       And wait
+      And I wait for the text "Test Unpublished Blog Post" to appear
      Then I should see "Test Unpublished Blog Post"
 
   @check @local @development @staging @production
@@ -139,7 +157,9 @@ Feature: Content Management - Access Unpublished
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/people/permissions/anonymous"
       And wait
+      And I wait for the text "Access Unpublished" to appear
      Then I should see "Access Unpublished"
      When I go to "/admin/people/permissions/authenticated"
       And wait
+      And I wait for the text "Access Unpublished" to appear
      Then I should see "Access Unpublished"

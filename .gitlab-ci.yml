@@ -220,6 +220,9 @@ stylelint:
       - varbase-db.sql.gz
       - $_WEB_ROOT/sites/default/settings.php
       - $_WEB_ROOT/sites/default/files
+      # easy_encryption private keys (default dir: project-root/.easy_encryption).
+      # The test job needs them to decrypt AI/API config stored by the recipes.
+      - .easy_encryption
   before_script:
     - !reference [.fragments, prepare_code]
     - !reference [.fragments, web_db]

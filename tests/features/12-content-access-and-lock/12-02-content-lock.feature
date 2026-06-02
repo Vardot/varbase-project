@@ -8,12 +8,14 @@ Feature: Content Management - Content Lock
     Given I am a logged in user with the "webmaster" user
      When I go to "/node/add/blog"
       And wait
+      And I wait for the text "Create Blog post" to appear
      Then I should see "Create Blog post"
      When I fill in "Test Content Lock Blog Post" for "Title"
       And I fill in "Test description for content lock blog post." for "#edit-field-description-0-value" by attr
       And I scroll to the bottom
       And I press the "Save" button
       And wait
+      And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
 
   @check @local @development @staging @production
@@ -21,6 +23,7 @@ Feature: Content Management - Content Lock
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/config/content/content_lock"
       And wait
+      And I wait for the text "Content lock settings" to appear
      Then I should see "Content lock settings"
       And I should see "Verbose"
       And I should see "Lock timeout"
@@ -32,6 +35,7 @@ Feature: Content Management - Content Lock
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/modules"
       And wait
+      And I wait for the text "Content Lock" to appear
      Then I should see "Content Lock"
 
   @check @local @development @staging @production
@@ -67,31 +71,39 @@ Feature: Content Management - Content Lock
     Given I am a logged in user with the "Content editor" user
      When I go to "/admin/content"
       And wait
+      And I wait for the text "Content" to appear
      Then I should see "Content"
      When I fill in "Test Content Lock Blog Post" for "Title"
       And I press the "Filter" button
       And wait
+      And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
      When I click "Edit" in the "Test Content Lock Blog Post" row
       And wait
+      And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
       And I should see "simultaneous editing"
      When I am an anonymous user
       And I am a logged in user with the "Content admin" user
       And I go to "/admin/content"
       And wait
+      And I wait for the text "Content" to appear
      Then I should see "Content"
      When I fill in "Test Content Lock Blog Post" for "Title"
       And I press the "Filter" button
       And wait
+      And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
      When I click "Edit" in the "Test Content Lock Blog Post" row
       And wait
+      And I wait for the text "This content is being edited by the user" to appear
      Then I should see "This content is being edited by the user"
       And I should see "Break lock"
      When I click "Break lock"
       And wait
+      And I wait for the text "Confirm break lock" to appear
      Then I should see "Confirm break lock"
      When I press the "Confirm break lock" button
       And wait
+      And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"

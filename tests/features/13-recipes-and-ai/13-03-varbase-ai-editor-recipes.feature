@@ -21,9 +21,11 @@ Feature: Varbase AI Recipes - editor, image-alt, taxonomy, context and safety
   Scenario: AI Editor Assistant - the CKEditor 5 AI assistant is wired into the Rich editor format
     When I go to "/admin/config/content/formats/manage/full_html"
       And wait
-      And I wait for the text "AI Assistant" to appear
+      And I wait for the text "Rich editor" to appear
     Then I should see "Rich editor"
       And I should see "CKEditor 5"
+      And I wait 8s
+      And I wait for the text "AI Assistant" to appear
       And I should see "AI Assistant"
 
   # = varbase_ai_image_alt =
@@ -32,6 +34,7 @@ Feature: Varbase AI Recipes - editor, image-alt, taxonomy, context and safety
   Scenario: AI Image Alt - the automatic image alt-text settings page is available
     When I go to "/admin/config/ai/ai_image_alt_text"
       And wait
+      And I wait for the text "AI Image Alt Text Settings" to appear
     Then I should see "AI Image Alt Text Settings"
 
   # = varbase_ai_taxonomy_tagging =
@@ -40,6 +43,7 @@ Feature: Varbase AI Recipes - editor, image-alt, taxonomy, context and safety
   Scenario: AI Taxonomy Tagging - the AI Automators administration page is available
     When I go to "/admin/config/ai/ai-automators"
       And wait
+      And I wait for the text "AI Automators" to appear
     Then I should see "AI Automators"
       And I should see "Automator Chain"
 
@@ -49,12 +53,14 @@ Feature: Varbase AI Recipes - editor, image-alt, taxonomy, context and safety
   Scenario: AI Context - the Context Control Center overview is available
     When I go to "/admin/ai/context/overview"
       And wait
+      And I wait for the text "Overview" to appear
     Then I should see "Overview"
 
   @check @ai @recipes @local @development @staging @production
   Scenario: AI Context - the Context Items settings page is available
     When I go to "/admin/ai/context/settings/items"
       And wait
+      And I wait for the text "Context Items Settings" to appear
     Then I should see "Context Items Settings"
 
   # = varbase_ai_safety =
@@ -63,7 +69,9 @@ Feature: Varbase AI Recipes - editor, image-alt, taxonomy, context and safety
   Scenario: AI Safety - the Safety & Compliance section and global guardrails are available
     When I go to "/admin/config/ai/safety-compliance"
       And wait
+      And I wait for the text "Safety & Compliance" to appear
     Then I should see "Safety & Compliance"
     When I go to "/admin/config/ai/guardrails/global"
       And wait
+      And I wait for the text "Global AI guardrails" to appear
     Then I should see "Global AI guardrails"

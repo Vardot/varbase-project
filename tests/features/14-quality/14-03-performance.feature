@@ -20,11 +20,11 @@ Feature: Quality - Performance budgets
     Given I am an anonymous user
      When I go to homepage
       And wait
-     Then the page should load in less than 20 seconds
+     Then the page should load in less than 3 seconds
 
   @perf @local @development @staging @production
   Scenario: The admin dashboard loads within budget for the webmaster
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/dashboard"
       And wait
-     Then the page should load in less than 20 seconds
+     Then the page should load in less than 10 seconds
