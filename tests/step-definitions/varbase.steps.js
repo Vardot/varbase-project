@@ -83,3 +83,54 @@ Then(/^the page should (?:load|respond) in less than (\d+) (ms|milliseconds?|sec
     `Page load time ${Math.round(loadMs)}ms exceeded the ${budgetMs}ms budget.`
   );
 });
+
+/**
+ * Submit a form by triggering the in-page native click on a button id.
+ * Gin moves the primary submit into a sticky action bar that overlays the
+ * original button, so a Playwright click on it times out on actionability.
+ * Dispatching the click in-page bypasses the overlay.
+ *
+ * Example: When I submit by id "edit-submit"
+ */
+When(/^(?:I |we )*submit by id "([^"]*)"$/, async function (id) {
+  await this.page.evaluate((sel) => {
+    const el = document.getElementById(sel);
+    if (el) { el.click(); return; }
+    const form = document.querySelector('form');
+    if (form) form.submit();
+  }, id);
+  await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
+});
+
+/**
+ * Open a row action link (e.g. "Edit") by navigating to its href rather than
+ * clicking it. A Playwright click waits for the heavy node-edit page (CKEditor
+ * 5 + AI widgets) `load` event which can exceed the step timeout; reading the
+ * href and `goto` with domcontentloaded avoids that hang.
+ *
+ * Example: When I open the "Edit" link in the "Test Unpublished Page" row
+ */
+When(/^(?:I |we )*open the "([^"]*)" link in the "([^"]*)" row$/, async function (linkText, rowText) {
+  // Read the link's href in-page. Drupal/Gin puts row actions (Edit, Delete…)
+  // inside a collapsed operations dropdown, so the anchor is present in the DOM
+  // but hidden - getByRole().getAttribute() would hang on actionability. We
+  // match the anchor by visible text (or, for Edit, an /edit href) and read its
+  // href directly, then navigate with domcontentloaded (no heavy load wait).
+  const href = await this.page.evaluate(({ rowText, linkText }) => {
+    const rows = [...document.querySelectorAll('tr')]
+      .filter((tr) => tr.textContent.includes(rowText));
+    for (const tr of rows) {
+      const links = [...tr.querySelectorAll('a[href]')];
+      let a = links.find((x) => x.textContent.trim() === linkText);
+      if (!a && linkText.toLowerCase() === 'edit') {
+        a = links.find((x) => /\/edit(\?|$)/.test(x.getAttribute('href')));
+      }
+      if (a) return a.getAttribute('href');
+    }
+    return null;
+  }, { rowText, linkText });
+  if (!href) throw friendly(`No "${linkText}" link found in the "${rowText}" row.`);
+  const url = href.startsWith('http') ? href : this.launchUrl.replace(/\/$/, '') + href;
+  await this.page.goto(url, { waitUntil: 'domcontentloaded' });
+  await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
+});

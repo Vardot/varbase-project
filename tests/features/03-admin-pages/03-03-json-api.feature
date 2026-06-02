@@ -51,7 +51,7 @@ Feature: Check JSON API admin interface and services and Varbase API settings
      Then I should see "Add term"
      When I fill in "space" for "Name"
       And I scroll to the bottom
-      And I press "edit-submit" by attr
+      And I submit by id "edit-submit"
       And wait
       And I go to "/admin/structure/taxonomy/manage/tags/overview"
       And I wait for the text "space" to appear

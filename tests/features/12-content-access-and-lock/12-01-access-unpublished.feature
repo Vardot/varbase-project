@@ -80,7 +80,7 @@ Feature: Content Management - Access Unpublished
       And wait
       And I wait for the text "Test Unpublished Page" to appear
      Then I should see "Test Unpublished Page"
-     When I click "Edit" in the "Test Unpublished Page" row
+     When I open the "Edit" link in the "Test Unpublished Page" row
       And wait
       And I wait for the text "Test Unpublished Page" to appear
      Then I should see "Test Unpublished Page"
@@ -102,7 +102,7 @@ Feature: Content Management - Access Unpublished
       And wait
       And I wait for the text "Test Unpublished Blog Post" to appear
      Then I should see "Test Unpublished Blog Post"
-     When I click "Edit" in the "Test Unpublished Blog Post" row
+     When I open the "Edit" link in the "Test Unpublished Blog Post" row
       And wait
       And I wait for the text "Test Unpublished Blog Post" to appear
      Then I should see "Test Unpublished Blog Post"

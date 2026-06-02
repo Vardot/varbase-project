@@ -13,7 +13,7 @@ Feature: Content Management - Content Lock
      When I fill in "Test Content Lock Blog Post" for "Title"
       And I fill in "Test description for content lock blog post." for "#edit-field-description-0-value" by attr
       And I scroll to the bottom
-      And I press the "Save" button
+      And I submit by id "edit-submit"
       And wait
       And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
@@ -78,7 +78,7 @@ Feature: Content Management - Content Lock
       And wait
       And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
-     When I click "Edit" in the "Test Content Lock Blog Post" row
+     When I open the "Edit" link in the "Test Content Lock Blog Post" row
       And wait
       And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
@@ -94,16 +94,16 @@ Feature: Content Management - Content Lock
       And wait
       And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
-     When I click "Edit" in the "Test Content Lock Blog Post" row
+     When I open the "Edit" link in the "Test Content Lock Blog Post" row
       And wait
       And I wait for the text "This content is being edited by the user" to appear
      Then I should see "This content is being edited by the user"
       And I should see "Break lock"
-     When I click "Break lock"
+     When I follow "Break lock"
       And wait
-      And I wait for the text "Confirm break lock" to appear
-     Then I should see "Confirm break lock"
-     When I press the "Confirm break lock" button
+      And I wait for the text "Break Lock for content" to appear
+     Then I should see "Break Lock for content"
+     When I submit by id "edit-submit"
       And wait
       And I wait for the text "Test Content Lock Blog Post" to appear
      Then I should see "Test Content Lock Blog Post"
