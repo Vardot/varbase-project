@@ -83,7 +83,7 @@ module.exports = {
         }
       },
       minWaitTime: {
-        // Per-navigation settle budget. webship's `I go to` waits up to this
+        // Per-navigation settle budget. webship-js's `I go to` waits up to this
         // long for the page to reach a quiet edge (DOM ready + network idle),
         // returning as soon as it settles. The full Varbase install is heavy
         // (Gin admin + AI widgets); 8s gives slow admin pages time to render
@@ -105,9 +105,9 @@ module.exports = {
           sm:   { width: 576,  height: 800  },
           md:   { width: 768,  height: 1024 },
           lg:   { width: 992,  height: 768  },
-          xl:   { width: 1200, height: 900, default: true },
+          xl:   { width: 1200, height: 900  },
           xxl:  { width: 1400, height: 900  },
-          xxxl: { width: 1920, height: 1080 },
+          xxxl: { width: 1920, height: 1080, default: true },
         },
       },
       screenshot: {
@@ -125,7 +125,7 @@ module.exports = {
         // 'off' | 'on' | 'on-failure' | 'tag'. Override per run with WEBSHIP_VIDEO.
         mode: process.env.WEBSHIP_VIDEO || 'on-failure',
         dir: './tests/videos',
-        size: { width: 1280, height: 720 },
+        size: { width: 1920, height: 1080 },
         filenamePattern: '{datetime}.{feature_file}.{scenario}.{status}.{ext}',
       },
       javascript: {

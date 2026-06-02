@@ -12,8 +12,8 @@ FEATURES="tests/features/04-admin-users/**/*.feature" ddev yarn test:chromium
 
 | Feature file | Description | Scenarios |
 | --- | --- | --- |
-| `04-01-allows-site-administrators-to-masquerade-by-switching-users.feature` | Support Requirements - Standard Support Navigation - Allow site super administrators to switch users and surf the site as that user | 6 |
-| `04-02-admins-can-disable-users.feature` | User Management - Standard User Management - Admins can disable users | 3 |
-| `04-03-navigate-through-drupal-admin-keyboard.feature` | Admin management - Standard Back-End Navigation - Navigate through the Drupal admin with the keyboard for faster access | 5 |
+| `04-01-masquerade.feature` | Support Requirements - Standard Support Navigation - Allow site super administrators to switch users and surf the site as that user | 6 |
+| `04-02-admins-can-disable-users.feature` | User Management - Standard User Management - Admins can disable users | 1 |
+| `04-03-admin-keyboard-nav.feature` | Admin management - Standard Back-End Navigation - Navigate through the Drupal admin with the keyboard for faster access | 5 |
 
-**Total: 14 scenarios across 3 feature files.**
+**Total: 12 scenarios across 3 feature files.**

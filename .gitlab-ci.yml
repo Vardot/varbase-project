@@ -283,8 +283,9 @@ stylelint:
           - "10-content-permissions"
           - "11-content-workflow"
           - "12-content-access-and-lock"
-          - "13-recipes-and-ai"
-          - "14-quality"
+          - "13-varbase-recipes"
+          - "14-ai"
+          - "15-quality"
   # Override the parent's services - we only need the database. Playwright
   # bundles its own Chromium, so Selenium and chromedriver are not needed.
   services:

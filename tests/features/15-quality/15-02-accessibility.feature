@@ -35,3 +35,45 @@ Feature: Quality - Accessibility (a11y)
      When I go to "/admin/dashboard"
       And wait
      Then the page should have no critical accessibility violations
+
+  @a11y @local @development @staging @production
+  Scenario: The contact page has no critical accessibility violations
+    Given I am an anonymous user
+     When I go to "/contact-us"
+      And wait
+     Then the page should have no critical accessibility violations
+
+  @a11y @local @development @staging @production
+  Scenario: The blog listing page has no critical accessibility violations
+    Given I am an anonymous user
+     When I go to "/blog"
+      And wait
+     Then the page should have no critical accessibility violations
+
+  @a11y @local @development @staging @production
+  Scenario: The homepage has no serious accessibility violations
+    Given I am an anonymous user
+     When I go to homepage
+      And wait
+     Then the page should have no serious accessibility violations
+
+  @a11y @local @development @staging @production
+  Scenario: Images on the homepage have a text alternative
+    Given I am an anonymous user
+     When I go to homepage
+      And wait
+     Then the page should not violate the accessibility rule "image-alt"
+
+  @a11y @local @development @staging @production
+  Scenario: Form fields have labels on the login page
+    Given I am an anonymous user
+     When I go to "/user/login"
+      And wait
+     Then the page should not violate the accessibility rule "label"
+
+  @a11y @local @development @staging @production
+  Scenario: The document language is set on the homepage
+    Given I am an anonymous user
+     When I go to homepage
+      And wait
+     Then the page should not violate the accessibility rule "html-has-lang"

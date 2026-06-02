@@ -12,10 +12,10 @@ FEATURES="tests/features/03-admin-pages/**/*.feature" ddev yarn test:chromium
 
 | Feature file | Description | Scenarios |
 | --- | --- | --- |
-| `03-01-pre-check-important-admin-development-pages.feature` | Pre-check important administrator and development pages | 9 |
-| `03-02-image-media-and-their-usage-list-page-for-admins.feature` | File & Media Management - Assets Management - Image media and their usage list page for site admins | 2 |
-| `03-03-json-api-admin-checks-for-the-interface-and-services.feature` | Check JSON API admin interface and services and Varbase API settings | 6 |
-| `03-04-access-admin-audit-trail-permissions.feature` | User Management - Admin audit trails access | 0 |
-| `03-05-access-media-bulk-upload-permissions.feature` | Admin management - Media bulk upload permissions | 0 |
+| `03-01-admin-pages.feature` | Pre-check important administrator and development pages | 9 |
+| `03-02-media-usage.feature` | File & Media Management - Assets Management - Image media and their usage list page for site admins | 2 |
+| `03-03-json-api.feature` | Check JSON API admin interface and services and Varbase API settings | 6 |
+| `03-04-audit-trail.feature` | User Management - Admin audit trails access | 0 |
+| `03-05-media-bulk-upload.feature` | Admin management - Media bulk upload permissions | 0 |
 
 **Total: 17 scenarios across 5 feature files.**
