@@ -9,7 +9,7 @@ Feature: Frontend Pages - Contact Us Page
      When I go to "/contact-us"
       And wait
      Then I should see "Contact Us"
-      And I should see "Ask Us About Anything!"
+      And I should see "Ask us about anything"
       And I should not see "Page not found"
 
   @check @local @development @staging @production
@@ -18,12 +18,12 @@ Feature: Frontend Pages - Contact Us Page
      When I go to "/contact-us"
       And wait
      Then I should see a "First Name" element
-      And I should see a "Last Name" element
-      And I should see a "Business" element
+      And I should see a "Last name" element
+      And I should see a "Company name" element
       And I should see a "Industry" element
       And I should see a "Country" element
       And I should see a "Email" element
-      And I should see a "Phone Number" element
+      And I should see a "Phone number" element
       And I should see a "Message" element
 
   @check @local @development @staging @production
@@ -31,7 +31,7 @@ Feature: Frontend Pages - Contact Us Page
     Given I am an anonymous user
      When I go to "/contact-us"
       And wait
-     Then I should see "Submit Your Request"
+     Then I should see "Submit Form"
 
   @check @local @development @staging @production
   Scenario: Check that legal links are present

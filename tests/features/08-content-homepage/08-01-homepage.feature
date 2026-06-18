@@ -42,8 +42,8 @@ Feature: Frontend Pages - Homepage
     Given I am an anonymous user
      When I go to homepage
       And wait
-     Then I should see "Varbase Usage"
-      And I should see "Overall Installs"
+     Then I should see "Sites using Varbase"
+      And I should see "Projects delivered by Vardot"
 
   @check @local @development @staging @production
   Scenario: Check that the homepage has the security section

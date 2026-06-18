@@ -98,8 +98,8 @@ Feature: Content Management - Content Lock
       And wait
       And I wait for the text "This content is being edited by the user" to appear
      Then I should see "This content is being edited by the user"
-      And I should see "Break lock"
-     When I follow "Break lock"
+      And I should see "Break the lock."
+     When I follow "Break the lock."
       And wait
       And I wait for the text "Break Lock for content" to appear
      Then I should see "Break Lock for content"
