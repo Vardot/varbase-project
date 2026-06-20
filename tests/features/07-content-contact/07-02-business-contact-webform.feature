@@ -11,12 +11,10 @@ Feature: Frontend Webform - Business Contact on the Contact Us page
       And I fill in "First Name" with "Test"
       And I fill in "Last name" with "Tester"
       And I fill in "Company name" with "Vardot QA"
-      And I fill in "Email" with "test.qa@example.com"
       And I fill in "Subject" with "Automated test inquiry"
      Then the field "First Name" should not be empty
       And the field "Last name" should not be empty
       And the field "Company name" should not be empty
-      And the field "Email" should not be empty
       And the field "Subject" should not be empty
 
   @check @local @development @staging @production

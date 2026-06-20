@@ -179,3 +179,84 @@ When(/^(?:I |we )*fill in the international phone (?:field|number)(?: "[^"]*")? 
     );
   }
 });
+
+/**
+ * Add a Webform block component to the bottom of a Drupal Canvas page and
+ * publish the page. Drupal Canvas builds pages from a React editor whose
+ * drag-and-drop cannot be driven by a browser test (the drop target lives in a
+ * cross-document iframe), so this step performs the same change the editor
+ * makes by calling Canvas's own authoring API:
+ *   1. resolve the canvas_page id by title,
+ *   2. append a `block.webform_block` component to the page's main content,
+ *   3. POST the updated layout (creates an auto-save),
+ *   4. publish the pending auto-save.
+ *
+ * Requires an authenticated user with "publish auto-saves" access (e.g. the
+ * webmaster) — run a login step first. The webform value is the entity
+ * autocomplete format "Label (machine_name)".
+ *
+ * Example:
+ *   Given I am a logged in user with the "webmaster" user
+ *    When I add the "Newsletter Subscribe (newsletter_subscribe)" webform to the bottom of the "Home" Canvas page and publish it
+ */
+When(/^(?:I |we )*add the "([^"]*)" webform to the bottom of the "([^"]*)" (?:Canvas )?page(?: and publish(?: it)?)?$/, async function (webformId, pageTitle) {
+  const result = await this.page.evaluate(async ({ webformId, pageTitle }) => {
+    const json = (r) => r.json();
+    const csrf = await (await fetch('/session/token', { credentials: 'same-origin' })).text();
+    const headers = { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf };
+
+    // 1. Resolve the canvas_page id by title.
+    const list = await fetch('/canvas/api/v0/content/canvas_page', { credentials: 'same-origin' }).then(json);
+    const pages = (list && list.data) || [];
+    const pageEntry = pages.find((p) => p.title === pageTitle);
+    if (!pageEntry) return { ok: false, error: `No Canvas page titled "${pageTitle}". Available: ${pages.map((p) => p.title).join(', ')}` };
+    const id = pageEntry.id;
+
+    // 2. Start from a clean auto-save for this page, then fetch its layout.
+    await fetch(`/canvas/api/v0/auto-saves/canvas_page/${id}`, { method: 'DELETE', credentials: 'same-origin', headers });
+    const data = await fetch(`/canvas/api/v0/layout/canvas_page/${id}`, { credentials: 'same-origin' }).then(json);
+    const layout = data.layout;
+    const model = data.model;
+    const content = layout.find((r) => r.nodeType === 'region' && r.id === 'content');
+    if (!content) return { ok: false, error: 'No main content region found in the Canvas layout.' };
+
+    // 3. Idempotency: drop any existing block for the same webform so re-runs
+    //    (and adding to the same page twice) never duplicate the form.
+    for (const region of layout) {
+      if (!Array.isArray(region.components)) continue;
+      region.components = region.components.filter((c) => {
+        const m = model[c.uuid];
+        const isSame = m && m.resolved && m.resolved.webform_id === webformId;
+        if (isSame) delete model[c.uuid];
+        return !isSame;
+      });
+    }
+
+    // 4. Append the webform block component at the bottom of the content region.
+    const uuid = crypto.randomUUID();
+    content.components.push({ uuid, nodeType: 'component', type: 'block.webform_block@75298500addde82f', name: null, slots: [] });
+    model[uuid] = { resolved: { webform_id: webformId, settings: { default_data: '', redirect: false, lazy: false }, label: 'Webform', label_display: '0' } };
+
+    // 5. Save the layout (auto-save) then publish it.
+    const post = await fetch(`/canvas/api/v0/layout/canvas_page/${id}`, {
+      method: 'POST', credentials: 'same-origin', headers,
+      body: JSON.stringify({ layout, model, autoSaves: data.autoSaves, clientInstanceId: crypto.randomUUID(), entity_form_fields: data.entity_form_fields }),
+    });
+    if (!post.ok) return { ok: false, error: `Layout POST failed (${post.status}): ${(await post.text()).slice(0, 200)}` };
+
+    const pending = await fetch('/canvas/api/v0/auto-saves/pending', { credentials: 'same-origin' }).then(json);
+    const pub = await fetch('/canvas/api/v0/auto-saves/publish', {
+      method: 'POST', credentials: 'same-origin', headers, body: JSON.stringify(pending.data),
+    });
+    if (!pub.ok) return { ok: false, error: `Publish failed (${pub.status}): ${(await pub.text()).slice(0, 200)}` };
+    return { ok: true };
+  }, { webformId, pageTitle });
+
+  if (!result || !result.ok) {
+    throw friendly(
+      `Could not add the "${webformId}" webform to the "${pageTitle}" Canvas page.`,
+      (result && result.error) || 'Ensure you are logged in as a user who can publish Canvas auto-saves.'
+    );
+  }
+  await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
+});
