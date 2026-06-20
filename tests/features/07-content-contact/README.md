@@ -12,6 +12,5 @@ FEATURES="tests/features/07-content-contact/**/*.feature" ddev yarn test:chromiu
 
 | Feature file | Description | Scenarios |
 | --- | --- | --- |
-| `07-01-contact-us-page.feature` | Frontend Pages - Contact Us Page | 6 |
-
-**Total: 6 scenarios across 1 feature files.**
+| `07-01-contact-us-page.feature` | Contact Us Canvas page rendering | 9 |
+| `07-02-business-contact-webform.feature` | Business Contact webform interaction on /contact-us | 5 |

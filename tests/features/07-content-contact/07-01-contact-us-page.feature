@@ -13,7 +13,14 @@ Feature: Frontend Pages - Contact Us Page
       And I should not see "Page not found"
 
   @check @local @development @staging @production
-  Scenario: Check that the Contact Us form fields are present
+  Scenario: Check that the Contact Us page loads within the performance budget
+    Given I am an anonymous user
+     When I go to "/contact-us"
+      And wait
+     Then the page should load in less than 10 seconds
+
+  @check @local @development @staging @production
+  Scenario: Check that all Business Contact form fields are present
     Given I am an anonymous user
      When I go to "/contact-us"
       And wait
@@ -24,7 +31,29 @@ Feature: Frontend Pages - Contact Us Page
       And I should see a "Country" element
       And I should see a "Email" element
       And I should see a "Phone number" element
+      And I should see a "Subject" element
       And I should see a "Message" element
+
+  @check @local @development @staging @production
+  Scenario: Check that the required Business Contact fields are marked required
+    Given I am an anonymous user
+     When I go to "/contact-us"
+      And wait
+     Then the field "First Name" should be required
+      And the field "Last name" should be required
+      And the field "Company name" should be required
+      And the field "Email" should be required
+      And the field "Subject" should be required
+
+  @check @local @development @staging @production
+  Scenario: Check that the Industry select lists its options
+    Given I am an anonymous user
+     When I go to "/contact-us"
+      And wait
+     Then the option "Technology" should exist within the select element "[name='industry']"
+      And the option "Finance & Banking" should exist within the select element "[name='industry']"
+      And the option "Healthcare" should exist within the select element "[name='industry']"
+      And the option "Other" should exist within the select element "[name='industry']"
 
   @check @local @development @staging @production
   Scenario: Check that the submit button is present

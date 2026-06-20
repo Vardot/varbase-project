@@ -134,3 +134,48 @@ When(/^(?:I |we )*open the "([^"]*)" link in the "([^"]*)" row$/, async function
   await this.page.goto(url, { waitUntil: 'domcontentloaded' });
   await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
 });
+
+/**
+ * Fill an international telephone field (Webform `tel` element with
+ * `#international`, rendered by the intl-tel-input library). Setting the raw
+ * value with a plain "fill in" step is not enough: intl-tel-input validates
+ * the number with libphonenumber and rejects anything it cannot parse, so the
+ * webform's clientside/serverside validation fails. This step drives the
+ * intl-tel-input instance itself (`setNumber`) and dispatches input/blur so
+ * both the widget and the webform see a valid, formatted number.
+ *
+ * Pass the number in E.164 form (e.g. "+14155552671") for deterministic
+ * results regardless of the field's selected country.
+ *
+ * Example: When I fill in the international phone field with "+14155552671"
+ */
+When(/^(?:I |we )*fill in the international phone (?:field|number)(?: "[^"]*")? with "([^"]*)"$/, async function (number) {
+  const valid = await this.page.evaluate((num) => {
+    const g = window.intlTelInputGlobals;
+    if (!g || !g.instances) return null;
+    const keys = Object.keys(g.instances);
+    if (!keys.length) return null;
+    const inst = g.instances[keys[0]];
+    inst.setNumber(num);
+    const input = inst.telInput || document.querySelector('input[type="tel"]');
+    if (input) {
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+      input.dispatchEvent(new Event('blur', { bubbles: true }));
+    }
+    return inst.isValidNumber();
+  }, number);
+
+  if (valid === null) {
+    throw friendly(
+      'No intl-tel-input phone field was found on the page.',
+      'This step only works on a Webform "tel" element with #international enabled.'
+    );
+  }
+  if (!valid) {
+    throw friendly(
+      `"${number}" is not a valid phone number for this field.`,
+      'Pass a libphonenumber-valid number in E.164 form, e.g. "+14155552671".'
+    );
+  }
+});
