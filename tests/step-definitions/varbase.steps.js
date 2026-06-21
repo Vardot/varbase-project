@@ -260,3 +260,39 @@ When(/^(?:I |we )*add the "([^"]*)" webform to the bottom of the "([^"]*)" (?:Ca
   }
   await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
 });
+
+/**
+ * Assert that a component is (or is not) offered in the Drupal Canvas editor's
+ * component library. The editor populates its library from the same
+ * `/canvas/api/v0/config/component` endpoint queried here, so this verifies
+ * what an editor sees when building a page - without driving the React editor.
+ *
+ * Requires an authenticated user who can edit Canvas pages (run a login step
+ * and navigate to an admin page first so the request is same-origin).
+ *
+ * Example:
+ *   Then the Drupal Canvas component library should list the "block.system_menu_block.main" component
+ */
+Then(/^the Drupal Canvas component library should( not)? list the "([^"]*)" component$/, async function (negate, componentId) {
+  const present = await this.page.evaluate(async (cid) => {
+    const data = await fetch('/canvas/api/v0/config/component', { credentials: 'same-origin' })
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null);
+    if (!data) return null;
+    const keys = Array.isArray(data) ? data.map((x) => x.id || x) : Object.keys(data);
+    return keys.includes(cid);
+  }, componentId);
+
+  if (present === null) {
+    throw friendly(
+      'Could not read the Drupal Canvas component library.',
+      'Run a login step (e.g. the webmaster) and navigate to an admin page first.'
+    );
+  }
+  if (negate && present) {
+    throw friendly(`Component "${componentId}" should not be in the Canvas library, but it is.`);
+  }
+  if (!negate && !present) {
+    throw friendly(`Component "${componentId}" is not listed in the Canvas component library.`);
+  }
+});

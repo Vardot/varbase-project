@@ -17,5 +17,6 @@ FEATURES="tests/features/01-website-base-requirements/**/*.feature" ddev yarn te
 | `01-03-user-roles.feature` | Website Base Requirements - User Roles - Simple Roles | 1 |
 | `01-04-input-formats.feature` | Content Editing - Rich Text Editor - Input formats | 2 |
 | `01-05-website-languages.feature` | Website Base Requirements - Website Languages - Internationalization | 3 |
+| `01-06-front-end-pages.feature` | Website Base Requirements - Front-end pages (working header/footer, landmarks, language, no JS errors) across Canvas pages, blog articles and content pages | 19 |
 
-**Total: 10 scenarios across 5 feature files.**
+**Total: 29 scenarios across 6 feature files.**

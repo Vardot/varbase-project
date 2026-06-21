@@ -14,5 +14,6 @@ FEATURES="tests/features/09-drupal-canvas/**/*.feature" ddev yarn test:chromium
 | --- | --- | --- |
 | `09-01-canvas-pages-permissions.feature` | Content Structure - Canvas Pages permissions | 6 |
 | `09-02-canvas-editor.feature` | Content Structure - Drupal Canvas Editor | 5 |
+| `09-03-canvas-menus.feature` | Content Structure - Menus in Drupal Canvas (system menus offered in the component library) | 1 |
 
-**Total: 11 scenarios across 2 feature files.**
+**Total: 12 scenarios across 3 feature files.**
