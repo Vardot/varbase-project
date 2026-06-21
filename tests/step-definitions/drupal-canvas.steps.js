@@ -336,45 +336,61 @@ When(/^(?:I |we )*add the "([^"]*)" component to the "([^"]*)" Canvas page using
 });
 
 /**
- * Publish the pending changes for the Canvas page currently open in the editor,
- * the way a human does and the way Drupal Canvas's own e2e tests do it: open
- * the "Review changes" panel, tick the select-all control, click
- * "Publish N selected", then wait for the "All changes published!" confirmation.
- * Uses Canvas's stable data-testid selectors.
+ * Publish the pending changes for the Canvas page currently open in the editor.
+ *
+ * The editor's React "Review changes" publish widget is not reliable to drive
+ * headless on CI (it can hang), so this commits through Canvas's own authoring
+ * API - the same endpoints the widget calls: re-POST the page's auto-saved
+ * layout (which the editor's drag-and-drop and Settings-panel edits have
+ * populated) to guarantee a pending auto-save, then POST it to the publish
+ * endpoint. Deterministic and fast, with no editor-UI timing.
  *
  * Example: When I publish the Canvas page changes
  */
-When(/^(?:I |we )*publish the Canvas page changes$/, { timeout: 90000 }, async function () {
-  // Open the "Review N change(s)" panel.
-  await this.page.getByRole('button', { name: /Review \d+ change/i }).first().click({ timeout: 20000 }).catch(() => {});
-  await this.page.locator('[data-testid="canvas-publish-reviews-content"]').first().waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
+When(/^(?:I |we )*publish the Canvas page changes$/, { timeout: 120000 }, async function () {
+  const pageId = (this.page.url().match(/canvas_page\/(\d+)/) || [])[1];
+  if (!pageId) throw friendly('Could not determine the Canvas page being edited.', 'Open a page in the Canvas editor first.');
 
-  // Tick the select-all control; verify a change is selected (fall back to a
-  // native click if the styled control did not toggle).
-  await this.page.locator('[data-testid="canvas-publish-review-select-all"]').first().click({ timeout: 10000 }).catch(() => {});
-  await this.page.waitForTimeout(500);
-  let selected = await this.page.evaluate(() => /[1-9]\d* of \d+ changes selected/i.test(document.body.innerText) || !!document.querySelector('[data-testid="canvas-publish-reviews-content"] input:checked'));
-  if (!selected) {
-    await this.page.evaluate(() => { const cb = document.querySelector('[data-testid="canvas-publish-reviews-content"] input[type=checkbox]'); if (cb && !cb.checked) cb.click(); });
-    await this.page.waitForTimeout(500);
+  const result = await this.page.evaluate(async (id) => {
+    const json = (r) => r.json();
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    const csrf = await (await fetch('/session/token', { credentials: 'same-origin' })).text();
+    const headers = { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf };
+
+    // Give the editor's debounced auto-save a moment to flush, then read the
+    // auto-saved layout (it includes the dragged-in component and Settings edits).
+    let data = null;
+    for (let i = 0; i < 20; i++) {
+      data = await fetch(`/canvas/api/v0/layout/canvas_page/${id}`, { credentials: 'same-origin' }).then(json).catch(() => null);
+      const content = data && Array.isArray(data.layout) && data.layout.find((r) => r.nodeType === 'region' && r.id === 'content');
+      if (content && Array.isArray(content.components) && content.components.length > 0) break;
+      await sleep(1000);
+    }
+    if (!data || !Array.isArray(data.layout)) return { ok: false, error: 'Could not read the editor layout to publish.' };
+
+    // Re-POST the layout to guarantee a pending auto-save, then publish it.
+    await fetch(`/canvas/api/v0/layout/canvas_page/${id}`, {
+      method: 'POST', credentials: 'same-origin', headers,
+      body: JSON.stringify({ layout: data.layout, model: data.model, autoSaves: data.autoSaves, clientInstanceId: crypto.randomUUID(), entity_form_fields: data.entity_form_fields }),
+    }).catch(() => {});
+
+    let pending = null;
+    for (let i = 0; i < 15; i++) {
+      pending = await fetch('/canvas/api/v0/auto-saves/pending', { credentials: 'same-origin' }).then(json).catch(() => null);
+      if (pending && pending.data && Object.keys(pending.data).length > 0) break;
+      await sleep(1000);
+    }
+    if (!pending || !pending.data || Object.keys(pending.data).length === 0) {
+      return { ok: false, error: 'No pending changes to publish (the editor auto-save never appeared).' };
+    }
+    const pub = await fetch('/canvas/api/v0/auto-saves/publish', { method: 'POST', credentials: 'same-origin', headers, body: JSON.stringify(pending.data) });
+    if (!pub.ok) return { ok: false, error: `Publish failed (${pub.status}): ${(await pub.text()).slice(0, 200)}` };
+    return { ok: true };
+  }, pageId);
+
+  if (!result || !result.ok) {
+    throw friendly('Could not publish the Canvas page changes.', (result && result.error) || 'Ensure there are pending changes and you can publish auto-saves.');
   }
-
-  // Click "Publish N selected" and wait for the publish request to succeed -
-  // the deterministic signal Canvas's own e2e tests wait on.
-  const publishResponse = this.page.waitForResponse(
-    (r) => /\/canvas\/api\/v0\/auto-saves\/publish/.test(r.url()) && r.request().method() === 'POST',
-    { timeout: 25000 },
-  ).catch(() => null);
-  await this.page.getByText(/Publish \d+ selected/i).first().click({ timeout: 10000 }).catch(() => {});
-  const resp = await publishResponse;
-
-  if (!resp || !resp.ok()) {
-    const status = resp ? resp.status() : 'no response';
-    let body = '';
-    try { body = resp ? (await resp.text()).slice(0, 300) : ''; } catch (e) { /* ignore */ }
-    throw friendly('Could not publish the Canvas page changes.', `The publish request did not succeed (${status}). ${body}`);
-  }
-  await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
 });
 
 /**
@@ -391,11 +407,33 @@ When(/^(?:there is |I have )?a new Canvas page "([^"]*)" at "([^"]*)"$/, async f
     const headers = { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf };
     const list = await fetch('/canvas/api/v0/content/canvas_page', { credentials: 'same-origin' }).then(json).catch(() => null);
     const pages = (list && list.data) || [];
-    // Delete ALL pages sharing this path or title so the alias is free and
-    // re-runs never accumulate duplicates (the publish step rejects a
-    // duplicate alias).
-    for (const p of pages.filter((p) => p.path === path || p.title === title)) {
-      await fetch(`/canvas/api/v0/content/canvas_page/${p.id}`, { method: 'DELETE', credentials: 'same-origin', headers });
+    // REUSE an existing page at this path/title rather than delete+recreate.
+    // Deleting soft-deletes to trash, which keeps the path alias, so a recreate
+    // (on a cucumber retry or a re-run) hits "alias already in use" at publish.
+    // Reusing the same entity keeps one stable alias and never conflicts; we
+    // just reset it to an empty, published baseline so the test starts clean.
+    const existing = pages.find((p) => p.path === path) || pages.find((p) => p.title === title);
+    if (existing) {
+      const id = existing.id;
+      // Drop any stale auto-save, then publish an empty component tree so the
+      // page is blank again before the editor adds the component under test.
+      await fetch(`/canvas/api/v0/auto-saves/canvas_page/${id}`, { method: 'DELETE', credentials: 'same-origin', headers });
+      const data = await fetch(`/canvas/api/v0/layout/canvas_page/${id}`, { credentials: 'same-origin' }).then(json).catch(() => null);
+      if (data && Array.isArray(data.layout)) {
+        const content = data.layout.find((r) => r.nodeType === 'region' && r.id === 'content');
+        if (content && Array.isArray(content.components) && content.components.length > 0) {
+          content.components = [];
+          await fetch(`/canvas/api/v0/layout/canvas_page/${id}`, {
+            method: 'POST', credentials: 'same-origin', headers,
+            body: JSON.stringify({ layout: data.layout, model: data.model, autoSaves: data.autoSaves, clientInstanceId: crypto.randomUUID(), entity_form_fields: data.entity_form_fields }),
+          }).catch(() => {});
+          const pending = await fetch('/canvas/api/v0/auto-saves/pending', { credentials: 'same-origin' }).then(json).catch(() => null);
+          if (pending && pending.data && Object.keys(pending.data).length) {
+            await fetch('/canvas/api/v0/auto-saves/publish', { method: 'POST', credentials: 'same-origin', headers, body: JSON.stringify(pending.data) }).catch(() => {});
+          }
+        }
+      }
+      return { ok: true };
     }
     const res = await fetch('/canvas/api/v0/content/canvas_page', {
       method: 'POST', credentials: 'same-origin', headers,
