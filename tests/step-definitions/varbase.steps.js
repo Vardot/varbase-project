@@ -361,3 +361,37 @@ Then(/^the "([^"]*)" should( not)? be sticky$/, async function (name, negate) {
     assert.strictEqual(position, 'sticky', friendly(`Expected "${name}" to be sticky, but its computed position is "${position}".`));
   }
 });
+
+/**
+ * Warm up a page across every viewport breakpoint in the testing settings.
+ *
+ * The default theme renders responsive images via drimage_improved, which builds
+ * a different WebP derivative per rendered width. This visits the page once at
+ * each breakpoint from worldParameters.selectors.breakpoints (scrolling to the
+ * bottom to trigger lazy images) so every derivative is generated and cached to
+ * disk before the health checks assert on console errors. It makes no
+ * assertions; it only primes the cache.
+ *
+ * Example #1: When I warm up "/" at all testing breakpoints
+ * Example #2: And I warm up "/features" at all testing breakpoints
+ * Example #3: When we warm up "/blog" at all testing breakpoints
+ * Example #4: And I warm up "/contact-us" at all testing breakpoints
+ * Example #5: Given I warm up "/about-varbase" at all testing breakpoints
+ */
+When(/^(?:I |we )*warm up "([^"]*)" at all testing breakpoints$/, async function (path) {
+  const base = this.launchUrl.replace(/\/$/, '');
+  const url = path.startsWith('http') ? path : base + (path.startsWith('/') ? path : '/' + path);
+  const configured = (this.parameters.selectors && this.parameters.selectors.breakpoints) || {};
+  const breakpoints = Object.values(configured);
+  if (!breakpoints.length) {
+    breakpoints.push({ width: 1920, height: 1080 });
+  }
+  const budget = (this.minWaitTime && this.minWaitTime.page) || 8000;
+  for (const breakpoint of breakpoints) {
+    await this.page.setViewportSize({ width: breakpoint.width, height: breakpoint.height });
+    await this.page.goto(url, { waitUntil: 'domcontentloaded' });
+    await smartSettle(this.page, budget);
+    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await smartSettle(this.page, budget);
+  }
+});
