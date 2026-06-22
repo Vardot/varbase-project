@@ -155,9 +155,14 @@ stylelint:
   # Build the codebase in-job from the composer artifact's lock file (the
   # composer job does not pass the full build - too large to artifact) and
   # install ImageMagick (Varbase's image toolkit; the drupalci image lacks the
-  # identify/convert binaries -> error 127).
+  # identify/convert binaries -> error 127). drimage_improved emits WebP
+  # derivatives on the fly, so the WebP coder + libraries must be present and
+  # the ImageMagick security policy must allow reading/writing WEBP, otherwise
+  # derivative generation fails and the front-end pages log resource 404s.
   prepare_code: &prepare_code
-    - apt-get update -y && apt-get install -y imagemagick
+    - apt-get update -y && apt-get install -y imagemagick webp libwebp7
+    - apt-get install -y libmagickcore-7.q16-10-extra || apt-get install -y libmagickcore-6.q16-6-extra || true
+    - sed -i 's/rights="none"\s*pattern="WEBP"/rights="read|write" pattern="WEBP"/I' /etc/ImageMagick-*/policy.xml 2>/dev/null || true
     # The cached Composer VCS clones are owned by a different uid across jobs;
     # tell git to trust them (otherwise "detected dubious ownership").
     - git config --global --add safe.directory '*'
@@ -173,6 +178,14 @@ stylelint:
     - chmod -R 777 $CI_PROJECT_DIR/$_WEB_ROOT/sites/simpletest
     - rm -rf /var/www/html && ln -s $CI_PROJECT_DIR/$_WEB_ROOT /var/www/html
     - chown -R www-data:www-data $CI_PROJECT_DIR
+    # Drupal's .htaccess rewrites missing /sites/default/files/styles/... requests
+    # to index.php so image styles (incl. drimage WebP derivatives) generate on
+    # the fly. That needs mod_rewrite plus AllowOverride All and FollowSymLinks
+    # on the symlinked docroot; without it those requests 404 instead of routing
+    # to Drupal.
+    - a2enmod rewrite headers
+    - printf '<Directory /var/www/html>\n  Options +FollowSymLinks\n  AllowOverride All\n  Require all granted\n</Directory>\n' > /etc/apache2/conf-available/drupal-docroot.conf
+    - a2enconf drupal-docroot
     - service apache2 start
     - export SIMPLETEST_DB=mysql://$MYSQL_USER:$MYSQL_PASSWORD@database/$MYSQL_DATABASE
   # Rebuild caches and dump the DB for the next pre-test job in the chain.

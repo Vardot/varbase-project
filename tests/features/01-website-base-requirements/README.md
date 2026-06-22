@@ -18,5 +18,6 @@ FEATURES="tests/features/01-website-base-requirements/**/*.feature" ddev yarn te
 | `01-04-input-formats.feature` | Content Editing - Rich Text Editor - Input formats | 2 |
 | `01-05-website-languages.feature` | Website Base Requirements - Website Languages - Internationalization | 3 |
 | `01-06-front-end-pages.feature` | Website Base Requirements - Front-end pages (working header/footer, landmarks, language, no JS errors) across Canvas pages, blog articles and content pages | 19 |
+| `01-07-default-theme-settings.feature` | Website Base Requirements - Default theme settings (sticky header: default on, scrolled state, enable/disable) | 4 |
 
-**Total: 29 scenarios across 6 feature files.**
+**Total: 33 scenarios across 7 feature files.**
