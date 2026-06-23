@@ -1,6 +1,6 @@
 {
     "name": "drupal/varbase_project",
-    "version": "11.0.x-dev",
+    "version": "11.0.1",
     "description": "Project template for Varbase distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
@@ -33,8 +33,8 @@
         "drupal/core-vendor-hardening": "~11.3",
         "drupal/core": "~11.3.0",
         "drush/drush": "~13",
-        "vardot/varbase": "11.0.x-dev",
-        "vardot/varbase-patches": "11.0.x-dev"
+        "vardot/varbase": "~11.0.0",
+        "vardot/varbase-patches": "~11.0.0"
     },
     "conflict": {
         "drupal/drupal": "*"

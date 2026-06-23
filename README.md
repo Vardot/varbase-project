@@ -1,8 +1,6 @@
-[![pipeline status](https://git.drupalcode.org/project/varbase_project/badges/11.0.x/pipeline.svg)](https://git.drupalcode.org/project/varbase_project/-/commits/11.0.x)
-[![coverage report](https://git.drupalcode.org/project/varbase_project/badges/11.0.x/coverage.svg)](https://git.drupalcode.org/project/varbase_project/-/commits/11.0.x)
-[![Latest Release](https://git.drupalcode.org/project/varbase_project/-/badges/release.svg)](https://git.drupalcode.org/project/varbase_project/-/releases)
-
-**Varbase 11.0.0-alpha2**
+[![pipeline status](https://git.drupalcode.org/project/varbase_project/badges/11.0.x/pipeline.svg)](https://git.drupalcode.org/project/varbase_project/-/pipelines)
+[![Varbase Project](https://img.shields.io/badge/Varbase%20Project-11.0.1-0d6efc?labelColor=001d38&style=flat-square)](https://git.drupalcode.org/project/varbase_project/-/pipelines?ref=11.0.0)
+[![Automated Functional Testing](https://git.drupalcode.org/project/varbase_project/badges/11.0.x/pipeline.svg)](https://git.drupalcode.org/project/varbase_project/-/pipelines)
 
 
 [![](https://raw.githubusercontent.com/Vardot/varbase/11.0.x/images/varbase-logo.png)](https://www.drupal.org/project/varbase)
@@ -35,7 +33,7 @@ instructions.
 
 To install the most recent stable release of **Varbase `11.0.x`** run this command:
 ```
-composer create-project drupal/varbase_project:~11.0.0 PROJECT_DIR_NAME --no-dev --no-interaction
+composer create-project drupal/varbase_project:~11 PROJECT_DIR_NAME --no-dev --no-interaction
 ```
 
 To install the dev version of **Varbase `11.0.x`** run this command:
