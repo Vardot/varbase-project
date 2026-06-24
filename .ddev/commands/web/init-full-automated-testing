@@ -135,11 +135,10 @@ echo ""
 echo "--- Relaxing login flood limits for automated testing ---"
 # The webship-js suite logs in many times in a row; the default flood
 # limits (ip_limit 5 / user_limit 4) trip "Too many failed login attempts"
-# and cascade-fail every login-dependent scenario. Raise the ceilings and
-# clear any existing flood events so the suite starts from a clean slate.
+# and cascade-fail every login-dependent scenario. Raise the ceilings so the
+# suite starts from a clean slate.
 drush config:set user.flood ip_limit 1000000 --yes
 drush config:set user.flood user_limit 1000000 --yes
-drush sql:query "TRUNCATE flood;" 2>/dev/null || drush sql:query "DELETE FROM flood;" 2>/dev/null || echo "  Could not clear flood table"
 
 echo ""
 echo "--- Disabling Honeypot time trap for automated testing ---"

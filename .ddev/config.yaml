@@ -36,3 +36,9 @@ web_extra_daemons:
 hooks:
   post-start:
     - exec: yarn set version berry
+    # Re-enable the Storybook development local services (CORS, Twig debug) in
+    # settings.ddev.php. DDEV regenerates that file on every start and would
+    # otherwise drop the include added by `ddev init-storybook`, breaking
+    # cross-origin story rendering on the storybook.* subdomain. No-op until
+    # init-storybook has copied development.local.services.yml into place.
+    - exec: bash /var/www/html/.ddev/commands/web/storybook enable --boot

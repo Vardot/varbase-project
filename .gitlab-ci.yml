@@ -109,10 +109,23 @@ nightwatch:
 "deprecation - composer":
   rules: [{ when: never }]
   script: ["true"]
+# drupalci also ships cspell / eslint / stylelint. We replace them with our own
+# self-contained, emoji-named jobs below (🔤 Cspell / 🟨 ESLint / 🎨 Stylelint),
+# so disable the drupalci originals to avoid duplicate jobs that would expect
+# the full build artifact.
+cspell:
+  rules: [{ when: never }]
+  script: ["true"]
+eslint:
+  rules: [{ when: never }]
+  script: ["true"]
+stylelint:
+  rules: [{ when: never }]
+  script: ["true"]
 
 # = Validate stage =
 
-cspell:
+"🔤 Cspell":
   stage: validate
   image: node:20
   before_script:
@@ -121,8 +134,52 @@ cspell:
     - cspell "**/*.{php,module,inc,install,test,profile,theme,js,css,md,yml,txt}" --no-progress || true
   allow_failure: false
 
+# = YAML lint =
+#
+# Validates every YAML file in the project parses. Registers a catch-all
+# constructor so GitLab's custom `!reference` tags (and any other `!tags`) do
+# not fail the parse. Skips vendor / node_modules / web (contrib + core).
+"📐 YAML lint":
+  stage: validate
+  image: python:3.12-slim
+  needs: []
+  before_script:
+    - pip install --no-cache-dir pyyaml
+  script:
+    - |
+      python - <<'PY'
+      import sys, yaml
+      from pathlib import Path
+
+      class Loader(yaml.SafeLoader):
+          pass
+      # Treat any unknown tag (e.g. GitLab CI's !reference) as a no-op so the
+      # file still parses for a pure syntax check.
+      Loader.add_multi_constructor('', lambda loader, suffix, node: None)
+
+      SKIP = ('vendor/', 'node_modules/', 'web/core/', 'web/modules/contrib/',
+              'web/themes/contrib/', 'web/profiles/contrib/', 'web/libraries/',
+              '.cache/')
+      errors = 0
+      count = 0
+      for path in sorted(Path('.').rglob('*.y*ml')):
+          rel = str(path).lstrip('./')
+          if any(s in rel for s in SKIP):
+              continue
+          count += 1
+          try:
+              with open(path) as fh:
+                  list(yaml.load_all(fh, Loader=Loader))
+          except yaml.YAMLError as e:
+              errors += 1
+              print(f"INVALID: {rel}\n  {e}")
+      print(f"Checked {count} YAML files, {errors} invalid.")
+      sys.exit(1 if errors else 0)
+      PY
+  allow_failure: false
+
 # Node 20+ required: webship-js >= 2.0 declares engines.node ">=20".
-eslint:
+"🟨 ESLint":
   stage: validate
   image: node:20
   # --mode=skip-build skips the package.json postinstall (drupal-libraries-sync,
@@ -138,7 +195,7 @@ eslint:
     - touch junit.xml _eslint.patch
   allow_failure: false
 
-stylelint:
+"🎨 Stylelint":
   stage: validate
   image: node:20
   before_script:
@@ -148,6 +205,61 @@ stylelint:
     - yarn lint:css || true
   after_script:
     - echo '[]' > gl-codequality.json
+  allow_failure: false
+
+# = PHP_CodeSniffer (Drupal coding standards) =
+#
+# Self-contained PHPCS over the project's custom code (web/modules/custom +
+# web/themes/custom, per .phpcs.xml). The drupalci `phpcs` job is disabled above
+# because it needs the full composer build artifact; this one installs its own
+# drupal/coder so it runs without that artifact. Named with an emoji prefix to
+# sit alongside the project's other custom jobs and not collide with the
+# disabled drupalci `phpcs`.
+"🐘 PHPCS":
+  stage: validate
+  image: php:8.4-cli
+  needs: []
+  before_script:
+    - apt-get update -y && apt-get install -y git unzip
+    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    # Composer 2.2+ blocks third-party plugins by default; allow the PHPCS
+    # standards installer before requiring it, or `composer global require`
+    # aborts ("contains a Composer plugin which is blocked by your allow-plugins").
+    - composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+    - composer global require drupal/coder:^8.3 dealerdirect/phpcodesniffer-composer-installer --no-interaction
+    - export PATH="$(composer global config bin-dir --absolute 2>/dev/null):$PATH"
+  script:
+    # The standard lists web/modules/custom + web/themes/custom; create them so
+    # PHPCS has valid (possibly empty) targets instead of erroring on a missing
+    # path on a fresh template.
+    - mkdir -p web/modules/custom web/themes/custom
+    - phpcs --version
+    - phpcs --standard=.phpcs.xml -p web/modules/custom web/themes/custom
+  allow_failure: false
+
+# = PHPStan (static analysis) =
+#
+# Self-contained PHPStan over the recipes (phpstan.neon scopes
+# recipes/varbase_starter). The neon includes phar://phpstan.phar/..., so it
+# runs against the downloaded phpstan.phar in the project root. The disabled
+# drupalci `deprecation - composer` / `phpstan` jobs need the full build artifact.
+"🔬 PHPStan":
+  stage: validate
+  image: php:8.4-cli
+  needs: []
+  before_script:
+    - apt-get update -y && apt-get install -y curl
+    - curl -sSL https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar -o phpstan.phar
+    - chmod +x phpstan.phar
+  script:
+    # Only analyse when the scope actually has PHP (the template ships none yet);
+    # otherwise PHPStan would error with "No files found to analyse".
+    - |
+      if find recipes/varbase_starter -name '*.php' | grep -q .; then
+        php phpstan.phar analyse -c phpstan.neon --no-progress
+      else
+        echo "No PHP files in PHPStan scope (recipes/varbase_starter) - nothing to analyse."
+      fi
   allow_failure: false
 
 # = Reusable before_script fragments (via !reference) =
@@ -266,6 +378,91 @@ stylelint:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance js.preprocess 0 -y
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.logging error_level all -y
     - !reference [.fragments, dump_db]
+  allow_failure: false
+
+# = Storybook build - own job (pre-test) =
+#
+# Tests the two Storybook commands developers rely on (mirrors what
+# `ddev storybook build` and `ddev yarn storybook:ddev` run): a static
+# `yarn storybook:build` and a booted `yarn storybook:dev` server, asserting
+# both produce/serve a non-empty story index. Self-contained: it builds the
+# codebase from the composer lock (so the vartheme_bs5 components + their
+# shipped *.stories.json are present) and needs no database or running Drupal -
+# the Server framework builds/serves the index client-side, no render backend.
+"📖 Storybook build":
+  extends: .testing-job-base
+  stage: pre-test
+  # Start only after Varbase is installed. This job builds its own codebase
+  # from the composer lock and needs no DB / running Drupal, so it pulls the
+  # composer.lock artifact but skips the heavy 📦 Install Varbase artifacts
+  # (artifacts: false) - the dependency is for ordering only.
+  needs:
+    - composer
+    - job: "📦 Install Varbase"
+      artifacts: false
+  timeout: 1h
+  cache: *varbase_cache
+  variables:
+    # Read by .storybook/middleware.js (STORYBOOK_SERVER_URL) and
+    # preview.ts (STORYBOOK_SERVER_RENDER_URL). Only embedded into the build;
+    # they do not need to be reachable for build/index to succeed.
+    STORYBOOK_SERVER_URL: "http://localhost"
+    STORYBOOK_SERVER_RENDER_URL: "http://localhost/storybook/stories/render"
+  artifacts:
+    when: always
+    paths:
+      - storybook/
+      - storybook-dev.log
+    expire_in: 7 days
+  before_script:
+    # Build the codebase from composer.lock (brings in web/themes/contrib/
+    # vartheme_bs5 with its shipped component stories). No web_db / Apache / DB.
+    - !reference [.fragments, prepare_code]
+    # Node.js 20 + yarn. --mode=skip-build skips the composer-bound postinstall
+    # (drupal-libraries-sync), which the static Storybook build does not need.
+    - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    - apt-get install -y nodejs
+    - node --version && npm --version
+    - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
+    - corepack enable
+    - yarn install --mode=skip-build
+    # Chromium for the real-browser page check (Test 3). Playwright ships its
+    # own browser; --with-deps pulls the system libs the CI image lacks.
+    - ./node_modules/.bin/playwright install --with-deps chromium
+  script:
+    # Sanity: the component stories ship with the vartheme_bs5 theme (composer).
+    - 'test -d web/themes/contrib/vartheme_bs5/components || { echo "vartheme_bs5 components missing"; exit 1; }'
+    # = Test 1: static build (yarn storybook:build -> ./storybook) =
+    - yarn storybook:build
+    - 'test -f storybook/index.html || { echo "build produced no index.html"; exit 1; }'
+    - 'test -f storybook/index.json || { echo "build produced no index.json"; exit 1; }'
+    - |
+      BUILD_COUNT=$(grep -o '"id":' storybook/index.json | wc -l)
+      echo "Storybook build: ${BUILD_COUNT} entries in index.json"
+      test "${BUILD_COUNT}" -gt 0 || { echo "0 stories in built index.json"; exit 1; }
+    # = Test 2: dev server (yarn storybook:dev) boots and serves the index =
+    - yarn storybook:dev > storybook-dev.log 2>&1 &
+    - SB_PID=$!
+    - |
+      UP=0
+      for i in $(seq 1 60); do
+        if curl -sf http://127.0.0.1:6006/index.json | grep -q '"entries"'; then UP=1; break; fi
+        sleep 5
+      done
+      if [ "${UP}" != "1" ]; then echo "dev server did not come up on :6006"; tail -n 50 storybook-dev.log; kill "${SB_PID}" 2>/dev/null; exit 1; fi
+    - |
+      DEV_COUNT=$(curl -sf http://127.0.0.1:6006/index.json | grep -o '"id":' | wc -l)
+      echo "Storybook dev: ${DEV_COUNT} entries served on :6006"
+      test "${DEV_COUNT}" -gt 0 || { echo "dev server served 0 stories"; kill "${SB_PID}" 2>/dev/null; exit 1; }
+    # = Test 3: the Storybook PAGE renders in a real (headless) browser =
+    # Drives Chromium against the dev server and asserts a story renders inside
+    # the preview iframe. Uses the static "Welcome" story, so it passes without
+    # a running Drupal render backend.
+    - |
+      SB_URL=http://127.0.0.1:6006 node tests/storybook/check-storybook-page.mjs
+      RC=$?
+      kill "${SB_PID}" 2>/dev/null || true
+      test "${RC}" -eq 0 || { echo "Storybook page check failed"; tail -n 50 storybook-dev.log; exit 1; }
   allow_failure: false
 
 # = webship-js BDD - one parallel job per feature folder =

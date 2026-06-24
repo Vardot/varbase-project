@@ -1,0 +1,373 @@
+#!/bin/bash
+
+## Description: Manage Storybook for Varbase: init | enable | disable | list | status | stats | doctor | gen | build
+## Usage: storybook <command>
+## Example: ddev storybook doctor
+## Aliases: varbase:storybook-manage,sb
+## AutocompleteTerms: ["init","enable","disable","list","status","stats","doctor","gen","build","help"]
+
+# Single entry point for working with Storybook on this project.
+#
+#   ddev storybook init      Full first-time setup (delegates to init-storybook).
+#   ddev storybook enable    Turn ON the dev local services (CORS, Twig debug)
+#                            so the storybook.* subdomain can render stories.
+#   ddev storybook disable   Turn them OFF (and keep them off across restarts).
+#   ddev storybook list      Print the Storybook URLs / domains to open.
+#   ddev storybook status    Show module / daemon / port / CORS health.
+#   ddev storybook gen       Regenerate *.stories.json from Twig.
+#   ddev storybook build     Build a static Storybook into ./storybook.
+#
+# The `enable` command is ALSO run from the post-start hook in .ddev/config.yaml,
+# because DDEV regenerates settings.ddev.php on every start and would otherwise
+# drop the include - silently breaking cross-origin story rendering (CORS).
+# Pass `--boot` there to skip the cache rebuild (a fresh container compiles on
+# its first request anyway).
+
+set -uo pipefail
+
+PROJECT_ROOT="/var/www/html"
+CMD_DIR="${PROJECT_ROOT}/.ddev/commands/web"
+DEFAULT_DIR="${PROJECT_ROOT}/web/sites/default"
+
+SERVICES_SRC="${CMD_DIR}/assets/development.local.services.yml"
+SERVICES_DST="${DEFAULT_DIR}/development.local.services.yml"
+DISABLED_FLAG="${DEFAULT_DIR}/.storybook-dev-services.disabled"
+SETTINGS_FILES=("${DEFAULT_DIR}/settings.ddev.php" "${DEFAULT_DIR}/settings.platformsh.php")
+SERVICES_LINE="\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';"
+
+# Resolve the Storybook subdomain + direct URLs from DDEV environment.
+PRIMARY_HOST="${DDEV_PRIMARY_URL_WITHOUT_PORT:-}"
+PRIMARY_HOST="${PRIMARY_HOST#https://}"
+PRIMARY_HOST="${PRIMARY_HOST#http://}"
+STORYBOOK_HOST="storybook.${PRIMARY_HOST#storybook.}"
+PORT="${DDEV_ROUTER_HTTPS_PORT:-443}"
+if [ "${PORT}" = "443" ]; then
+  DRUPAL_URL="https://${PRIMARY_HOST}"
+else
+  DRUPAL_URL="https://${PRIMARY_HOST}:${PORT}"
+fi
+
+# --- helpers --------------------------------------------------------------
+
+bootstrapped() {
+  [ "$(drush status --field=bootstrap 2>/dev/null)" = "Successful" ]
+}
+
+module_enabled() {
+  drush pm:list --status=enabled --field=name 2>/dev/null | grep -qx storybook
+}
+
+services_enabled() {
+  grep -qF "development.local.services.yml" "${DEFAULT_DIR}/settings.ddev.php" 2>/dev/null
+}
+
+daemon_running() {
+  sudo supervisorctl status webextradaemons:storybook 2>/dev/null | grep -q RUNNING
+}
+
+port_listening() {
+  ss -ltn 2>/dev/null | grep -q ':6006 '
+}
+
+cors_present() {
+  curl -sk -D - -o /dev/null -H "Origin: https://${STORYBOOK_HOST}" \
+    "${DRUPAL_URL}/storybook/stories/render/x" 2>/dev/null \
+    | grep -qi 'access-control-allow-origin'
+}
+
+# Fetch the Storybook index (story manifest) from the local dev server.
+fetch_index() {
+  curl -sk "http://127.0.0.1:6006/index.json" 2>/dev/null
+}
+
+# Append the include to a settings file if not already present.
+add_include() {
+  local f="$1"
+  [[ -f "${f}" && -s "${f}" ]] || return 0
+  if ! grep -qxF "${SERVICES_LINE}" "${f}"; then
+    {
+      echo ""
+      echo "// Enable the development local services for Storybook (CORS, Twig debug)."
+      echo "// Re-applied on every start by 'ddev storybook enable' (post-start hook)"
+      echo "// because DDEV regenerates settings.ddev.php and would otherwise drop it."
+      echo "${SERVICES_LINE}"
+    } >> "${f}"
+    echo "  enabled in $(basename "${f}")"
+  else
+    echo "  already enabled in $(basename "${f}")"
+  fi
+}
+
+# Strip the include (and its comment block) from a settings file.
+remove_include() {
+  local f="$1"
+  [[ -f "${f}" ]] || return 0
+  if grep -qF "development.local.services.yml" "${f}"; then
+    grep -vF \
+      -e "${SERVICES_LINE}" \
+      -e "// Enable the development local services for Storybook (CORS, Twig debug)." \
+      -e "// Re-applied on every start by 'ddev storybook enable' (post-start hook)" \
+      -e "// because DDEV regenerates settings.ddev.php and would otherwise drop it." \
+      "${f}" > "${f}.tmp" && mv "${f}.tmp" "${f}"
+    echo "  removed from $(basename "${f}")"
+  fi
+}
+
+# --- subcommands ----------------------------------------------------------
+
+cmd_init() {
+  exec bash "${CMD_DIR}/init-storybook"
+}
+
+cmd_enable() {
+  local boot=0
+  [ "${1:-}" = "--boot" ] && boot=1
+
+  # Honor a sticky "disabled" choice unless this is an explicit enable.
+  if [ "${boot}" = "1" ] && [ -f "${DISABLED_FLAG}" ]; then
+    echo "Storybook dev services are disabled (flag present) - skipping enable on boot."
+    return 0
+  fi
+  rm -f "${DISABLED_FLAG}"
+
+  # Make sure the services file exists (copy the template if needed).
+  if [[ ! -f "${SERVICES_DST}" && -f "${SERVICES_SRC}" ]]; then
+    cp "${SERVICES_SRC}" "${SERVICES_DST}"
+    echo "Copied development.local.services.yml to ${SERVICES_DST}"
+  fi
+  if [[ ! -f "${SERVICES_DST}" ]]; then
+    echo "Storybook dev services: template not found, nothing to enable."
+    return 0
+  fi
+
+  echo "Enabling Storybook development local services (CORS, Twig debug):"
+  for f in "${SETTINGS_FILES[@]}"; do add_include "${f}"; done
+
+  if [ "${boot}" = "0" ] && bootstrapped; then
+    drush cache:rebuild >/dev/null 2>&1 && echo "  cache rebuilt"
+  fi
+}
+
+cmd_disable() {
+  echo "Disabling Storybook development local services:"
+  touch "${DISABLED_FLAG}"
+  for f in "${SETTINGS_FILES[@]}"; do remove_include "${f}"; done
+  echo "  (stays disabled across restarts; run 'ddev storybook enable' to undo)"
+  if bootstrapped; then
+    drush cache:rebuild >/dev/null 2>&1 && echo "  cache rebuilt"
+  fi
+}
+
+cmd_list() {
+  echo "Storybook URLs for this project:"
+  echo "   • Subdomain:     https://${STORYBOOK_HOST}/"
+  echo "   • Direct port:   https://${PRIMARY_HOST}:6006/"
+  echo "   • Drupal render: ${DRUPAL_URL}/storybook/stories/render"
+  echo ""
+  local count
+  count=$(curl -sk "https://${STORYBOOK_HOST}/index.json" 2>/dev/null \
+    | grep -o '"id":' | wc -l | tr -d ' ')
+  if [ -n "${count}" ] && [ "${count}" != "0" ]; then
+    echo "   ${count} stories currently served."
+  else
+    echo "   (Storybook index not reachable yet - the dev server may still be building.)"
+  fi
+}
+
+cmd_status() {
+  echo "Storybook status:"
+
+  if bootstrapped; then
+    if module_enabled; then
+      echo "   • Drupal module 'storybook': ENABLED"
+    else
+      echo "   • Drupal module 'storybook': not enabled (run 'ddev storybook init')"
+    fi
+  else
+    echo "   • Drupal: not installed / not bootstrapped"
+  fi
+
+  if [ -f "${DISABLED_FLAG}" ]; then
+    echo "   • Dev local services (CORS): DISABLED (flag present)"
+  elif services_enabled; then
+    echo "   • Dev local services (CORS): enabled"
+  else
+    echo "   • Dev local services (CORS): not enabled"
+  fi
+
+  daemon_running   && echo "   • Storybook daemon: RUNNING"      || echo "   • Storybook daemon: not running"
+  port_listening   && echo "   • Port 6006: listening"          || echo "   • Port 6006: free"
+  cors_present     && echo "   • CORS header on render endpoint: present" \
+                   || echo "   • CORS header on render endpoint: MISSING (run 'ddev storybook enable')"
+}
+
+cmd_stats() {
+  local json
+  json="$(fetch_index)"
+  if ! echo "${json}" | grep -q '"entries"'; then
+    echo "Storybook stats: index not reachable on :6006 yet."
+    echo "  The dev server may still be building - try again shortly, or check:"
+    echo "    ddev logs -f | grep -i story"
+    return 0
+  fi
+  echo "Storybook stats:"
+  echo "${json}" | node -e '
+    let raw = require("fs").readFileSync(0, "utf8");
+    let d = JSON.parse(raw);
+    let e = d.entries || {};
+    let stories = 0, docs = 0;
+    let groups = {};
+    for (let k in e) {
+      let it = e[k];
+      if (it.type === "docs") docs++; else stories++;
+      let g = (it.title || "").split("/")[0] || "(none)";
+      groups[g] = (groups[g] || 0) + 1;
+    }
+    let total = stories + docs;
+    console.log("   • Total entries:   " + total + "  (" + stories + " stories, " + docs + " docs)");
+    let names = Object.keys(groups).sort((a,b)=>groups[b]-groups[a]);
+    console.log("   • Top-level groups: " + names.length);
+    for (let g of names) console.log("       - " + g + ": " + groups[g]);
+  ' 2>/dev/null || echo "   (could not parse index.json)"
+}
+
+cmd_gen() {
+  exec yarn storybook:gen
+}
+
+cmd_build() {
+  exec yarn storybook:build
+}
+
+# Diagnose common situations and tell the user exactly what to run next.
+cmd_doctor() {
+  echo "Storybook doctor - checking common scenarios:"
+  echo ""
+  local issues=0
+  ok()   { echo "   [ OK ] $1"; }
+  warn() { echo "   [FIX ] $1"; echo "          -> $2"; issues=$((issues+1)); }
+
+  # 1. Drupal installed?
+  if bootstrapped; then
+    ok "Drupal is installed and bootstrapping."
+  else
+    warn "Drupal is not installed." "ddev install-varbase minimal   (or: ddev install-varbase full)"
+    echo "          -> or install from the browser: ${DRUPAL_URL}/core/install.php"
+    echo ""
+    echo "Stop: install Varbase first (CLI or browser), then re-run 'ddev storybook doctor'."
+    return 1
+  fi
+
+  # 2. node_modules present (yarn install run)?
+  if [ -d "${PROJECT_ROOT}/node_modules/@storybook" ]; then
+    ok "Node dependencies are installed."
+  else
+    warn "Node dependencies missing (no node_modules/@storybook)." "ddev yarn install"
+  fi
+
+  # 3. Storybook Drupal module enabled?
+  if module_enabled; then
+    ok "Drupal module 'storybook' is enabled."
+  else
+    warn "Drupal module 'storybook' is not enabled." "ddev storybook init"
+  fi
+
+  # 4. Dev local services (CORS) state.
+  if [ -f "${DISABLED_FLAG}" ]; then
+    warn "Dev local services are DISABLED (you ran 'ddev storybook disable')." "ddev storybook enable"
+  elif services_enabled; then
+    ok "Dev local services include is present in settings.ddev.php."
+  else
+    warn "Dev local services include is missing from settings.ddev.php." "ddev storybook enable"
+  fi
+
+  # 5. CORS actually serving on the render endpoint?
+  if cors_present; then
+    ok "CORS header is present on the Drupal render endpoint."
+  else
+    warn "CORS header MISSING - stories will fail to render cross-origin." "ddev storybook enable   (then reload the subdomain)"
+  fi
+
+  # 6. Daemon + port (the dev server itself).
+  if daemon_running; then
+    ok "Storybook daemon (webextradaemons:storybook) is RUNNING."
+  else
+    warn "Storybook daemon is not running." "ddev restart   (the daemon auto-starts on boot)"
+  fi
+  if port_listening; then
+    ok "Port 6006 is listening."
+  else
+    warn "Port 6006 is not listening yet (server building, or daemon down)." "ddev logs -f | grep -i story   (watch the build), or 'ddev restart'"
+  fi
+
+  # 7. Stories actually served?
+  local json count
+  json="$(fetch_index)"
+  if echo "${json}" | grep -q '"entries"'; then
+    count=$(echo "${json}" | grep -o '"id":' | wc -l | tr -d ' ')
+    if [ "${count}" -gt 0 ] 2>/dev/null; then
+      ok "Storybook is serving ${count} entries on :6006."
+    else
+      warn "Storybook index has 0 stories." "ddev storybook gen   (regenerate *.stories.json from Twig)"
+    fi
+  else
+    warn "Storybook index not reachable on :6006." "Wait for the build to finish, or 'ddev restart'."
+  fi
+
+  echo ""
+  if [ "${issues}" = "0" ]; then
+    echo "All checks passed. Open Storybook:"
+    echo "   https://${STORYBOOK_HOST}/"
+  else
+    echo "${issues} issue(s) found - run the suggested commands above, then:"
+    echo "   ddev storybook doctor"
+  fi
+  return 0
+}
+
+usage() {
+  cat <<'EOF'
+Usage: ddev storybook <command>
+
+  init      Full first-time setup (same as 'ddev init-storybook').
+  enable    Turn ON dev local services (CORS, Twig debug) for story rendering.
+  disable   Turn them OFF and keep them off across restarts.
+  list      Print the Storybook URLs / domains to open.
+  status    Show module / dev-services / daemon / port / CORS health.
+  stats     Show how many stories are served, broken down by group.
+  doctor    Diagnose common problems and tell you exactly what to run next.
+  gen       Regenerate *.stories.json from Twig.
+  build     Build a static Storybook into ./storybook.
+
+To start the dev server manually:  ddev yarn storybook:ddev
+
+Common scenarios:
+  First time on this project ......... ddev storybook init
+  "blocked by CORS policy" in browser  ddev storybook enable
+  Don't know the URL ................. ddev storybook list
+  "Is it up?" / something's off ...... ddev storybook doctor
+  Changed a component's *.twig ....... ddev storybook gen
+  Turn Storybook off for now ......... ddev storybook disable
+EOF
+}
+
+# --- dispatch -------------------------------------------------------------
+
+case "${1:-list}" in
+  init)            cmd_init ;;
+  enable)          shift; cmd_enable "${1:-}" ;;
+  disable)         cmd_disable ;;
+  list|urls|ls)    cmd_list ;;
+  status)          cmd_status ;;
+  stats)           cmd_stats ;;
+  doctor|check)    cmd_doctor ;;
+  gen|generate)    cmd_gen ;;
+  build)           cmd_build ;;
+  help|-h|--help)  usage ;;
+  *)
+    echo "Unknown command: ${1}"
+    echo ""
+    usage
+    exit 1
+    ;;
+esac

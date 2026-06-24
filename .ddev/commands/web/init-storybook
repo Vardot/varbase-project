@@ -37,41 +37,12 @@ drush role:perm:add authenticated 'render storybook stories'
 # This file enables CORS (all origins), Twig debug, and storybook.development.
 # ---------------------------------------------------------------------------
 
-SERVICES_SRC="${current_path}/.ddev/commands/web/assets/development.local.services.yml"
-SERVICES_DST="${current_path}/web/sites/default/development.local.services.yml"
-SETTINGS_DDEV="${current_path}/web/sites/default/settings.ddev.php"
-SETTINGS_PLATFORMSH="${current_path}/web/sites/default/settings.platformsh.php"
-SERVICES_LINE="\$settings['container_yamls'][] = \$app_root . '/' . \$site_path . '/development.local.services.yml';"
-
-# Copy the development.local.services.yml file.
-cp "${SERVICES_SRC}" "${SERVICES_DST}"
-echo "Copied development.local.services.yml to ${SERVICES_DST}"
-
-# Enable it in settings.ddev.php (if exists and not empty).
-if [[ -f "${SETTINGS_DDEV}" && -s "${SETTINGS_DDEV}" ]]; then
-  if ! grep -qxF "${SERVICES_LINE}" "${SETTINGS_DDEV}"; then
-    echo "" >> "${SETTINGS_DDEV}"
-    echo "// Enable the development local services for Storybook." >> "${SETTINGS_DDEV}"
-    echo "" >> "${SETTINGS_DDEV}"
-    echo "${SERVICES_LINE}" >> "${SETTINGS_DDEV}"
-    echo "Enabled development.local.services.yml in settings.ddev.php"
-  else
-    echo "development.local.services.yml already enabled in settings.ddev.php"
-  fi
-fi
-
-# Enable it in settings.platformsh.php (if exists and not empty).
-if [[ -f "${SETTINGS_PLATFORMSH}" && -s "${SETTINGS_PLATFORMSH}" ]]; then
-  if ! grep -qxF "${SERVICES_LINE}" "${SETTINGS_PLATFORMSH}"; then
-    echo "" >> "${SETTINGS_PLATFORMSH}"
-    echo "// Enable the development local services for Storybook." >> "${SETTINGS_PLATFORMSH}"
-    echo "" >> "${SETTINGS_PLATFORMSH}"
-    echo "${SERVICES_LINE}" >> "${SETTINGS_PLATFORMSH}"
-    echo "Enabled development.local.services.yml in settings.platformsh.php"
-  else
-    echo "development.local.services.yml already enabled in settings.platformsh.php"
-  fi
-fi
+# Copy the development.local.services.yml template into place and enable the
+# include in the Drupal settings files. Delegated to `ddev storybook enable`,
+# which is ALSO run from the post-start hook in .ddev/config.yaml - because DDEV
+# regenerates settings.ddev.php on every start and would otherwise drop this
+# include, silently breaking cross-origin story rendering (CORS) after a restart.
+bash "${current_path}/.ddev/commands/web/storybook" enable
 
 # ---------------------------------------------------------------------------
 # Update Storybook hostname in DDEV config and Apache proxy config.
@@ -164,5 +135,18 @@ echo "   • https://${STORYBOOK_HOST}/"
 echo "   • https://${CURRENT_HOST}:6006/"
 echo ""
 
-echo "Storybook initialized. Run 'ddev storybook:ddev' to start the dev server."
-echo "If hostname settings changed, run 'ddev restart' to apply updated routing."
+echo "Storybook initialized."
+echo ""
+echo "The Storybook dev server runs automatically as a DDEV web_extra_daemon"
+echo "(see web_extra_daemons in .ddev/config.yaml) - you do NOT need to start it"
+echo "manually. It is already serving on port 6006 and the subdomain above."
+echo ""
+echo "If the subdomain or port changed during init, run 'ddev restart' once to"
+echo "apply the updated routing, then reload the Storybook URL."
+echo ""
+echo "Useful commands:"
+echo "   • ddev yarn storybook:ddev     # (re)start the Storybook dev server manually"
+echo "   • ddev yarn storybook:gen      # regenerate *.stories.json from Twig"
+echo "   • ddev yarn storybook:build    # build static Storybook into ./storybook"
+echo "   • ddev restart                 # apply hostname/routing changes"
+echo "   • ddev logs -f | grep -i story # follow the Storybook daemon log"
