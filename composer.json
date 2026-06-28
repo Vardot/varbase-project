@@ -1,15 +1,15 @@
 {
     "name": "drupal/varbase_project",
-    "version": "111.0.x-dev",
+    "version": "11.0.x-dev",
     "description": "Project template for Varbase distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/varbase",
     "authors": [
         {
-        "name": "Vardot",
-        "homepage": "https://github.com/vardot",
-        "role": "Maintainer"
+            "name": "Vardot",
+            "homepage": "https://github.com/vardot",
+            "role": "Maintainer"
         }
     ],
     "support": {
@@ -64,26 +64,48 @@
             }
         },
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "./drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-            "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
-            "./recipes/{$name}": ["type:drupal-recipe"],
-            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "./drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "./recipes/{$name}": [
+                "type:drupal-recipe"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
         },
         "drupal-core-project-message": {
-            "include-keys": ["homepage", "support"],
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
             "post-create-project-cmd-message": [
                 "<bg=blue;fg=white>                                                           </>",
                 "<bg=blue;fg=white>  Congratulations, you have installed the Varbase codebase </>",
                 "<bg=blue;fg=white>                                                           </>",
                 "",
                 "<bg=yellow;fg=black>Next steps</>:",
-
                 "  * Install the site: https://www.drupal.org/docs/installing-drupal",
                 "  * Read the user guide: https://docs.varbase.vardot.com",
                 "  * Get support: https://www.vardot.com/en/form/get-support-varbase",
@@ -97,28 +119,30 @@
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "composer-patches": {
-            "allowed-dependency-patches": ["vardot/varbase-patches"]
+            "allowed-dependency-patches": [
+                "vardot/varbase-patches"
+            ]
         },
-        "patches-ignore": { },
-        "patches": {  }
+        "patches-ignore": {},
+        "patches": {}
     },
     "scripts": {
         "post-update-cmd": [
             "@php -r \"@unlink('vendor/bin/composer');\""
         ],
         "drupal-libraries-sync": [
-          "@drupal-libraries-yarn-sync"
+            "@drupal-libraries-yarn-sync"
         ],
         "drupal-libraries-yarn-sync": [
-          "yarn install",
-          "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
+            "yarn install",
+            "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
         ],
         "drupal-libraries-npm-sync": [
-          "npm install",
-          "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
+            "npm install",
+            "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
         ],
         "post-create-project-cmd": [
-          "@drupal-libraries-sync"
+            "@drupal-libraries-sync"
         ]
     }
 }
