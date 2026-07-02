@@ -1,5 +1,5 @@
 {
-  "name": "vardot/varbase-project",
+  "name": "drupal/varbase_project",
   "description": "Project template for Varbase distribution.",
   "type": "project",
   "license": "GPL-2.0-or-later",
@@ -89,7 +89,7 @@
         "post-create-project-cmd-message": [
             "<bg=blue;fg=white>                                                           </>",
             "<bg=blue;fg=white>  Congratulations, you have installed the Varbase codebase </>",
-            "<bg=blue;fg=white>  from the vardot/varbase-project template!                </>",
+            "<bg=blue;fg=white>  from the drupal/varbase_project template!                </>",
             "<bg=blue;fg=white>                                                           </>",
             "",
             "<bg=yellow;fg=black>Next steps</>:",
