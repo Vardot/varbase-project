@@ -83,8 +83,17 @@ When(/^(?:I |we )*add the "([^"]*)" webform to the bottom of the "([^"]*)" (?:Ca
     }
 
     // 4. Append the webform block component at the bottom of the content region.
+    //    Resolve the block.webform_block component version at runtime — the
+    //    version is a content hash of the component's plugin/config definition
+    //    and therefore differs per environment (Drupal core minor, enabled
+    //    modules, config), so it must never be hardcoded.
+    const components = await fetch('/canvas/api/v0/config/component', { credentials: 'same-origin' }).then(json);
+    const webformComponent = components && components['block.webform_block'];
+    if (!webformComponent || !webformComponent.version) {
+      return { ok: false, error: 'The "block.webform_block" Canvas component is not available. Ensure the webform + Canvas blocks are installed.' };
+    }
     const uuid = crypto.randomUUID();
-    content.components.push({ uuid, nodeType: 'component', type: 'block.webform_block@75298500addde82f', name: null, slots: [] });
+    content.components.push({ uuid, nodeType: 'component', type: `block.webform_block@${webformComponent.version}`, name: null, slots: [] });
     model[uuid] = { resolved: { webform_id: webformId, settings: { default_data: '', redirect: false, lazy: false }, label: 'Webform', label_display: '0' } };
 
     // 5. Save the layout (auto-save) then publish it.
