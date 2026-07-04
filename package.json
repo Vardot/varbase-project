@@ -22,14 +22,7 @@
     "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
     "lint:css": "npx stylelint --config=.stylelintrc.json",
     "drupal-libraries-sync": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js",
-    "postinstall": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js",
-    "test": "node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "test:chromium": "BROWSER=chromium node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "test:firefox": "BROWSER=firefox node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "test:webkit": "BROWSER=webkit node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "test:headed": "HEADLESS=false node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "test:fast": "SLOW_MO=0 node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "generate-reports": "node ./node_modules/webship-js/bin/generate-reports.js"
+    "postinstall": "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-media-embed": "~45.2.0",
@@ -111,8 +104,7 @@
     "stylelint-order": "~6.0",
     "typescript": "^5.0.0",
     "webpack": "~5",
-    "webpack-cli": "~5",
-    "webship-js": "^2.0.4"
+    "webpack-cli": "~5"
   },
   "resolutions": {
     "webpack": "^5"
