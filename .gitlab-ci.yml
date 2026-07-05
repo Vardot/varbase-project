@@ -1,0 +1,556 @@
+################################################################################
+# GitLab CI for the Varbase project template.
+#
+# Keeps drupalci's PHPCS / PHPStan / composer-lint validation jobs, adds
+# cspell / eslint / stylelint, and a pre-test -> test -> post-test browser flow
+# that builds Varbase, installs it with the `varbase` profile, applies the base
+# + AI recipes, seeds the per-role testing users and drives the whole site
+# through the browser. The heavy drupalci test jobs (phpunit / nightwatch /
+# upgrade status / deprecation) are disabled below.
+################################################################################
+
+include:
+  - local: '.gitlab-ci/php.yml'
+  - project: $_GITLAB_TEMPLATES_REPO
+    ref: $_GITLAB_TEMPLATES_REF
+    file:
+      - "/includes/include.drupalci.main.yml"
+      - "/includes/include.drupalci.variables.yml"
+      - "/includes/include.drupalci.workflows.yml"
+
+# Pipeline stages. `build` / `validate` keep the drupalci jobs; the Varbase
+# browser flow runs as pre-test (install) -> test (run suite) -> post-test
+# (build reports).
+stages:
+  - build
+  - validate
+  - pre-test
+  - test
+  - post-test
+
+variables:
+  # The varbase_project web-root is docroot/ (not the DrupalCI default web/).
+  _WEB_ROOT: "docroot"
+  COMPOSER_FLAGS: "--no-strict-lock"
+  COMPOSER_MEMORY_LIMIT: "-1"
+  COMPOSER_ALLOW_SUPERUSER: 1
+  # Yarn 4 defaults to immutable installs and would refuse to create a
+  # lockfile in CI; allow it for every job.
+  YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
+  # Cache locations (Composer packages, Yarn packages, Playwright browsers) so
+  # the build / install / test jobs reuse downloads instead of re-fetching.
+  COMPOSER_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/composer"
+  YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.cache/yarn"
+  PLAYWRIGHT_BROWSERS_PATH: "${CI_PROJECT_DIR}/.cache/ms-playwright"
+  # CI database (drupalci db image: root, empty password, host 'database').
+  MYSQL_USER: "root"
+  MYSQL_PASSWORD: ""
+  MYSQL_DATABASE: "drupal"
+
+
+# Shared cache definition referenced by the build / install / test jobs.
+.varbase_cache: &varbase_cache
+  key: "varbase-build"
+  paths:
+    - .cache/composer
+    - .cache/yarn
+    - .cache/ms-playwright
+
+# Override composer job to build straight from this project's composer.json.
+#
+# drupalci's default composer job resolves against its own pinned package set
+# and only sees cweagans/composer-patches 1.7.3, which fails the project's
+# `~2.0` constraint. Clearing the cache and running a fresh `composer update`
+# against this composer.json resolves the documented set (composer-patches
+# 2.0.0 is a stable release) so the build matches composer.json exactly.
+composer:
+  cache: *varbase_cache
+  before_script:
+    - composer self-update
+    # Cached Composer VCS clones are owned by a different uid across runs;
+    # trust them so git does not reject with "detected dubious ownership".
+    - git config --global --add safe.directory '*'
+  script:
+    - composer validate --no-check-all --no-check-publish
+    # --prefer-dist pulls dist archives instead of cloning full .git histories.
+    # Dev packages (drupal/varbase, drupal/webshare, …) cloned as source carry
+    # large .git histories that blow the build artifact past the GitLab
+    # artifact-size limit (413 Request Entity Too Large). dist keeps the
+    # artifact small without changing the installed code.
+    - composer update --with-all-dependencies --no-interaction --no-progress --optimize-autoloader --prefer-dist
+  # A full Varbase build (web/ + vendor/) exceeds the GitLab artifact-size
+  # limit (413 Request Entity Too Large), so do NOT pass the build downstream.
+  # Publish only the resolved lock file; jobs that need the codebase run their
+  # own `composer install --prefer-dist` from this lock (see the functional job).
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - composer.json
+      - composer.lock
+
+# = Disable drupalci jobs that need the full composer build artifact =
+#
+# A full Varbase build is too large to publish as an artifact (413), so the
+# composer job only passes composer.lock. drupalci's composer-lint / phpcs /
+# phpstan expect the whole vendor/ + the composer status marker, so they cannot
+# run here. (`script` is overridden too so these stay valid even if a name is
+# absent.) Re-add self-contained PHPCS/PHPStan jobs if these checks are needed.
+composer-lint:
+  rules: [{ when: never }]
+  script: ["true"]
+phpcs:
+  rules: [{ when: never }]
+  script: ["true"]
+phpstan:
+  rules: [{ when: never }]
+  script: ["true"]
+phpunit:
+  rules: [{ when: never }]
+  script: ["true"]
+nightwatch:
+  rules: [{ when: never }]
+  script: ["true"]
+"upgrade status":
+  rules: [{ when: never }]
+  script: ["true"]
+"deprecation - composer":
+  rules: [{ when: never }]
+  script: ["true"]
+# drupalci also ships cspell / eslint / stylelint. We replace them with our own
+# self-contained, emoji-named jobs below (🔤 Cspell / 🟨 ESLint / 🎨 Stylelint),
+# so disable the drupalci originals to avoid duplicate jobs that would expect
+# the full build artifact.
+cspell:
+  rules: [{ when: never }]
+  script: ["true"]
+eslint:
+  rules: [{ when: never }]
+  script: ["true"]
+stylelint:
+  rules: [{ when: never }]
+  script: ["true"]
+
+# = Validate stage =
+
+"🔤 Cspell":
+  stage: validate
+  image: node:22
+  before_script:
+    - npm install -g cspell
+  script:
+    - cspell "**/*.{php,module,inc,install,test,profile,theme,js,css,md,yml,txt}" --no-progress
+  allow_failure: false
+
+# = YAML lint =
+#
+# Validates every YAML file in the project parses. Registers a catch-all
+# constructor so GitLab's custom `!reference` tags (and any other `!tags`) do
+# not fail the parse. Skips vendor / node_modules / web (contrib + core).
+"📐 YAML lint":
+  stage: validate
+  image: python:3.12-slim
+  needs: []
+  before_script:
+    - pip install --no-cache-dir pyyaml
+  script:
+    - |
+      python - <<'PY'
+      import sys, yaml
+      from pathlib import Path
+
+      class Loader(yaml.SafeLoader):
+          pass
+      # Treat any unknown tag (e.g. GitLab CI's !reference) as a no-op so the
+      # file still parses for a pure syntax check.
+      Loader.add_multi_constructor('', lambda loader, suffix, node: None)
+
+      SKIP = ('vendor/', 'node_modules/', 'web/core/', 'web/modules/contrib/',
+              'web/themes/contrib/', 'web/profiles/contrib/', 'web/libraries/',
+              '.cache/')
+      errors = 0
+      count = 0
+      for path in sorted(Path('.').rglob('*.y*ml')):
+          rel = str(path).lstrip('./')
+          if any(s in rel for s in SKIP):
+              continue
+          count += 1
+          try:
+              with open(path) as fh:
+                  list(yaml.load_all(fh, Loader=Loader))
+          except yaml.YAMLError as e:
+              errors += 1
+              print(f"INVALID: {rel}\n  {e}")
+      print(f"Checked {count} YAML files, {errors} invalid.")
+      sys.exit(1 if errors else 0)
+      PY
+  allow_failure: false
+
+# Node 22+ required: webship-js 2.x cucumber needs Node 22 || 24 || >=26.
+"🟨 ESLint":
+  stage: validate
+  image: node:22
+  # --mode=skip-build skips the package.json postinstall (drupal-libraries-sync,
+  # which needs a composer build); linting only needs the JS dev dependencies.
+  before_script:
+    - corepack enable
+    - yarn install --mode=skip-build
+  # YAML files are validated by the dedicated "📐 YAML lint" job; eslint only
+  # lints the project's JavaScript here.
+  script:
+    - node --version
+    - yarn lint:js
+  after_script:
+    - touch junit.xml _eslint.patch
+  allow_failure: false
+
+"🎨 Stylelint":
+  stage: validate
+  image: node:22
+  before_script:
+    - corepack enable
+    - yarn install --mode=skip-build
+  script:
+    - yarn lint:css
+  after_script:
+    - echo '[]' > gl-codequality.json
+  allow_failure: false
+
+# = PHP_CodeSniffer (Drupal coding standards) =
+#
+# Self-contained PHPCS over the project's custom code (web/modules/custom +
+# web/themes/custom, per .phpcs.xml). The drupalci `phpcs` job is disabled above
+# because it needs the full composer build artifact; this one installs its own
+# drupal/coder so it runs without that artifact. Named with an emoji prefix to
+# sit alongside the project's other custom jobs and not collide with the
+# disabled drupalci `phpcs`.
+"🐘 PHPCS":
+  stage: validate
+  image: php:8.4-cli
+  needs: []
+  before_script:
+    - apt-get update -y && apt-get install -y git unzip
+    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    # Composer 2.2+ blocks third-party plugins by default; allow the PHPCS
+    # standards installer before requiring it, or `composer global require`
+    # aborts ("contains a Composer plugin which is blocked by your allow-plugins").
+    - composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+    - composer global require drupal/coder:^8.3 dealerdirect/phpcodesniffer-composer-installer --no-interaction
+    - export PATH="$(composer global config bin-dir --absolute 2>/dev/null):$PATH"
+  script:
+    # The standard lists web/modules/custom + web/themes/custom; create them so
+    # PHPCS has valid (possibly empty) targets instead of erroring on a missing
+    # path on a fresh template.
+    - mkdir -p web/modules/custom web/themes/custom
+    - phpcs --version
+    - phpcs --standard=.phpcs.xml -p web/modules/custom web/themes/custom
+  allow_failure: false
+
+# = PHPStan (static analysis) =
+#
+# Self-contained PHPStan over the recipes (phpstan.neon scopes
+# recipes/varbase_starter). The neon includes phar://phpstan.phar/..., so it
+# runs against the downloaded phpstan.phar in the project root. The disabled
+# drupalci `deprecation - composer` / `phpstan` jobs need the full build artifact.
+"🔬 PHPStan":
+  stage: validate
+  image: php:8.4-cli
+  needs: []
+  before_script:
+    - apt-get update -y && apt-get install -y curl
+    - curl -sSL https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar -o phpstan.phar
+    - chmod +x phpstan.phar
+  script:
+    # Only analyse when the scope actually has PHP (the template ships none yet);
+    # otherwise PHPStan would error with "No files found to analyse".
+    - |
+      if find recipes/varbase_starter -name '*.php' | grep -q .; then
+        php phpstan.phar analyse -c phpstan.neon --no-progress
+      else
+        echo "No PHP files in PHPStan scope (recipes/varbase_starter) - nothing to analyse."
+      fi
+  allow_failure: false
+
+# = Reusable before_script fragments (via !reference) =
+.fragments:
+  # Build the codebase in-job from the composer artifact's lock file (the
+  # composer job does not pass the full build - too large to artifact) and
+  # install ImageMagick (Varbase's image toolkit; the drupalci image lacks the
+  # identify/convert binaries -> error 127). drimage_improved emits WebP
+  # derivatives on the fly, so the WebP coder + libraries must be present and
+  # the ImageMagick security policy must allow reading/writing WEBP, otherwise
+  # derivative generation fails and the front-end pages log resource 404s.
+  prepare_code: &prepare_code
+    - apt-get update -y && apt-get install -y imagemagick webp libwebp7
+    - apt-get install -y libmagickcore-7.q16-10-extra || apt-get install -y libmagickcore-6.q16-6-extra || true
+    - sed -i 's/rights="none"\s*pattern="WEBP"/rights="read|write" pattern="WEBP"/I' /etc/ImageMagick-*/policy.xml 2>/dev/null || true
+    # The cached Composer VCS clones are owned by a different uid across jobs;
+    # tell git to trust them (otherwise "detected dubious ownership").
+    - git config --global --add safe.directory '*'
+    # A restored site dir is read-only (drush site:install sets sites/default to
+    # 555 / settings.php to 444); make it writable so composer scaffold + the
+    # next install steps can write there.
+    - chmod -R u+w $CI_PROJECT_DIR/$_WEB_ROOT/sites 2>/dev/null || true
+    - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist
+  web_db: &web_db
+    - mkdir -pv $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/files
+    - mkdir -pv $CI_PROJECT_DIR/$_WEB_ROOT/sites/simpletest
+    - chmod -R 777 $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/files
+    - chmod -R 777 $CI_PROJECT_DIR/$_WEB_ROOT/sites/simpletest
+    - rm -rf /var/www/html && ln -s $CI_PROJECT_DIR/$_WEB_ROOT /var/www/html
+    - chown -R www-data:www-data $CI_PROJECT_DIR
+    # Drupal's .htaccess rewrites missing /sites/default/files/styles/... requests
+    # to index.php so image styles (incl. drimage WebP derivatives) generate on
+    # the fly. That needs mod_rewrite plus AllowOverride All and FollowSymLinks
+    # on the symlinked docroot; without it those requests 404 instead of routing
+    # to Drupal.
+    - a2enmod rewrite headers
+    - printf '<Directory /var/www/html>\n  Options +FollowSymLinks\n  AllowOverride All\n  Require all granted\n</Directory>\n' > /etc/apache2/conf-available/drupal-docroot.conf
+    - a2enconf drupal-docroot
+    - service apache2 start
+    # mariadb 11.x rejects DROP DATABASE by a DB-scoped user and the DrupalCI
+    # MYSQL_DATABASE can be empty (targets the 'mysql' system db). Use root and a
+    # dedicated 'drupal' database created up front (validated via gitlab-ci-local).
+    - export SIMPLETEST_DB=mysql://$MYSQL_USER:$MYSQL_PASSWORD@database/$MYSQL_DATABASE
+  # Rebuild caches and dump the DB for the next pre-test job in the chain.
+  dump_db: &dump_db
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:dump --gzip --result-file=$CI_PROJECT_DIR/varbase-db.sql
+  node_playwright: &node_playwright
+    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    - apt-get install -y nodejs
+    - node --version && npm --version
+    - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
+    # Back up cucumber.js - webship-js's postinstall can clobber it under yarn 4.
+    - cp cucumber.js .cucumber.js.bak
+    - corepack enable
+    # Full install runs the package.json postinstall (drupal-libraries-sync),
+    # syncing the front-end libraries into web/libraries - the recipes are
+    # present here from the composer artifact (CircleCI parity).
+    - yarn install
+    - cp .cucumber.js.bak cucumber.js && rm .cucumber.js.bak
+    - ./node_modules/.bin/playwright install --with-deps chromium
+
+# = Install & prepare Varbase - single pre-test job =
+#
+# Builds the codebase, installs Varbase (`varbase` profile), applies the
+# top-level base + AI recipes (sub-recipes apply transitively), seeds the
+# per-role testing users and prepares the site for deterministic testing
+# (mirrors ddev init-full-automated-testing). Exports the installed site as
+# small artifacts (gzipped DB dump + settings.php + files) for the test job.
+"📦 Install Varbase":
+  extends: .testing-job-base
+  stage: pre-test
+  needs: [composer]
+  timeout: 2h
+  cache: *varbase_cache
+  services:
+    - name: $_CONFIG_DOCKERHUB_ROOT/$_TARGET_DB_TYPE-$_TARGET_DB_VERSION:$_TARGET_DB_IMAGE_TAG
+      alias: database
+  variables:
+    DRUPAL_ADMIN_USERNAME: "webmaster"
+    DRUPAL_ADMIN_PASSWORD: "dD.123123ddd"
+  artifacts:
+    when: on_success
+    expire_in: 1 day
+    paths:
+      - varbase-db.sql.gz
+      - docroot/sites/default/files
+  before_script:
+    - !reference [.fragments, prepare_code]
+    - !reference [.fragments, web_db]
+    # mariadb 11.x rejects DROP DATABASE by a DB-scoped user (innodb_index_stats);
+    # grant the install user full privileges via root (empty root pw on the CI image).
+    # web_db points SIMPLETEST_DB at 127.0.0.1; the DB service is at host 'database'.
+    - export SIMPLETEST_DB=mysql://$MYSQL_USER:$MYSQL_PASSWORD@database/$MYSQL_DATABASE
+  script:
+    # = Install Varbase =
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT site:install varbase varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true install_configure_form.enable_update_status_emails=NULL
+        --db-url=$SIMPLETEST_DB
+        --account-name=webmaster --account-pass=dD.123123ddd --account-mail=webmaster@vardot.com
+        --site-name="Varbase Test" --locale=en -y
+    # = Enable the full Varbase module set (classic profile; mirrors install-varbase full) =
+    # Enable the extra module set ONE MODULE AT A TIME: a single incompatible
+    # module (e.g. varbase_content_planner on Drupal 11.4) must not abort the
+    # whole batch and leave editoria11y / reroute_email / mailer_policy disabled.
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_development -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_styleguide -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_landing -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_api -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_media_instagram -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_media_twitter -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable editoria11y -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable symfony_mailer -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable mailer_policy -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable reroute_email -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_content_planner -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT php:script $CI_PROJECT_DIR/tests/scripts/seed_content_planner_activity.php || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable social_auth_google social_auth_facebook -y || true
+    # = Prepare Varbase site for deterministic testing =
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:uninstall antibot honeypot -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set reroute_email.settings enable true -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set reroute_email.settings address 'dev-catchall@vardot.com' -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set reroute_email.settings allowed '*@vardot.com' -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance css.preprocess 0 -y
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance js.preprocess 0 -y
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.logging error_level all -y
+    - !reference [.fragments, dump_db]
+  allow_failure: false
+
+# = webship-js BDD - one parallel job per feature folder =
+#
+# Each job restores the installed site from the 📦 Install Varbase artifacts and
+# runs ONE feature folder (FEATURES) writing its own JSON (CUCUMBER_JSON). The
+# `parallel: matrix` fans the folders out into independent, parallel jobs;
+# within a folder cucumber runs sequentially so setup -> consume scenarios keep
+# their order. 📊 Create reports merges every folder's JSON.
+"🧪 Automated Functional Testing":
+  extends: .testing-job-base
+  stage: test
+  needs: [composer]
+  timeout: 2h
+  cache: *varbase_cache
+  parallel:
+    matrix:
+      - SUITE:
+          - "01-website-base-requirements"
+          - "02-user-management"
+          - "03-admin-management"
+          - "05-content-management"
+      # 04-content-structure is split in two: the folder's paragraph-widget
+      # scenarios exceed the drupalci runner's 30-minute hard cap as one job.
+      - SUITE: "04-content-structure-a"
+        FEATURES: "tests/features/varbase/04-content-structure/04-{01,02}-*.feature"
+      - SUITE: "04-content-structure-a2"
+        FEATURES: "tests/features/varbase/04-content-structure/04-{03}-*.feature"
+      - SUITE: "04-content-structure-a3"
+        FEATURES: "tests/features/varbase/04-content-structure/04-{04,05}-*.feature"
+      - SUITE: "04-content-structure-b"
+        FEATURES: "tests/features/varbase/04-content-structure/04-{06,07,08,09,10}-*.feature"
+  # Override the parent's services - we only need the database. Playwright
+  # bundles its own Chromium, so Selenium and chromedriver are not needed.
+  services:
+    - name: $_CONFIG_DOCKERHUB_ROOT/$_TARGET_DB_TYPE-$_TARGET_DB_VERSION:$_TARGET_DB_IMAGE_TAG
+      alias: database
+  variables:
+    DRUPAL_ADMIN_USERNAME: "webmaster"
+    DRUPAL_ADMIN_PASSWORD: "dD.123123ddd"
+    DRUPAL_TEST_BASE_URL: "http://localhost"
+    LAUNCH_URL: "http://localhost"
+    FORCE_COLOR: "1"
+    WEBSHIP_REPORT_DISABLE: "1"
+    FEATURES: "tests/features/varbase/$SUITE/**/*.feature"
+    CUCUMBER_JSON: "cucumber_report_$SUITE"
+  artifacts:
+    when: always
+    paths:
+      - tests/reports/
+      - tests/screenshots/
+      - tests/videos/
+    expire_in: 7 days
+  before_script:
+    - !reference [.fragments, prepare_code]
+    - !reference [.fragments, web_db]
+    # = Install Varbase fresh via PDO (the mysql client cannot auth to the DB service) =
+    - export SIMPLETEST_DB=mysql://$MYSQL_USER:$MYSQL_PASSWORD@database/$MYSQL_DATABASE
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT site:install varbase --db-url=$SIMPLETEST_DB --account-name=webmaster --account-pass=dD.123123ddd --account-mail=webmaster@vardot.com --site-name="Varbase Test" --locale=en -y varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true install_configure_form.enable_update_status_emails=NULL
+    # Enable the extra module set ONE MODULE AT A TIME: a single incompatible
+    # module (e.g. varbase_content_planner on Drupal 11.4) must not abort the
+    # whole batch and leave editoria11y / reroute_email / mailer_policy disabled.
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_development -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_styleguide -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_landing -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_api -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_media_instagram -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_media_twitter -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable editoria11y -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable symfony_mailer -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable mailer_policy -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable reroute_email -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable varbase_content_planner -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT php:script $CI_PROJECT_DIR/tests/scripts/seed_content_planner_activity.php || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable social_auth_google social_auth_facebook -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:uninstall antibot honeypot -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set reroute_email.settings enable true -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set reroute_email.settings address 'dev-catchall@vardot.com' -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set reroute_email.settings allowed '*@vardot.com' -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance css.preprocess 0 -y
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance js.preprocess 0 -y
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.logging error_level all -y
+    # = Provision the Varbase roles + the per-role testing users (drush-only) =
+    # The four Varbase roles already exist on a real Varbase install; role:create
+    # is a harmless no-op there (|| true) and only matters on a Standard site.
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:create editor 'Editor' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:create content_admin 'Content Admin' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:create site_admin 'Site Admin' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:create seo_admin 'SEO Admin' || true
+    # Create the 6 testing users (password dD.123123ddd for all).
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create 'Normal user' --mail='test.authenticated@vardot.com' --password='dD.123123ddd' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create 'Editor' --mail='test.editor@vardot.com' --password='dD.123123ddd' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create 'Content admin' --mail='test.content_admin@vardot.com' --password='dD.123123ddd' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create 'SEO admin' --mail='test.seo_admin@vardot.com' --password='dD.123123ddd' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create 'Site admin' --mail='test.site_admin@vardot.com' --password='dD.123123ddd' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create 'Super admin' --mail='test.super_admin@vardot.com' --password='dD.123123ddd' || true
+    # Assign the Varbase roles (Normal user stays authenticated-only).
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:role:add editor 'Editor' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:role:add content_admin 'Content admin' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:role:add seo_admin 'SEO admin' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:role:add site_admin 'Site admin' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:role:add administrator 'Super admin' || true
+    # --- Provisioning the ported 9.1.x scenarios rely on (languages, permissions, menu) ---
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT locale-import ar --autocreate-language $CI_PROJECT_DIR/$_WEB_ROOT/profiles/contrib/varbase/translations/ar.po || $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT locale-import ar --autocreate-language $CI_PROJECT_DIR/$_WEB_ROOT/profiles/varbase/translations/ar.po || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable locale -y || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT locale:update || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cr || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add editor 'create landing_page content' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add content_admin 'create landing_page content' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add editor 'translate landing_page_lb node' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add editor 'create landing_page_lb content,edit any landing_page_lb content' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add content_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add site_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add site_admin 'create landing_page content,edit any landing_page content,delete any landing_page content,clone node entity,create content translations,update content translations,delete content translations,translate any entity' || true
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cr || true
+    - !reference [.fragments, node_playwright]
+  script:
+    - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
+  allow_failure: false
+
+# = Create reports - own job =
+#
+# Merges the per-folder cucumber JSONs from every Automated Functional Testing
+# matrix job (plus their screenshots / videos) into one HTML + PDF report. Runs
+# on a plain node image with webship-js + a Chromium for the PDF - no Drupal.
+"📊 Create reports":
+  stage: post-test
+  image: node:22
+  # Always build the reports, even when a test job failed - so failures are
+  # captured. `dependencies` (not `needs`) pulls the artifacts from ALL matrix
+  # jobs of the test stage without gating on their success.
+  rules:
+    - when: always
+  dependencies:
+    - "🧪 Automated Functional Testing"
+  cache: *varbase_cache
+  before_script:
+    - apt-get update -y && apt-get install -y jq
+    - npm install --no-save webship-js
+    # --with-deps installs Chromium's system libraries (libnspr4 etc.) which the
+    # plain node image lacks - needed for the PDF report's headless Chromium.
+    - ./node_modules/.bin/playwright install --with-deps chromium
+  script:
+    # Merge every folder's cucumber JSON array into one combined report.
+    - jq -s 'add' tests/reports/cucumber_report_*.json > tests/reports/cucumber_report.json
+    # Human-readable report name: varbase--{branch|tag}--automated-functional-testing-report--{date}--{time}
+    - export REPORT="varbase--${CI_COMMIT_REF_SLUG}--automated-functional-testing-report--$(date +%Y-%m-%d)--$(date +%H-%M)"
+    - node ./node_modules/webship-js/bin/generate-reports.js
+        --json tests/reports/cucumber_report.json
+        --out  "tests/reports/${REPORT}.html"
+        --format all
+        --pdf-out "tests/reports/${REPORT}.pdf"
+  artifacts:
+    when: always
+    paths:
+      - tests/reports/
+      - tests/screenshots/
+      - tests/videos/
+    expire_in: 30 days
+  allow_failure: false

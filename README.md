@@ -10,12 +10,12 @@ Project template for [Varbase distribution](http://www.drupal.org/project/varbas
 
 The 9.1.x branch is only to support old projects
 Recommended to start new projects with Varbase ~10
-Go to https://github.com/Vardot/varbase-project/tree/10.0.x
+Go to https://www.drupal.org/project/varbase_project
 
 
 To install the dev version of Varbase 9.1.x run this command:
 ```
-composer create-project vardot/varbase-project:9.1.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
+composer create-project drupal/varbase_project:9.2.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
 ```
 
 ## [Create a new Vartheme sub theme for a project](https://github.com/Vardot/varbase/tree/9.1.x/scripts/README.md)

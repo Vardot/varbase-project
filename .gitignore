@@ -84,3 +84,8 @@ CURSOR.md
 .gemini/
 .codex/
 .warp/
+
+# webship-js test artifacts (generated on each run; never commit)
+tests/screenshots/
+tests/videos/
+tests/reports/
