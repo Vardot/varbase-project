@@ -51,7 +51,8 @@
             "drupal/core-recipe-unpack": true,
             "drupal/core-vendor-hardening": true,
             "oomphinc/composer-installers-extender": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "symfony/runtime": true
         },
         "bin-dir": "bin/",
         "sort-packages": true,
