@@ -1,134 +1,160 @@
 {
-  "name": "drupal/varbase_project",
-  "description": "Project template for Varbase distribution.",
-  "type": "project",
-  "license": "GPL-2.0-or-later",
-  "version": "10.1.x-dev",
-  "homepage": "https://www.drupal.org/project/varbase",
-  "authors": [
-    {
-      "name": "Vardot",
-      "homepage": "https://github.com/vardot",
-      "role": "Maintainer"
-    }
-  ],
-  "support": {
-    "issues": "http://drupal.org/project/issues/varbase",
-    "source": "http://cgit.drupalcode.org/varbase"
-  },
-  "repositories": {
-    "drupal": {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-    }
-  },
-  "require": {
-    "composer/installers": "~2",
-    "drupal/core-composer-scaffold": "~11",
-    "drupal/core-project-message": "~11",
-    "cweagans/composer-patches": "~2",
-    "webflo/drupal-finder": "~1.0",
-    "vardot/varbase": "10.1.x-dev",
-    "vardot/varbase-patches": "10.1.x-dev",
-    "drush/drush": "~13"
-  },
-  "config": {
-    "bin-dir": "bin/",
-    "secure-http": false,
-    "optimize-autoloader": true,
-    "preferred-install": {
-      "drupal/core": "dist"
+    "name": "drupal/varbase_project",
+    "description": "Project template for Varbase distribution.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "version": "10.1.x-dev",
+    "homepage": "https://www.drupal.org/project/varbase",
+    "authors": [
+        {
+            "name": "Vardot",
+            "homepage": "https://github.com/vardot",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "http://drupal.org/project/issues/varbase",
+        "source": "http://cgit.drupalcode.org/varbase"
     },
-    "allow-plugins": {
-      "composer/installers": true,
-      "cweagans/composer-patches": true,
-      "vardot/varbase-patches": true,
-      "vardot/drupal-core-patches": true,
-      "oomphinc/composer-installers-extender": true,
-      "drupal/core-composer-scaffold": true,
-      "drupal/core-project-message": true,
-      "dealerdirect/phpcodesniffer-composer-installer": true,
-      "phpstan/extension-installer": true,
-      "php-http/discovery": true,
-      "tbachert/spi": true
-    }
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "Varbase\\composer\\ScriptHandler::createRequiredFiles",
-      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
-    ],
-    "post-update-cmd": [
-      "Varbase\\composer\\ScriptHandler::createRequiredFiles",
-      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
-    ],
-    "post-drupal-scaffold-cmd": ["Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"],
-    "drupal-libraries-sync": [
-      "@drupal-libraries-yarn-sync"
-    ],
-    "drupal-libraries-yarn-sync": [
-      "yarn install",
-      "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
-    ],
-    "drupal-libraries-npm-sync": [
-      "npm install",
-      "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
-    ],
-    "post-create-project-cmd": [
-      "@drupal-libraries-sync"
-    ]
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "conflict": {
-    "drupal/drupal": "*"
-  },
-  "extra": {
-    "drupal-core-project-message": {
-        "include-keys": ["homepage", "support"],
-        "post-create-project-cmd-message": [
-            "<bg=blue;fg=white>                                                           </>",
-            "<bg=blue;fg=white>  Congratulations, you have installed the Varbase codebase </>",
-            "<bg=blue;fg=white>  from the drupal/varbase_project template!                </>",
-            "<bg=blue;fg=white>                                                           </>",
-            "",
-            "<bg=yellow;fg=black>Next steps</>:",
-
-            "  * Install the site: https://www.drupal.org/docs/installing-drupal",
-            "  * Read the user guide: https://docs.varbase.vardot.com",
-            "  * Get support: https://www.vardot.com/en/form/get-support-varbase",
-            "  * Join Our Slack Team for Feedback and Support:",
-            "      http://slack.varbase.vardot.com",
-            "  * Remove the plugin that prints this message:",
-            "      composer remove drupal/core-project-message"
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "require": {
+        "composer/installers": "~2",
+        "drupal/core-composer-scaffold": "~11",
+        "drupal/core-project-message": "~11",
+        "cweagans/composer-patches": "~2",
+        "webflo/drupal-finder": "~1.0",
+        "vardot/varbase": "10.1.x-dev",
+        "vardot/varbase-patches": "10.1.x-dev",
+        "drush/drush": "~13"
+    },
+    "config": {
+        "bin-dir": "bin/",
+        "secure-http": false,
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "drupal/core": "dist"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "vardot/varbase-patches": true,
+            "vardot/drupal-core-patches": true,
+            "oomphinc/composer-installers-extender": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "php-http/discovery": true,
+            "tbachert/spi": true,
+            "symfony/runtime": true
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Varbase\\composer\\ScriptHandler::createRequiredFiles",
+            "Varbase\\composer\\ScriptHandler::removeGitDirectories"
+        ],
+        "post-update-cmd": [
+            "Varbase\\composer\\ScriptHandler::createRequiredFiles",
+            "Varbase\\composer\\ScriptHandler::removeGitDirectories"
+        ],
+        "post-drupal-scaffold-cmd": [
+            "Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure"
+        ],
+        "drupal-libraries-sync": [
+            "@drupal-libraries-yarn-sync"
+        ],
+        "drupal-libraries-yarn-sync": [
+            "yarn install",
+            "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
+        ],
+        "drupal-libraries-npm-sync": [
+            "npm install",
+            "node ./docroot/profiles/contrib/varbase/scripts/drupal-libraries-sync.js"
+        ],
+        "post-create-project-cmd": [
+            "@drupal-libraries-sync"
         ]
     },
-    "drupal-scaffold": {
-      "allowed-packages": [
-        "drupal/core"
-      ],
-      "gitignore": true,
-      "locations": {
-        "web-root": "docroot/"
-      }
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "conflict": {
+        "drupal/drupal": "*"
     },
-    "installer-paths": {
-      "docroot/core": ["type:drupal-core"],
-      "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
-      "docroot/modules/contrib/{$name}": ["type:drupal-module"],
-      "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
-      "docroot/recipes/contrib/{$name}": ["type:drupal-recipe"],
-      "docroot/libraries/{$name}": ["type:drupal-library"],
-      "docroot/modules/custom/{$name}": ["type:drupal-custom-module"],
-      "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"],
-      "drush/contrib/{$name}": ["type:drupal-drush"]
-    },
-    "enable-patching": true,
-    "composer-exit-on-patch-failure": true,
-    "composer-patches": {
-      "allowed-dependency-patches": ["vardot/varbase-patches", "vardot/drupal-core-patches"]
-    },
-    "patches-ignore": { },
-    "patches": {  }
-  }
+    "extra": {
+        "drupal-core-project-message": {
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                           </>",
+                "<bg=blue;fg=white>  Congratulations, you have installed the Varbase codebase </>",
+                "<bg=blue;fg=white>  from the drupal/varbase_project template!                </>",
+                "<bg=blue;fg=white>                                                           </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+                "  * Install the site: https://www.drupal.org/docs/installing-drupal",
+                "  * Read the user guide: https://docs.varbase.vardot.com",
+                "  * Get support: https://www.vardot.com/en/form/get-support-varbase",
+                "  * Join Our Slack Team for Feedback and Support:",
+                "      http://slack.varbase.vardot.com",
+                "  * Remove the plugin that prints this message:",
+                "      composer remove drupal/core-project-message"
+            ]
+        },
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "drupal/core"
+            ],
+            "gitignore": true,
+            "locations": {
+                "web-root": "docroot/"
+            }
+        },
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "docroot/recipes/contrib/{$name}": [
+                "type:drupal-recipe"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "docroot/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "docroot/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
+        "composer-patches": {
+            "allowed-dependency-patches": [
+                "vardot/varbase-patches",
+                "vardot/drupal-core-patches"
+            ]
+        },
+        "patches-ignore": {},
+        "patches": {}
+    }
 }
