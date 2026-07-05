@@ -62,6 +62,39 @@ if [ "$BOOTSTRAP" != "Successful" ]; then
   drush config:set reroute_email.settings enable true -y || true
   drush config:set reroute_email.settings address 'dev-catchall@vardot.com' -y || true
   drush config:set reroute_email.settings allowed '*@vardot.com' -y || true
+
+  echo ""
+  echo "--- Creating the per-role testing users (as the CI does) ---"
+  drush role:create editor 'Editor' || true
+  drush role:create content_admin 'Content Admin' || true
+  drush role:create site_admin 'Site Admin' || true
+  drush role:create seo_admin 'SEO Admin' || true
+  drush user:create 'Normal user' --mail='test.authenticated@vardot.com' --password='dD.123123ddd' || true
+  drush user:create 'Editor' --mail='test.editor@vardot.com' --password='dD.123123ddd' || true
+  drush user:create 'Content admin' --mail='test.content_admin@vardot.com' --password='dD.123123ddd' || true
+  drush user:create 'SEO admin' --mail='test.seo_admin@vardot.com' --password='dD.123123ddd' || true
+  drush user:create 'Site admin' --mail='test.site_admin@vardot.com' --password='dD.123123ddd' || true
+  drush user:create 'Super admin' --mail='test.super_admin@vardot.com' --password='dD.123123ddd' || true
+  drush user:role:add editor 'Editor' || true
+  drush user:role:add content_admin 'Content admin' || true
+  drush user:role:add seo_admin 'SEO admin' || true
+  drush user:role:add site_admin 'Site admin' || true
+  drush user:role:add administrator 'Super admin' || true
+
+  echo ""
+  echo "--- Arabic locale + landing-page permission grants (as the CI does) ---"
+  drush locale-import ar --autocreate-language /var/www/html/docroot/profiles/contrib/varbase/translations/ar.po \
+    || drush locale-import ar --autocreate-language /var/www/html/docroot/profiles/varbase/translations/ar.po || true
+  drush pm:enable locale -y || true
+  drush locale:update || true
+  drush cr || true
+  drush role:perm:add editor 'create landing_page content' || true
+  drush role:perm:add content_admin 'create landing_page content' || true
+  drush role:perm:add editor 'translate landing_page_lb node' || true
+  drush role:perm:add editor 'create landing_page_lb content,edit any landing_page_lb content' || true
+  drush role:perm:add content_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
+  drush role:perm:add site_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
+  drush role:perm:add site_admin 'create landing_page content,edit any landing_page content,delete any landing_page content,clone node entity,create content translations,update content translations,delete content translations,translate any entity' || true
 else
   echo "  Drupal is already installed - skipping install."
 fi
