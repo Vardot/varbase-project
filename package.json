@@ -8,6 +8,11 @@
     "node": ">= 20.0"
   },
   "scripts": {
+    "test": "./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+    "test:chromium": "BROWSER=chromium ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+    "test:firefox": "BROWSER=firefox ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+    "test:webkit": "BROWSER=webkit ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+    "test:headed": "HEADLESS=false ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
     "phpcs": "phpcs --standard=./.phpcs.xml .",
     "phpcbf": "phpcbf --standard=./.phpcs.xml .",
     "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",

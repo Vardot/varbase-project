@@ -1,0 +1,79 @@
+#!/bin/bash
+
+## Description: Full initialization for automated testing - installs Varbase (classic profile) with the same components and provisioning the GitLab CI webship-js job uses, then prepares the site for the cucumber suite.
+## Usage: init-full-automated-testing
+## Example: ddev init-full-automated-testing
+## Aliases: varbase:init-full-automated-testing
+
+set -e
+
+echo "=== Full automated testing initialization for Varbase 9.2.x ==="
+
+# ------------------------------------------------------------------
+# 0. Install Varbase (classic profile) if not already installed.
+#    Mirrors the GitLab CI "Automated Functional Testing" before_script:
+#    install with the multilingual + extra components, then enable the
+#    remaining full-set modules and tune the site for deterministic tests.
+# ------------------------------------------------------------------
+BOOTSTRAP=$(drush status --field=bootstrap 2>/dev/null || true)
+if [ "$BOOTSTRAP" != "Successful" ]; then
+  echo ""
+  echo "--- Installing Varbase (varbase profile) ---"
+  drush site:install varbase --yes \
+    --account-name=webmaster \
+    --account-pass="dD.123123ddd" \
+    --account-mail="webmaster@vardot.com" \
+    --site-name="$DDEV_PROJECT" \
+    --locale=en \
+    varbase_multilingual_configuration.enable_multilingual=true \
+    varbase_extra_components.vmi=true \
+    varbase_extra_components.varbase_heroslider_media=true \
+    varbase_extra_components.varbase_carousels=true \
+    varbase_extra_components.varbase_search=true \
+    varbase_extra_components.varbase_blog=true \
+    varbase_extra_components.varbase_auth=true \
+    install_configure_form.enable_update_status_emails=NULL
+
+  echo ""
+  echo "--- Enabling the full Varbase module set ---"
+  drush pm:enable varbase_development -y || true
+  drush pm:enable varbase_styleguide -y || true
+  drush pm:enable varbase_landing -y || true
+  drush pm:enable varbase_api -y || true
+  drush pm:enable varbase_media_instagram -y || true
+  drush pm:enable varbase_media_twitter -y || true
+  drush pm:enable editoria11y -y || true
+  drush pm:enable symfony_mailer -y || true
+  drush pm:enable mailer_policy -y || true
+  drush pm:enable reroute_email -y || true
+  drush pm:enable varbase_content_planner -y || true
+  drush pm:enable social_auth_google social_auth_facebook -y || true
+
+  # Seed a user-owned Content Kanban activity so the Content Planner dashboard
+  # "Recent Kanban Activities" widget renders (same as CI).
+  if [ -f /var/www/html/tests/scripts/seed_content_planner_activity.php ]; then
+    drush php:script /var/www/html/tests/scripts/seed_content_planner_activity.php || true
+  fi
+
+  echo ""
+  echo "--- Tuning the site for deterministic testing ---"
+  # Remove spam/flood protection that blocks automated form submits.
+  drush pm:uninstall antibot honeypot -y || true
+  drush config:set reroute_email.settings enable true -y || true
+  drush config:set reroute_email.settings address 'dev-catchall@vardot.com' -y || true
+  drush config:set reroute_email.settings allowed '*@vardot.com' -y || true
+else
+  echo "  Drupal is already installed - skipping install."
+fi
+
+# ------------------------------------------------------------------
+# 1. Front-end performance + logging tuning (always applied).
+# ------------------------------------------------------------------
+drush config:set system.performance css.preprocess 0 -y
+drush config:set system.performance js.preprocess 0 -y
+drush config:set system.logging error_level all -y
+drush cache:rebuild
+
+echo ""
+echo "=== Varbase is installed and ready for the webship-js cucumber suite ==="
+echo "  Run the suite with:  ddev yarn test:chromium"
