@@ -1,30 +1,30 @@
 #!/bin/bash
 
-## Description: Full initialization for automated testing - installs Varbase (classic profile) with the same components and provisioning the GitLab CI webship-js job uses, then prepares the site for the cucumber suite.
+## Description: Full initialization for automated testing - installs Varbase if needed with the same components and provisioning the GitLab CI webship-js job uses, adds testing users, and prepares the site
 ## Usage: init-full-automated-testing
 ## Example: ddev init-full-automated-testing
 ## Aliases: varbase:init-full-automated-testing
 
-set -e
-
-echo "=== Full automated testing initialization for Varbase 9.2.x ==="
+echo "=== Full automated testing initialization for Varbase ==="
 
 # ------------------------------------------------------------------
-# 0. Install Varbase (classic profile) if not already installed.
-#    Mirrors the GitLab CI "Automated Functional Testing" before_script:
-#    install with the multilingual + extra components, then enable the
-#    remaining full-set modules and tune the site for deterministic tests.
+# 0. Check and install Drupal if not already installed
 # ------------------------------------------------------------------
-BOOTSTRAP=$(drush status --field=bootstrap 2>/dev/null || true)
+echo ""
+echo "--- Checking if Drupal is installed ---"
+
+BOOTSTRAP=$(drush status --field=bootstrap 2>/dev/null)
 if [ "$BOOTSTRAP" != "Successful" ]; then
+  echo "  Drupal is not installed. Running full Varbase install..."
   echo ""
-  echo "--- Installing Varbase (varbase profile) ---"
+
   drush site:install varbase --yes \
     --account-name=webmaster \
     --account-pass="dD.123123ddd" \
     --account-mail="webmaster@vardot.com" \
     --site-name="$DDEV_PROJECT" \
     --locale=en \
+    --no-interaction \
     varbase_multilingual_configuration.enable_multilingual=true \
     varbase_extra_components.vmi=true \
     varbase_extra_components.varbase_heroslider_media=true \
@@ -34,20 +34,33 @@ if [ "$BOOTSTRAP" != "Successful" ]; then
     varbase_extra_components.varbase_auth=true \
     install_configure_form.enable_update_status_emails=NULL
 
+  if [[ $? -ne 0 ]]; then
+    echo "  Error: Varbase installation failed."
+    exit 1
+  fi
+
+  echo ""
+  echo "  Rebuilding cache after install..."
+  drush cache:rebuild
+
+  # ------------------------------------------------------------------
+  # 1. Enable the full Varbase module set (classic profile)
+  # ------------------------------------------------------------------
   echo ""
   echo "--- Enabling the full Varbase module set ---"
-  drush pm:enable varbase_development -y || true
-  drush pm:enable varbase_styleguide -y || true
-  drush pm:enable varbase_landing -y || true
-  drush pm:enable varbase_api -y || true
-  drush pm:enable varbase_media_instagram -y || true
-  drush pm:enable varbase_media_twitter -y || true
-  drush pm:enable editoria11y -y || true
-  drush pm:enable symfony_mailer -y || true
-  drush pm:enable mailer_policy -y || true
-  drush pm:enable reroute_email -y || true
-  drush pm:enable varbase_content_planner -y || true
-  drush pm:enable social_auth_google social_auth_facebook -y || true
+  # One module at a time: a single incompatible module must not abort the batch.
+  drush pm:enable varbase_development --yes || true
+  drush pm:enable varbase_styleguide --yes || true
+  drush pm:enable varbase_landing --yes || true
+  drush pm:enable varbase_api --yes || true
+  drush pm:enable varbase_media_instagram --yes || true
+  drush pm:enable varbase_media_twitter --yes || true
+  drush pm:enable editoria11y --yes || true
+  drush pm:enable symfony_mailer --yes || true
+  drush pm:enable mailer_policy --yes || true
+  drush pm:enable reroute_email --yes || true
+  drush pm:enable varbase_content_planner --yes || true
+  drush pm:enable social_auth_google social_auth_facebook --yes || true
 
   # Seed a user-owned Content Kanban activity so the Content Planner dashboard
   # "Recent Kanban Activities" widget renders (same as CI).
@@ -55,58 +68,123 @@ if [ "$BOOTSTRAP" != "Successful" ]; then
     drush php:script /var/www/html/tests/scripts/seed_content_planner_activity.php || true
   fi
 
+  # ------------------------------------------------------------------
+  # 2. Arabic locale (the suite asserts Arabic translations)
+  # ------------------------------------------------------------------
   echo ""
-  echo "--- Tuning the site for deterministic testing ---"
-  # Remove spam/flood protection that blocks automated form submits.
-  drush pm:uninstall antibot honeypot -y || true
-  drush config:set reroute_email.settings enable true -y || true
-  drush config:set reroute_email.settings address 'dev-catchall@vardot.com' -y || true
-  drush config:set reroute_email.settings allowed '*@vardot.com' -y || true
-
-  echo ""
-  echo "--- Creating the per-role testing users (as the CI does) ---"
-  drush role:create editor 'Editor' || true
-  drush role:create content_admin 'Content Admin' || true
-  drush role:create site_admin 'Site Admin' || true
-  drush role:create seo_admin 'SEO Admin' || true
-  drush user:create 'Normal user' --mail='test.authenticated@vardot.com' --password='dD.123123ddd' || true
-  drush user:create 'Editor' --mail='test.editor@vardot.com' --password='dD.123123ddd' || true
-  drush user:create 'Content admin' --mail='test.content_admin@vardot.com' --password='dD.123123ddd' || true
-  drush user:create 'SEO admin' --mail='test.seo_admin@vardot.com' --password='dD.123123ddd' || true
-  drush user:create 'Site admin' --mail='test.site_admin@vardot.com' --password='dD.123123ddd' || true
-  drush user:create 'Super admin' --mail='test.super_admin@vardot.com' --password='dD.123123ddd' || true
-  drush user:role:add editor 'Editor' || true
-  drush user:role:add content_admin 'Content admin' || true
-  drush user:role:add seo_admin 'SEO admin' || true
-  drush user:role:add site_admin 'Site admin' || true
-  drush user:role:add administrator 'Super admin' || true
-
-  echo ""
-  echo "--- Arabic locale + landing-page permission grants (as the CI does) ---"
+  echo "--- Importing the Arabic locale ---"
   drush locale-import ar --autocreate-language /var/www/html/docroot/profiles/contrib/varbase/translations/ar.po \
     || drush locale-import ar --autocreate-language /var/www/html/docroot/profiles/varbase/translations/ar.po || true
-  drush pm:enable locale -y || true
+  drush pm:enable locale --yes || true
   drush locale:update || true
-  drush cr || true
-  drush role:perm:add editor 'create landing_page content' || true
-  drush role:perm:add content_admin 'create landing_page content' || true
-  drush role:perm:add editor 'translate landing_page_lb node' || true
-  drush role:perm:add editor 'create landing_page_lb content,edit any landing_page_lb content' || true
-  drush role:perm:add content_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
-  drush role:perm:add site_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
-  drush role:perm:add site_admin 'create landing_page content,edit any landing_page content,delete any landing_page content,clone node entity,create content translations,update content translations,delete content translations,translate any entity' || true
+
+  echo ""
+  echo "--- Configuring reroute email (dev catch-all) ---"
+  drush config:set reroute_email.settings enable true --yes || true
+  drush config:set reroute_email.settings address 'dev-catchall@vardot.com' --yes || true
+  drush config:set reroute_email.settings allowed '*@vardot.com' --yes || true
+
+  echo ""
+  echo "--- Rebuilding cache after provisioning ---"
+  drush cache:rebuild
 else
-  echo "  Drupal is already installed - skipping install."
+  echo "  Drupal is already installed. Skipping site install."
 fi
 
+
 # ------------------------------------------------------------------
-# 1. Front-end performance + logging tuning (always applied).
+# 3. Add testing users
 # ------------------------------------------------------------------
-drush config:set system.performance css.preprocess 0 -y
-drush config:set system.performance js.preprocess 0 -y
-drush config:set system.logging error_level all -y
-drush cache:rebuild
+echo ""
+echo "--- Adding testing users ---"
+
+current_path=$(pwd);
+
+# Include the Bash YAML library.
+source ${current_path}/.ddev/commands/web/libs/bash-yaml.sh || exit 1 ;
+
+# Load the list of default users for Varbase.
+eval $(parse_yaml ${current_path}/.ddev/commands/web/assets/varbase.users.yml);
+
+for user in ${users[@]}
+do
+  user_name="user_${user}_name";
+  user_mail="user_${user}_mail";
+  user_password="user_${user}_password";
+  user_role="user_${user}_role";
+
+  echo " ---------------------------------------------------------------- ";
+  echo "      User name: ${!user_name}";
+  echo "      User mail: ${!user_mail}";
+  echo "  User password: ${!user_password}";
+  echo "      User role: ${!user_role}";
+  echo " ================================================================= ";
+
+  drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
+  if [ "${!user_role}" == '_none_' ] ; then
+    echo "   No user role for this user" ;
+  else
+    drush user:role:add "${!user_role}" "${!user_name}" ;
+  fi
+
+done
+
+# ------------------------------------------------------------------
+# 4. Grant the landing-page permissions the suite expects (same as CI)
+# ------------------------------------------------------------------
+echo ""
+echo "--- Granting landing-page permissions to the testing roles ---"
+drush role:perm:add editor 'create landing_page content' || true
+drush role:perm:add content_admin 'create landing_page content' || true
+drush role:perm:add editor 'translate landing_page_lb node' || true
+drush role:perm:add editor 'create landing_page_lb content,edit any landing_page_lb content' || true
+drush role:perm:add content_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
+drush role:perm:add site_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
+drush role:perm:add site_admin 'create landing_page content,edit any landing_page content,delete any landing_page content,clone node entity,create content translations,update content translations,delete content translations,translate any entity' || true
+
+# ------------------------------------------------------------------
+# 5. Prepare site for automated testing
+# ------------------------------------------------------------------
+echo ""
+echo "--- Disabling antibot module ---"
+drush pm:uninstall antibot --yes 2>/dev/null || echo "  Antibot module not found or already disabled"
 
 echo ""
-echo "=== Varbase is installed and ready for the webship-js cucumber suite ==="
-echo "  Run the suite with:  ddev yarn test:chromium"
+echo "--- Relaxing login flood limits for automated testing ---"
+# The webship-js suite logs in many times in a row; the default flood
+# limits (ip_limit 5 / user_limit 4) trip "Too many failed login attempts"
+# and cascade-fail every login-dependent scenario. Raise the ceilings so the
+# suite starts from a clean slate.
+drush config:set user.flood ip_limit 1000000 --yes
+drush config:set user.flood user_limit 1000000 --yes
+
+echo ""
+echo "--- Disabling Honeypot time trap for automated testing ---"
+# Honeypot's time_limit rejects fast form submissions ("Please wait N seconds
+# and try again"), which breaks scripted form posts. Zero it out; the hidden
+# honeypot field protection stays in place.
+drush config:set honeypot.settings time_limit 0 --yes || true
+
+echo ""
+echo "--- Disabling CSS/JS aggregation ---"
+drush config:set system.performance css.preprocess 0 --yes
+drush config:set system.performance js.preprocess 0 --yes
+
+echo ""
+echo "--- Setting verbose error logging ---"
+drush config:set system.logging error_level all --yes
+
+echo ""
+echo "--- Rebuilding cache ---"
+drush cache:rebuild
+
+
+echo ""
+echo "=== Full automated testing initialization complete ==="
+echo ""
+echo "Now run on the host:"
+echo "  ddev yarn install"
+echo "  ddev npx playwright install-deps"
+echo "  ddev npx playwright install"
+echo "  ddev yarn test:chromium"
+echo ""
