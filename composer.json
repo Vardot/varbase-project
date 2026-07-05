@@ -52,7 +52,8 @@
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "phpstan/extension-installer": true,
       "php-http/discovery": true,
-      "tbachert/spi": true
+      "tbachert/spi": true,
+      "symfony/runtime": true
     }
   },
   "scripts": {
