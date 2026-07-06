@@ -501,14 +501,6 @@ stylelint:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable locale -y || true
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT locale:update || true
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cr || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add editor 'create landing_page content' || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add content_admin 'create landing_page content' || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add editor 'translate landing_page_lb node' || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add editor 'create landing_page_lb content,edit any landing_page_lb content' || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add content_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add site_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT role:perm:add site_admin 'create landing_page content,edit any landing_page content,delete any landing_page content,clone node entity,create content translations,update content translations,delete content translations,translate any entity' || true
-    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cr || true
     - !reference [.fragments, node_playwright]
   script:
     - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
