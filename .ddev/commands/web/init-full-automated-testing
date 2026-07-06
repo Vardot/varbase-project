@@ -130,20 +130,7 @@ do
 done
 
 # ------------------------------------------------------------------
-# 4. Grant the landing-page permissions the suite expects (same as CI)
-# ------------------------------------------------------------------
-echo ""
-echo "--- Granting landing-page permissions to the testing roles ---"
-drush role:perm:add editor 'create landing_page content' || true
-drush role:perm:add content_admin 'create landing_page content' || true
-drush role:perm:add editor 'translate landing_page_lb node' || true
-drush role:perm:add editor 'create landing_page_lb content,edit any landing_page_lb content' || true
-drush role:perm:add content_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
-drush role:perm:add site_admin 'create landing_page_lb content,edit any landing_page_lb content,delete any landing_page_lb content' || true
-drush role:perm:add site_admin 'create landing_page content,edit any landing_page content,delete any landing_page content,clone node entity,create content translations,update content translations,delete content translations,translate any entity' || true
-
-# ------------------------------------------------------------------
-# 5. Prepare site for automated testing
+# 4. Prepare site for automated testing
 # ------------------------------------------------------------------
 echo ""
 echo "--- Disabling antibot module ---"
