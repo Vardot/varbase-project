@@ -90,7 +90,6 @@ install_varbase_by_type() {
     drush pm:enable varbase_media_twitter --yes
     drush pm:enable social_auth_google --yes
     drush pm:enable social_auth_facebook --yes
-    drush pm:enable social_auth_twitter --yes
     drush pm:enable social_auth_linkedin --yes
     drush pm:enable editoria11y --yes
   fi
