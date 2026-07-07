@@ -1,4 +1,6 @@
-[![Vardot](https://circleci.com/gh/Vardot/varbase/tree/9.1.x.svg?style=shield)](https://app.circleci.com/pipelines/github/Vardot/varbase/1260/workflows/6d4e9f49-c32a-407b-ab1b-66829b02de7d) **Varbase 9.1.13**
+[![pipeline status](https://git.drupalcode.org/project/varbase_project/badges/9.2.x/pipeline.svg)](https://git.drupalcode.org/project/varbase_project/-/pipelines)
+[![Varbase Project](https://img.shields.io/badge/Varbase%20Project-9.2.0-0d6efc?labelColor=001d38&style=flat-square)](https://git.drupalcode.org/project/varbase_project/-/pipelines?ref=9.2.x)
+[![Automated Functional Testing](https://git.drupalcode.org/project/varbase_project/badges/9.2.x/pipeline.svg)](https://git.drupalcode.org/project/varbase_project/-/pipelines)
 
 [![](https://www.drupal.org/files/styles/grid-3/public/project-images/Medium-Logo%20Color%20with%20padding.png)](http://www.drupal.org/project/varbase)
 
