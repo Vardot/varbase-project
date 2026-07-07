@@ -20,29 +20,19 @@ To install the dev version of Varbase 9.1.x run this command:
 composer create-project drupal/varbase_project:9.2.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
 ```
 
-## [Create a new Vartheme sub theme for a project](https://github.com/Vardot/varbase/tree/9.1.x/scripts/README.md)
+## [Create a new Vartheme sub theme for a project](https://git.drupalcode.org/project/varbase/-/blob/9.2.x/scripts/README.md)
 
-## [Automated Functional Testing](https://github.com/Vardot/varbase/blob/9.1.x/tests/README.md)
+## [Automated Functional Testing](https://git.drupalcode.org/project/varbase_project/-/blob/9.2.x/tests/README.md)
 
 ## [Varbase 9.1.x Developer Guide](https://docs.varbase.vardot.com)
 
-## [CHANGELOG for Varbase](https://github.com/Vardot/varbase/blob/9.1.x/CHANGELOG.md)
+## [CHANGELOG for Varbase](https://git.drupalcode.org/project/varbase/-/blob/9.2.x/CHANGELOG.md)
 
-## [Varbase Gherkin features](https://github.com/Vardot/varbase/blob/9.1.x/tests/features/varbase/README.md)
+## [Varbase Gherkin features](https://git.drupalcode.org/project/varbase_project/-/tree/9.2.x/tests/features/varbase)
 
 ## [Varbase Developer Guide](https://docs.varbase.vardot.com)
 
-## [General instructions on how to update Varbase](https://github.com/Vardot/varbase/blob/9.1.x/UPDATE.md)
-
-## [Local development with Lando](https://docs.varbase.vardot.com/developers/installing-varbase/installing-varbase-with-lando)
-
-1. Install Lando locally, steps for installing can be found [here](https://docs.lando.dev/basics/installation.html).
-2. Run `lando start`.
-
-## Debugging using Lando
-
-- xDebug is enabled on Lando by default for PHP debugging.
-- The debugger is set to listen for the port 9003 but can be changed in `.lando/.php.ini`
+## [General instructions on how to update Varbase](https://git.drupalcode.org/project/varbase/-/blob/9.2.x/UPDATE.md)
 
 ## [Local development with DDEV](https://docs.varbase.vardot.com/developers/installing-varbase/installing-varbase-with-ddev)
 1. Install DDEV locally, steps for installing can be found [here](https://ddev.readthedocs.io/en/stable/).
