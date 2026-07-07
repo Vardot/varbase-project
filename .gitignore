@@ -86,6 +86,9 @@ CURSOR.md
 .warp/
 
 # webship-js test artifacts (generated on each run; never commit)
-tests/screenshots/
-tests/videos/
-tests/reports/
+tests/screenshots/*
+!tests/screenshots/README.md
+tests/videos/*
+!tests/videos/README.md
+tests/reports/*
+!tests/reports/README.md
