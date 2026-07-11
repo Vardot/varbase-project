@@ -5,10 +5,13 @@
 //
 // Two flavours of step live here:
 //   1. Editor steps that drive the real Drupal Canvas React editor the way a
-//      human site builder does - drag a component from the Library onto the
-//      canvas, configure it in the Settings panel, then publish.
+//      human site builder does - open a page in the editor, browse the Library,
+//      drag a component onto the canvas or right-click a pattern and choose
+//      Insert, configure it in the Settings panel, then publish through the
+//      editor's Review/Publish widget.
 //   2. API helper steps that use Canvas's own authoring endpoints (the same
-//      ones the editor calls) to set up or read state quickly.
+//      ones the editor calls) to set up or read state quickly (e.g. creating a
+//      blank page for an editor step to then build on).
 //
 // Reuses webship-js's own helpers (smartSettle + friendly) so these steps
 // behave like the core navigation steps.
@@ -510,4 +513,210 @@ When(/^(?:I |we )*set the Canvas component option "([^"]*)" to "([^"]*)"$/, { ti
     throw friendly(`Could not set the Canvas component option "${label}".`, 'Open a component in the editor Settings panel first, and check the field label and option value.');
   }
   await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
+});
+
+/**
+ * Open a Canvas page in the real Drupal Canvas editor the way a site builder
+ * does: navigate to /canvas/editor/canvas_page/<id> and wait until the editor
+ * is ready to drive. Drupal Canvas is a heavy React SPA, so readiness is polled
+ * off the left toolbar "Library" button (it can take several seconds to mount)
+ * rather than a fixed sleep.
+ *
+ * Resolves the page id by its title, so create the page first (e.g. with a
+ * "a new Canvas page ..." step) and run a login step as a user who can edit
+ * Canvas pages (e.g. the webmaster).
+ *
+ * Example #1: When I open the "Landing" Canvas page in the editor
+ * Example #2: And I open the "Test Pattern Counters" Canvas page in the editor
+ * Example #3: When we open the "Home" Canvas page in the editor
+ * Example #4: And we open the "Test Pattern Header Footer" Canvas page in the editor
+ * Example #5: Given I open the "Pattern Library Check" Canvas page in the editor
+ */
+When(/^(?:I |we )*open the "([^"]*)" Canvas page in the editor$/, { timeout: 180000 }, async function (pageTitle) {
+  const id = await resolveCanvasPageId(this.page, pageTitle);
+  if (!id) throw friendly(`No Canvas page titled "${pageTitle}" was found.`, 'Create the page first with a "a new Canvas page ..." step.');
+  const editorUrl = `${this.launchUrl.replace(/\/$/, '')}/canvas/editor/canvas_page/${id}`;
+  const libraryButton = this.page.getByRole('button', { name: 'Library' }).first();
+  // The React editor occasionally fails to mount its toolbar under cumulative
+  // browser load; a fresh load recovers it. Reload-and-retry with an
+  // event-based wait for the "Library" button (webship smart wait) instead of
+  // one long blind wait, so the step self-heals rather than leaning on the
+  // cucumber scenario retry.
+  let ready = false;
+  for (let attempt = 1; attempt <= 3 && !ready; attempt++) {
+    try {
+      await this.page.goto(editorUrl, { waitUntil: 'domcontentloaded' });
+      await libraryButton.waitFor({ state: 'visible', timeout: 45000 });
+      ready = true;
+    } catch (e) {
+      await smartSettle(this.page, 2000);
+    }
+  }
+  if (!ready) {
+    throw friendly(`The Canvas editor for "${pageTitle}" did not become ready after 3 load attempts.`, 'The left toolbar "Library" button never appeared.');
+  }
+  await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
+});
+
+/**
+ * Open a named tab in the Drupal Canvas editor Library panel, the way a site
+ * builder browses ready-made sections. Opens the Library panel if it is closed
+ * (idempotent - it never toggles an already-open panel shut), activates the
+ * requested tab, and waits until the tab's list has actually populated (a known
+ * item is visible) so a following assertion or insert reads real, on-screen
+ * content - not an empty, still-loading panel.
+ *
+ * Only "Patterns" and "Components" are valid tab names. Open a page in the
+ * editor first.
+ *
+ * Example #1: When I open the "Patterns" tab in the Canvas Library
+ * Example #2: And I open the "Components" tab in the Canvas Library
+ * Example #3: When we open the "Patterns" tab in the Canvas Library
+ * Example #4: And we open the "Components" tab in the Canvas Library
+ * Example #5: Given I open the "Patterns" tab in the Canvas Library
+ */
+When(/^(?:I |we )*open the "(Patterns|Components)" tab in the Canvas Library$/, { timeout: 60000 }, async function (tabName) {
+  const key = tabName.toLowerCase();
+  const tabSelect = `canvas-library-${key}-tab-select`;
+  const tabContent = `canvas-library-${key}-tab-content`;
+  const probe = key === 'patterns' ? 'Counters' : 'Webform';
+  try {
+    const alreadyOpen = await this.page.getByTestId(tabSelect).isVisible().catch(() => false);
+    if (!alreadyOpen) {
+      await this.page.getByRole('button', { name: 'Library' }).first().click();
+    }
+    await this.page.getByTestId(tabSelect).waitFor({ state: 'visible', timeout: 20000 });
+    await this.page.getByTestId(tabSelect).click();
+    await this.page.getByTestId(tabContent).waitFor({ state: 'visible', timeout: 20000 });
+    await this.page.getByTestId(tabContent).getByText(probe, { exact: true }).first().waitFor({ state: 'visible', timeout: 20000 });
+  } catch (e) {
+    throw friendly(`Could not open the "${tabName}" tab in the Canvas Library.`, 'Open a page in the Canvas editor first, then check the Library panel opens and the tab populates.');
+  }
+  await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
+});
+
+/**
+ * Insert a default Canvas Pattern into the page open in the editor, exactly as a
+ * site builder does: right-click the pattern's row in the Library > Patterns
+ * list (a context-menu trigger) and choose "Insert". The whole section is added
+ * and the just-inserted component becomes selected, so the editor URL gains a
+ * fresh /component/<uuid>; the step waits for that uuid to change to confirm the
+ * insert registered. Inserting the same pattern twice therefore lands two
+ * independent copies (each gets its own uuid).
+ *
+ * Open the page in the editor and open the "Patterns" Library tab first. Use the
+ * pattern's visible human label (e.g. "Hero Slider", "Counters", "Site Header").
+ *
+ * Example #1: When I insert the "Hero Slider" pattern from the Canvas Library
+ * Example #2: And I insert the "Counters" pattern from the Canvas Library
+ * Example #3: And I insert the "Counters" pattern from the Canvas Library
+ * Example #4: When we insert the "Site Header" pattern from the Canvas Library
+ * Example #5: And we insert the "Site Footer" pattern from the Canvas Library
+ */
+When(/^(?:I |we )*insert the "([^"]*)" pattern from the Canvas Library$/, { timeout: 60000 }, async function (label) {
+  const uuidOf = (url) => (url.match(/\/component\/([0-9a-f-]+)/i) || [])[1] || null;
+  const before = uuidOf(this.page.url());
+  const row = this.page.getByTestId('canvas-library-patterns-tab-content').getByText(label, { exact: true }).first();
+  try {
+    await row.waitFor({ state: 'visible', timeout: 15000 });
+    await row.scrollIntoViewIfNeeded();
+    await row.click({ button: 'right' });
+    const insert = this.page.getByRole('menuitem', { name: 'Insert' });
+    await insert.waitFor({ state: 'visible', timeout: 10000 });
+    await insert.click();
+    await this.page.waitForFunction((prev) => {
+      const m = location.pathname.match(/\/component\/([0-9a-f-]+)/i);
+      return !!(m && m[1] !== prev);
+    }, before, { timeout: 25000 });
+  } catch (e) {
+    throw friendly(`Could not insert the "${label}" pattern from the Canvas Library.`, 'Open the "Patterns" Library tab first, and check the pattern label. Right-click on the row must open a menu with an "Insert" item.');
+  }
+  await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
+});
+
+/**
+ * Publish the pending Canvas changes through the editor's own Review/Publish
+ * widget, the way a site builder ships a page: click the topbar "Review N
+ * change(s)" button, "Select All" in the review list, then "Publish N selected".
+ * The step waits until the topbar widget resets to "No changes", confirming the
+ * publish landed. Drupal Canvas's review list is site-wide, so "Select All"
+ * publishes every pending change; drive this right after inserting on the page
+ * under test so only that page's changes are pending.
+ *
+ * Open a page in the editor and make at least one change (e.g. insert a pattern)
+ * first.
+ *
+ * Example #1: When I publish the Canvas page changes through the editor
+ * Example #2: And I publish the Canvas page changes through the editor
+ * Example #3: When we publish the Canvas page changes through the editor
+ * Example #4: And we publish the Canvas page changes through the editor
+ * Example #5: Then I publish the Canvas page changes through the editor
+ */
+When(/^(?:I |we )*publish the Canvas page changes through the editor$/, { timeout: 90000 }, async function () {
+  try {
+    const review = this.page.getByTestId('canvas-publish-review');
+    await review.waitFor({ state: 'visible', timeout: 20000 });
+    await review.click();
+    const selectAll = this.page.getByTestId('canvas-publish-review-select-all');
+    await selectAll.waitFor({ state: 'visible', timeout: 15000 });
+    await selectAll.click();
+    const publishButton = this.page.getByRole('button', { name: /Publish \d+ selected/i }).first();
+    await publishButton.waitFor({ state: 'visible', timeout: 15000 });
+    await publishButton.click();
+    await this.page.waitForFunction(() => {
+      const b = document.querySelector('[data-testid="canvas-publish-review"]');
+      return !!(b && /no changes/i.test(b.textContent));
+    }, null, { timeout: 40000 });
+  } catch (e) {
+    throw friendly('Could not publish the Canvas page changes through the editor.', 'Open a page in the editor and insert at least one change first. The Review -> Select All -> Publish widget must be reachable.');
+  }
+  await smartSettle(this.page, (this.minWaitTime && this.minWaitTime.page) || 8000);
+});
+
+/**
+ * Assert that a Drupal Canvas Library panel does (or does not) list an item by
+ * its visible label. Scoped to the panel element by CSS selector (e.g. the
+ * Patterns or Components tab content) and read straight from the panel's
+ * on-screen text - the labels a site builder actually sees, not any API dump.
+ *
+ * This is the fast, panel-scoped counterpart of the generic "I should see ... in
+ * the ... element" assertion: it reads the panel's innerText once and checks the
+ * label against the panel's line items, so a library with a dozen checks stays
+ * quick and never trips a step timeout. Matches a whole line item exactly (so
+ * "Share" does not match "Social media menu" and an absent admin label is never
+ * a false positive from a longer entry).
+ *
+ * The panel selector is resolved from the named-selector registry
+ * (tests/selectors/<preset>.json): the "Patterns" tab maps to the
+ * "canvas patterns library" selector and "Components" to
+ * "canvas components library", so the feature reads by tab name and the CSS
+ * lives in one place. Open the page in the editor and open that Library tab
+ * first.
+ *
+ * Example #1: Then the Canvas Library "Patterns" tab should list "Hero Slider"
+ * Example #2: And the Canvas Library "Patterns" tab should list "Counters"
+ * Example #3: Then the Canvas Library "Components" tab should list "Webform"
+ * Example #4: And the Canvas Library "Components" tab should not list "Events Feed"
+ * Example #5: And the Canvas Library "Components" tab should not list "Recent pages"
+ */
+Then(/^the Canvas Library "(Patterns|Components)" tab should( not)? list "([^"]*)"$/, { timeout: 30000 }, async function (tab, negate, label) {
+  const selectorName = tab === 'Patterns' ? 'canvas patterns library' : 'canvas components library';
+  const registry = (this.__selectorsCss || {});
+  const selector = registry[selectorName] || `[data-testid='canvas-library-${tab.toLowerCase()}-tab-content']`;
+  const panel = this.page.locator(selector).first();
+  let text = '';
+  try {
+    await panel.waitFor({ state: 'visible', timeout: 15000 });
+    text = (await panel.innerText()) || '';
+  } catch (e) {
+    throw friendly(`Could not read the Canvas Library "${tab}" tab panel.`, 'Open the page in the editor and open that Library tab first.');
+  }
+  const items = text.split('\n').map((s) => s.trim()).filter(Boolean);
+  const present = items.includes(label);
+  if (negate && present) {
+    throw friendly(`The Canvas Library "${tab}" tab should not list "${label}", but it does.`);
+  }
+  if (!negate && !present) {
+    throw friendly(`The Canvas Library "${tab}" tab should list "${label}", but it does not.`, `Panel items seen: ${items.join(', ')}`);
+  }
 });

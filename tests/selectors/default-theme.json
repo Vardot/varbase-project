@@ -8,7 +8,9 @@
     "skip link": ".skip-link",
     "breadcrumb": "nav[aria-label=\"breadcrumb\"]",
     "contact form": "form.webform-submission-form",
-    "blog view": ".view-blog"
+    "blog view": ".view-blog",
+    "canvas patterns library": "[data-testid='canvas-library-patterns-tab-content']",
+    "canvas components library": "[data-testid='canvas-library-components-tab-content']"
   },
   "xpath": {}
 }

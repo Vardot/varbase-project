@@ -73,47 +73,14 @@ composer:
     # large .git histories that blow the build artifact past the GitLab
     # artifact-size limit (413 Request Entity Too Large). dist keeps the
     # artifact small without changing the installed code.
-    - |
-      # Drupal 11.4.0 coordinated build: pull every varbase_* (+ vmi, ckeditor_media_resize)
-      # from its 11.4 issue-fork so the whole tree resolves on Drupal 11.4.0.
-      # redirect 11.4 patch now curated in vardot/varbase-patches (#420/#421 merged).
-      composer config minimum-stability dev
-      composer config prefer-stable true
-      composer config --no-plugins allow-plugins.symfony/runtime true
-      composer config "repositories.varbase-3607727" vcs "https://git.drupalcode.org/issue/varbase-3607727.git"
-      composer config "repositories.varbase_starter-3607733" vcs "https://git.drupalcode.org/issue/varbase_starter-3607733.git"
-      composer config "repositories.vartheme_bs5-3607734" vcs "https://git.drupalcode.org/issue/vartheme_bs5-3607734.git"
-      composer config "repositories.varbase_auth-3607735" vcs "https://git.drupalcode.org/issue/varbase_auth-3607735.git"
-      composer config "repositories.varbase_components-3607736" vcs "https://git.drupalcode.org/issue/varbase_components-3607736.git"
-      composer config "repositories.varbase_media-3607737" vcs "https://git.drupalcode.org/issue/varbase_media-3607737.git"
-      composer config "repositories.varbase_recipes-3607739" vcs "https://git.drupalcode.org/issue/varbase_recipes-3607739.git"
-      composer config "repositories.varbase_admin_base-3607740" vcs "https://git.drupalcode.org/issue/varbase_admin_base-3607740.git"
-      composer config "repositories.varbase_ai_base-3607741" vcs "https://git.drupalcode.org/issue/varbase_ai_base-3607741.git"
-      composer config "repositories.varbase_ai_context-3607742" vcs "https://git.drupalcode.org/issue/varbase_ai_context-3607742.git"
-      composer config "repositories.varbase_ai_editor_assistant-3607746" vcs "https://git.drupalcode.org/issue/varbase_ai_editor_assistant-3607746.git"
-      composer config "repositories.varbase_ai_image_alt-3607747" vcs "https://git.drupalcode.org/issue/varbase_ai_image_alt-3607747.git"
-      composer config "repositories.varbase_ai_safety-3607750" vcs "https://git.drupalcode.org/issue/varbase_ai_safety-3607750.git"
-      composer config "repositories.varbase_ai_taxonomy_tagging-3607751" vcs "https://git.drupalcode.org/issue/varbase_ai_taxonomy_tagging-3607751.git"
-      composer config "repositories.varbase_api_base-3607752" vcs "https://git.drupalcode.org/issue/varbase_api_base-3607752.git"
-      composer config "repositories.varbase_auth_base-3607753" vcs "https://git.drupalcode.org/issue/varbase_auth_base-3607753.git"
-      composer config "repositories.varbase_blog_base-3607754" vcs "https://git.drupalcode.org/issue/varbase_blog_base-3607754.git"
-      composer config "repositories.varbase_content_base-3607755" vcs "https://git.drupalcode.org/issue/varbase_content_base-3607755.git"
-      composer config "repositories.varbase_demo_content-3607756" vcs "https://git.drupalcode.org/issue/varbase_demo_content-3607756.git"
-      composer config "repositories.varbase_dev_base-3607757" vcs "https://git.drupalcode.org/issue/varbase_dev_base-3607757.git"
-      composer config "repositories.varbase_editor_base-3607758" vcs "https://git.drupalcode.org/issue/varbase_editor_base-3607758.git"
-      composer config "repositories.varbase_i18n_base-3607760" vcs "https://git.drupalcode.org/issue/varbase_i18n_base-3607760.git"
-      composer config "repositories.varbase_media_assets-3607761" vcs "https://git.drupalcode.org/issue/varbase_media_assets-3607761.git"
-      composer config "repositories.varbase_media_base-3607762" vcs "https://git.drupalcode.org/issue/varbase_media_base-3607762.git"
-      composer config "repositories.varbase_page_base-3607764" vcs "https://git.drupalcode.org/issue/varbase_page_base-3607764.git"
-      composer config "repositories.varbase_performance_base-3607766" vcs "https://git.drupalcode.org/issue/varbase_performance_base-3607766.git"
-      composer config "repositories.varbase_security_base-3607767" vcs "https://git.drupalcode.org/issue/varbase_security_base-3607767.git"
-      composer config "repositories.varbase_seo_base-3607768" vcs "https://git.drupalcode.org/issue/varbase_seo_base-3607768.git"
-      composer config "repositories.varbase_users_base-3607770" vcs "https://git.drupalcode.org/issue/varbase_users_base-3607770.git"
-      composer config "repositories.varbase_webform_base-3607771" vcs "https://git.drupalcode.org/issue/varbase_webform_base-3607771.git"
-      composer config "repositories.varbase_workflow_base-3607772" vcs "https://git.drupalcode.org/issue/varbase_workflow_base-3607772.git"
-      composer config "repositories.vmi-3607789" vcs "https://git.drupalcode.org/issue/vmi-3607789.git"
-      composer config "repositories.ckeditor_media_resize-3607786" vcs "https://git.drupalcode.org/issue/ckeditor_media_resize-3607786.git"
-      composer require --no-update --no-interaction "vardot/varbase:dev-3607727-support-drupal-11.4.0 as 11.0.x-dev" "drupal/varbase_starter:dev-3607733-update-drupal-core as 1.0.x-dev" "drupal/vartheme_bs5:dev-3607734-update-drupal-core as 5.0.x-dev" "drupal/varbase_auth:dev-3607735-update-drupal-core as 11.0.x-dev" "drupal/varbase_components:dev-3607736-update-drupal-core as 4.0.x-dev" "drupal/varbase_media:dev-3607737-update-drupal-core as 11.0.x-dev" "drupal/varbase_recipes:dev-3607739-update-drupal-core as 1.0.x-dev" "drupal/varbase_admin_base:dev-3607740-update-drupal-core as 1.0.x-dev" "drupal/varbase_ai_base:dev-3607741-update-drupal-core as 1.0.x-dev" "drupal/varbase_ai_context:dev-3607742-update-drupal-core as 1.0.x-dev" "drupal/varbase_ai_editor_assistant:dev-3607746-update-drupal-core as 2.0.x-dev" "drupal/varbase_ai_image_alt:dev-3607747-update-drupal-core as 2.0.x-dev" "drupal/varbase_ai_safety:dev-3607750-update-drupal-core as 1.0.x-dev" "drupal/varbase_ai_taxonomy_tagging:dev-3607751-update-drupal-core as 2.0.x-dev" "drupal/varbase_api_base:dev-3607752-update-drupal-core as 1.0.x-dev" "drupal/varbase_auth_base:dev-3607753-update-drupal-core as 1.0.x-dev" "drupal/varbase_blog_base:dev-3607754-update-drupal-core as 1.0.x-dev" "drupal/varbase_content_base:dev-3607755-update-drupal-core as 1.0.x-dev" "drupal/varbase_demo_content:dev-3607756-update-drupal-core as 1.0.x-dev" "drupal/varbase_dev_base:dev-3607757-update-drupal-core as 1.0.x-dev" "drupal/varbase_editor_base:dev-3607758-update-drupal-core as 1.0.x-dev" "drupal/varbase_i18n_base:dev-3607760-update-drupal-core as 1.0.x-dev" "drupal/varbase_media_assets:dev-3607761-update-drupal-core as 1.0.x-dev" "drupal/varbase_media_base:dev-3607762-update-drupal-core as 1.0.x-dev" "drupal/varbase_page_base:dev-3607764-update-drupal-core as 1.0.x-dev" "drupal/varbase_performance_base:dev-3607766-update-drupal-core as 1.0.x-dev" "drupal/varbase_security_base:dev-3607767-update-drupal-core as 1.0.x-dev" "drupal/varbase_seo_base:dev-3607768-update-drupal-core as 1.0.x-dev" "drupal/varbase_users_base:dev-3607770-update-drupal-core as 1.0.x-dev" "drupal/varbase_webform_base:dev-3607771-update-drupal-core as 1.0.x-dev" "drupal/varbase_workflow_base:dev-3607772-update-drupal-core as 1.0.x-dev" "drupal/vmi:dev-3607789-update-drupal-core as 5.0.x-dev" "drupal/ckeditor_media_resize:dev-3607786-add-drupal-core as 1.1.x-dev" "drupal/svg_image:^3.2.4" "vardot/drupal-core-patches:11.4.x-dev"
+    #
+    # The whole varbase_* tree resolves from canonical via packages.drupal.org
+    # through this project's composer.json (vardot/varbase:11.0.x-dev). The one
+    # holdout is ckeditor_media_resize (no canonical Drupal 11.4 release yet,
+    # #3607786; required by varbase_editor_base ~1): mglaman/composer-drupal-lenient
+    # relaxes its core constraint. The plugin, its allow-plugins entry and the
+    # drupal-lenient allowed-list all live in composer.json, so the build stays a
+    # plain composer update - a temporary measure until the module tags 11.4.
     - composer update --with-all-dependencies --no-interaction --no-progress --optimize-autoloader --prefer-dist
   # A full Varbase build (web/ + vendor/) exceeds the GitLab artifact-size
   # limit (413 Request Entity Too Large), so do NOT pass the build downstream.

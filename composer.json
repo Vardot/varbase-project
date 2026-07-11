@@ -33,6 +33,7 @@
         "drupal/core-vendor-hardening": "~11.4",
         "drupal/core": "~11.4.0",
         "drush/drush": "~13",
+        "mglaman/composer-drupal-lenient": "^1.0",
         "vardot/varbase": "11.0.x-dev",
         "vardot/varbase-patches": "11.0.x-dev"
     },
@@ -53,13 +54,19 @@
             "drupal/core-vendor-hardening": true,
             "oomphinc/composer-installers-extender": true,
             "php-http/discovery": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "mglaman/composer-drupal-lenient": true
         },
         "bin-dir": "bin/",
         "sort-packages": true,
         "optimize-autoloader": true
     },
     "extra": {
+        "drupal-lenient": {
+            "allowed-list": [
+                "drupal/ckeditor_media_resize"
+            ]
+        },
         "drupal-scaffold": {
             "locations": {
                 "web-root": "web/"
