@@ -30,7 +30,8 @@
         "webflo/drupal-finder": "~1.0",
         "vardot/varbase": "10.1.x-dev",
         "vardot/varbase-patches": "10.1.x-dev",
-        "drush/drush": "~13"
+        "drush/drush": "~13",
+        "mglaman/composer-drupal-lenient": "~1.0"
     },
     "config": {
         "bin-dir": "bin/",
@@ -43,7 +44,6 @@
             "composer/installers": true,
             "cweagans/composer-patches": true,
             "vardot/varbase-patches": true,
-            "vardot/drupal-core-patches": true,
             "oomphinc/composer-installers-extender": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
@@ -51,7 +51,9 @@
             "phpstan/extension-installer": true,
             "php-http/discovery": true,
             "tbachert/spi": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "mglaman/composer-drupal-lenient": true,
+            "php-tuf/composer-stager": false
         }
     },
     "scripts": {
@@ -155,6 +157,12 @@
             ]
         },
         "patches-ignore": {},
-        "patches": {}
+        "patches": {},
+        "drupal-lenient": {
+            "allowed-list": [
+                "drupal/ckeditor_media_resize"
+            ],
+            "constraint": "^11.4 || ^12"
+        }
     }
 }

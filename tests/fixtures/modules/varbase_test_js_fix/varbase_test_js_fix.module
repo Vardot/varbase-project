@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Test-only JS library dependency repairs for the webship-js CI suite.
+ *
+ * On Drupal 11.4 the jQuery plugin `drupalSetSummary()` is defined by
+ * `core/misc/form.js` (library `core/drupal.form`); it is no longer part of
+ * `core/drupal.vertical-tabs`. Several contrib modules ship vertical-tab
+ * "summary" behaviours that call `$(...).drupalSetSummary(...)` but never
+ * declare a dependency on `core/drupal.form`. With JS aggregation enabled
+ * (which the CI Install job turns on to keep the number of <script> tags,
+ * and therefore the page's domcontentloaded budget, small) those callers can
+ * be grouped into an aggregate that loads before `form.js`. The behaviour then
+ * throws `drupalSetSummary is not a function`, which aborts
+ * `Drupal.attachBehaviors()` for the whole page — so, on `/node/add/*`, the
+ * CKEditor 5 attach behaviour never runs and `.ck.ck-editor__main` never
+ * appears.
+ *
+ * Declaring the missing dependency forces `form.js` into an earlier aggregate
+ * group, so `drupalSetSummary` is defined before any caller runs. This mirrors
+ * the fix an upstream library patch would make; it is scoped to the specific
+ * offending libraries and is a no-op when a library is absent.
+ */
+
+/**
+ * Implements hook_library_info_alter().
+ *
+ * Two complementary repairs:
+ *
+ * 1. Append a drupalSetSummary/drupalGetSummary fallback to core/jquery, so it
+ *    is defined immediately after jQuery core and before ANY behaviour runs.
+ *    This is the actual fix: it is order-independent and cannot be defeated by
+ *    the aggregate grouping, because the fallback ships inside the jQuery
+ *    library that every summary behaviour transitively depends on. It only
+ *    fills in the plugin when core/drupal.form has not defined it yet.
+ *
+ * 2. Declare the (already-correct in core, missing in a few contrib libraries)
+ *    core/drupal.form dependency on the known vertical-tab summary callers.
+ */
+function varbase_test_js_fix_library_info_alter(array &$libraries, $extension) {
+  // (1) Fallback drupalSetSummary appended to core/jquery.
+  if ($extension === 'core' && isset($libraries['jquery'])) {
+    $module_path = \Drupal::service('extension.list.module')->getPath('varbase_test_js_fix');
+    $file = '/' . $module_path . '/js/drupalsetsummary_polyfill.js';
+    // Appended last (Drupal forbids positive JS weights); with an equal weight
+    // the stable sort keeps insertion order, so it evaluates right after
+    // jquery.js and before anything that depends on core/jquery. preprocess
+    // TRUE keeps it inside the aggregate.
+    $libraries['jquery']['js'][$file] = [
+      'preprocess' => TRUE,
+      'minified' => FALSE,
+    ];
+  }
+
+  // (2) Missing core/drupal.form dependency on contrib summary callers.
+  $needs_form = [
+    'scheduler' => ['vertical-tabs'],
+    'simple_sitemap' => ['fieldsetSummaries'],
+    'search_api' => ['drupal.search_api.processors'],
+    'rabbit_hole' => ['field-ui'],
+    'checklistapi' => ['checklistapi'],
+  ];
+  if (isset($needs_form[$extension])) {
+    foreach ($needs_form[$extension] as $name) {
+      if (!isset($libraries[$name])) {
+        continue;
+      }
+      if (!isset($libraries[$name]['dependencies'])) {
+        $libraries[$name]['dependencies'] = [];
+      }
+      if (!in_array('core/drupal.form', $libraries[$name]['dependencies'], TRUE)) {
+        $libraries[$name]['dependencies'][] = 'core/drupal.form';
+      }
+    }
+  }
+}

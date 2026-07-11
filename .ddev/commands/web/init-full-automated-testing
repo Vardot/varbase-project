@@ -1,0 +1,55 @@
+#!/bin/bash
+
+## Description: Full initialization for automated testing - installs Varbase (classic profile) with the same provisioning the GitLab CI webship-js job uses, adds the testing users, then prepares the site for the cucumber suite.
+## Usage: init-full-automated-testing
+## Example: ddev init-full-automated-testing
+## Aliases: varbase:init-full-automated-testing
+
+set -e
+
+echo "=== Full automated testing initialization for Varbase 10.1.x ==="
+
+# ------------------------------------------------------------------
+# 0. Install Varbase (classic profile) if not already installed.
+#    Mirrors the GitLab CI "Automated Functional Testing" before_script.
+# ------------------------------------------------------------------
+BOOTSTRAP=$(drush status --field=bootstrap 2>/dev/null || true)
+if [ "$BOOTSTRAP" != "Successful" ]; then
+  echo ""
+  echo "--- Installing Varbase (varbase profile) ---"
+  drush site:install varbase --yes \
+    --account-name=webmaster \
+    --account-pass="dD.123123ddd" \
+    --account-mail="webmaster@vardot.com" \
+    --site-name="$DDEV_PROJECT" \
+    --locale=en
+
+  echo ""
+  echo "--- Enabling multilingual + importing optional config ---"
+  drush pm:install language content_translation -y || true
+  drush php:eval '\Drupal::service("config.installer")->installOptionalConfig();' || true
+
+  echo ""
+  echo "--- Adding the automated-testing users (Normal/Editor/Content admin/SEO admin/Site admin/Super admin) ---"
+  add-testing-users || true
+fi
+
+# ------------------------------------------------------------------
+# 1. Tune the site for deterministic testing (always applied).
+# ------------------------------------------------------------------
+drush pm:uninstall antibot -y || true
+drush config:set honeypot.settings time_limit 0 -y || true
+drush config:set user.flood ip_limit 1000000 -y || true
+drush config:set user.flood user_limit 1000000 -y || true
+drush config:set system.site page.403 '' -y || true
+drush config:set reroute_email.settings enable 1 -y || true
+drush config:set reroute_email.settings address 'dev-catchall@vardot.com' -y || true
+drush config:set reroute_email.settings allowed '*@vardot.com' -y || true
+drush config:set system.performance css.preprocess 0 -y
+drush config:set system.performance js.preprocess 0 -y
+drush config:set system.logging error_level all -y
+drush cache:rebuild
+
+echo ""
+echo "=== Varbase is installed and ready for the webship-js cucumber suite ==="
+echo "  Run the suite with:  ddev yarn test:chromium"
