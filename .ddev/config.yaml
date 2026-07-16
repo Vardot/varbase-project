@@ -1,4 +1,4 @@
-type: drupal10
+type: drupal11
 docroot: docroot
 webserver_type: apache-fpm
 database:

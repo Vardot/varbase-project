@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2cf985cdf9c3b944a3d47f569e2f905",
+    "content-hash": "c4907040dd3d73f9b803c5e3b117cae3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -125,16 +125,16 @@
         },
         {
             "name": "chi-teck/drupal-code-generator",
-            "version": "4.x-dev",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Chi-teck/drupal-code-generator.git",
-                "reference": "ee02eb9373a534ab9a426eb7c9e9b75918785694"
+                "reference": "984dd69522b5839976df51470a00a51616a21f42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Chi-teck/drupal-code-generator/zipball/ee02eb9373a534ab9a426eb7c9e9b75918785694",
-                "reference": "ee02eb9373a534ab9a426eb7c9e9b75918785694",
+                "url": "https://api.github.com/repos/Chi-teck/drupal-code-generator/zipball/984dd69522b5839976df51470a00a51616a21f42",
+                "reference": "984dd69522b5839976df51470a00a51616a21f42",
                 "shasum": ""
             },
             "require": {
@@ -142,10 +142,10 @@
                 "php": ">=8.3.0",
                 "psr/event-dispatcher": "^1.0",
                 "psr/log": "^3.0",
-                "symfony/console": "^7.4 || ^8",
-                "symfony/dependency-injection": "^7.4 || ^8",
-                "symfony/filesystem": "^7.4 || ^8",
-                "symfony/string": "^7.4 || ^8",
+                "symfony/console": "^7.1",
+                "symfony/dependency-injection": "^7.1",
+                "symfony/filesystem": "^7.1",
+                "symfony/string": "^7.0",
                 "twig/twig": "^3.4"
             },
             "conflict": {
@@ -155,16 +155,15 @@
             "require-dev": {
                 "chi-teck/drupal-coder-extension": "^2.0.0-rc2",
                 "drupal/coder": "8.3.24",
-                "drupal/core": "11.x-dev || 12.x-dev",
+                "drupal/core": "11.x-dev",
                 "ext-simplexml": "*",
                 "phpspec/prophecy-phpunit": "^2.2",
                 "phpunit/phpunit": "^10.5",
                 "squizlabs/php_codesniffer": "^3.9",
-                "symfony/var-dumper": "^7.4 || ^8",
-                "symfony/yaml": "^7.4 || ^8",
+                "symfony/var-dumper": "^7.1",
+                "symfony/yaml": "^7.1",
                 "vimeo/psalm": "^5.24.0"
             },
-            "default-branch": true,
             "bin": [
                 "bin/dcg"
             ],
@@ -181,9 +180,9 @@
             "description": "Drupal code generator",
             "support": {
                 "issues": "https://github.com/Chi-teck/drupal-code-generator/issues",
-                "source": "https://github.com/Chi-teck/drupal-code-generator/tree/4.x"
+                "source": "https://github.com/Chi-teck/drupal-code-generator/tree/4.2.0"
             },
-            "time": "2026-03-29T17:10:39+00:00"
+            "time": "2025-06-01T13:48:30+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -4495,7 +4494,7 @@
         },
         {
             "name": "drupal/core-project-message",
-            "version": "11.4.1",
+            "version": "11.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -4533,7 +4532,7 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-project-message/tree/11.4.1"
+                "source": "https://github.com/drupal/core-project-message/tree/11.4.4"
             },
             "time": "2026-01-07T19:00:53+00:00"
         },
@@ -14917,7 +14916,7 @@
         },
         {
             "name": "drupal/vbp_text_and_image",
-            "version": "9.2.1",
+            "version": "10.1.1",
             "require": {
                 "drupal/core": "~11.4.0",
                 "drupal/varbase_bootstrap_paragraphs": "*"
@@ -14925,8 +14924,8 @@
             "type": "metapackage",
             "extra": {
                 "drupal": {
-                    "version": "9.2.1",
-                    "datestamp": "1783439308",
+                    "version": "10.1.1",
+                    "datestamp": "1783537561",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -15092,17 +15091,17 @@
         },
         {
             "name": "drupal/views_bulk_operations",
-            "version": "4.4.5",
+            "version": "4.4.7",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/views_bulk_operations.git",
-                "reference": "4.4.5"
+                "reference": "4.4.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/views_bulk_operations-4.4.5.zip",
-                "reference": "4.4.5",
-                "shasum": "0f4a674e79149ad7306209ac90890d9ba6f60d14"
+                "url": "https://ftp.drupal.org/files/projects/views_bulk_operations-4.4.7.zip",
+                "reference": "4.4.7",
+                "shasum": "eacf78c01dba6dabb44a65db8761aabff504f88b"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11"
@@ -15111,10 +15110,10 @@
                 "drush/drush": "<12.5.1"
             },
             "require-dev": {
-                "drupal/coder": "^8.3.16",
+                "drupal/search_api": "^1.35",
                 "drush/drush": "^12 || ^13",
-                "phpstan/phpstan-deprecation-rules": "^2",
-                "phpstan/phpstan-strict-rules": "^2"
+                "phpstan/phpstan-deprecation-rules": "^1",
+                "phpstan/phpstan-strict-rules": "^1"
             },
             "suggest": {
                 "drush/drush": "^12 || ^13"
@@ -15122,8 +15121,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.4.5",
-                    "datestamp": "1778674066",
+                    "version": "4.4.7",
+                    "datestamp": "1784189101",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -15226,17 +15225,17 @@
         },
         {
             "name": "drupal/viewsreference",
-            "version": "2.0.0-beta12",
+            "version": "2.0.0-beta13",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/viewsreference.git",
-                "reference": "8.x-2.0-beta12"
+                "reference": "8.x-2.0-beta13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/viewsreference-8.x-2.0-beta12.zip",
-                "reference": "8.x-2.0-beta12",
-                "shasum": "643eefb27c3f415a50eec75eccbbc287bcc7156a"
+                "url": "https://ftp.drupal.org/files/projects/viewsreference-8.x-2.0-beta13.zip",
+                "reference": "8.x-2.0-beta13",
+                "shasum": "359a8051f7faa5e5a9b568cb0705eb73ff97ce62"
             },
             "require": {
                 "drupal/core": "^10 || ^11 || ^12"
@@ -15250,8 +15249,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.0-beta12",
-                    "datestamp": "1776760483",
+                    "version": "8.x-2.0-beta13",
+                    "datestamp": "1783759655",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -15410,7 +15409,7 @@
             "extra": {
                 "drupal": {
                     "version": "6.3.0",
-                    "datestamp": "1783438699",
+                    "datestamp": "1783989705",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -15646,16 +15645,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "13.7.5",
+            "version": "13.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "b040551cda3ba173531a420c283b9f492d96698d"
+                "reference": "051f6b4909728e0d3363aedab19d393f64438de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/b040551cda3ba173531a420c283b9f492d96698d",
-                "reference": "b040551cda3ba173531a420c283b9f492d96698d",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/051f6b4909728e0d3363aedab19d393f64438de4",
+                "reference": "051f6b4909728e0d3363aedab19d393f64438de4",
                 "shasum": ""
             },
             "require": {
@@ -15783,7 +15782,7 @@
                 "issues": "https://github.com/drush-ops/drush/issues",
                 "security": "https://github.com/drush-ops/drush/security/advisories",
                 "slack": "https://drupal.slack.com/messages/C62H9CWQM",
-                "source": "https://github.com/drush-ops/drush/tree/13.7.5"
+                "source": "https://github.com/drush-ops/drush/tree/13.7.6"
             },
             "funding": [
                 {
@@ -15791,7 +15790,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-07T15:10:52+00:00"
+            "time": "2026-07-08T10:43:20+00:00"
         },
         {
             "name": "e0ipso/shaper",
@@ -22265,34 +22264,35 @@
         },
         {
             "name": "symfony/string",
-            "version": "v8.1.0",
+            "version": "v7.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "afd5944f4005862d961efb85c8bbd5c523c4e3c9"
+                "reference": "961683010db3b27ec6ebcd7308e6e1ee8fa7ffde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/afd5944f4005862d961efb85c8bbd5c523c4e3c9",
-                "reference": "afd5944f4005862d961efb85c8bbd5c523c4e3c9",
+                "url": "https://api.github.com/repos/symfony/string/zipball/961683010db3b27ec6ebcd7308e6e1ee8fa7ffde",
+                "reference": "961683010db3b27ec6ebcd7308e6e1ee8fa7ffde",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.4.1",
-                "symfony/polyfill-ctype": "^1.8",
-                "symfony/polyfill-intl-grapheme": "^1.33",
-                "symfony/polyfill-intl-normalizer": "^1.0",
-                "symfony/polyfill-mbstring": "^1.0"
+                "php": ">=8.2",
+                "symfony/deprecation-contracts": "^2.5|^3.0",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-intl-grapheme": "~1.33",
+                "symfony/polyfill-intl-normalizer": "~1.0",
+                "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
                 "symfony/translation-contracts": "<2.5"
             },
             "require-dev": {
-                "symfony/emoji": "^7.4|^8.0",
-                "symfony/http-client": "^7.4|^8.0",
-                "symfony/intl": "^7.4|^8.0",
+                "symfony/emoji": "^7.1|^8.0",
+                "symfony/http-client": "^6.4|^7.0|^8.0",
+                "symfony/intl": "^6.4|^7.0|^8.0",
                 "symfony/translation-contracts": "^2.5|^3.0",
-                "symfony/var-exporter": "^7.4|^8.0"
+                "symfony/var-exporter": "^6.4|^7.0|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -22331,7 +22331,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v8.1.0"
+                "source": "https://github.com/symfony/string/tree/v7.4.13"
             },
             "funding": [
                 {
@@ -22351,7 +22351,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-29T05:06:50+00:00"
+            "time": "2026-05-23T15:23:29+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -23079,16 +23079,16 @@
         },
         {
             "name": "vardot/drupal-core-patches",
-            "version": "11.4.0.4",
+            "version": "11.4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/drupal-core-patches.git",
-                "reference": "6ba0a353bf53db16ddf6b2209bf3e37a56171c09"
+                "reference": "c7a534a0a42c8d507469e8e8d1a8fd04d228ee9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/drupal-core-patches/zipball/6ba0a353bf53db16ddf6b2209bf3e37a56171c09",
-                "reference": "6ba0a353bf53db16ddf6b2209bf3e37a56171c09",
+                "url": "https://api.github.com/repos/Vardot/drupal-core-patches/zipball/c7a534a0a42c8d507469e8e8d1a8fd04d228ee9d",
+                "reference": "c7a534a0a42c8d507469e8e8d1a8fd04d228ee9d",
                 "shasum": ""
             },
             "require": {
@@ -23149,9 +23149,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/drupal-core-patches/issues",
-                "source": "https://github.com/Vardot/drupal-core-patches/tree/11.4.0.4"
+                "source": "https://github.com/Vardot/drupal-core-patches/tree/11.4.0.6"
             },
-            "time": "2026-07-03T15:05:38+00:00"
+            "time": "2026-07-14T16:36:33+00:00"
         },
         {
             "name": "vardot/entity-definition-update-manager",
@@ -23312,16 +23312,16 @@
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "9.2.94",
+            "version": "9.2.96",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "18a14cd63ef292837e2574a556cde1cfccdc897d"
+                "reference": "4151cdc234613203fe9a405916cb53b8179b3bb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/18a14cd63ef292837e2574a556cde1cfccdc897d",
-                "reference": "18a14cd63ef292837e2574a556cde1cfccdc897d",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/4151cdc234613203fe9a405916cb53b8179b3bb5",
+                "reference": "4151cdc234613203fe9a405916cb53b8179b3bb5",
                 "shasum": ""
             },
             "require": {
@@ -23460,7 +23460,7 @@
                         "fix: #3538671 PHP 8.4 compatibility with implicit nullable parameters in ParagraphsPreviewController": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/paragraphs_previewer--2025-12-08--3538671--mr-5.patch"
                     },
                     "drupal/social_auth_linkedin": {
-                        "Remove dangling configure route social_auth_linkedin.settings_form (module uses the generic social_auth.network.settings_form)": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/social_auth_linkedin--2026-07-06--remove-dangling-configure-route.patch"
+                        "Issue #3507495: Remove leftover reference to social_auth_linkedin.settings_form to fix Route Provider Error": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/social_auth_linkedin--2026-07-13--3507495--mr-10.patch"
                     },
                     "drupal/ui_patterns_settings": {
                         "Issue #3414084: Fix UI Patterns Settings issue of TypeError: array_unshift(): Argument #1 ($array) must be of type array, null given in array_unshift() Caused by Deprecated Hooks in Drupal ~10.2.0": "https://www.drupal.org/files/issues/2024-01-11/ui_patterns_settings--2023-12-17--3409221-3--mr-21--39e896da.patch"
@@ -23495,9 +23495,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/9.2.94"
+                "source": "https://github.com/Vardot/varbase-patches/tree/9.2.96"
             },
-            "time": "2026-07-06T15:06:52+00:00"
+            "time": "2026-07-14T15:17:59+00:00"
         },
         {
             "name": "vardot/varbase-replaces",

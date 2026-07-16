@@ -1,5 +1,5 @@
 {
-    "_hash": "91ddc8079beb07ed9d6ff522e03eaca1270754c5c00f5873d2b4d18f756af50d",
+    "_hash": "bdd6ede17e01834e930dc67af47751b778edc7597ccecb516c0758c6ba5adf44",
     "patches": {
         "drupal/core": [
             {
@@ -788,8 +788,8 @@
         "drupal/social_auth_linkedin": [
             {
                 "package": "drupal/social_auth_linkedin",
-                "description": "Remove dangling configure route social_auth_linkedin.settings_form (module uses the generic social_auth.network.settings_form)",
-                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/social_auth_linkedin--2026-07-06--remove-dangling-configure-route.patch",
+                "description": "Issue #3507495: Remove leftover reference to social_auth_linkedin.settings_form to fix Route Provider Error",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/social_auth_linkedin--2026-07-13--3507495--mr-10.patch",
                 "sha256": null,
                 "depth": null,
                 "extra": {
