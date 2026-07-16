@@ -14,7 +14,7 @@ Feature: Content Management - Standard Entity Queue Management - Have the option
       And I should see "Test content N1" in the "Test content N1" row
       And I should see "Test content N2" in the "Test content N2" row
       And I should see "Test content N3" in the "Test content N3" row
-     When I go to "/admin/structure/entityqueue/test_queue#edit-queue-settings"
+     When I go to "/admin/structure/entityqueue/test_queue/edit#edit-queue-settings"
       And wait
      Then I should see "Configure Test Queue"
       And I should see "Restrict this queue to a minimum of"
