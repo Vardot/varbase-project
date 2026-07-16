@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43f7916ed422922b3a0b1a8066d7c8b6",
+    "content-hash": "f2f9d2c9f7b05ce3a1c7d8088df6faf2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3874,11 +3874,17 @@
         },
         {
             "name": "drupal/canvas_override",
-            "version": "dev-1.0.x",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/canvas_override.git",
-                "reference": "35b3c0ba05e98a4b99811bca6d94cad58aab9547"
+                "reference": "1.0.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/canvas_override-1.0.0-beta1.zip",
+                "reference": "1.0.0-beta1",
+                "shasum": "6a6ecda6a4cb54d3612c1e4efd887eff1270a320"
             },
             "require": {
                 "drupal/canvas": "~1",
@@ -3886,15 +3892,12 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.0.x": "1.0.x-dev"
-                },
                 "drupal": {
-                    "version": "1.0.0-alpha2+1-dev",
-                    "datestamp": "1780939075",
+                    "version": "1.0.0-beta1",
+                    "datestamp": "1783610215",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -4405,17 +4408,17 @@
         },
         {
             "name": "drupal/ckeditor_media_resize",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ckeditor_media_resize.git",
-                "reference": "1.0.0"
+                "reference": "1.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor_media_resize-1.0.0.zip",
-                "reference": "1.0.0",
-                "shasum": "0e700e53a9aaedbd7586d3fc995201bed14e12a8"
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_media_resize-1.1.0.zip",
+                "reference": "1.1.0",
+                "shasum": "b158f58590054f0e69a9bdbb106738323e4d3bea"
             },
             "require": {
                 "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
@@ -4423,8 +4426,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.0",
-                    "datestamp": "1730224770",
+                    "version": "1.1.0",
+                    "datestamp": "1759230011",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -14610,16 +14613,16 @@
         },
         {
             "name": "drupal/varbase_admin_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_admin_base.git",
-                "reference": "624028c9c47e23f40c4718713ac2ea48f33b3f04"
+                "reference": "369ee13c3f19ae6b8b37846606d2ce657b07da9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_admin_base/repository/archive.zip?sha=624028c9c47e23f40c4718713ac2ea48f33b3f04",
-                "reference": "624028c9c47e23f40c4718713ac2ea48f33b3f04",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_admin_base/repository/archive.zip?sha=369ee13c3f19ae6b8b37846606d2ce657b07da9b",
+                "reference": "369ee13c3f19ae6b8b37846606d2ce657b07da9b",
                 "shasum": ""
             },
             "require": {
@@ -14649,11 +14652,10 @@
                 "drupal/trash": "~3",
                 "drupal/ui_icons": "~1",
                 "drupal/userprotect": "~1",
-                "drupal/varbase_recipes": "1.0.x-dev",
+                "drupal/varbase_recipes": "~1.0.0",
                 "drupal/views_bulk_edit": "~3",
                 "drupal/views_bulk_operations": "~4"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -14682,20 +14684,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_admin_base",
                 "source": "http://cgit.drupalcode.org/varbase_admin_base"
             },
-            "time": "2026-07-09T14:07:09+00:00"
+            "time": "2026-07-09T13:58:47+00:00"
         },
         {
             "name": "drupal/varbase_ai_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_ai_base.git",
-                "reference": "8997637d9bb09dca2de4597d6b030632dd50e7fc"
+                "reference": "e8e202a1a08f88b6a52b3ee39bd6103ab880b9fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_base/repository/archive.zip?sha=8997637d9bb09dca2de4597d6b030632dd50e7fc",
-                "reference": "8997637d9bb09dca2de4597d6b030632dd50e7fc",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_base/repository/archive.zip?sha=e8e202a1a08f88b6a52b3ee39bd6103ab880b9fa",
+                "reference": "e8e202a1a08f88b6a52b3ee39bd6103ab880b9fa",
                 "shasum": ""
             },
             "require": {
@@ -14703,13 +14705,12 @@
                 "drupal/core": "~11.4.0",
                 "drupal/drupal_cms_ai": "~2",
                 "drupal/eca": "~3",
-                "drupal/varbase_ai_context": "1.0.x-dev",
-                "drupal/varbase_ai_editor_assistant": "2.0.x-dev",
-                "drupal/varbase_ai_image_alt": "2.0.x-dev",
-                "drupal/varbase_ai_safety": "1.0.x-dev",
-                "drupal/varbase_ai_taxonomy_tagging": "2.0.x-dev"
+                "drupal/varbase_ai_context": "~1.0.0",
+                "drupal/varbase_ai_editor_assistant": "~2.0.0",
+                "drupal/varbase_ai_image_alt": "~2.0.0",
+                "drupal/varbase_ai_safety": "~1.0.0",
+                "drupal/varbase_ai_taxonomy_tagging": "~2.0.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -14736,29 +14737,28 @@
                 "varbase recipe"
             ],
             "support": {
-                "source": "https://git.drupalcode.org/project/varbase_ai_base/-/tree/1.0.x"
+                "source": "https://git.drupalcode.org/project/varbase_ai_base/-/tree/1.0.0-beta3"
             },
-            "time": "2026-07-10T00:33:04+00:00"
+            "time": "2026-07-10T00:18:41+00:00"
         },
         {
             "name": "drupal/varbase_ai_context",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_ai_context.git",
-                "reference": "274d85c4595b45fa501593afe309883fef53abbc"
+                "reference": "d45d80dad371c7046b5f5788fba934da4d16b9dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_context/repository/archive.zip?sha=274d85c4595b45fa501593afe309883fef53abbc",
-                "reference": "274d85c4595b45fa501593afe309883fef53abbc",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_context/repository/archive.zip?sha=d45d80dad371c7046b5f5788fba934da4d16b9dd",
+                "reference": "d45d80dad371c7046b5f5788fba934da4d16b9dd",
                 "shasum": ""
             },
             "require": {
                 "drupal/ai_context": "~1.0",
                 "drupal/core": "~11.4.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -14788,29 +14788,28 @@
             ],
             "support": {
                 "issues": "https://www.drupal.org/project/issues/varbase_ai_context",
-                "source": "https://git.drupalcode.org/project/varbase_ai_context/-/tree/1.0.x"
+                "source": "https://git.drupalcode.org/project/varbase_ai_context/-/tree/1.0.0-beta1"
             },
-            "time": "2026-07-09T23:44:31+00:00"
+            "time": "2026-07-09T23:34:00+00:00"
         },
         {
             "name": "drupal/varbase_ai_editor_assistant",
-            "version": "2.0.x-dev",
+            "version": "2.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_ai_editor_assistant.git",
-                "reference": "2259f936c62a106725fd42624dfc85d03c1e7254"
+                "reference": "271e8ea600012ecf2ca4b44677d827145e287ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_editor_assistant/repository/archive.zip?sha=2259f936c62a106725fd42624dfc85d03c1e7254",
-                "reference": "2259f936c62a106725fd42624dfc85d03c1e7254",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_editor_assistant/repository/archive.zip?sha=271e8ea600012ecf2ca4b44677d827145e287ee1",
+                "reference": "271e8ea600012ecf2ca4b44677d827145e287ee1",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
                 "drupal/drupal_cms_ai": "~2"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -14837,29 +14836,28 @@
                 "varbase recipe"
             ],
             "support": {
-                "source": "https://git.drupalcode.org/project/varbase_ai_editor_assistant/-/tree/2.0.x"
+                "source": "https://git.drupalcode.org/project/varbase_ai_editor_assistant/-/tree/2.0.0-beta1"
             },
-            "time": "2026-07-09T23:04:30+00:00"
+            "time": "2026-07-09T22:49:58+00:00"
         },
         {
             "name": "drupal/varbase_ai_image_alt",
-            "version": "2.0.x-dev",
+            "version": "2.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_ai_image_alt.git",
-                "reference": "e1711d0aa68ce51519a8d394faaa6dbc070d159b"
+                "reference": "097d96727afef04f695519bbf437f1419fc40630"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_image_alt/repository/archive.zip?sha=e1711d0aa68ce51519a8d394faaa6dbc070d159b",
-                "reference": "e1711d0aa68ce51519a8d394faaa6dbc070d159b",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_image_alt/repository/archive.zip?sha=097d96727afef04f695519bbf437f1419fc40630",
+                "reference": "097d96727afef04f695519bbf437f1419fc40630",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
                 "drupal/drupal_cms_ai": "~2"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -14885,22 +14883,22 @@
                 "varbase recipe"
             ],
             "support": {
-                "source": "https://git.drupalcode.org/project/varbase_ai_image_alt/-/tree/2.0.x"
+                "source": "https://git.drupalcode.org/project/varbase_ai_image_alt/-/tree/2.0.0-beta1"
             },
-            "time": "2026-07-09T22:40:11+00:00"
+            "time": "2026-07-09T22:31:13+00:00"
         },
         {
             "name": "drupal/varbase_ai_safety",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_ai_safety.git",
-                "reference": "675e2d76990c9c988ee4324cbcdb603edd3f2f14"
+                "reference": "8165409dff9e36a79eaca9d91ae2c1397dbc130c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_safety/repository/archive.zip?sha=675e2d76990c9c988ee4324cbcdb603edd3f2f14",
-                "reference": "675e2d76990c9c988ee4324cbcdb603edd3f2f14",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_safety/repository/archive.zip?sha=8165409dff9e36a79eaca9d91ae2c1397dbc130c",
+                "reference": "8165409dff9e36a79eaca9d91ae2c1397dbc130c",
                 "shasum": ""
             },
             "require": {
@@ -14909,7 +14907,6 @@
                 "drupal/ai_recipe_guardrails_prompt_safety": "~1",
                 "drupal/core": "~11.4.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -14942,29 +14939,28 @@
             ],
             "support": {
                 "issues": "https://www.drupal.org/project/issues/varbase_ai_safety",
-                "source": "https://git.drupalcode.org/project/varbase_ai_safety/-/tree/1.0.x"
+                "source": "https://git.drupalcode.org/project/varbase_ai_safety/-/tree/1.0.0-beta1"
             },
-            "time": "2026-07-10T00:01:59+00:00"
+            "time": "2026-07-09T23:54:49+00:00"
         },
         {
             "name": "drupal/varbase_ai_taxonomy_tagging",
-            "version": "2.0.x-dev",
+            "version": "2.0.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_ai_taxonomy_tagging.git",
-                "reference": "2023ad1a1ef1e6ad71c409de5b35efebbfd4fc76"
+                "reference": "3cf261ba64eece57711863086a0f98dd256935eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_taxonomy_tagging/repository/archive.zip?sha=2023ad1a1ef1e6ad71c409de5b35efebbfd4fc76",
-                "reference": "2023ad1a1ef1e6ad71c409de5b35efebbfd4fc76",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_ai_taxonomy_tagging/repository/archive.zip?sha=3cf261ba64eece57711863086a0f98dd256935eb",
+                "reference": "3cf261ba64eece57711863086a0f98dd256935eb",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
                 "drupal/drupal_cms_ai": "~2"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -14989,22 +14985,22 @@
                 "varbase recipe"
             ],
             "support": {
-                "source": "https://git.drupalcode.org/project/varbase_ai_taxonomy_tagging/-/tree/2.0.x"
+                "source": "https://git.drupalcode.org/project/varbase_ai_taxonomy_tagging/-/tree/2.0.0-beta2"
             },
-            "time": "2026-07-14T10:26:22+00:00"
+            "time": "2026-07-14T10:00:37+00:00"
         },
         {
             "name": "drupal/varbase_api_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_api_base.git",
-                "reference": "59f6d31e51279293cd0a6f066fb0bed1d585ba05"
+                "reference": "4870b37540b22bc4b949b1d7add924feea1e1831"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_api_base/repository/archive.zip?sha=59f6d31e51279293cd0a6f066fb0bed1d585ba05",
-                "reference": "59f6d31e51279293cd0a6f066fb0bed1d585ba05",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_api_base/repository/archive.zip?sha=4870b37540b22bc4b949b1d7add924feea1e1831",
+                "reference": "4870b37540b22bc4b949b1d7add924feea1e1831",
                 "shasum": ""
             },
             "require": {
@@ -15020,7 +15016,6 @@
                 "drupal/schema_metatag": "~3",
                 "drupal/simple_oauth": "~6"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15049,15 +15044,21 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_api_base",
                 "source": "http://cgit.drupalcode.org/varbase_api_base"
             },
-            "time": "2026-07-09T18:18:32+00:00"
+            "time": "2026-07-09T18:05:34+00:00"
         },
         {
             "name": "drupal/varbase_auth",
-            "version": "dev-11.0.x",
+            "version": "11.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_auth.git",
-                "reference": "13cfb8aaaf25eb7e4c3ed284100fd5ca319bba75"
+                "reference": "11.0.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/varbase_auth-11.0.0-beta1.zip",
+                "reference": "11.0.0-beta1",
+                "shasum": "63b33ec19309ffd251f05a7de6399f4705095d85"
             },
             "require": {
                 "drupal/core": "~11.4.0",
@@ -15069,15 +15070,12 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-11.0.x": "11.0.x-dev"
-                },
                 "drupal": {
-                    "version": "11.0.0-alpha2+2-dev",
-                    "datestamp": "1782931852",
+                    "version": "11.0.0-beta1",
+                    "datestamp": "1783603921",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15113,16 +15111,16 @@
         },
         {
             "name": "drupal/varbase_auth_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_auth_base.git",
-                "reference": "20f0d8d19fce12430ef6022ac697e41e28e1e7d7"
+                "reference": "210426e524f4c9d534b03e4dea16f76e9c89aff8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_auth_base/repository/archive.zip?sha=20f0d8d19fce12430ef6022ac697e41e28e1e7d7",
-                "reference": "20f0d8d19fce12430ef6022ac697e41e28e1e7d7",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_auth_base/repository/archive.zip?sha=210426e524f4c9d534b03e4dea16f76e9c89aff8",
+                "reference": "210426e524f4c9d534b03e4dea16f76e9c89aff8",
                 "shasum": ""
             },
             "require": {
@@ -15132,9 +15130,8 @@
                 "drupal/social_auth_facebook": "~4",
                 "drupal/social_auth_google": "~4",
                 "drupal/social_auth_linkedin": "~4",
-                "drupal/varbase_auth": "11.0.x-dev"
+                "drupal/varbase_auth": "~11.0.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15163,33 +15160,31 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_auth_base",
                 "source": "http://cgit.drupalcode.org/varbase_auth_base"
             },
-            "time": "2026-07-09T16:27:14+00:00"
+            "time": "2026-07-09T16:21:49+00:00"
         },
         {
             "name": "drupal/varbase_blog_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_blog_base.git",
-                "reference": "0879be62174251eec82170e2f4cf42c12059f48e"
+                "reference": "c52df393fa796d775d226e262d4c0c468c12f699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_blog_base/repository/archive.zip?sha=0879be62174251eec82170e2f4cf42c12059f48e",
-                "reference": "0879be62174251eec82170e2f4cf42c12059f48e",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_blog_base/repository/archive.zip?sha=c52df393fa796d775d226e262d4c0c468c12f699",
+                "reference": "c52df393fa796d775d226e262d4c0c468c12f699",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
                 "drupal/selective_better_exposed_filters": "~3",
-                "drupal/varbase_components": "4.0.x-dev",
-                "drupal/varbase_content_base": "1.0.x-dev",
-                "drupal/varbase_media_base": "1.0.x-dev",
-                "drupal/varbase_seo_base": "1.0.x-dev",
-                "drupal/varbase_workflow_base": "1.0.x-dev",
-                "drupal/webshare": "2.0.x-dev"
+                "drupal/varbase_content_base": "~1.0.0",
+                "drupal/varbase_media_base": "~1.0.0",
+                "drupal/varbase_seo_base": "~1.0.0",
+                "drupal/varbase_workflow_base": "~1.0.0",
+                "drupal/webshare": "~2.0.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15207,15 +15202,21 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_blog_base",
                 "source": "http://cgit.drupalcode.org/varbase_blog_base"
             },
-            "time": "2026-07-14T13:34:30+00:00"
+            "time": "2026-07-09T21:21:21+00:00"
         },
         {
             "name": "drupal/varbase_components",
-            "version": "dev-4.0.x",
+            "version": "4.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_components.git",
-                "reference": "3c1a3f4a05099f73a69fca419a5bb462d2bf6042"
+                "reference": "4.0.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/varbase_components-4.0.0-beta3.zip",
+                "reference": "4.0.0-beta3",
+                "shasum": "a96f2f91b94fc5591f60fe00806d0de1942369f2"
             },
             "require": {
                 "drupal/core": "~11.4.0",
@@ -15223,15 +15224,12 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-4.0.x": "4.0.x-dev"
-                },
                 "drupal": {
-                    "version": "4.0.0-beta2+1-dev",
-                    "datestamp": "1783705144",
+                    "version": "4.0.0-beta3",
+                    "datestamp": "1783706140",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15267,23 +15265,23 @@
         },
         {
             "name": "drupal/varbase_content_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_content_base.git",
-                "reference": "4d6ee85e6e0bcd8a450adfcf0936fdcff60f2382"
+                "reference": "ebb01d67704f50c9a402ac7b6cd41498dd765ff7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_content_base/repository/archive.zip?sha=4d6ee85e6e0bcd8a450adfcf0936fdcff60f2382",
-                "reference": "4d6ee85e6e0bcd8a450adfcf0936fdcff60f2382",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_content_base/repository/archive.zip?sha=ebb01d67704f50c9a402ac7b6cd41498dd765ff7",
+                "reference": "ebb01d67704f50c9a402ac7b6cd41498dd765ff7",
                 "shasum": ""
             },
             "require": {
                 "drupal/advanced_text_formatter": "~3",
                 "drupal/better_exposed_filters": "~7",
                 "drupal/bpmn_io": "~3",
-                "drupal/canvas_override": "1.0.x-dev",
+                "drupal/canvas_override": "~1.0.0",
                 "drupal/content_lock": "~3",
                 "drupal/core": "~11.4.0",
                 "drupal/date_filter": "~1",
@@ -15305,11 +15303,10 @@
                 "drupal/tagify": "~1.0",
                 "drupal/token": "~1",
                 "drupal/token_filter": "~2",
-                "drupal/varbase_components": "4.0.x-dev",
+                "drupal/varbase_components": "~4.0.0",
                 "drupal/views_infinite_scroll": "~2",
-                "drupal/vmi": "5.0.x-dev"
+                "drupal/vmi": "~5.0.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15327,27 +15324,26 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_content_base",
                 "source": "http://cgit.drupalcode.org/varbase_content_base"
             },
-            "time": "2026-07-09T16:05:54+00:00"
+            "time": "2026-07-09T15:54:28+00:00"
         },
         {
             "name": "drupal/varbase_demo_content",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_demo_content.git",
-                "reference": "3b35398002092b257d0669ac70804f3f1e963ce4"
+                "reference": "e6a5541d883dd490e07dc831ae5ed04984ddc142"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_demo_content/repository/archive.zip?sha=3b35398002092b257d0669ac70804f3f1e963ce4",
-                "reference": "3b35398002092b257d0669ac70804f3f1e963ce4",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_demo_content/repository/archive.zip?sha=e6a5541d883dd490e07dc831ae5ed04984ddc142",
+                "reference": "e6a5541d883dd490e07dc831ae5ed04984ddc142",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
-                "drupal/varbase_media_assets": "1.0.x-dev"
+                "drupal/varbase_media_assets": "~1.0.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15366,20 +15362,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_demo_content",
                 "source": "https://git.drupalcode.org/project/varbase_demo_content"
             },
-            "time": "2026-07-09T22:23:28+00:00"
+            "time": "2026-07-09T22:10:56+00:00"
         },
         {
             "name": "drupal/varbase_dev_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_dev_base.git",
-                "reference": "d4f5f944c911a11c7d47b9106b5ba1afac60fc5c"
+                "reference": "c74c1c9d1546ac3e1f71fbca0ddeb79d9c8de835"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_dev_base/repository/archive.zip?sha=d4f5f944c911a11c7d47b9106b5ba1afac60fc5c",
-                "reference": "d4f5f944c911a11c7d47b9106b5ba1afac60fc5c",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_dev_base/repository/archive.zip?sha=c74c1c9d1546ac3e1f71fbca0ddeb79d9c8de835",
+                "reference": "c74c1c9d1546ac3e1f71fbca0ddeb79d9c8de835",
                 "shasum": ""
             },
             "require": {
@@ -15393,7 +15389,6 @@
                 "drupal/stage_file_proxy": "~3.1.0",
                 "drupal/storybook": "~1.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15421,20 +15416,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_dev_base",
                 "source": "http://cgit.drupalcode.org/varbase_dev_base"
             },
-            "time": "2026-07-09T18:33:29+00:00"
+            "time": "2026-07-09T18:25:51+00:00"
         },
         {
             "name": "drupal/varbase_editor_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_editor_base.git",
-                "reference": "96076bc2e19602f385d3d40a059fc82e4a6d50c9"
+                "reference": "fe06f150e9a9bbb48f979aae8663569be4ab03e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_editor_base/repository/archive.zip?sha=96076bc2e19602f385d3d40a059fc82e4a6d50c9",
-                "reference": "96076bc2e19602f385d3d40a059fc82e4a6d50c9",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_editor_base/repository/archive.zip?sha=fe06f150e9a9bbb48f979aae8663569be4ab03e7",
+                "reference": "fe06f150e9a9bbb48f979aae8663569be4ab03e7",
                 "shasum": ""
             },
             "require": {
@@ -15456,7 +15451,6 @@
                 "drupal/token": "~1",
                 "drupal/token_filter": "~2"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15484,27 +15478,26 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_editor_base",
                 "source": "http://cgit.drupalcode.org/varbase_editor_base"
             },
-            "time": "2026-07-09T18:48:18+00:00"
+            "time": "2026-07-09T18:41:41+00:00"
         },
         {
             "name": "drupal/varbase_i18n_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_i18n_base.git",
-                "reference": "a6c18b8548e036061c7fa27bfb3181ebd2c297ff"
+                "reference": "309292d9bb3f7283e2425bd42ec527c59f8b0ac7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_i18n_base/repository/archive.zip?sha=a6c18b8548e036061c7fa27bfb3181ebd2c297ff",
-                "reference": "a6c18b8548e036061c7fa27bfb3181ebd2c297ff",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_i18n_base/repository/archive.zip?sha=309292d9bb3f7283e2425bd42ec527c59f8b0ac7",
+                "reference": "309292d9bb3f7283e2425bd42ec527c59f8b0ac7",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
                 "drupal/eca": "~3"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15533,15 +15526,21 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_i18n_base",
                 "source": "http://cgit.drupalcode.org/varbase_i18n_base"
             },
-            "time": "2026-07-09T19:04:04+00:00"
+            "time": "2026-07-09T18:59:18+00:00"
         },
         {
             "name": "drupal/varbase_media",
-            "version": "dev-11.0.x",
+            "version": "11.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_media.git",
-                "reference": "1088516a454503be417f707025baa37e53313720"
+                "reference": "11.0.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/varbase_media-11.0.0-beta1.zip",
+                "reference": "11.0.0-beta1",
+                "shasum": "778d6e7319cb87084e250887ac44f2f0fc1170d6"
             },
             "require": {
                 "drupal/core": "~11.4.0",
@@ -15549,15 +15548,12 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-11.0.x": "11.0.x-dev"
-                },
                 "drupal": {
-                    "version": "11.0.0-alpha2+2-dev",
-                    "datestamp": "1782931784",
+                    "version": "11.0.0-beta1",
+                    "datestamp": "1783602722",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15593,22 +15589,21 @@
         },
         {
             "name": "drupal/varbase_media_assets",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_media_assets.git",
-                "reference": "8ce01bd506edf33ad5f7dc5953744527ea24f80a"
+                "reference": "65a67e30d6c6e945c401e7b6f84644a2c8ade0dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_media_assets/repository/archive.zip?sha=8ce01bd506edf33ad5f7dc5953744527ea24f80a",
-                "reference": "8ce01bd506edf33ad5f7dc5953744527ea24f80a",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_media_assets/repository/archive.zip?sha=65a67e30d6c6e945c401e7b6f84644a2c8ade0dc",
+                "reference": "65a67e30d6c6e945c401e7b6f84644a2c8ade0dc",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15636,20 +15631,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_media_assets",
                 "source": "http://cgit.drupalcode.org/varbase_media_assets"
             },
-            "time": "2026-07-09T22:00:03+00:00"
+            "time": "2026-07-09T21:51:56+00:00"
         },
         {
             "name": "drupal/varbase_media_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_media_base.git",
-                "reference": "c47423fc324fd5956f6d04e6459d02b10ce8cc8b"
+                "reference": "e2ec8b8361c1410814eaa2c2c2350813b3ca6b27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_media_base/repository/archive.zip?sha=c47423fc324fd5956f6d04e6459d02b10ce8cc8b",
-                "reference": "c47423fc324fd5956f6d04e6459d02b10ce8cc8b",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_media_base/repository/archive.zip?sha=e2ec8b8361c1410814eaa2c2c2350813b3ca6b27",
+                "reference": "e2ec8b8361c1410814eaa2c2c2350813b3ca6b27",
                 "shasum": ""
             },
             "require": {
@@ -15662,9 +15657,8 @@
                 "drupal/media_bulk_upload": "~3",
                 "drupal/media_library_edit": "~3",
                 "drupal/media_library_form_element": "~2.1.0",
-                "drupal/varbase_media": "11.0.x-dev"
+                "drupal/varbase_media": "~11.0.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15692,31 +15686,30 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_media_base",
                 "source": "http://cgit.drupalcode.org/varbase_media_base"
             },
-            "time": "2026-07-09T15:42:02+00:00"
+            "time": "2026-07-09T14:16:55+00:00"
         },
         {
             "name": "drupal/varbase_page_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_page_base.git",
-                "reference": "af61b0200e7d163772f6f9952e4edd982afdee62"
+                "reference": "718b9d9ebce6a3bb419a0bd3a4d144a6016e347b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_page_base/repository/archive.zip?sha=af61b0200e7d163772f6f9952e4edd982afdee62",
-                "reference": "af61b0200e7d163772f6f9952e4edd982afdee62",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_page_base/repository/archive.zip?sha=718b9d9ebce6a3bb419a0bd3a4d144a6016e347b",
+                "reference": "718b9d9ebce6a3bb419a0bd3a4d144a6016e347b",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
                 "drupal/drupal_cms_content_type_base": "^2",
-                "drupal/varbase_content_base": "1.0.x-dev",
-                "drupal/varbase_media_base": "1.0.x-dev",
-                "drupal/varbase_seo_base": "1.0.x-dev",
-                "drupal/varbase_workflow_base": "1.0.x-dev"
+                "drupal/varbase_content_base": "~1.0.0",
+                "drupal/varbase_media_base": "~1.0.0",
+                "drupal/varbase_seo_base": "~1.0.0",
+                "drupal/varbase_workflow_base": "~1.0.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15734,20 +15727,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_page_base",
                 "source": "http://cgit.drupalcode.org/varbase_page_base"
             },
-            "time": "2026-07-09T21:45:53+00:00"
+            "time": "2026-07-09T21:36:46+00:00"
         },
         {
             "name": "drupal/varbase_performance_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_performance_base.git",
-                "reference": "941f12f4dced34b449dc756e6e701437539500d6"
+                "reference": "af6a77392998224684c1d03b3d56b3cc1355f259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_performance_base/repository/archive.zip?sha=941f12f4dced34b449dc756e6e701437539500d6",
-                "reference": "941f12f4dced34b449dc756e6e701437539500d6",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_performance_base/repository/archive.zip?sha=af6a77392998224684c1d03b3d56b3cc1355f259",
+                "reference": "af6a77392998224684c1d03b3d56b3cc1355f259",
                 "shasum": ""
             },
             "require": {
@@ -15757,7 +15750,6 @@
                 "drupal/imagemagick": "~4",
                 "drupal/ultimate_cron": "~2"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15787,32 +15779,34 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_performance_base",
                 "source": "http://cgit.drupalcode.org/varbase_performance_base"
             },
-            "time": "2026-07-09T20:05:23+00:00"
+            "time": "2026-07-09T19:55:27+00:00"
         },
         {
             "name": "drupal/varbase_recipes",
-            "version": "dev-1.0.x",
+            "version": "1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_recipes.git",
-                "reference": "bf72298a238cc317a28f26b4c22228f845c1698c"
+                "reference": "1.0.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/varbase_recipes-1.0.0-beta3.zip",
+                "reference": "1.0.0-beta3",
+                "shasum": "e8c6e28d8a36950bf5a58c10989da9622c8af068"
             },
             "require": {
                 "drupal/core": "~11.4.0",
-                "drupal/project_browser": "~2",
-                "drupal/varbase_components": "4.0.x-dev"
+                "drupal/project_browser": "~2"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.0.x": "1.0.x-dev"
-                },
                 "drupal": {
-                    "version": "1.0.0-beta3+3-dev",
-                    "datestamp": "1784045873",
+                    "version": "1.0.0-beta3",
+                    "datestamp": "1783601727",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -15848,16 +15842,16 @@
         },
         {
             "name": "drupal/varbase_security_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_security_base.git",
-                "reference": "c974b016056c367334424d0d6698897715afae54"
+                "reference": "e750bdc6e7306f1fdfd202126cf47dd1b402ea58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_security_base/repository/archive.zip?sha=c974b016056c367334424d0d6698897715afae54",
-                "reference": "c974b016056c367334424d0d6698897715afae54",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_security_base/repository/archive.zip?sha=e750bdc6e7306f1fdfd202126cf47dd1b402ea58",
+                "reference": "e750bdc6e7306f1fdfd202126cf47dd1b402ea58",
                 "shasum": ""
             },
             "require": {
@@ -15872,7 +15866,6 @@
                 "drupal/security_review": "~3",
                 "drupal/username_enumeration_prevention": "~1"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15902,20 +15895,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_security_base",
                 "source": "http://cgit.drupalcode.org/varbase_security_base"
             },
-            "time": "2026-07-09T20:19:22+00:00"
+            "time": "2026-07-09T20:13:58+00:00"
         },
         {
             "name": "drupal/varbase_seo_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_seo_base.git",
-                "reference": "6e7ce53aefaa371b74fabcab5a4c42395cff1f7d"
+                "reference": "d064a1b0b375f296d79a0719390994fde9487519"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_seo_base/repository/archive.zip?sha=6e7ce53aefaa371b74fabcab5a4c42395cff1f7d",
-                "reference": "6e7ce53aefaa371b74fabcab5a4c42395cff1f7d",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_seo_base/repository/archive.zip?sha=d064a1b0b375f296d79a0719390994fde9487519",
+                "reference": "d064a1b0b375f296d79a0719390994fde9487519",
                 "shasum": ""
             },
             "require": {
@@ -15929,7 +15922,6 @@
                 "drupal/simple_sitemap": "~4",
                 "drupal/yoast_seo": "~2"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -15958,20 +15950,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_seo_base",
                 "source": "http://cgit.drupalcode.org/varbase_seo_base"
             },
-            "time": "2026-07-09T17:48:24+00:00"
+            "time": "2026-07-09T17:40:01+00:00"
         },
         {
             "name": "drupal/varbase_starter",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_starter.git",
-                "reference": "c873b1b93b8067f06b2a8cd865c52173c2ce6f0b"
+                "reference": "8b480e145cdc8e6ce9b6047cc0443ec8efa34d69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_starter/repository/archive.zip?sha=c873b1b93b8067f06b2a8cd865c52173c2ce6f0b",
-                "reference": "c873b1b93b8067f06b2a8cd865c52173c2ce6f0b",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_starter/repository/archive.zip?sha=8b480e145cdc8e6ce9b6047cc0443ec8efa34d69",
+                "reference": "8b480e145cdc8e6ce9b6047cc0443ec8efa34d69",
                 "shasum": ""
             },
             "require": {
@@ -15991,27 +15983,26 @@
                 "drupal/drupal_cms_seo_tools": "~2",
                 "drupal/easy_email_express": "~1",
                 "drupal/recipe_installer_kit": "~1",
-                "drupal/varbase_admin_base": "1.0.x-dev",
-                "drupal/varbase_ai_base": "1.0.x-dev",
-                "drupal/varbase_api_base": "1.0.x-dev",
-                "drupal/varbase_auth_base": "1.0.x-dev",
-                "drupal/varbase_blog_base": "1.0.x-dev",
-                "drupal/varbase_content_base": "1.0.x-dev",
-                "drupal/varbase_demo_content": "1.0.x-dev",
-                "drupal/varbase_dev_base": "1.0.x-dev",
-                "drupal/varbase_editor_base": "1.0.x-dev",
-                "drupal/varbase_i18n_base": "1.0.x-dev",
-                "drupal/varbase_media_base": "1.0.x-dev",
-                "drupal/varbase_page_base": "1.0.x-dev",
-                "drupal/varbase_performance_base": "1.0.x-dev",
-                "drupal/varbase_security_base": "1.0.x-dev",
-                "drupal/varbase_seo_base": "1.0.x-dev",
-                "drupal/varbase_users_base": "1.0.x-dev",
-                "drupal/varbase_webform_base": "1.0.x-dev",
-                "drupal/varbase_workflow_base": "1.0.x-dev",
-                "drupal/vartheme_bs5": "5.0.x-dev"
+                "drupal/varbase_admin_base": "~1.0.0",
+                "drupal/varbase_ai_base": "~1.0.0",
+                "drupal/varbase_api_base": "~1.0.0",
+                "drupal/varbase_auth_base": "~1.0.0",
+                "drupal/varbase_blog_base": "~1.0.0",
+                "drupal/varbase_content_base": "~1.0.0",
+                "drupal/varbase_demo_content": "~1.0.0",
+                "drupal/varbase_dev_base": "~1.0.0",
+                "drupal/varbase_editor_base": "~1.0.0",
+                "drupal/varbase_i18n_base": "~1.0.0",
+                "drupal/varbase_media_base": "~1.0.0",
+                "drupal/varbase_page_base": "~1.0.0",
+                "drupal/varbase_performance_base": "~1.0.0",
+                "drupal/varbase_security_base": "~1.0.0",
+                "drupal/varbase_seo_base": "~1.0.0",
+                "drupal/varbase_users_base": "~1.0.0",
+                "drupal/varbase_webform_base": "~1.0.0",
+                "drupal/varbase_workflow_base": "~1.0.0",
+                "drupal/vartheme_bs5": "~5.0.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -16019,29 +16010,28 @@
             ],
             "description": "A starter site template recipe for Varbase, providing a modern recipe-first approach to initializing Varbase sites.",
             "support": {
-                "source": "https://git.drupalcode.org/project/varbase_starter/-/tree/1.0.x"
+                "source": "https://git.drupalcode.org/project/varbase_starter/-/tree/1.0.0-beta1"
             },
-            "time": "2026-07-10T18:51:28+00:00"
+            "time": "2026-07-10T18:44:35+00:00"
         },
         {
             "name": "drupal/varbase_users_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_users_base.git",
-                "reference": "ebe4d45c61f8c1fb23c12a2e00b27d8ba47395d1"
+                "reference": "2cb66c581050c46c3b80ac9ad714300325260884"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_users_base/repository/archive.zip?sha=ebe4d45c61f8c1fb23c12a2e00b27d8ba47395d1",
-                "reference": "ebe4d45c61f8c1fb23c12a2e00b27d8ba47395d1",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_users_base/repository/archive.zip?sha=2cb66c581050c46c3b80ac9ad714300325260884",
+                "reference": "2cb66c581050c46c3b80ac9ad714300325260884",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
                 "drupal/persistent_login": "~2.3.0"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -16069,20 +16059,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_users_base",
                 "source": "http://cgit.drupalcode.org/varbase_users_base"
             },
-            "time": "2026-07-09T20:38:12+00:00"
+            "time": "2026-07-09T20:25:00+00:00"
         },
         {
             "name": "drupal/varbase_webform_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_webform_base.git",
-                "reference": "b0d2a5c4fd5a4a6a0e366e452b6a52bc997b2cf0"
+                "reference": "5de8f971f2098a891c6de762817d9c7fae75e624"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_webform_base/repository/archive.zip?sha=b0d2a5c4fd5a4a6a0e366e452b6a52bc997b2cf0",
-                "reference": "b0d2a5c4fd5a4a6a0e366e452b6a52bc997b2cf0",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_webform_base/repository/archive.zip?sha=5de8f971f2098a891c6de762817d9c7fae75e624",
+                "reference": "5de8f971f2098a891c6de762817d9c7fae75e624",
                 "shasum": ""
             },
             "require": {
@@ -16092,7 +16082,6 @@
                 "drupal/webform": "~6.3.0",
                 "drupal/webform_views": "~5"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -16120,20 +16109,20 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_webform_base",
                 "source": "http://cgit.drupalcode.org/varbase_webform_base"
             },
-            "time": "2026-07-09T20:53:46+00:00"
+            "time": "2026-07-09T20:47:11+00:00"
         },
         {
             "name": "drupal/varbase_workflow_base",
-            "version": "1.0.x-dev",
+            "version": "1.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_workflow_base.git",
-                "reference": "653da2acbe2912c759be97f30e5023b0b5481068"
+                "reference": "63b1d1c0c1eba9dac29c60f5c9d3d70999e88158"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_workflow_base/repository/archive.zip?sha=653da2acbe2912c759be97f30e5023b0b5481068",
-                "reference": "653da2acbe2912c759be97f30e5023b0b5481068",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_workflow_base/repository/archive.zip?sha=63b1d1c0c1eba9dac29c60f5c9d3d70999e88158",
+                "reference": "63b1d1c0c1eba9dac29c60f5c9d3d70999e88158",
                 "shasum": ""
             },
             "require": {
@@ -16144,7 +16133,6 @@
                 "drupal/scheduler": "~2",
                 "drupal/scheduler_content_moderation_integration": "~3"
             },
-            "default-branch": true,
             "type": "drupal-recipe",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -16172,15 +16160,21 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_workflow_base",
                 "source": "http://cgit.drupalcode.org/varbase_workflow_base"
             },
-            "time": "2026-07-09T21:08:32+00:00"
+            "time": "2026-07-09T21:03:34+00:00"
         },
         {
             "name": "drupal/vartheme_bs5",
-            "version": "dev-5.0.x",
+            "version": "5.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/vartheme_bs5.git",
-                "reference": "8302c55721fda1cfd55398b20fe60b80170ea76d"
+                "reference": "5.0.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/vartheme_bs5-5.0.0-beta3.zip",
+                "reference": "5.0.0-beta3",
+                "shasum": "bd93ed53383d3fcd69f19c753630ccb28ab177c9"
             },
             "require": {
                 "drupal/canvas": "~1",
@@ -16189,15 +16183,12 @@
             },
             "type": "drupal-theme",
             "extra": {
-                "branch-alias": {
-                    "dev-5.0.x": "5.0.x-dev"
-                },
                 "drupal": {
-                    "version": "5.0.0-beta2+1-dev",
-                    "datestamp": "1783755982",
+                    "version": "5.0.0-beta3",
+                    "datestamp": "1783756470",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16492,11 +16483,17 @@
         },
         {
             "name": "drupal/vmi",
-            "version": "dev-5.0.x",
+            "version": "5.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/vmi.git",
-                "reference": "52bf0dc883f49e04e7bf0d766174282a6d7302f1"
+                "reference": "5.0.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/vmi-5.0.0-beta1.zip",
+                "reference": "5.0.0-beta1",
+                "shasum": "032a9c752840e9b3a3219461fea80ff9fc083587"
             },
             "require": {
                 "drupal/canvas": "~1",
@@ -16504,15 +16501,12 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-5.0.x": "5.0.x-dev"
-                },
                 "drupal": {
-                    "version": "5.0.0-alpha1+1-dev",
-                    "datestamp": "1782936265",
+                    "version": "5.0.0-beta1",
+                    "datestamp": "1783611421",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -16724,11 +16718,17 @@
         },
         {
             "name": "drupal/webshare",
-            "version": "dev-2.0.x",
+            "version": "2.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webshare.git",
-                "reference": "912ead1be99c9f6c4640020d708c03826fae3740"
+                "reference": "2.0.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/webshare-2.0.0-alpha1.zip",
+                "reference": "2.0.0-alpha1",
+                "shasum": "6b0d72f811134c877efe67b817c21047b1198099"
             },
             "require": {
                 "drupal/core": "^10 || ^11"
@@ -16738,12 +16738,9 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.0.x": "2.0.x-dev"
-                },
                 "drupal": {
-                    "version": "2.0.x-dev",
-                    "datestamp": "1779722573",
+                    "version": "2.0.0-alpha1",
+                    "datestamp": "1779790644",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -25259,23 +25256,22 @@
         },
         {
             "name": "vardot/varbase",
-            "version": "11.0.x-dev",
+            "version": "11.0.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
-                "reference": "6651add2332373658954ea7857d0042134531c1d"
+                "reference": "06195fb4840d6e8ef929de38384c3dcfe3011449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase/zipball/6651add2332373658954ea7857d0042134531c1d",
-                "reference": "6651add2332373658954ea7857d0042134531c1d",
+                "url": "https://api.github.com/repos/Vardot/varbase/zipball/06195fb4840d6e8ef929de38384c3dcfe3011449",
+                "reference": "06195fb4840d6e8ef929de38384c3dcfe3011449",
                 "shasum": ""
             },
             "require": {
                 "drupal/core": "~11.4.0",
-                "drupal/varbase_starter": "1.0.x-dev"
+                "drupal/varbase_starter": "~1.0.0"
             },
-            "default-branch": true,
             "type": "drupal-profile",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -25294,20 +25290,20 @@
                 "issues": "http://drupal.org/project/issues/varbase",
                 "source": "http://cgit.drupalcode.org/varbase"
             },
-            "time": "2026-07-13T14:37:15+00:00"
+            "time": "2026-07-16T12:26:36+00:00"
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "11.0.x-dev",
+            "version": "11.0.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "2ffd66170f2ae0a53066ca032a43a050be981442"
+                "reference": "492824e8508342ca29ec5695bd8eaa36a90ce2f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/2ffd66170f2ae0a53066ca032a43a050be981442",
-                "reference": "2ffd66170f2ae0a53066ca032a43a050be981442",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/492824e8508342ca29ec5695bd8eaa36a90ce2f8",
+                "reference": "492824e8508342ca29ec5695bd8eaa36a90ce2f8",
                 "shasum": ""
             },
             "require": {
@@ -25318,7 +25314,6 @@
                 "php": ">=8.1",
                 "vardot/drupal-core-patches": "~11 || ~12"
             },
-            "default-branch": true,
             "type": "composer-plugin",
             "extra": {
                 "class": "Vardot\\VarbasePatches\\Plugin\\VarbasePatchesPlugin",
@@ -25478,9 +25473,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/11.0.x"
+                "source": "https://github.com/Vardot/varbase-patches/tree/11.0.24"
             },
-            "time": "2026-07-14T15:58:08+00:00"
+            "time": "2026-07-14T15:15:25+00:00"
         },
         {
             "name": "yethee/tiktoken",
@@ -25537,10 +25532,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "vardot/varbase": 20,
-        "vardot/varbase-patches": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {},
