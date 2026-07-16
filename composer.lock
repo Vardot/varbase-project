@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "153c7afcfd43fc76c747fee4736785d6",
+    "content-hash": "4e44ef9d272d5c9fc3f2645a1f8d2763",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3800,26 +3800,26 @@
         },
         {
             "name": "drupal/ckeditor_media_resize",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ckeditor_media_resize.git",
-                "reference": "1.0.0"
+                "reference": "1.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor_media_resize-1.0.0.zip",
-                "reference": "1.0.0",
-                "shasum": "0e700e53a9aaedbd7586d3fc995201bed14e12a8"
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_media_resize-1.1.0.zip",
+                "reference": "1.1.0",
+                "shasum": "b158f58590054f0e69a9bdbb106738323e4d3bea"
             },
             "require": {
-                "drupal/core": "^10.3.0 || ^11"
+                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.0",
-                    "datestamp": "1730224770",
+                    "version": "1.1.0",
+                    "datestamp": "1759230011",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -26970,7 +26970,7 @@
         },
         {
             "name": "vardot/varbase",
-            "version": "10.1.x-dev",
+            "version": "10.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase.git",
@@ -27032,7 +27032,7 @@
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "10.1.x-dev",
+            "version": "10.1.80",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
@@ -27225,7 +27225,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/10.1.x"
+                "source": "https://github.com/Vardot/varbase-patches/tree/10.1.80"
             },
             "time": "2026-07-14T15:16:35+00:00"
         },
@@ -27364,10 +27364,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "vardot/varbase": 20,
-        "vardot/varbase-patches": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {},
