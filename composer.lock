@@ -25294,16 +25294,16 @@
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "11.0.24",
+            "version": "11.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "492824e8508342ca29ec5695bd8eaa36a90ce2f8"
+                "reference": "19e1be661894b71c4a2b013985ae54360fb72c64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/492824e8508342ca29ec5695bd8eaa36a90ce2f8",
-                "reference": "492824e8508342ca29ec5695bd8eaa36a90ce2f8",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/19e1be661894b71c4a2b013985ae54360fb72c64",
+                "reference": "19e1be661894b71c4a2b013985ae54360fb72c64",
                 "shasum": ""
             },
             "require": {
@@ -25424,9 +25424,6 @@
                     "drupal/drupal_cms_admin_ui": {
                         "fix: #3576540 Redirect non-admin authenticated users to their profile instead of Dashboard": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/drupal_cms_admin_ui--2026-03-03--3576540.patch"
                     },
-                    "drupal/ai_provider_amazeeio": {
-                        "fix: #3586236 Do not abort recipe apply when amazee.ai trial provisioning fails": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/ai_provider_amazeeio--2026-07-13--3586236--mr-78.patch"
-                    },
                     "drupal/layout_builder_perms": {
                         "fix: #3562020 PHP 8.4 implicit nullable parameters across Layout Builder Advanced Permissions": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/layout_builder_perms--2025-12-08--3562020--mr-28.patch",
                         "Issue #3502237: Fix type error in layout builder perms access manager logger channel factory with LoggerChannelFactoryInterface ": "https://www.drupal.org/files/issues/2025-01-25/layout_builder_perms--2025-01-25--3502237--mr-25.patch"
@@ -25473,9 +25470,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/11.0.24"
+                "source": "https://github.com/Vardot/varbase-patches/tree/11.0.25"
             },
-            "time": "2026-07-14T15:15:25+00:00"
+            "time": "2026-07-16T16:42:53+00:00"
         },
         {
             "name": "yethee/tiktoken",

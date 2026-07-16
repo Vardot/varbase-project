@@ -1,5 +1,5 @@
 {
-    "_hash": "b1af74e725d710f8adca436016babffefc2a4346153c3618cedcb6d5054471c3",
+    "_hash": "724e87aa5afb6a490a3d32a3ee645600611e7ebb711f950e112421f8fe10dd69",
     "patches": {
         "drupal/core": [
             {
@@ -704,18 +704,6 @@
                 "depth": null,
                 "extra": {
                     "provenance": "dependency:drupal/drupal_cms_admin_ui"
-                }
-            }
-        ],
-        "drupal/ai_provider_amazeeio": [
-            {
-                "package": "drupal/ai_provider_amazeeio",
-                "description": "fix: #3586236 Do not abort recipe apply when amazee.ai trial provisioning fails",
-                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/ai_provider_amazeeio--2026-07-13--3586236--mr-78.patch",
-                "sha256": null,
-                "depth": null,
-                "extra": {
-                    "provenance": "dependency:drupal/ai_provider_amazeeio"
                 }
             }
         ],
