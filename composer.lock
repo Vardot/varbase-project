@@ -27032,16 +27032,16 @@
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "10.1.82",
+            "version": "10.1.83",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "726340e41a444120fc9f1b15ea36448d9d996a51"
+                "reference": "f092e66c6ff3e10e9324afc63cedc665c8fc9aec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/726340e41a444120fc9f1b15ea36448d9d996a51",
-                "reference": "726340e41a444120fc9f1b15ea36448d9d996a51",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/f092e66c6ff3e10e9324afc63cedc665c8fc9aec",
+                "reference": "f092e66c6ff3e10e9324afc63cedc665c8fc9aec",
                 "shasum": ""
             },
             "require": {
@@ -27112,6 +27112,9 @@
                         "Issue #3138609: Fixe Field group support broken": "https://www.drupal.org/files/issues/2020-06-03/3138609-24.patch",
                         "Issue #2924774: Let Editors add/delete/clone paragraphs When [Editing a translation]": "https://www.drupal.org/files/issues/2018-06-03/2924774-29.patch",
                         "Issue #3090200: Paragraph access check using incorrect revision of its parent, leading to issues editing and viewing paragraphs when content moderation is involved.": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/paragraphs--2026-06-25--3090200--mr264.patch"
+                    },
+                    "drupal/social_api": {
+                        "fix: #3593752 Deprecated implicit nullable $request parameter in OAuth2Manager::__construct() on PHP 8.4 (breaks the installer's AJAX batch response)": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/social_api--2026-07-17--3593752--mr-17.patch"
                     },
                     "openai-php/client": {
                         "fix: PHP 8.4 compatibility - TypeError when API returns null for results array #725": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/openai-php--client--2025-12-30--pr-725.patch"
@@ -27225,9 +27228,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/10.1.82"
+                "source": "https://github.com/Vardot/varbase-patches/tree/10.1.83"
             },
-            "time": "2026-07-16T16:47:22+00:00"
+            "time": "2026-07-17T01:25:32+00:00"
         },
         {
             "name": "vardot/varbase-replaces",

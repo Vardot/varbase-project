@@ -1,5 +1,5 @@
 {
-    "_hash": "cd4b45be91550c6ea49da34566806bb4a76a3c7046fa2160d2aece9dd0f89c74",
+    "_hash": "55005f7f7d144f4b76f9b7210193034dc9a6c0e43b4c9411d3ed56a54a32c27e",
     "patches": {
         "drupal/core": [
             {
@@ -464,6 +464,18 @@
                 "depth": null,
                 "extra": {
                     "provenance": "dependency:drupal/paragraphs"
+                }
+            }
+        ],
+        "drupal/social_api": [
+            {
+                "package": "drupal/social_api",
+                "description": "fix: #3593752 Deprecated implicit nullable $request parameter in OAuth2Manager::__construct() on PHP 8.4 (breaks the installer's AJAX batch response)",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/social_api--2026-07-17--3593752--mr-17.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/social_api"
                 }
             }
         ],
