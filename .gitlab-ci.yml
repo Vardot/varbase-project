@@ -32,6 +32,9 @@ variables:
   # Drupal 11.4.0 released 2026-07-01; pinned templates ref $CORE_STABLE is still 11.3.
   DRUPAL_CORE: "11.4.0"
   IGNORE_PROJECT_DRUPAL_CORE_VERSION: "1"
+  # This line works with PHP 8.4 (locks are generated under 8.4); pin the
+  # drupalci job images accordingly (default for core 11.4 is PHP 8.3).
+  _TARGET_PHP: "8.4"
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
   COMPOSER_ALLOW_SUPERUSER: 1
@@ -74,14 +77,17 @@ composer:
     # artifact-size limit (413 Request Entity Too Large). dist keeps the
     # artifact small without changing the installed code.
     #
-    # The whole varbase_* tree resolves from canonical via packages.drupal.org
-    # through this project's composer.json (vardot/varbase:11.0.x-dev). The one
-    # holdout is ckeditor_media_resize (no canonical Drupal 11.4 release yet,
-    # #3607786; required by varbase_editor_base ~1): mglaman/composer-drupal-lenient
-    # relaxes its core constraint. The plugin, its allow-plugins entry and the
-    # drupal-lenient allowed-list all live in composer.json, so the build stays a
-    # plain composer update - a temporary measure until the module tags 11.4.
-    - composer update --with-all-dependencies --no-interaction --no-progress --optimize-autoloader --prefer-dist
+    # This branch ships composer.lock + patches.lock.json: install the locked
+    # set. A fresh `composer update` cannot work here - on an empty vendor/ the
+    # mglaman/composer-drupal-lenient and vardot/varbase-patches plugins are
+    # not active during the solve, so lenient-allowed packages (e.g.
+    # drupal/ckeditor_media_resize 1.1.0, #3607786) are unreachable and their
+    # patches fail to apply against the downgraded version.
+    #
+    # --ignore-platform-req=ext-pgsql: drupal/ai_provider_amazeeio >=1.3.2
+    # requires ext-pgsql, which the drupalci PHP 8.4 job image does not ship;
+    # the runtime/web images do. Composer-level ignore only - no code impact.
+    - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist --ignore-platform-req=ext-pgsql
   # A full Varbase build (web/ + vendor/) exceeds the GitLab artifact-size
   # limit (413 Request Entity Too Large), so do NOT pass the build downstream.
   # Publish only the resolved lock file; jobs that need the codebase run their
@@ -293,7 +299,9 @@ stylelint:
     # 555 / settings.php to 444); make it writable so composer scaffold + the
     # next install steps can write there.
     - chmod -R u+w $CI_PROJECT_DIR/$_WEB_ROOT/sites 2>/dev/null || true
-    - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist
+    # --ignore-platform-req=ext-pgsql: see the composer job note (amazeeio
+    # >=1.3.2 requires ext-pgsql; absent from the PHP 8.4 job image).
+    - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist --ignore-platform-req=ext-pgsql
   web_db: &web_db
     - mkdir -pv $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/files
     - mkdir -pv $CI_PROJECT_DIR/$_WEB_ROOT/sites/simpletest

@@ -65,7 +65,8 @@
         "drupal-lenient": {
             "allowed-list": [
                 "drupal/ckeditor_media_resize"
-            ]
+            ],
+            "constraint": "^11.4 || ^12"
         },
         "drupal-scaffold": {
             "locations": {

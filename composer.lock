@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2f9d2c9f7b05ce3a1c7d8088df6faf2",
+    "content-hash": "49cc0da497cca1027078e9828ba0ffdb",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -15420,16 +15420,16 @@
         },
         {
             "name": "drupal/varbase_editor_base",
-            "version": "1.0.0-beta1",
+            "version": "1.0.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/varbase_editor_base.git",
-                "reference": "fe06f150e9a9bbb48f979aae8663569be4ab03e7"
+                "reference": "530718513984310b1e1017343422b76ecdbe4834"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_editor_base/repository/archive.zip?sha=fe06f150e9a9bbb48f979aae8663569be4ab03e7",
-                "reference": "fe06f150e9a9bbb48f979aae8663569be4ab03e7",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fvarbase_editor_base/repository/archive.zip?sha=530718513984310b1e1017343422b76ecdbe4834",
+                "reference": "530718513984310b1e1017343422b76ecdbe4834",
                 "shasum": ""
             },
             "require": {
@@ -15440,7 +15440,7 @@
                 "drupal/ckeditor_bidi": "~5",
                 "drupal/ckeditor_emoji": "~2",
                 "drupal/ckeditor_media_embed": "~2",
-                "drupal/ckeditor_media_resize": "~1",
+                "drupal/ckeditor_media_resize": "~1.1.0",
                 "drupal/core": "~11.4.0",
                 "drupal/edit_media_modal": "~2.1.0",
                 "drupal/editor_advanced_link": "~2.3.0",
@@ -15478,7 +15478,7 @@
                 "issues": "https://www.drupal.org/project/issues/varbase_editor_base",
                 "source": "http://cgit.drupalcode.org/varbase_editor_base"
             },
-            "time": "2026-07-09T18:41:41+00:00"
+            "time": "2026-07-17T01:59:41+00:00"
         },
         {
             "name": "drupal/varbase_i18n_base",
@@ -17796,16 +17796,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.12.5",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "9365d578a9fd1552ad6ca9c3cb530708526feb09"
+                "reference": "dad89620b7a6edb60c15858442eb2e408b45d8f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9365d578a9fd1552ad6ca9c3cb530708526feb09",
-                "reference": "9365d578a9fd1552ad6ca9c3cb530708526feb09",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dad89620b7a6edb60c15858442eb2e408b45d8f4",
+                "reference": "dad89620b7a6edb60c15858442eb2e408b45d8f4",
                 "shasum": ""
             },
             "require": {
@@ -17895,7 +17895,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.12.5"
+                "source": "https://github.com/guzzle/psr7/tree/2.13.0"
             },
             "funding": [
                 {
@@ -17911,7 +17911,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-13T01:27:20+00:00"
+            "time": "2026-07-16T22:23:49+00:00"
         },
         {
             "name": "html2text/html2text",
@@ -25294,16 +25294,16 @@
         },
         {
             "name": "vardot/varbase-patches",
-            "version": "11.0.25",
+            "version": "11.0.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vardot/varbase-patches.git",
-                "reference": "19e1be661894b71c4a2b013985ae54360fb72c64"
+                "reference": "ddd0ee76b5bfc7c80046f58891f39d5213255fed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/19e1be661894b71c4a2b013985ae54360fb72c64",
-                "reference": "19e1be661894b71c4a2b013985ae54360fb72c64",
+                "url": "https://api.github.com/repos/Vardot/varbase-patches/zipball/ddd0ee76b5bfc7c80046f58891f39d5213255fed",
+                "reference": "ddd0ee76b5bfc7c80046f58891f39d5213255fed",
                 "shasum": ""
             },
             "require": {
@@ -25439,6 +25439,9 @@
                     },
                     "drupal/ai_provider_anthropic": {
                         "fix: #3607044 Chat: requests rejected when the conversation ends with a non-user (assistant/system) message": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/ai_provider_anthropic--2026-06-30--3607044--mr-30.patch"
+                    },
+                    "drupal/ckeditor_media_resize": {
+                        "chore: #3607786 Add Drupal Core ~11.4.0 support in the CKEditor Media Resize module on the 1.1.x branch": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/ckeditor_media_resize--2026-07-16--3607786--mr-30.patch"
                     }
                 }
             },
@@ -25470,9 +25473,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Vardot/varbase-patches/issues",
-                "source": "https://github.com/Vardot/varbase-patches/tree/11.0.25"
+                "source": "https://github.com/Vardot/varbase-patches/tree/11.0.26"
             },
-            "time": "2026-07-16T16:42:53+00:00"
+            "time": "2026-07-16T19:45:33+00:00"
         },
         {
             "name": "yethee/tiktoken",
