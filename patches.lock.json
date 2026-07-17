@@ -1,5 +1,5 @@
 {
-    "_hash": "acadeb6f46bc03c51a4befe750d69f7f950c32a5876e45e1f1b6c7fc9a4b7439",
+    "_hash": "cd4b45be91550c6ea49da34566806bb4a76a3c7046fa2160d2aece9dd0f89c74",
     "patches": {
         "drupal/core": [
             {
@@ -743,18 +743,6 @@
                 }
             }
         ],
-        "drupal/ai_provider_amazeeio": [
-            {
-                "package": "drupal/ai_provider_amazeeio",
-                "description": "fix: #3586236 Do not abort recipe apply when amazee.ai trial provisioning fails",
-                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/ai_provider_amazeeio--2026-07-13--3586236--mr-78.patch",
-                "sha256": null,
-                "depth": null,
-                "extra": {
-                    "provenance": "dependency:drupal/ai_provider_amazeeio"
-                }
-            }
-        ],
         "drupal/layout_builder_perms": [
             {
                 "package": "drupal/layout_builder_perms",
@@ -822,6 +810,18 @@
                 "depth": null,
                 "extra": {
                     "provenance": "dependency:drupal/social_auth_linkedin"
+                }
+            }
+        ],
+        "drupal/ckeditor_media_resize": [
+            {
+                "package": "drupal/ckeditor_media_resize",
+                "description": "chore: #3607786 Add Drupal Core ~11.4.0 support in the CKEditor Media Resize module on the 1.1.x branch",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/ckeditor_media_resize--2026-07-16--3607786--mr-30.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/ckeditor_media_resize"
                 }
             }
         ],

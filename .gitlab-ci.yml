@@ -49,6 +49,9 @@ variables:
   # Pin Drupal core for the whole 10.1.x line (Drupal ~11.3/11.4).
   DRUPAL_CORE: "11.4.0"
   IGNORE_PROJECT_DRUPAL_CORE_VERSION: "1"
+  # This line works with PHP 8.4 (locks are generated under 8.4); pin the
+  # drupalci job images accordingly (default for core 11.4 is PHP 8.3).
+  _TARGET_PHP: "8.4"
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
   COMPOSER_ALLOW_SUPERUSER: 1
@@ -79,10 +82,13 @@ composer:
     - composer validate --no-check-all --no-check-publish
     # --prefer-dist pulls dist archives instead of cloning full .git histories,
     # keeping the build artifact under the GitLab artifact-size limit. The
-    # mglaman/composer-drupal-lenient plugin is a no-op here (its allowed-list
-    # is empty now that every varbase_* component ships ~11.4.0), so a plain
-    # solve resolves the documented set on Drupal 11.4.
-    - composer update --with-all-dependencies --no-interaction --no-progress --optimize-autoloader --prefer-dist
+    # 10.1.x ships composer.lock + patches.lock.json: install the locked set.
+    # A fresh `composer update` cannot work here - on an empty vendor/ the
+    # mglaman/composer-drupal-lenient and vardot/varbase-patches plugins are
+    # not active during the solve, so lenient-allowed packages (e.g.
+    # drupal/ckeditor_media_resize 1.1.0) are unreachable and their patches
+    # fail to apply against the downgraded version.
+    - composer install --no-interaction --no-progress --optimize-autoloader --prefer-dist
   artifacts:
     expire_in: 1 day
     paths:

@@ -5,6 +5,9 @@
 * Require released `vardot/varbase: ~10.1.0` and `vardot/varbase-patches: ~10.1.0`
 * Track `composer.lock` and `patches.lock.json`
 
+### Fixes since [10.1.1](https://www.drupal.org/project/varbase_project/releases/10.1.1):
+* [#3611408](https://www.drupal.org/i/3611408) fix: Regenerate `composer.lock` and `patches.lock.json` against `vardot/varbase-patches: 10.1.82`, so a fresh install picks up the [CKEditor Media Resize Drupal 11.4 compatibility patch](https://www.drupal.org/node/3607786) and no longer hits `MissingDependencyException: module 'ckeditor_media_resize' is incompatible with this version of Drupal core`
+
 # 10.1.1
 
 ### Changed since [10.1.0](https://www.drupal.org/project/varbase_project/releases/10.1.0):
