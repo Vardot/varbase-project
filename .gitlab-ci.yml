@@ -78,6 +78,13 @@ composer:
   before_script:
     - composer self-update
     - git config --global --add safe.directory '*'
+    # Lock-less dev branch: pre-activate the lenient plugin GLOBALLY so it is
+    # live during the fresh solve (drupalci does the same by installing it
+    # before the main solve — cf. varbase_editor 10.1.4). Without it the solve
+    # picks ckeditor_media_resize 1.0.0 and the 1.1.0 varbase-patches patch
+    # hard-fails. Harmless when a committed lock exists (install skips solving).
+    - composer global config --no-plugins allow-plugins.mglaman/composer-drupal-lenient true
+    - composer global require mglaman/composer-drupal-lenient --no-interaction --no-progress
   script:
     - composer validate --no-check-all --no-check-publish
     # --prefer-dist pulls dist archives instead of cloning full .git histories,
