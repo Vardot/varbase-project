@@ -8,11 +8,11 @@ Feature: Varbase AI Recipe - AI Context (Context Control Center)
 
   @check @ai @recipes @local @development @staging @production
   Scenario: The Context Control Center overview and items are available
-     When I go to "/admin/ai/context/overview"
+     When I go to "/admin/config/ai/context/overview"
       And wait
       And I wait for the text "Overview" to appear
      Then I should see "Overview"
-     When I go to "/admin/ai/context/settings/items"
+     When I go to "/admin/config/ai/context/settings/items"
       And wait
       And I wait for the text "Context Items Settings" to appear
      Then I should see "Context Items Settings"
