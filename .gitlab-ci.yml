@@ -32,10 +32,6 @@ variables:
   # Drupal 11.4.0 released 2026-07-01; pinned templates ref $CORE_STABLE is still 11.3.
   DRUPAL_CORE: "11.4.0"
   IGNORE_PROJECT_DRUPAL_CORE_VERSION: "1"
-  # CKEditor Media Resize 1.1.0 declares core ~11.2/~11.3 only; upstream MR !30
-  # (Drupal 11.4 support, #3607786) is not released yet. Runtime info.yml fix
-  # ships via vardot/varbase-patches; keep lenient on the lock-less dev branch.
-  _LENIENT_ALLOW_LIST: "ckeditor_media_resize"
   # This line works with PHP 8.4 (locks are generated under 8.4); pin the
   # drupalci job images accordingly (default for core 11.4 is PHP 8.3).
   _TARGET_PHP: "8.4"
@@ -73,13 +69,6 @@ composer:
     # Cached Composer VCS clones are owned by a different uid across runs;
     # trust them so git does not reject with "detected dubious ownership".
     - git config --global --add safe.directory '*'
-    # Bootstrap mglaman/composer-drupal-lenient GLOBALLY so its solver hook is
-    # active during the lock-less `composer update` below (a fresh local solve
-    # installs plugins only after solving, so a locally-required lenient plugin
-    # is not yet active and drupal/ckeditor_media_resize 1.1.0 would downgrade;
-    # #3607786). The global plugin reads the local extra.drupal-lenient list.
-    - composer global config --no-plugins allow-plugins.mglaman/composer-drupal-lenient true
-    - composer global require mglaman/composer-drupal-lenient --no-interaction --no-progress
   script:
     - composer validate --no-check-all --no-check-publish
     # --prefer-dist pulls dist archives instead of cloning full .git histories.
@@ -87,13 +76,6 @@ composer:
     # large .git histories that blow the build artifact past the GitLab
     # artifact-size limit (413 Request Entity Too Large). dist keeps the
     # artifact small without changing the installed code.
-    #
-    # This branch ships composer.lock + patches.lock.json: install the locked
-    # set. A fresh `composer update` cannot work here - on an empty vendor/ the
-    # mglaman/composer-drupal-lenient and vardot/varbase-patches plugins are
-    # not active during the solve, so lenient-allowed packages (e.g.
-    # drupal/ckeditor_media_resize 1.1.0, #3607786) are unreachable and their
-    # patches fail to apply against the downgraded version.
     #
     # --ignore-platform-req=ext-pgsql: drupal/ai_provider_amazeeio >=1.3.2
     # requires ext-pgsql, which the drupalci PHP 8.4 job image does not ship;
