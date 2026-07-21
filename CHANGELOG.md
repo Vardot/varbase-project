@@ -1,3 +1,9 @@
+# 10.1.3
+
+### Changed since [10.1.2](https://www.drupal.org/project/varbase_project/releases/10.1.2):
+* [#3612207](https://www.drupal.org/i/3612207) fix: Remove `mglaman/composer-drupal-lenient`; Varbase Editor now resolves CKEditor Media Resize via the `vardot/ckeditor_media_resize` 2.0.0 fork
+* Track `composer.lock` and `patches.lock.json` for this release
+
 # 10.1.2
 
 ### Changed since [10.1.1](https://www.drupal.org/project/varbase_project/releases/10.1.1):
