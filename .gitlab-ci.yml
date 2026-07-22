@@ -542,6 +542,7 @@ stylelint:
           - "13-varbase-recipes"
           - "14-ai"
           - "15-quality"
+          - "16-eca-workflow-modeler"
   # Override the parent's services - we only need the database. Playwright
   # bundles its own Chromium, so Selenium and chromedriver are not needed.
   services:
