@@ -1,11 +1,18 @@
+---
+name: Default
+about: Report a problem or propose a change
+title: ''
+labels: ''
+assignees: ''
+---
+
 ### Problem/Motivation
 
 #### Steps to reproduce
 
 ### Proposed resolution
 
-
-### Remaining tasks:
+### Checkpoints:
 - [x] File an issue
 - [ ] Addition/Change/Update/Fix
 - [ ] Testing to ensure no regression
@@ -25,12 +32,3 @@
 - [ ] Review with the product owner
 - [ ] Release notes snippet
 - [ ] Release
-
-### API changes
-* N/A
-
-### Data model changes
-* N/A
-
-### Release notes snippet
-* N/A
