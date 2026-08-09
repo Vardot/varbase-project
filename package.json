@@ -28,7 +28,7 @@
     "test:webkit": "BROWSER=webkit node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:headed": "HEADLESS=false node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:fast": "SLOW_MO=0 node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "generate-reports": "node ./node_modules/webship-js/bin/generate-reports.js",
+    "generate-reports": "node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js",
     "drupal-libraries-sync": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js",
     "postinstall": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
   },
@@ -80,6 +80,7 @@
     "@storybook/server": "^10",
     "@storybook/server-webpack5": "^10",
     "@types/node": "^25.5.0",
+    "@vardot/varbase-e2e": "^2.0.0",
     "eslint": "^8.0.0",
     "eslint-plugin-storybook": "^10",
     "fork-ts-checker-webpack-plugin": "~8 || ~9",
@@ -96,8 +97,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
     "webpack": "~5",
-    "webpack-cli": "~5",
-    "webship-js": "^2.0.4"
+    "webpack-cli": "~5"
   },
   "resolutions": {
     "webpack": "^5"

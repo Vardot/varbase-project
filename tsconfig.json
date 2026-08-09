@@ -13,6 +13,6 @@
       "module": "CommonJS",
       "moduleResolution": "Node"
     },
-    "ignore": ["node_modules/(?!webship-js/)"]
+    "ignore": ["node_modules/(?!varbase-e2e/)"]
   }
 }

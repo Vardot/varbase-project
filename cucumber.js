@@ -1,12 +1,12 @@
-// cucumber-js configuration for the Varbase webship-js BDD suite.
+// cucumber-js configuration for the Varbase varbase-e2e BDD suite.
 //
-// Drives the whole site through the browser with webship-js (>= 2.0.4).
+// Drives the whole site through the browser with varbase-e2e (>= 2.0.4).
 //   yarn test                # all features (tests/features/**)
 //   yarn test:chromium       # force chromium
 //   yarn test:headed         # headed debug run
 //
 // Reports land in tests/reports/. Disable the auto HTML hook with
-// WEBSHIP_REPORT_DISABLE=1 and run `yarn generate-reports` in CI instead.
+// VARBASE_E2E_REPORT_DISABLE=1 and run `yarn generate-reports` in CI instead.
 
 module.exports = {
   default: {
@@ -20,12 +20,11 @@ module.exports = {
     // those transient timeouts. Override per run with --retry N.
     retry: 1,
     // tsx/cjs registers a require() hook so cucumber-js loads both `.js`
-    // and `.ts` step files with no build step (webship-js 2.0 dropped
+    // and `.ts` step files with no build step (varbase-e2e 2.0 dropped
     // ts-node in favour of tsx).
     requireModule: ['tsx/cjs'],
     require: [
-      'node_modules/webship-js/tests/step-definitions/**/*.js',          // Webship-js core step definitions (auto HTML report on exit; disable: WEBSHIP_REPORT_DISABLE=1).
-      // 'node_modules/webship-js/tests/step-definitions-diffy/**/*.js', // Diffy step definitions (optional).
+      'node_modules/@vardot/varbase-e2e/tests/step-definitions/**/*.js',          // Varbase E2E core step definitions (auto HTML report on exit; disable: VARBASE_E2E_REPORT_DISABLE=1).
       'tests/step-definitions/**/*.js',                                  // Your custom step definitions.
     ],
     // FEATURES lets CI run one feature folder per job (e.g.
@@ -83,7 +82,7 @@ module.exports = {
         }
       },
       minWaitTime: {
-        // Per-navigation settle budget. webship-js's `I go to` waits up to this
+        // Per-navigation settle budget. varbase-e2e's `I go to` waits up to this
         // long for the page to reach a quiet edge (DOM ready + network idle),
         // returning as soon as it settles. The full Varbase install is heavy
         // (Gin admin + AI widgets); 8s gives slow admin pages time to render
@@ -122,8 +121,8 @@ module.exports = {
         infoTypes: '',
       },
       video: {
-        // 'off' | 'on' | 'on-failure' | 'tag'. Override per run with WEBSHIP_VIDEO.
-        mode: process.env.WEBSHIP_VIDEO || 'on-failure',
+        // 'off' | 'on' | 'on-failure' | 'tag'. Override per run with VARBASE_E2E_VIDEO.
+        mode: process.env.VARBASE_E2E_VIDEO || 'on-failure',
         dir: './tests/videos',
         size: { width: 1920, height: 1080 },
         filenamePattern: '{datetime}.{feature_file}.{scenario}.{status}.{ext}',
@@ -133,26 +132,15 @@ module.exports = {
         //   'warn' — log a warning, scenario still passes (default here).
         //   'fail' — fail the scenario (per-scenario via @js-fail).
         //   'off'  — silent.
-        // NOTE: do NOT tag scenarios @javascript — in webship-js that tag
+        // NOTE: do NOT tag scenarios @javascript — in varbase-e2e that tag
         // forces 'fail' mode. The legacy Behat @javascript tags were removed
         // from this suite for that reason.
-        mode: process.env.WEBSHIP_JS_ERROR_MODE || 'warn',
+        mode: process.env.VARBASE_E2E_JS_ERROR_MODE || 'warn',
         levels: ['error'],
         ignore: '',
         beforeScenario: false,
         afterScenario: true,
       },
-      // diffy: {
-      //   apiKey: process.env.DIFFY_API_KEY || '',
-      //   projectId: parseInt(process.env.DIFFY_PROJECT_ID || '0', 10),
-      //   breakpoints: process.env.DIFFY_BREAKPOINTS || '640,1200',
-      //   windowHeight: parseInt(process.env.DIFFY_WINDOW_HEIGHT || '2000', 10),
-      //   screenshotsDir: process.env.DIFFY_SCREENSHOTS_DIR || '',
-      //   baseUrl: process.env.DIFFY_API_BASE_URL || 'https://app.diffy.website/api/',
-      //   maxWait: parseInt(process.env.DIFFY_MAX_WAIT || '30', 10),
-      //   env1Url: process.env.DIFFY_ENV1_URL || '',
-      //   env2Url: process.env.DIFFY_ENV2_URL || '',
-      // }
     },
   },
 };

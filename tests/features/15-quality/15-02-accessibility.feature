@@ -3,7 +3,7 @@ Feature: Quality - Accessibility (a11y)
       I want the key public pages to be free of critical accessibility issues
       So that the site is usable by everyone and meets WCAG expectations.
 
-  # Uses webship-js axe-core integration. We gate on "critical" violations
+  # Uses varbase-e2e axe-core integration. We gate on "critical" violations
   # (the highest impact level) so the suite stays green on the shipped theme
   # while still catching the show-stoppers. Tighten to "serious" / an "AA"
   # audit per page once the theme is clean at that level.
