@@ -8,7 +8,7 @@
 # browser flow that builds Varbase, installs it with the CLASSIC `varbase`
 # profile (Varbase 10.1.x is NOT recipe-based), seeds the per-role testing
 # users, prepares the site for deterministic testing, and drives the whole site
-# through the browser with webship-js (Playwright + Cucumber-js).
+# through the browser with varbase-e2e (Playwright + Cucumber-js).
 #
 # Varbase 10.1.x targets Drupal ~11.3/11.4; DRUPAL_CORE is pinned to 11.4.0 with
 # IGNORE_PROJECT_DRUPAL_CORE_VERSION so the drupalci variables match the rest of
@@ -274,17 +274,17 @@ stylelint:
     - apt-get install -y nodejs
     - node --version && npm --version
     - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
-    # Back up cucumber.js - webship-js's postinstall can clobber it under yarn 4.
+    # Back up cucumber.js - varbase-e2e's postinstall can clobber it under yarn 4.
     - cp cucumber.js .cucumber.js.bak
     - corepack enable
     - yarn install
     - cp .cucumber.js.bak cucumber.js && rm .cucumber.js.bak
-    # Make webship-js's getLocatorText() <select>-aware (see the script).
-    - bash $CI_PROJECT_DIR/tests/scripts/patch-webship-select.sh
+    # Make varbase-e2e's getLocatorText() <select>-aware (see the script).
+    - bash $CI_PROJECT_DIR/tests/scripts/patch-varbase-e2e-select.sh
     - ./node_modules/.bin/playwright install --with-deps chromium
-  # Run one folder of Gherkin features (webship-js) against the restored site.
+  # Run one folder of Gherkin features (varbase-e2e) against the restored site.
   run_features: &run_features
-    - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
+    - VARBASE_E2E_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
 
 # = Install & prepare Varbase - single pre-test job =
 #
@@ -410,7 +410,7 @@ stylelint:
       test "${RC}" -eq 0 || { echo "Storybook page check failed"; tail -n 50 storybook-dev.log; exit 1; }
   allow_failure: false
 
-# = webship-js BDD - one parallel job per feature folder =
+# = varbase-e2e BDD - one parallel job per feature folder =
 #
 # Each job restores the installed+seeded site from the 📦 Install Varbase
 # artifacts and runs ONE feature folder (SUITE) under tests/features/varbase/,
@@ -468,7 +468,7 @@ stylelint:
     DRUPAL_TEST_BASE_URL: "http://localhost"
     LAUNCH_URL: "http://localhost"
     FORCE_COLOR: "1"
-    WEBSHIP_REPORT_DISABLE: "1"
+    VARBASE_E2E_REPORT_DISABLE: "1"
     FEATURES: "tests/features/varbase/$SUITE/**/*.feature"
     CUCUMBER_JSON: "cucumber_report_$SUITE"
   artifacts:
@@ -503,12 +503,12 @@ stylelint:
   cache: *varbase_cache
   before_script:
     - apt-get update -y && apt-get install -y jq
-    - npm install --no-save webship-js
+    - npm install --no-save @vardot/varbase-e2e
     - ./node_modules/.bin/playwright install --with-deps chromium
   script:
     - jq -s 'add' tests/reports/cucumber_report_*.json > tests/reports/cucumber_report.json
     - export REPORT="varbase--${CI_COMMIT_REF_SLUG}--automated-functional-testing-report--$(date +%Y-%m-%d)--$(date +%H-%M)"
-    - node ./node_modules/webship-js/bin/generate-reports.js
+    - node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js
         --json tests/reports/cucumber_report.json
         --out  "tests/reports/${REPORT}.html"
         --format all

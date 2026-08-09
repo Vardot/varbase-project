@@ -67,7 +67,7 @@ $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.si
 #   Ensure the i18n modules are on, then seed the locked languages (und/zxx,
 #   whose missing config makes updateLockedLanguageWeights() 500) and the
 #   Arabic language, so the i18n functional scenarios have Arabic available
-#   and the browser 02-add-arabic add is superseded (avoids the webship
+#   and the browser 02-add-arabic add is superseded (avoids the varbase-e2e
 #   strict-label issue on the Drupal 11.4 Add-language form).
 $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:install language content_translation -y || true
 $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT php:eval '

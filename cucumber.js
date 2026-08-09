@@ -1,12 +1,12 @@
-// cucumber-js configuration for the Varbase 10.1.x webship-js BDD suite.
+// cucumber-js configuration for the Varbase 10.1.x varbase-e2e BDD suite.
 //
-// Drives the whole site through the browser with webship-js (>= 2.0.4).
+// Drives the whole site through the browser with varbase-e2e (>= 2.0.4).
 //   yarn test                # all features (tests/features/**)
 //   yarn test:chromium       # force chromium
 //   yarn test:headed         # headed debug run
 //
 // Reports land in tests/reports/. Disable the auto HTML hook with
-// WEBSHIP_REPORT_DISABLE=1 and run `yarn generate-reports` in CI instead.
+// VARBASE_E2E_REPORT_DISABLE=1 and run `yarn generate-reports` in CI instead.
 
 module.exports = {
   default: {
@@ -20,12 +20,11 @@ module.exports = {
     // transient timeouts. Override per run with --retry N.
     retry: 1,
     // tsx/cjs registers a require() hook so cucumber-js loads both `.js`
-    // and `.ts` step files with no build step (webship-js 2.0 dropped
+    // and `.ts` step files with no build step (varbase-e2e 2.0 dropped
     // ts-node in favour of tsx).
     requireModule: ['tsx/cjs'],
     require: [
-      'node_modules/webship-js/tests/step-definitions/**/*.js',          // Webship-js core step definitions (auto HTML report on exit; disable: WEBSHIP_REPORT_DISABLE=1).
-      // 'node_modules/webship-js/tests/step-definitions-diffy/**/*.js', // Diffy step definitions (optional).
+      'node_modules/@vardot/varbase-e2e/tests/step-definitions/**/*.js',          // Varbase E2E core step definitions (auto HTML report on exit; disable: VARBASE_E2E_REPORT_DISABLE=1).
       'tests/step-definitions/**/*.js',                                  // Varbase + custom step definitions.
     ],
     // FEATURES lets CI run one feature folder (or a comma-separated list of
@@ -98,7 +97,7 @@ module.exports = {
         }
       },
       minWaitTime: {
-        // Per-navigation settle budget. webship-js's `I go to` waits up to this
+        // Per-navigation settle budget. varbase-e2e's `I go to` waits up to this
         // long for the page to reach a quiet edge (DOM ready + network idle),
         // returning as soon as it settles. The full Varbase install is heavy
         // (Gin admin); 8s gives slow admin pages time to render before the
@@ -113,7 +112,7 @@ module.exports = {
         css: {},
         xpath: {},
         filesPath: './tests/selectors/',
-        // default-theme.json ships webship-js canonical Drupal/Gin selectors;
+        // default-theme.json ships varbase-e2e canonical Drupal/Gin selectors;
         // varbase-selectors.json holds the names ported from the profile's
         // tests/selectors/varbase/*.yml.
         files: ['default-theme.json', 'varbase-selectors.json'],
@@ -140,8 +139,8 @@ module.exports = {
         infoTypes: '',
       },
       video: {
-        // 'off' | 'on' | 'on-failure' | 'tag'. Override per run with WEBSHIP_VIDEO.
-        mode: process.env.WEBSHIP_VIDEO || 'on-failure',
+        // 'off' | 'on' | 'on-failure' | 'tag'. Override per run with VARBASE_E2E_VIDEO.
+        mode: process.env.VARBASE_E2E_VIDEO || 'on-failure',
         dir: './tests/videos',
         size: { width: 1920, height: 1080 },
         filenamePattern: '{datetime}.{feature_file}.{scenario}.{status}.{ext}',
@@ -152,7 +151,7 @@ module.exports = {
         //   'fail' — fail the scenario (per-scenario via @js-fail).
         //   'off'  — silent.
         // Every converted Behat scenario still carries the legacy @javascript
-        // tag, which webship-js resolves to 'fail' mode (tag > env > config).
+        // tag, which varbase-e2e resolves to 'fail' mode (tag > env > config).
         // Rather than strip the tag from 185 locked feature files, we keep the
         // hard JS-error gate on but filter the known-benign console/page noise
         // the Varbase admin (Gin, CKEditor 5, drimage, AI widgets) emits on
@@ -173,9 +172,9 @@ module.exports = {
         //     highlighting), so a worker load hiccup is not the flow under test.
         //     (Also mitigated by serving JS unaggregated — see js.preprocess=0.)
         // A brand-new, unrelated JS error type is NOT matched and still fails.
-        mode: process.env.WEBSHIP_JS_ERROR_MODE || 'warn',
+        mode: process.env.VARBASE_E2E_JS_ERROR_MODE || 'warn',
         levels: ['error'],
-        ignore: process.env.WEBSHIP_JS_ERROR_IGNORE
+        ignore: process.env.VARBASE_E2E_JS_ERROR_IGNORE
           || "getComputedStyle|Failed to load resource|objectSizeSmall|plugincollection-plugin-not-found|CKEditorError|Maximum call stack size exceeded|ResizeObserver loop|importScripts|worker-html",
         beforeScenario: false,
         afterScenario: true,

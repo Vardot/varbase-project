@@ -29,7 +29,7 @@
     "test:webkit": "BROWSER=webkit node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:headed": "HEADLESS=false node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:fast": "SLOW_MO=0 node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "generate-reports": "node ./node_modules/webship-js/bin/generate-reports.js"
+    "generate-reports": "node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-media-embed": "~45.2.0",
@@ -97,6 +97,7 @@
     "@storybook/test": "^8.6.0",
     "@storybook/theming": "~8",
     "@storybook/types": "~8",
+    "@vardot/varbase-e2e": "^2.0.0",
     "eslint": "^8.0.0",
     "eslint-plugin-storybook": "^0.11.3",
     "fork-ts-checker-webpack-plugin": "~8 || ~9",
@@ -111,8 +112,7 @@
     "stylelint-order": "~6.0",
     "typescript": "^5.0.0",
     "webpack": "~5",
-    "webpack-cli": "~5",
-    "webship-js": "^2.0.4"
+    "webpack-cli": "~5"
   },
   "resolutions": {
     "webpack": "^5",

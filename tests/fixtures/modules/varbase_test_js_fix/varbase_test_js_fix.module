@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Test-only JS library dependency repairs for the webship-js CI suite.
+ * Test-only JS library dependency repairs for the varbase-e2e CI suite.
  *
  * On Drupal 11.4 the jQuery plugin `drupalSetSummary()` is defined by
  * `core/misc/form.js` (library `core/drupal.form`); it is no longer part of

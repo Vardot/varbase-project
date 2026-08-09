@@ -1,5 +1,5 @@
 name: Varbase Test JS Fix
 type: module
-description: 'Test-only helper. Repairs contrib JS library dependencies so Drupal.attachBehaviors does not abort under JS aggregation on Drupal 11.4 (fixes the drupalSetSummary ordering error that stops CKEditor 5 from booting). Enabled only by the webship-js CI Install job.'
+description: 'Test-only helper. Repairs contrib JS library dependencies so Drupal.attachBehaviors does not abort under JS aggregation on Drupal 11.4 (fixes the drupalSetSummary ordering error that stops CKEditor 5 from booting). Enabled only by the varbase-e2e CI Install job.'
 package: Testing
 core_version_requirement: ^10 || ^11

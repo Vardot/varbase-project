@@ -6,7 +6,7 @@
 
 Automated functional acceptance testing for Varbase using
 [Playwright](https://playwright.dev/), [Cucumber-JS](https://github.com/cucumber/cucumber-js),
-and [Webship-js](https://github.com/webship/webship-js).
+and [Varbase E2E](https://github.com/varbase-e2e/varbase-e2e).
 
 Moving with modern automated functional testing setup for end-to-end testing.
 
@@ -22,15 +22,15 @@ Moving with modern automated functional testing setup for end-to-end testing.
 > collaboration and trust on your team.
 > Supports [Behaviour-Driven Development (BDD)](https://cucumber.io/docs/bdd/).
 
-> **[Webship-js](https://github.com/webship/webship-js)** is an **Automated Functional Acceptance Testing** tool.
+> **[Varbase E2E](https://github.com/varbase-e2e/varbase-e2e)** is an **Automated Functional Acceptance Testing** tool.
 > Helps to ease and speed the work with end-to-end testing features in web apps or projects.
 > Utilizing Playwright and Cucumber-js.
-> [Having custom and advanced general step definitions](https://webship.co/docs/webship-js/2.0.x/step-definitions)
+> [Having custom and advanced general step definitions](https://varbase-e2e.co/docs/varbase-e2e/2.0.x/step-definitions)
 > with Drupal Core and Drupal CMS context in mind.
 
 ### Summary
 
-- Add automated functional testing support using **Playwright**, **Cucumber-JS**, and **Webship-js**.
+- Add automated functional testing support using **Playwright**, **Cucumber-JS**, and **Varbase E2E**.
 - Provide custom and advanced Drupal CMS general step definitions.
 - Enable readable, maintainable end-to-end test scenarios.
 - Run tests as part of the CI pipeline on each merge request and build.
@@ -155,7 +155,7 @@ The report opens from `tests/reports/cucumber_report.html`.
 To disable the auto-generated report on exit, set:
 
 ```bash
-WEBSHIP_REPORT_DISABLE=1 yarn test:chromium
+VARBASE_E2E_REPORT_DISABLE=1 yarn test:chromium
 ```
 
 ## Screenshots
@@ -191,7 +191,7 @@ export DIFFY_PROJECT_ID=your-project-id
 Then enable the Diffy step definitions in `cucumber.js`:
 
 ```js
-'node_modules/webship-js/tests/step-definitions-diffy/**/*.js',
+'node_modules/@vardot/varbase-e2e/tests/step-definitions-diffy/**/*.js',
 ```
 
 | Variable               | Default                          | Description                        |
@@ -233,7 +233,7 @@ tests/
     custom.js                       # Project-specific custom step definitions
 ```
 
-Step definitions from [Webship-js](https://github.com/webship/webship-js) are loaded automatically from `node_modules/webship-js/tests/step-definitions/`.
+Step definitions from [Varbase E2E](https://github.com/varbase-e2e/varbase-e2e) are loaded automatically from `node_modules/@vardot/varbase-e2e/tests/step-definitions/`.
 
 ## Configuration
 

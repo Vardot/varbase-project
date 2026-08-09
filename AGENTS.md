@@ -19,7 +19,7 @@ Read the project history and context first:
   `vardot/varbase-patches` directly in `composer.json`.
 - Cross-dependencies are pinned to stable `~` constraints at release and flipped back to `*-dev`
   in the follow-up "Back to DEV" change.
-- Automated functional acceptance testing (webship-js) lives HERE, in varbase_project — not in the
+- Automated functional acceptance testing (varbase-e2e) lives HERE, in varbase_project — not in the
   Varbase profile. Run it via the `.gitlab-ci.yml` GitLab CI pipeline.
 
 ## When you make a change

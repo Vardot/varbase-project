@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Description: Full initialization for automated testing - installs Varbase (classic profile) with the same provisioning the GitLab CI webship-js job uses, adds the testing users, then prepares the site for the cucumber suite.
+## Description: Full initialization for automated testing - installs Varbase (classic profile) with the same provisioning the GitLab CI varbase-e2e job uses, adds the testing users, then prepares the site for the cucumber suite.
 ## Usage: init-full-automated-testing
 ## Example: ddev init-full-automated-testing
 ## Aliases: varbase:init-full-automated-testing
@@ -81,5 +81,5 @@ drush config:set system.logging error_level all -y
 drush cache:rebuild
 
 echo ""
-echo "=== Varbase is installed and ready for the webship-js cucumber suite ==="
+echo "=== Varbase is installed and ready for the varbase-e2e cucumber suite ==="
 echo "  Run the suite with:  ddev yarn test:chromium"
