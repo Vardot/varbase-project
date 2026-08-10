@@ -192,7 +192,7 @@ stylelint:
       PY
   allow_failure: false
 
-# Node 22+ required: webship-js 2.x cucumber needs Node 22 || 24 || >=26.
+# Node 22+ required: varbase-e2e 2.x cucumber needs Node 22 || 24 || >=26.
 "🟨 ESLint":
   stage: validate
   image: node:22
@@ -327,7 +327,7 @@ stylelint:
     - apt-get install -y nodejs
     - node --version && npm --version
     - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
-    # Back up cucumber.js - webship-js's postinstall can clobber it under yarn 4.
+    # Back up cucumber.js - varbase-e2e's postinstall can clobber it under yarn 4.
     - cp cucumber.js .cucumber.js.bak
     - corepack enable
     # Full install runs the package.json postinstall (drupal-libraries-sync),
@@ -403,7 +403,7 @@ stylelint:
     - !reference [.fragments, dump_db]
   allow_failure: false
 
-# = webship-js BDD - one parallel job per feature folder =
+# = varbase-e2e BDD - one parallel job per feature folder =
 #
 # Each job restores the installed site from the 📦 Install Varbase artifacts and
 # runs ONE feature folder (FEATURES) writing its own JSON (CUCUMBER_JSON). The
@@ -444,7 +444,7 @@ stylelint:
     DRUPAL_TEST_BASE_URL: "http://localhost"
     LAUNCH_URL: "http://localhost"
     FORCE_COLOR: "1"
-    WEBSHIP_REPORT_DISABLE: "1"
+    VARBASE_E2E_REPORT_DISABLE: "1"
     FEATURES: "tests/features/varbase/$SUITE/**/*.feature"
     CUCUMBER_JSON: "cucumber_report_$SUITE"
   artifacts:
@@ -510,14 +510,14 @@ stylelint:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cr || true
     - !reference [.fragments, node_playwright]
   script:
-    - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
+    - VARBASE_E2E_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
   allow_failure: false
 
 # = Create reports - own job =
 #
 # Merges the per-folder cucumber JSONs from every Automated Functional Testing
 # matrix job (plus their screenshots / videos) into one HTML + PDF report. Runs
-# on a plain node image with webship-js + a Chromium for the PDF - no Drupal.
+# on a plain node image with varbase-e2e + a Chromium for the PDF - no Drupal.
 "📊 Create reports":
   stage: post-test
   image: node:22
@@ -531,7 +531,7 @@ stylelint:
   cache: *varbase_cache
   before_script:
     - apt-get update -y && apt-get install -y jq
-    - npm install --no-save webship-js
+    - npm install --no-save @vardot/varbase-e2e
     # --with-deps installs Chromium's system libraries (libnspr4 etc.) which the
     # plain node image lacks - needed for the PDF report's headless Chromium.
     - ./node_modules/.bin/playwright install --with-deps chromium
@@ -540,7 +540,7 @@ stylelint:
     - jq -s 'add' tests/reports/cucumber_report_*.json > tests/reports/cucumber_report.json
     # Human-readable report name: varbase--{branch|tag}--automated-functional-testing-report--{date}--{time}
     - export REPORT="varbase--${CI_COMMIT_REF_SLUG}--automated-functional-testing-report--$(date +%Y-%m-%d)--$(date +%H-%M)"
-    - node ./node_modules/webship-js/bin/generate-reports.js
+    - node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js
         --json tests/reports/cucumber_report.json
         --out  "tests/reports/${REPORT}.html"
         --format all

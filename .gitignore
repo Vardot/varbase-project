@@ -85,7 +85,7 @@ CURSOR.md
 .codex/
 .warp/
 
-# webship-js test artifacts (generated on each run; never commit)
+# varbase-e2e test artifacts (generated on each run; never commit)
 tests/screenshots/*
 !tests/screenshots/README.md
 tests/videos/*

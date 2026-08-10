@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Description: Full initialization for automated testing - installs Varbase if needed with the same components and provisioning the GitLab CI webship-js job uses, adds testing users, and prepares the site
+## Description: Full initialization for automated testing - installs Varbase if needed with the same components and provisioning the GitLab CI varbase-e2e job uses, adds testing users, and prepares the site
 ## Usage: init-full-automated-testing
 ## Example: ddev init-full-automated-testing
 ## Aliases: varbase:init-full-automated-testing
@@ -138,7 +138,7 @@ drush pm:uninstall antibot --yes 2>/dev/null || echo "  Antibot module not found
 
 echo ""
 echo "--- Relaxing login flood limits for automated testing ---"
-# The webship-js suite logs in many times in a row; the default flood
+# The varbase-e2e suite logs in many times in a row; the default flood
 # limits (ip_limit 5 / user_limit 4) trip "Too many failed login attempts"
 # and cascade-fail every login-dependent scenario. Raise the ceilings so the
 # suite starts from a clean slate.

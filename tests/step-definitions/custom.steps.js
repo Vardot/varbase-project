@@ -4,18 +4,18 @@
 // Custom step definitions — a starting point for YOUR project.
 //
 // Developers, QA / QC automation testers and DevOps: add your own project-specific
-// webship-js (Playwright + Cucumber-js) step definitions in this file. It is loaded
+// varbase-e2e (Playwright + Cucumber-js) step definitions in this file. It is loaded
 // automatically by cucumber.js via `tests/step-definitions/**/*.js`, alongside the
-// webship-js core steps and Varbase's own `varbase.steps.js`.
+// varbase-e2e core steps and Varbase's own `varbase.steps.js`.
 //
-// Reuse webship-js's helpers so your steps behave like the built-in ones:
+// Reuse varbase-e2e's helpers so your steps behave like the built-in ones:
 //   - smartSettle : the smart "wait for a quiet edge" used by every navigation
 //                   step (DOM ready + network idle + no pending AJAX / timers).
 //   - friendly    : tester-friendly error formatting (message + optional hint).
 //
 //   const { Given, When, Then } = require('@cucumber/cucumber');
 //   const { smartSettle, friendly } =
-//     require('webship-js/tests/step-definitions/webship');
+//     require('@vardot/varbase-e2e/tests/step-definitions/varbase-e2e');
 //
 // Example — copy, rename and ALTER the expected values to match the site you test:
 //

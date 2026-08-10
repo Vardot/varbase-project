@@ -1,122 +1,122 @@
 {
-  "name": "varbase-project",
-  "description": "Varbase project is a composer starterkit for new projects.",
-  "license": "GPL-2.0-or-later",
-  "private": true,
-  "engines": {
-    "yarn": ">= 4.9.3",
-    "node": ">= 20.0"
-  },
-  "scripts": {
-    "test": "./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
-    "test:chromium": "BROWSER=chromium ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
-    "test:firefox": "BROWSER=firefox ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
-    "test:webkit": "BROWSER=webkit ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
-    "test:headed": "HEADLESS=false ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
-    "phpcs": "phpcs --standard=./.phpcs.xml .",
-    "phpcbf": "phpcbf --standard=./.phpcs.xml .",
-    "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
-    "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
-    "lint:css": "npx stylelint \"**/*.css\" --allow-empty-input --config=.stylelintrc.json",
-    "drupal-libraries-sync": "node ./docroot/profiles/varbase/scripts/drupal-libraries-sync.js",
-    "postinstall": "node ./docroot/profiles/varbase/scripts/drupal-libraries-sync.js"
-  },
-  "dependencies": {
-    "@ckeditor/ckeditor5-media-embed": "~45.2.0",
-    "ace-builds": "~1",
-    "aos": "~2",
-    "blazy": "~1",
-    "c3": "0.7.*",
-    "chart.js": "~4",
-    "d3": "~5",
-    "dropzone": "~5",
-    "imagesloaded": "~4",
-    "jquery.fancytree": "~2",
-    "masonry-layout": "~4",
-    "objectFitPolyfill": "~2",
-    "slick-carousel": "~1",
-    "swagger-ui-dist": "~3"
-  },
-  "drupal-libraries": {
-    "library-directory": "docroot/libraries",
-    "libraries": [
-      {
-        "name": "ckeditor5/plugins/media-embed",
-        "package": "@ckeditor/ckeditor5-media-embed"
-      },
-      {
-        "name": "ace",
-        "package": "ace-builds"
-      },
-      {
-        "name": "aos",
-        "package": "aos"
-      },
-      {
-        "name": "blazy",
-        "package": "blazy"
-      },
-      {
-        "name": "chartjs",
-        "package": "chart.js"
-      },
-      {
-        "name": "c3",
-        "package": "c3"
-      },
-      {
-        "name": "d3",
-        "package": "d3"
-      },
-      {
-        "name": "dropzone",
-        "package": "dropzone/dist"
-      },
-      {
-        "name": "imagesloaded",
-        "package": "imagesloaded"
-      },
-      {
-        "name": "jquery.fancytree",
-        "package": "jquery.fancytree"
-      },
-      {
-        "name": "objectfitpolyfill",
-        "package": "objectFitPolyfill"
-      },
-      {
-        "name": "slick/slick",
-        "package": "slick-carousel/slick"
-      },
-      {
-        "name": "swagger-ui/dist",
-        "package": "swagger-ui-dist"
-      }
-    ]
-  },
-  "devDependencies": {
-    "eslint": "^8.9.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.4.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jquery": "^1.5.1",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.10.0",
-    "eslint-plugin-react-hooks": "^4.1.2",
-    "eslint-plugin-yml": "^0.14.0",
-    "prettier": "^2.1.2",
-    "stylelint": "^13.0.0",
-    "stylelint-checkstyle-formatter": "^0.1.1",
-    "stylelint-config-standard": "^20.0.0",
-    "stylelint-no-browser-hacks": "^1.2.1",
-    "stylelint-order": "^4.0.0",
-    "webship-js": "^2.0.4"
-  },
-  "resolutions": {
-    "webpack": "^5",
-    "@cucumber/cucumber": "12.9.0",
-    "@cucumber/pretty-formatter": "1.0.1"
-  },
-  "packageManager": "yarn@4.9.3"
+    "name": "varbase-project",
+    "description": "Varbase project is a composer starterkit for new projects.",
+    "license": "GPL-2.0-or-later",
+    "private": true,
+    "engines": {
+        "yarn": ">= 4.9.3",
+        "node": ">= 20.0"
+    },
+    "scripts": {
+        "test": "./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+        "test:chromium": "BROWSER=chromium ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+        "test:firefox": "BROWSER=firefox ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+        "test:webkit": "BROWSER=webkit ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+        "test:headed": "HEADLESS=false ./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
+        "phpcs": "phpcs --standard=./.phpcs.xml .",
+        "phpcbf": "phpcbf --standard=./.phpcs.xml .",
+        "lint:yaml": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .yml .",
+        "lint:js": "node ./node_modules/eslint/bin/eslint.js --config=.eslintrc.json --ext .js .",
+        "lint:css": "npx stylelint \"**/*.css\" --allow-empty-input --config=.stylelintrc.json",
+        "drupal-libraries-sync": "node ./docroot/profiles/varbase/scripts/drupal-libraries-sync.js",
+        "postinstall": "node ./docroot/profiles/varbase/scripts/drupal-libraries-sync.js"
+    },
+    "dependencies": {
+        "@ckeditor/ckeditor5-media-embed": "~45.2.0",
+        "ace-builds": "~1",
+        "aos": "~2",
+        "blazy": "~1",
+        "c3": "0.7.*",
+        "chart.js": "~4",
+        "d3": "~5",
+        "dropzone": "~5",
+        "imagesloaded": "~4",
+        "jquery.fancytree": "~2",
+        "masonry-layout": "~4",
+        "objectFitPolyfill": "~2",
+        "slick-carousel": "~1",
+        "swagger-ui-dist": "~3"
+    },
+    "drupal-libraries": {
+        "library-directory": "docroot/libraries",
+        "libraries": [
+            {
+                "name": "ckeditor5/plugins/media-embed",
+                "package": "@ckeditor/ckeditor5-media-embed"
+            },
+            {
+                "name": "ace",
+                "package": "ace-builds"
+            },
+            {
+                "name": "aos",
+                "package": "aos"
+            },
+            {
+                "name": "blazy",
+                "package": "blazy"
+            },
+            {
+                "name": "chartjs",
+                "package": "chart.js"
+            },
+            {
+                "name": "c3",
+                "package": "c3"
+            },
+            {
+                "name": "d3",
+                "package": "d3"
+            },
+            {
+                "name": "dropzone",
+                "package": "dropzone/dist"
+            },
+            {
+                "name": "imagesloaded",
+                "package": "imagesloaded"
+            },
+            {
+                "name": "jquery.fancytree",
+                "package": "jquery.fancytree"
+            },
+            {
+                "name": "objectfitpolyfill",
+                "package": "objectFitPolyfill"
+            },
+            {
+                "name": "slick/slick",
+                "package": "slick-carousel/slick"
+            },
+            {
+                "name": "swagger-ui/dist",
+                "package": "swagger-ui-dist"
+            }
+        ]
+    },
+    "devDependencies": {
+        "@vardot/varbase-e2e": "^2.0.1",
+        "eslint": "^8.9.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^8.4.0",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-jquery": "^1.5.1",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.10.0",
+        "eslint-plugin-react-hooks": "^4.1.2",
+        "eslint-plugin-yml": "^0.14.0",
+        "prettier": "^2.1.2",
+        "stylelint": "^13.0.0",
+        "stylelint-checkstyle-formatter": "^0.1.1",
+        "stylelint-config-standard": "^20.0.0",
+        "stylelint-no-browser-hacks": "^1.2.1",
+        "stylelint-order": "^4.0.0"
+    },
+    "resolutions": {
+        "webpack": "^5",
+        "@cucumber/cucumber": "12.9.0",
+        "@cucumber/pretty-formatter": "1.0.1"
+    },
+    "packageManager": "yarn@4.9.3"
 }
