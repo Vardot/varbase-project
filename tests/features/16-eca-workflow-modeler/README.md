@@ -9,7 +9,7 @@ BPMN.iO is absent — on stock Varbase both editors are installed (BPMN.iO via t
 recipes, Workflow Modeler via the Varbase recipe). They use only shipped artifacts (the editor
 picker and the shipped `redirect_403_to_login` model); no seeded or demo fixtures.
 
-All scenarios use webship-js built-in steps plus the existing Varbase login/wait steps
+All scenarios use Varbase E2E built-in steps plus the existing Varbase login/wait steps
 (`tests/step-definitions/varbase.steps.js`); this suite adds no custom step definitions.
 
 Run locally:
