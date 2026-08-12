@@ -1,3 +1,4 @@
+@regression @any @i18n
 Feature: Website Base Requirements - Website Languages - English
       As a logged in user with the permission to add content
       I want to be able to check if the site has got the English language Enabled

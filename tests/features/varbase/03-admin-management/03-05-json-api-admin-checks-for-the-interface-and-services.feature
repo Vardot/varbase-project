@@ -1,3 +1,4 @@
+@regression @any @admin
 Feature: Check JSON API admin interface and services and Varbase API settings
       As a site admin user
       I want to be able to check the JSON:API available interface options

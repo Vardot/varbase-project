@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @content
 Feature: Content Structure - Landing Pages with Layout Builder
       As a logged in user with a permission to manage Landing (Layout Builder) pages.
       I want to be able to add a "Landing page (Layout Builder)" which has got predefined set of layouts

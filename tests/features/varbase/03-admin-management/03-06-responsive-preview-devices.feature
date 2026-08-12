@@ -1,3 +1,4 @@
+@regression @any @admin
 Feature: Preview the site in a number of responsive devices
       As a site admin user
       I want to be able to preview the look and feel of the site in a number of devices

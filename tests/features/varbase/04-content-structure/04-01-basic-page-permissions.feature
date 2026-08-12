@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @content
 Feature: Content Structure - Basic Page
       As a logged in user with a permission to mange Basic pages
       I want to be able to add a "Basic page" to the site with a fixed layout

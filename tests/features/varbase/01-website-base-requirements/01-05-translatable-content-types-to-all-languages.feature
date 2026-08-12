@@ -1,3 +1,4 @@
+@regression @any @content @i18n
 Feature: Website Base Requirements - Website Languages - All content translatable to all languages
       As a logged in user with a permission to translate content
       I want to be able to check if all content types are translatable

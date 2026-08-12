@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @content
 Feature: Content Structure - Blog post
       As a logged in user with a permission to manage Blogs.
       I want to be able to add a "Blog"

@@ -1,3 +1,4 @@
+@regression @any @admin
 Feature: Support Requirements - Standard Support Navigation - Allow site super administrators to switch users and surf the site as that user
       As the site super admin
       I want to be able to switch users and surf the site as that user with no password required

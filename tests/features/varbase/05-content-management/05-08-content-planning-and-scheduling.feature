@@ -1,3 +1,4 @@
+@regression @any @content @workflow
 Feature: Content Management - Content Planning and scheduling
 As a content admin
 I want to be able to add plan content publishing for internal content

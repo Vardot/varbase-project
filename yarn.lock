@@ -1710,9 +1710,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vardot/varbase-e2e@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@vardot/varbase-e2e@npm:2.0.1"
+"@vardot/varbase-e2e@npm:^2":
+  version: 2.0.3
+  resolution: "@vardot/varbase-e2e@npm:2.0.3"
   dependencies:
     "@axe-core/playwright": "npm:^4.11.3"
     "@cucumber/cucumber": "npm:*"
@@ -1731,7 +1731,7 @@ __metadata:
   bin:
     generate-reports: bin/generate-reports.js
     init-varbase-e2e: bin/init-varbase-e2e.js
-  checksum: 10c0/4d86bee7f739e684c6ff8ed88dcd690f4d4b20a1f89f6da43653368c6bbc0a3fa12596bd58f36c56d850994692df512cc0f6550427aab6c35f30540d9082688b
+  checksum: 10c0/161ed90086e4c36488f3daec53e1423d924823c21eb228e178b9a66df346cf68b95e5e5f43c1c6763f458e5b50a86128e98ace2053a717424eddf174e51498a7
   languageName: node
   linkType: hard
 
@@ -7931,7 +7931,7 @@ __metadata:
   resolution: "varbase-project@workspace:."
   dependencies:
     "@ckeditor/ckeditor5-media-embed": "npm:~45.2.0"
-    "@vardot/varbase-e2e": "npm:^2.0.1"
+    "@vardot/varbase-e2e": "npm:^2"
     ace-builds: "npm:~1"
     aos: "npm:~2"
     blazy: "npm:~1"

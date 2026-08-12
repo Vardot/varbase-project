@@ -1,3 +1,4 @@
+@regression @any @content @workflow
 Feature: Content Management - Cloning content and entities
       As a logged in user with a permission to mange entities
       I want to be able to clone an entity.

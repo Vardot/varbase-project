@@ -1,3 +1,4 @@
+@regression @slow @any @content
 Feature: Landing (Layout Builder) Pages - Check to add sections and choose layouts for sections
       As a logged in user with a permission to mange Landing (Layout Builder) pages
       I want to be able to add sections with any layouts to the page

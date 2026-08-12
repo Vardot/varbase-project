@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Landing page (Paragraphs) - Add any paragraph types to the page
       As a logged in user with a permission to mange Landing pages
       I want to be able to add any paragraph type to the page

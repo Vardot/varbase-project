@@ -1,3 +1,4 @@
+@regression @acceptance @slow @any @auth @media
 Feature: Admin management - Standard User Management - Users with permission to bulk upload media
       As a logged in user with permission to use media bulk upload bulk upload form
       I will be able to bulk upload media

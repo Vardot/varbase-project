@@ -1,3 +1,4 @@
+@regression @any @admin
 Feature: Admin management - Standard Back-End Navigation - Navigate through the Drupal admin with the keyboard for faster access
       As a site admin
       I want to be able to navigate through the Drupal admin with the keyboard

@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Content Structure - Landing page (Paragraphs) - Varbase text and image paragraphs
       As a logged in user with a permission to mange Landing page (Paragraphs)
       I want to be able to add number of Text and image paragraph compoments

@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: User Management - Standard User Management - Request new password
       As a user with a ready user account
       I will want to be able to Request new password
