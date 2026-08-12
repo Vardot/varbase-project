@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Frontend Webform - Business Contact on the Contact Us page
       As a site visitor
       I want to fill in the Business Contact webform on the Contact Us page

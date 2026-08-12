@@ -1,3 +1,4 @@
+@smoke @regression @any @content
 Feature: Website Base Requirements - Front-end pages
       As a site visitor
       I want every front-end page to be healthy

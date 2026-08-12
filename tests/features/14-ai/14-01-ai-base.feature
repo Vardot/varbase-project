@@ -1,3 +1,4 @@
+@regression @any @ai
 Feature: Varbase AI Recipe - AI Base (providers + prompts)
       As a webmaster
       I want this Varbase AI recipe to deliver its admin surface and behaviour

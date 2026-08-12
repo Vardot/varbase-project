@@ -1,3 +1,4 @@
+@regression @any @i18n
 Feature: Varbase Recipe - i18n Base (languages + translation)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

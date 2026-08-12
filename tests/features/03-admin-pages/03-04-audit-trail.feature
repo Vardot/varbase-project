@@ -1,3 +1,4 @@
+@regression @any @admin
 Feature: User Management - Admin audit trails access
   Admin audit trail module is not enabled in Varbase 11.0.x
 

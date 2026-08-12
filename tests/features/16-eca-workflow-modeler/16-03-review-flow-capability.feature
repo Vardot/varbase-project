@@ -1,3 +1,4 @@
+@regression @any @workflow
 Feature: Workflow Automation - Workflow Modeler review capability
       As a site admin user
       I want the Workflow Modeler to offer its Review flow control on a model

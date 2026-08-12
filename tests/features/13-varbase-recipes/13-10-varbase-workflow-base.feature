@@ -1,3 +1,4 @@
+@regression @acceptance @any @workflow
 Feature: Varbase Recipe - Workflow Base (moderation + scheduler)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

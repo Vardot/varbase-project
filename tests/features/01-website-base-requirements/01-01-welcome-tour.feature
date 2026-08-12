@@ -1,3 +1,4 @@
+@regression @any @admin @content
 Feature: The admin dashboard should be displayed after login
   The admin dashboard is the default landing page for admin users in Varbase 11
 

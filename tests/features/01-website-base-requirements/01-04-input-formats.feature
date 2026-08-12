@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Content Editing - Rich Text Editor - Input formats
       As a logged in user with a permission to edit content
       I want to be able to use the rich text editor

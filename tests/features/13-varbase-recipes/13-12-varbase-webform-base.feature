@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Varbase Recipe - Webform Base (contact form)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

@@ -1,3 +1,4 @@
+@regression @any @content @workflow
 Feature: Content Management - Content Planning and Scheduling
       As a site admin user
       I want to be able to access the Scheduler configuration

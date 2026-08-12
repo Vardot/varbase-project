@@ -1,3 +1,4 @@
+@regression @any @canvas
 Feature: Content Structure - Drupal Canvas Editor
       As a site admin user
       I want to access and use the Drupal Canvas page editor

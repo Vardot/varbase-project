@@ -1,3 +1,4 @@
+@regression @any @perf
 Feature: Varbase Recipe - Performance Base
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

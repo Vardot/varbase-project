@@ -1,3 +1,4 @@
+@regression @any @a11y
 Feature: Accessibility - Editorial Accessibility Checker permissions
       As a logged in user with permission to access the a11y checker tools
       I want to be able to use the tool to identify accessibility issues

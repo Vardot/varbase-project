@@ -1,3 +1,4 @@
+@regression @any @content @search
 Feature: Content Management - Easy Linking internal content with Linkit
       As a site admin user
       I want to be able to access the Linkit configuration

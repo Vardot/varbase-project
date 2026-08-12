@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @content
 Feature: Content Management - Entityqueue permissions
       As a site admin user
       I want to control access to Entityqueues

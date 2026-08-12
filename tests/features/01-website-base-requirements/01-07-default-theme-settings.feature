@@ -1,3 +1,4 @@
+@regression @any @admin
 Feature: Website Base Requirements - Default theme settings
       As a site visitor and a site administrator
       I want the default theme settings to work

@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @content @canvas
 Feature: Content Structure - Canvas Pages permissions
       As a site admin user
       I want to be able to manage Canvas Pages

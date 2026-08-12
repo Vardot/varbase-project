@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @content
 Feature: Content Structure - Blog post permissions
       As a site admin user
       I want to control who can create and manage Blog posts

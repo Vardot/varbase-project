@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: User Management - User login session
   As a user which can login to the site.
   I want to be able to login and stay logged in during my session.

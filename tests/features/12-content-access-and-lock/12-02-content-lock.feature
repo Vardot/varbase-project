@@ -1,3 +1,4 @@
+@regression @any @content @workflow
 Feature: Content Management - Content Lock
       As a site manager
       I want content to be locked when being edited

@@ -1,3 +1,4 @@
+@regression @any @perf
 Feature: Quality - Performance budgets
       As a site owner
       I want the key pages to load within a reasonable time budget

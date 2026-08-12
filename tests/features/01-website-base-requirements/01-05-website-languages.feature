@@ -1,3 +1,4 @@
+@regression @any @i18n
 Feature: Website Base Requirements - Website Languages - Internationalization
       As a site admin user
       I want to be able to check the language configuration

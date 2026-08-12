@@ -1,3 +1,4 @@
+@regression @any @admin
 Feature: Varbase Recipe - API Base (JSON:API + OpenAPI)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

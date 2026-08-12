@@ -1,3 +1,4 @@
+@regression @acceptance @any @workflow
 Feature: Workflow Automation - ECA Workflow Modeler is offered
       As a site admin user
       I want the ECA "add model" screen to offer the Workflow Modeler editor

@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Varbase Recipe - Editor Base (CKEditor 5)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

@@ -1,3 +1,4 @@
+@regression @any @auth @admin
 Feature: User Management - Standard User Management - Admins can disable users
       As a site admin user
       I want to be able Block user accounts

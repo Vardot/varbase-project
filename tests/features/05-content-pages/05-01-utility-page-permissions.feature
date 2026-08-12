@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @content
 Feature: Content Structure - Utility Page
       As a logged in user with a permission to manage Utility pages
       I want to be able to add a "Utility page" to the site

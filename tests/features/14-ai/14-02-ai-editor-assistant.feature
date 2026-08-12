@@ -1,3 +1,4 @@
+@regression @any @content @ai
 Feature: Varbase AI Recipe - AI Editor Assistant (CKEditor 5)
       As a webmaster
       I want this Varbase AI recipe to deliver its admin surface and behaviour

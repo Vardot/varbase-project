@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: Varbase Recipe - Security Base (password policy + CAPTCHA)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

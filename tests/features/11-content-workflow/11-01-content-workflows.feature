@@ -1,3 +1,4 @@
+@regression @acceptance @any @content @workflow
 Feature: Content Management - Content Workflows
       As a site admin user
       I want to manage content moderation workflows

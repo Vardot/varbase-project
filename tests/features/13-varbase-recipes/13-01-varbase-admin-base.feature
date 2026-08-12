@@ -1,3 +1,4 @@
+@regression @any @admin
 Feature: Varbase Recipe - Admin Base (Gin admin theme)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Varbase Recipes module - the recipe engine is installed
       As a webmaster
       I want the Varbase Recipes module enabled

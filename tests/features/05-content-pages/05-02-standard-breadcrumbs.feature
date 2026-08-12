@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Content Structure - Standard Breadcrumbs
       As a website visitor
       I want to see breadcrumb navigation on pages

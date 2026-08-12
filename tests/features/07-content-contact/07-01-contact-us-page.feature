@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Frontend Pages - Contact Us Page
       As a site visitor
       I want to use the Contact Us page

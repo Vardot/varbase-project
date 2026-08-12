@@ -1,3 +1,4 @@
+@regression @any @canvas
 Feature: Content Structure - Menus in Drupal Canvas
       As a site administrator
       I want the system menus offered as Canvas components

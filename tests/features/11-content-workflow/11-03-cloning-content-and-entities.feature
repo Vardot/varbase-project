@@ -1,3 +1,4 @@
+@regression @any @content @workflow
 Feature: Content Management - Cloning content and entities
       As a site admin user
       I want to be able to access the Entity Clone settings

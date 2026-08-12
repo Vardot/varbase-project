@@ -1,3 +1,4 @@
+@regression @any @workflow
 Feature: Workflow Automation - Existing models open in the Workflow Modeler
       As a site admin user
       I want a shipped ECA model to open and render in the Workflow Modeler

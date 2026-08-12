@@ -1,3 +1,4 @@
+@regression @any @canvas
 Feature: Drupal Canvas - default Canvas patterns
       As a site builder
       I want the 14 default Canvas patterns that ship with Varbase to work in Drupal Canvas
@@ -16,7 +17,7 @@ Feature: Drupal Canvas - default Canvas patterns
   # default patterns are offered to a site builder, asserted by their human
   # labels, scoped to the Patterns tab panel so nothing else on the page can
   # satisfy the match.
-  @check @local @development
+  @slow @flaky @check @local @development
   Scenario: the library offers all 14 default Canvas patterns
     Given a new Canvas page "Pattern Library Check" at "/pattern-library-check"
      When I open the "Pattern Library Check" Canvas page in the editor
@@ -44,7 +45,7 @@ Feature: Drupal Canvas - default Canvas patterns
   # keeps the administrative, AI, social and duplicate components out - even
   # though those modules are enabled. Asserted by the visible labels, scoped to
   # the Components tab panel.
-  @check @local @development
+  @slow @flaky @check @local @development
   Scenario: the component library lists content components, not administrative ones
     Given a new Canvas page "Component Library Check" at "/component-library-check"
      When I open the "Component Library Check" Canvas page in the editor
@@ -68,7 +69,7 @@ Feature: Drupal Canvas - default Canvas patterns
   # Each content pattern is inserted from the editor Library (right-click ->
   # Insert), published through the editor, then rendered for a logged-out visitor
   # who sees the pattern's own text.
-  @check @local @development
+  @slow @flaky @check @local @development
   Scenario Outline: a default pattern inserts through the editor, publishes and renders - <label>
     Given a new Canvas page "Test Pattern <label>" at "/test-pattern-<slug>"
      When I open the "Test Pattern <label>" Canvas page in the editor
@@ -97,7 +98,7 @@ Feature: Drupal Canvas - default Canvas patterns
   # independent. Two Counters inserts render two independent counters sections;
   # the Counters pattern renders three stat text blocks, so two copies produce
   # six - proven on the front end with an element count, no layout-API read.
-  @check @local @development
+  @slow @flaky @check @local @development
   Scenario: the same pattern used twice gives two independent copies
     Given a new Canvas page "Test Pattern Twice" at "/test-pattern-twice"
      When I open the "Test Pattern Twice" Canvas page in the editor

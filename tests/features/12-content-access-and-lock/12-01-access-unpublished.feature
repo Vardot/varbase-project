@@ -1,3 +1,4 @@
+@regression @any @auth @content @workflow
 Feature: Content Management - Access Unpublished
       As a site manager
       I want to control who can access unpublished content

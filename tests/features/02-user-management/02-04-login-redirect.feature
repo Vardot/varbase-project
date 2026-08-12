@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: User Management - Login Redirect - Admin roles redirect to dashboard, authenticated users to profile
       As a user logging into the site
       I want to be redirected to the appropriate page after login

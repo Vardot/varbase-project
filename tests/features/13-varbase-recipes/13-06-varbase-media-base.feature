@@ -1,3 +1,4 @@
+@regression @any @media
 Feature: Varbase Recipe - Media Base (media types + library)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

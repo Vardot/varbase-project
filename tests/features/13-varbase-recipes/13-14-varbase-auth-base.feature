@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: Varbase Recipe - Auth Base (social authentication)
       As a webmaster
       I want this Varbase recipe to deliver its user-facing behaviour

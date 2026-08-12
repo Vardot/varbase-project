@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: User Management - User account protection
   As a logged in site admin
   I want user accounts to be properly managed

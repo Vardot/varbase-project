@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Frontend Pages - Homepage
       As a site visitor
       I want to verify the homepage loads correctly

@@ -1,3 +1,4 @@
+@regression @any @a11y
 Feature: Quality - Accessibility (a11y)
       As a site owner
       I want the key public pages to be free of critical accessibility issues

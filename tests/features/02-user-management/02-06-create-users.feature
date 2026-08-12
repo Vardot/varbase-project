@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: User Management - Standard User Management - Admins can create users and assign a role to them
       As a site admin user
       I want to be able to create new user accounts and assign roles to them

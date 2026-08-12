@@ -1,3 +1,4 @@
+@regression @any @workflow
 Feature: Content Management - Trash management
       As a site admin user
       I want to be able to access the Trash management page

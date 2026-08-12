@@ -1,3 +1,4 @@
+@regression @exploratory @any @ai
 Feature: Varbase AI Recipe - AI Safety (logging + observability)
       As a webmaster
       I want this Varbase AI recipe to deliver its admin surface and behaviour

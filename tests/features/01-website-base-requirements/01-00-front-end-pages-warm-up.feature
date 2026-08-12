@@ -1,3 +1,4 @@
+@smoke @regression @slow @any @content
 Feature: Website Base Requirements - Front-end pages warm-up
       As the test runner
       I want each public page visited once at every testing breakpoint before the health checks

@@ -1,9 +1,10 @@
+@regression @any @canvas
 Feature: Content Structure - Hero Cards in Drupal Canvas
       As a site builder
       I want to drag a Hero Card onto a page and configure its options
       So that I can build hero sections the way a human site builder does.
 
-  @check @local @development
+  @slow @flaky @check @local @development
   Scenario: A site builder adds a Hero Card with the editor
     Given I am a logged in user with the "webmaster" user
       And a new Canvas page "Test Hero Default" at "/test-hero-default"
@@ -16,7 +17,7 @@ Feature: Content Structure - Hero Cards in Drupal Canvas
       And I should see "Demo title"
       And I should see "Learn more"
 
-  @check @local @development
+  @slow @flaky @check @local @development
   Scenario: A site builder configures the Hero Card options matrix in the editor
     Given I am a logged in user with the "webmaster" user
       And a new Canvas page "Test Hero Options" at "/test-hero-options"

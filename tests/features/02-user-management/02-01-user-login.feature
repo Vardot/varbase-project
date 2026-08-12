@@ -1,3 +1,4 @@
+@smoke @regression @any @auth
 Feature: User Management - Standard User Management - Login
       As a visitor with an existing user account
       I want to be able to login to the site

@@ -1,3 +1,4 @@
+@regression @any @canvas
 Feature: Content Structure - Hero Slider in Drupal Canvas
       As a site builder
       I want a Bootstrap 5 carousel-based Hero Slider in Drupal Canvas
@@ -24,7 +25,7 @@ Feature: Content Structure - Hero Slider in Drupal Canvas
       And the element ".carousel-item.active" should be displayed
       And the element ".carousel-item .btn-primary" should be displayed
 
-  @check @local @development
+  @slow @flaky @check @local @development
   Scenario Outline: A site builder styles a Hero Slider in the editor - <name>
     Given I am a logged in user with the "webmaster" user
       And a new Canvas page "Test Hero Slider <name>" at "/test-hero-slider-<slug>"

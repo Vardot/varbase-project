@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Frontend Pages - Blog Listing Page
       As a site visitor
       I want to see the blog listing page

@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Frontend Webform - Newsletter Subscribe
       As a marketer
       I want the Newsletter Subscribe form on the Home and Contact Us pages

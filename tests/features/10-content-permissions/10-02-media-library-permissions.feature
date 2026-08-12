@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @media
 Feature: Content Management - Media Library permissions
       As a site admin user
       I want to control access to the Media Library
