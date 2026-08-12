@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Content Management - Add default [entityqueue] module testing content and configuration
 
   @javascript @init @tools @local @development @staging

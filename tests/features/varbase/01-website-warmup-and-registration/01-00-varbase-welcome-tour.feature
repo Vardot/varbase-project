@@ -1,3 +1,4 @@
+@regression @any @admin @content
 Feature: The welcome message should be displayed on first visit to the site
   The welcome message is made possible by having Varbase Tour module
 

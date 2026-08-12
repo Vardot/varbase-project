@@ -1,3 +1,4 @@
+@regression @any @admin @media
 Feature: File & Media Management - Assets Management - Image media and their usage list page for site admins
       As a user with permission to manage files in the site
       I want to be able to see the list of files

@@ -1,3 +1,4 @@
+@regression @any @a11y
 Feature: Accessibility - Use the automatically Editorial Accessibility Checker tool
       As a logged in site admin or editor with permission to access the a11y checker tools
       I will be able to use the tool to automatically identifying and addressing straightforward accessibility issues in various contexts.

@@ -1,3 +1,4 @@
+@smoke @regression @any @admin
 Feature: Pre-check important administrator and development pages
       As a site admin user
       I want to be able to make sure that all admin and development tools are working

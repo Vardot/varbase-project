@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @content
 Feature: Content Structure - Landing page (Paragraphs)
       As a logged in user with a permission to manage Landing page (Paragraphs).
       I want to be able to add a "Landing page" which has got predefined set of paragrphs

@@ -38,6 +38,36 @@ stages:
   - test
   - post-test
 
+# = Path-based job gating (#3616266) ==========================================
+# Skip a job when the files it cares about did not change, but ALWAYS run the
+# full pipeline on the default branch, release branches and tags. Job-level
+# rules compose with the drupalci workflow: block, they do not override it.
+.run_on_release_refs: &run_on_release_refs
+  if: '$CI_COMMIT_TAG || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  when: on_success
+
+# A project developer's own code lives in docroot/modules/custom,
+# docroot/themes/custom and docroot/recipes/custom (this line scaffolds Drupal
+# into docroot/). Those three paths gate (and are the scope of) the PHPCS /
+# PHPStan validation below, and are part of the app-changes set that gates the
+# heavy install + test chain, so "what triggers a job" matches "what a
+# developer edits".
+.varbase_app_changes: &varbase_app_changes
+  - "composer.json"
+  - "composer.lock"
+  - ".gitlab-ci.yml"
+  - ".gitlab-ci/**/*"
+  - "config/**/*"
+  - "docroot/modules/custom/**/*"
+  - "docroot/themes/custom/**/*"
+  - "docroot/recipes/custom/**/*"
+  - "tests/**/*"
+  - "package.json"
+  - "yarn.lock"
+  - ".yarnrc.yml"
+  - "cucumber.js"
+  - "bin/**/*"
+
 variables:
   # This project scaffolds Drupal into docroot/ (see composer.json
   # drupal-scaffold web-root), but the drupalci default _WEB_ROOT is "web".
@@ -65,12 +95,32 @@ variables:
   PLAYWRIGHT_BROWSERS_PATH: "${CI_PROJECT_DIR}/.cache/ms-playwright"
 
 # Shared cache definition referenced by the build / install / test jobs.
+# Populated by the Install Varbase job: the download caches PLUS the built
+# output trees (vendor, node_modules, the docroot incl. installed files) and the
+# ms-playwright browsers. The parallel test jobs pull this (see .test_cache) so
+# they skip composer/yarn/playwright entirely and only restore the DB dump (1s).
 .varbase_cache: &varbase_cache
-  key: "varbase-build"
+  key: "varbase-build-v2-$CI_COMMIT_REF_SLUG"
   paths:
     - .cache/composer
     - .cache/yarn
     - .cache/ms-playwright
+    - vendor
+    - node_modules
+    - docroot
+    - bin
+
+.test_cache: &test_cache
+  key: "varbase-build-v2-$CI_COMMIT_REF_SLUG"
+  policy: pull
+  paths:
+    - .cache/composer
+    - .cache/yarn
+    - .cache/ms-playwright
+    - vendor
+    - node_modules
+    - docroot
+    - bin
 
 # Override composer job to build straight from this project's composer.json.
 composer:
@@ -130,6 +180,26 @@ stylelint:
 
 "🔤 Cspell":
   stage: validate
+  rules:
+    - <<: *run_on_release_refs
+    - changes:
+        - "**/*.php"
+        - "**/*.module"
+        - "**/*.inc"
+        - "**/*.install"
+        - "**/*.js"
+        - "**/*.css"
+        - "**/*.md"
+        - "**/*.yml"
+        - "**/*.txt"
+        - ".cspell.json"
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   image: node:20
   needs: []
   before_script:
@@ -141,6 +211,18 @@ stylelint:
 # = YAML lint =
 "📐 YAML lint":
   stage: validate
+  rules:
+    - <<: *run_on_release_refs
+    - changes:
+        - "**/*.yml"
+        - "**/*.yaml"
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   image: python:3.12-slim
   needs: []
   before_script:
@@ -178,6 +260,21 @@ stylelint:
 
 "🟨 ESLint":
   stage: validate
+  rules:
+    - <<: *run_on_release_refs
+    - changes:
+        - "**/*.js"
+        - "**/*.yml"
+        - ".eslintrc.json"
+        - "package.json"
+        - "yarn.lock"
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   image: node:20
   needs: []
   before_script:
@@ -193,6 +290,20 @@ stylelint:
 
 "🎨 Stylelint":
   stage: validate
+  rules:
+    - <<: *run_on_release_refs
+    - changes:
+        - "**/*.css"
+        - ".stylelintrc.json"
+        - "package.json"
+        - "yarn.lock"
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   image: node:20
   needs: []
   before_script:
@@ -207,6 +318,26 @@ stylelint:
 # = PHP_CodeSniffer (Drupal coding standards) =
 "🐘 PHPCS":
   stage: validate
+  rules:
+    - <<: *run_on_release_refs
+    - changes:
+        - "docroot/modules/custom/**/*"
+        - "docroot/themes/custom/**/*"
+        - "docroot/recipes/custom/**/*"
+        - "**/*.php"
+        - "**/*.module"
+        - "**/*.inc"
+        - "**/*.install"
+        - "**/*.theme"
+        - "**/*.profile"
+        - ".phpcs.xml"
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   image: php:8.4-cli
   needs: []
   before_script:
@@ -216,14 +347,36 @@ stylelint:
     - composer global require drupal/coder:^8.3 dealerdirect/phpcodesniffer-composer-installer --no-interaction
     - export PATH="$(composer global config bin-dir --absolute 2>/dev/null):$PATH"
   script:
-    - mkdir -p web/modules/custom web/themes/custom
+    # A project developer's custom code lives in docroot/modules/custom,
+    # docroot/themes/custom and docroot/recipes/custom. Create them so PHPCS has
+    # valid (possibly empty) targets instead of erroring on a missing path on a
+    # fresh template, then sniff all three the same way a developer would locally.
+    - mkdir -p docroot/modules/custom docroot/themes/custom docroot/recipes/custom
     - phpcs --version
-    - phpcs --standard=.phpcs.xml -p web/modules/custom web/themes/custom
+    - phpcs --standard=.phpcs.xml -p docroot/modules/custom docroot/themes/custom docroot/recipes/custom
   allow_failure: false
 
 # = PHPStan (static analysis) =
 "🔬 PHPStan":
   stage: validate
+  rules:
+    - <<: *run_on_release_refs
+    - changes:
+        - "docroot/modules/custom/**/*"
+        - "docroot/themes/custom/**/*"
+        - "docroot/recipes/custom/**/*"
+        - "**/*.php"
+        - "**/*.module"
+        - "**/*.inc"
+        - "**/*.install"
+        - "phpstan.neon"
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   image: php:8.4-cli
   needs: []
   before_script:
@@ -231,11 +384,21 @@ stylelint:
     - curl -sSL https://github.com/phpstan/phpstan/releases/latest/download/phpstan.phar -o phpstan.phar
     - chmod +x phpstan.phar
   script:
+    # Analyse a developer's own custom code (docroot/modules/custom,
+    # docroot/themes/custom, docroot/recipes/custom) - the same scope they would
+    # run locally. Only analyse dirs that actually contain PHP (the template
+    # ships none yet); otherwise PHPStan errors with "No files found to analyse".
     - |
-      if find web/modules/custom web/themes/custom -name '*.php' 2>/dev/null | grep -q .; then
-        php phpstan.phar analyse -c phpstan.neon --no-progress
+      SCOPE=""
+      for d in docroot/modules/custom docroot/themes/custom docroot/recipes/custom; do
+        if [ -d "$d" ] && find "$d" -name '*.php' | grep -q .; then
+          SCOPE="$SCOPE $d"
+        fi
+      done
+      if [ -n "$SCOPE" ]; then
+        php phpstan.phar analyse -c phpstan.neon --no-progress $SCOPE
       else
-        echo "No custom PHP files in PHPStan scope - nothing to analyse."
+        echo "No PHP files in PHPStan scope (docroot/*/custom) - nothing to analyse."
       fi
   allow_failure: false
 
@@ -279,9 +442,25 @@ stylelint:
     - corepack enable
     - yarn install
     - cp .cucumber.js.bak cucumber.js && rm .cucumber.js.bak
-    # Make varbase-e2e's getLocatorText() <select>-aware (see the script).
-    - bash $CI_PROJECT_DIR/tests/scripts/patch-varbase-e2e-select.sh
     - ./node_modules/.bin/playwright install --with-deps chromium
+  # Runtime-only prepare for the test jobs: vendor/, node_modules/, the docroot
+  # and the browsers all arrive from the pull-only build cache, so this does NO
+  # composer/yarn/playwright build - only the OS image libs, the Composer
+  # autoloader dump and the Node runtime. Keeps the parallel test jobs fast.
+  prepare_runtime_only: &prepare_runtime_only
+    - apt-get update -y && apt-get install -y imagemagick webp libwebp7
+    - apt-get install -y libmagickcore-7.q16-10-extra || apt-get install -y libmagickcore-6.q16-6-extra || true
+    - sed -i 's/rights="none"\s*pattern="WEBP"/rights="read|write" pattern="WEBP"/I' /etc/ImageMagick-*/policy.xml 2>/dev/null || true
+    - git config --global --add safe.directory '*'
+    - chmod -R u+w $CI_PROJECT_DIR/$_WEB_ROOT/sites 2>/dev/null || true
+    # Composer autoloader is a fast dump against the cached vendor/ (no resolve).
+    - composer dump-autoload --optimize --no-interaction || true
+    # Node runtime for cucumber-js (node_modules + browsers are cached).
+    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    - apt-get install -y nodejs
+    - node --version
+    # System libs Chromium needs (the browser itself is cached).
+    - ./node_modules/.bin/playwright install-deps chromium || true
   # Run one folder of Gherkin features (varbase-e2e) against the restored site.
   run_features: &run_features
     - VARBASE_E2E_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
@@ -297,6 +476,16 @@ stylelint:
 # the test jobs.
 "📦 Install Varbase":
   extends: .testing-job-base
+  rules:
+    - <<: *run_on_release_refs
+    - changes: *varbase_app_changes
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   stage: pre-test
   needs: [composer]
   timeout: 2h
@@ -356,6 +545,25 @@ stylelint:
 # = Storybook build - own job (pre-test) =
 "📖 Storybook build":
   extends: .testing-job-base
+  rules:
+    - <<: *run_on_release_refs
+    - changes:
+        - "docroot/modules/custom/**/*"
+        - "docroot/themes/custom/**/*"
+        - "docroot/recipes/custom/**/*"
+        - "docroot/themes/**/*"
+        - "**/*.stories.*"
+        - ".storybook/**/*"
+        - "package.json"
+        - "yarn.lock"
+        - "composer.lock"
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   stage: pre-test
   needs:
     - composer
@@ -410,7 +618,7 @@ stylelint:
       test "${RC}" -eq 0 || { echo "Storybook page check failed"; tail -n 50 storybook-dev.log; exit 1; }
   allow_failure: false
 
-# = varbase-e2e BDD - one parallel job per feature folder =
+# = Automated Functional Acceptance Testing (varbase-e2e) - one parallel job per feature folder =
 #
 # Each job restores the installed+seeded site from the 📦 Install Varbase
 # artifacts and runs ONE feature folder (SUITE) under tests/features/varbase/,
@@ -418,12 +626,22 @@ stylelint:
 # out into independent, parallel jobs; within a folder cucumber runs
 # sequentially so setup -> consume scenarios keep their order. The matrix
 # folders match the ACTUAL profile folder names.
-"🧪 Automated Functional Testing":
+"🧪 varbase-e2e":
   extends: .testing-job-base
+  rules:
+    - <<: *run_on_release_refs
+    - changes: *varbase_app_changes
+      when: on_success
+    # Its files did not change: keep the job LISTED as a manual (play button)
+    # so it never auto-runs on unrelated changes but stays visible and can be
+    # started on demand. allow_failure stays false so that when it IS run it
+    # must pass.
+    - when: manual
+      allow_failure: false
   stage: test
   needs: [composer, "📦 Install Varbase"]
   timeout: 2h
-  cache: *varbase_cache
+  cache: *test_cache
   parallel:
     matrix:
       # The 5 original folders were split into 15 smaller topic folders
@@ -479,12 +697,15 @@ stylelint:
       - tests/videos/
     expire_in: 7 days
   before_script:
-    - !reference [.fragments, prepare_code]
+    # vendor/, node_modules/, the docroot (incl. files) and the browsers arrive
+    # from the pull-only build cache - no composer/yarn/playwright build. Only
+    # the OS image libs, Apache and the Node runtime are set up, then the DB
+    # dump is restored (1s) and the suite runs.
+    - !reference [.fragments, prepare_runtime_only]
     - !reference [.fragments, web_db]
     # = Restore the installed+seeded site =
     - gunzip -c $CI_PROJECT_DIR/varbase-db.sql.gz | $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:cli
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
-    - !reference [.fragments, node_playwright]
   script:
     - !reference [.fragments, run_features]
   allow_failure: false
@@ -497,9 +718,21 @@ stylelint:
   stage: post-test
   image: node:22
   rules:
-    - when: always
+    # Auto-run in post-test whenever the test chain ran (release refs or the app
+    # changed), even if a test failed, so the full report + status is always
+    # published. Skipped only when no test ran (nothing to report).
+    - if: '$CI_COMMIT_TAG || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: always
+    - changes: *varbase_app_changes
+      when: always
+    - when: never
+  # DAG-schedule after the test matrix so the report is NOT held behind an
+  # un-played blocking-manual validate job (stage ordering). Runs when the
+  # whole varbase-e2e matrix passed.
+  needs:
+    - "🧪 varbase-e2e"
   dependencies:
-    - "🧪 Automated Functional Testing"
+    - "🧪 varbase-e2e"
   cache: *varbase_cache
   before_script:
     - apt-get update -y && apt-get install -y jq

@@ -1,3 +1,4 @@
+@regression @any @content @search
 Feature: Content Editing - Rich Text Editor - Easy linking to internal content by searching for content by its titles
       As a content admin
       I want to be able to add internal links searching the title of an internal content

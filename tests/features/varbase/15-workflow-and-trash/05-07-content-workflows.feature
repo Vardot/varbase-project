@@ -1,3 +1,4 @@
+@regression @acceptance @any @content @workflow
 Feature: Content Management - Content moderation workflows. Simple workflow, and Editorial workflow
       As a content admin
       I want to be able to manage the workflow of content in simple and editorial workflows

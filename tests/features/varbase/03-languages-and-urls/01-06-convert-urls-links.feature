@@ -1,3 +1,4 @@
+@regression @any @i18n
 Feature: Content Editing - Rich Text Editor - Convert URLs into links
       As a logged in user with a permission to use the rich text editor
       I want to add raw URLs and links in the rich text editor

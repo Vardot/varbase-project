@@ -3940,9 +3940,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vardot/varbase-e2e@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@vardot/varbase-e2e@npm:2.0.0"
+"@vardot/varbase-e2e@npm:^2":
+  version: 2.0.3
+  resolution: "@vardot/varbase-e2e@npm:2.0.3"
   dependencies:
     "@axe-core/playwright": "npm:^4.11.3"
     "@cucumber/cucumber": "npm:*"
@@ -3961,7 +3961,7 @@ __metadata:
   bin:
     generate-reports: bin/generate-reports.js
     init-varbase-e2e: bin/init-varbase-e2e.js
-  checksum: 10c0/a8e2487a9a9d4838b688cb38b4dbea55b73dce7f5ca5a83da6b03e412d8ae3d53a4cfbf19740cc0a1a87da594a2e7b201a7c4521e749ca0e17d48fedfe8af34c
+  checksum: 10c0/161ed90086e4c36488f3daec53e1423d924823c21eb228e178b9a66df346cf68b95e5e5f43c1c6763f458e5b50a86128e98ace2053a717424eddf174e51498a7
   languageName: node
   linkType: hard
 
@@ -10577,7 +10577,7 @@ __metadata:
     "@storybook/test": "npm:^8.6.0"
     "@storybook/theming": "npm:~8"
     "@storybook/types": "npm:~8"
-    "@vardot/varbase-e2e": "npm:^2.0.0"
+    "@vardot/varbase-e2e": "npm:^2"
     ace-builds: "npm:~1"
     aos: "npm:~2"
     blazy: "npm:~1"

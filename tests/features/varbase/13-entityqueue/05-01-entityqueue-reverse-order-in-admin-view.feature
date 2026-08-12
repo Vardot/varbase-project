@@ -1,3 +1,4 @@
+@regression @any @admin @content
 Feature: Content Management - Standard Entity Queue Management - Have the option to Reverse order in admin view
       As a logged in user with a permission to manage entity queues
       I well be able to view the order of entities in entity queues in a reverse order.

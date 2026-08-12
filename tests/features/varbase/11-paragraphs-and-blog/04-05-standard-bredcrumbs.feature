@@ -1,3 +1,4 @@
+@regression @any @content
 Feature: Navigational Features - Breadcrumbs - Standard breadcrumbs
       As a Visitor to the site
       I want to be able to see the back path

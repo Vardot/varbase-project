@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: User Management - Have persistent login options and configurations
       As a user which can login to the site.
       I want to have the option to have "Remember Me" option on the user login form.

@@ -1,3 +1,4 @@
+@regression @any @workflow
 Feature: Content Management - Trash Management
      As a logged in user with a permission to manage content
      I want to be able to manage content lifecycle using the trash module

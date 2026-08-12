@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @admin
 Feature: Website Base Requirements - User Registration - Only admins login
       As an anonymous user
       I will not be able to register as a user in the website.

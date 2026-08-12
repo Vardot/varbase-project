@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: Website Base Requirements - User Roles - Simple Roles
       As a logged in user with the User ID number 1
       I want to be able to see the list of User Roles

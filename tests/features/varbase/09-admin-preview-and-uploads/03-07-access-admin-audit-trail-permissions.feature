@@ -1,3 +1,4 @@
+@regression @acceptance @any @auth @admin
 Feature: User Management - Standard User Management - Users with permission to access the Admin audit trails
       As a logged in site admin or editor with permission to access the Admin audit trails
       I will be able to trails of actions on the site by the same user and or users

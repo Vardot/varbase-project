@@ -1,3 +1,4 @@
+@regression @any @auth
 Feature: User Management - Standard User Management - Have fine-grained access control of user administrators protections with specific user, or all users in a role
       As a logged in site admin
       I will be allowed to fine-grained access control of user administrators

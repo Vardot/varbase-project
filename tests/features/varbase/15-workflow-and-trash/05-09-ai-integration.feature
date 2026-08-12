@@ -1,3 +1,4 @@
+@regression @any @ai
 Feature: AI Agent integration and interpolation
       As a site and content admin
       I want to be able to use AI Agents
