@@ -3206,9 +3206,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vardot/varbase-e2e@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@vardot/varbase-e2e@npm:2.0.0"
+"@vardot/varbase-e2e@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@vardot/varbase-e2e@npm:2.0.1"
   dependencies:
     "@axe-core/playwright": "npm:^4.11.3"
     "@cucumber/cucumber": "npm:*"
@@ -3227,7 +3227,7 @@ __metadata:
   bin:
     generate-reports: bin/generate-reports.js
     init-varbase-e2e: bin/init-varbase-e2e.js
-  checksum: 10c0/a8e2487a9a9d4838b688cb38b4dbea55b73dce7f5ca5a83da6b03e412d8ae3d53a4cfbf19740cc0a1a87da594a2e7b201a7c4521e749ca0e17d48fedfe8af34c
+  checksum: 10c0/4d86bee7f739e684c6ff8ed88dcd690f4d4b20a1f89f6da43653368c6bbc0a3fa12596bd58f36c56d850994692df512cc0f6550427aab6c35f30540d9082688b
   languageName: node
   linkType: hard
 
@@ -9882,7 +9882,7 @@ __metadata:
     "@storybook/server": "npm:^10"
     "@storybook/server-webpack5": "npm:^10"
     "@types/node": "npm:^25.5.0"
-    "@vardot/varbase-e2e": "npm:^2.0.0"
+    "@vardot/varbase-e2e": "npm:^2.0.1"
     ace-builds: "npm:~1"
     aos: "npm:~2"
     dropzone: "npm:~5"
