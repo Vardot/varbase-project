@@ -137,7 +137,14 @@ module.exports = {
         // from this suite for that reason.
         mode: process.env.VARBASE_E2E_JS_ERROR_MODE || 'warn',
         levels: ['error'],
-        ignore: '',
+        // Filter the known-benign console/page noise the Varbase admin (Gin,
+        // CKEditor 5, drimage, AI widgets) and the CI runner emit - missing
+        // optional assets, aborted preloads, editor plugin chatter. Without
+        // this every scenario prints a 10-20 line error block that buries the
+        // Feature / Scenario / Step output. Genuine JavaScript errors are still
+        // reported; override with VARBASE_E2E_JS_ERROR_IGNORE.
+        ignore: process.env.VARBASE_E2E_JS_ERROR_IGNORE
+          || "getComputedStyle|Failed to load resource|objectSizeSmall|plugincollection-plugin-not-found|CKEditorError|Maximum call stack size exceeded|ResizeObserver loop|importScripts|worker-html",
         beforeScenario: false,
         afterScenario: true,
       },
