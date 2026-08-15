@@ -1,3 +1,12 @@
+# 10.1.4
+
+### Changed since [10.1.3](https://www.drupal.org/project/varbase_project/releases/10.1.3):
+* [#3614575](https://www.drupal.org/i/3614575) task: Add the default `.gitlab` and `.github` issue and merge/pull request templates
+* [#3615711](https://www.drupal.org/i/3615711) task: Switch the Varbase functional testing suite to Varbase E2E (Playwright + Cucumber-js)
+* [#3616266](https://www.drupal.org/i/3616266) perf: Reduce CI usage — reuse the installed build in the parallel test jobs instead of rebuilding
+* Require released `vardot/varbase: ~10.1.0` (10.1.2) and `vardot/varbase-patches: ~10.1.0` (10.1.88)
+* Track `composer.lock` and `patches.lock.json` for this release
+
 # 10.1.3
 
 ### Changed since [10.1.2](https://www.drupal.org/project/varbase_project/releases/10.1.2):
