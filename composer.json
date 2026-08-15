@@ -3,7 +3,7 @@
     "description": "Project template for Varbase distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
-    "version": "10.1.4",
+    "version": "10.1.x-dev",
     "homepage": "https://www.drupal.org/project/varbase",
     "authors": [
         {
