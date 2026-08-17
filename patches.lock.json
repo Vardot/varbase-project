@@ -1,0 +1,767 @@
+{
+    "_hash": "dcd0c2902e3e306e4116436f6264389da57bd44225aff349a11c3b21d9105388",
+    "patches": {
+        "drupal/core": [
+            {
+                "package": "drupal/core",
+                "description": "Issue #3080606: Reorder Layout Builder sections",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2025-12-20--3080606--mr-4075.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3457431: Saving text format generates validation warnings",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2024-07-01--3457431--mr-8608.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3456176: 11.2 upgrade now missing status-message theme suggestions",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/3456176-138-missing-status-messages-theme-suggestions.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3049332: Fix Log error + visual warning for missing or broken block",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-07-02--3049332--drupal-11-4.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3543210: Quick Edit Save Via Contextual Links Redirects to 404 Page",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-01-20--3543210--mr-13088.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #2893892: Fixed Warning Invalid argument supplied for foreach() in Drupal",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/core--getDerivatives-Invalid-argument-foreach--2893892-11-d8.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "fix: #3581250 Handle field storage and update issues during Recipe installation",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-03-24--3581250--mr-15193.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3606822: Synthetic kernel service error on CLI site:install with theme OOP hooks",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-06-28--3606822--classresolver-kernel-resync.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3538500: Fix block plugin not found warnings during Drush installation of Varbase",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2025-08-30--3538500--drupal11x02x.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #2741877: Nested modals don't work: opening a modal from a modal closes the original",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2025-06-24--2741877--mr-8105.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue 3544608: Fix Media Library: Selected media lost after pager navigation prevents insertion",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2025-09-03--mr-13141.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3431330: Add Action Method to Add a button plugin and settings into the Active toolbar in editor",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2025-02-18--3431330--drupal-11-1.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "fix: #3352384 Add Exception for TypeError Argument must be String in Drupal Component Utility Html escape{}",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-01-21--3352384--mr-14437.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3415961: [drupalMedia] Using the Insert Media button causes the window to scroll to the bottom of the page",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-3415961-19.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "feat: #3559809 Add noUi support for SDC props to hide attributes and utility props from UI while preserving default values",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-02-02--3559809--mr-14056.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3302838: Fix PHP8.1+ Querying with NULL values results in warning mb_strtolower(): Passing null to parameter is deprecated",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/3302838-38.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #2741429: calculateDependencies doesn't check $mode_entity if it is NULL (fatal on drupal_cms_search recipe cloneAs install)",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-07-02--2741429--entitydisplaybase-null-mode-entity.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3465033: Fix not saving addItemToToolbar recipe action for divider | (vertical separator) or wrapping - items to CKEditor 5",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2024-08-01--3465033--mr-9003.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3272720: Fix PHP8.1+ Deprecated function: hash(): Passing null to parameter #2 ($data) of type string is deprecated in generateFieldTableName",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/3272720-6.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3101231: Fix multilingual site's layout edit context issue with TypeError: Argument 1 passed to UrlHelper::buildQuery() must be of the type array, null given",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-07-02--3101231--drupal-11-4.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #3459881: Fix TypeError: implode(): Argument #1 ($array) must be of type array, string given in implode() (line 537 of core/lib/Drupal/Core/Field/WidgetBase.php)",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2025-02-17--3459881--mr-8702.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Issue #2701575: Fix TypeError RequestContext::fromRequest(): Argument #1 ($request) must be of type Request, null given (fatal on drush site:install during a request-less route rebuild)",
+                "url": "https://raw.githubusercontent.com/Vardot/drupal-core-patches/refs/heads/patches/drupal-core--2026-07-03--2701575--mr-16205.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/core"
+                }
+            }
+        ],
+        "drupal/gin": [
+            {
+                "package": "drupal/gin",
+                "description": "fix: #3590827 Sticky form actions appear on node revision revert/delete confirm forms (incomplete exclusion pattern)",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/gin--2026-05-19--3590827--mp-787.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/gin"
+                }
+            }
+        ],
+        "drupal/webp": [
+            {
+                "package": "drupal/webp",
+                "description": "fix: #3561953 PHP 8.4 implicit nullable & constructor parameter order issues in WebP FileDownloadController",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/webp--2026-04-15--3561953--mr-54.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/webp"
+                }
+            }
+        ],
+        "drupal/embed": [
+            {
+                "package": "drupal/embed",
+                "description": "Issue #3517882: The namespace of EmbedCKEditor5PluginBase does not respect PSR4",
+                "url": "https://www.drupal.org/files/issues/2025-06-30/embed--2025-06-30--3517882--mr-26.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/embed"
+                }
+            }
+        ],
+        "drupal/canvas": [
+            {
+                "package": "drupal/canvas",
+                "description": "fix: #3591751 Compile on serve when a code component's compiled JS is empty",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/canvas--2026-07-26--3591751--mr-1424.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/canvas"
+                }
+            },
+            {
+                "package": "drupal/canvas",
+                "description": "feat: #3585221 Fall back to active version when stored component version is not available",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/canvas--2026-04-21--3585221--mr-927.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/canvas"
+                }
+            },
+            {
+                "package": "drupal/canvas",
+                "description": "feat: #3584713 Add Allow Edit Global Regions permission to restrict editing of global page regions",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/canvas--2026-08-13--3584713--mr-911.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/canvas"
+                }
+            },
+            {
+                "package": "drupal/canvas",
+                "description": "fix: #3591751 Compile JSX server-side for AI-created/edited code components (fixes [object Object])",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/canvas--2026-07-10--3591751--mr-1315.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/canvas"
+                }
+            },
+            {
+                "package": "drupal/canvas",
+                "description": "fix: #3560889 JsComponent crash renders Canvas Editor unusable when Image Props have relative example URLs",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/canvas--2026-07-26--3560889--mr-1425.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/canvas"
+                }
+            },
+            {
+                "package": "drupal/canvas",
+                "description": "fix: #3584883 Undefined array key placeholder warning in Component::getSlotDefinitions() when versioned_properties lacks last_active_version key",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/canvas--2026-04-15--3584883--mr-916.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/canvas"
+                }
+            },
+            {
+                "package": "drupal/canvas",
+                "description": "feat: #3567225 Allow per-node override of Content Template via checkbox in node selector -- minimal re-roll against Canvas 1.10.0 (ComponentTreeLoader extension point only)",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/canvas--2026-08-09--3567225--mr-948-minimal.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/canvas"
+                }
+            }
+        ],
+        "drupal/coffee": [
+            {
+                "package": "drupal/coffee",
+                "description": "Issue #3535874: Add Navigation Top Bar integration for Coffee module in Drupal ~11.2.0 and Gin ~5.0",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/coffee--2025-07-30--3535874--mr-19.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/coffee"
+                }
+            }
+        ],
+        "drupal/shield": [
+            {
+                "package": "drupal/shield",
+                "description": "fix: #3562392 PHP 8.4 - Implicit nullable parameters for Shield",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/shield--2025-12-10--3562392--mr-30.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/shield"
+                }
+            }
+        ],
+        "drupal/tagify": [
+            {
+                "package": "drupal/tagify",
+                "description": "fix: #3555084 Exposed filter tag input missing label; add aria-labelledby to Tagify input and propagate to contenteditable",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/tagify--2026-07-28--3555084--mr-177.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/tagify"
+                }
+            }
+        ],
+        "drupal/openapi": [
+            {
+                "package": "drupal/openapi",
+                "description": "fix: #3523346 PHP 8.4: Implicitly nullable parameter declarations deprecated",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/openapi--2025-12-08--3523346--mr-22.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/openapi"
+                }
+            }
+        ],
+        "drupal/redirect": [
+            {
+                "package": "drupal/redirect",
+                "description": "Issue #2879648: Redirects from aliased paths aren't triggered (Drupal 11.4, RedirectPathProcessorManager approach)",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/redirect--2026-07-05--2879648--mr-202.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/redirect"
+                }
+            }
+        ],
+        "drupal/schemata": [
+            {
+                "package": "drupal/schemata",
+                "description": "fix: #3523349 PHP 8.4: Implicitly nullable parameter declarations deprecated",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/schemata--2025-12-09--3523349--mr-17.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/schemata"
+                }
+            }
+        ],
+        "drupal/ai_agents": [
+            {
+                "package": "drupal/ai_agents",
+                "description": "fix: #3586043 Array to string conversion in Token::doReplace() when a dynamical token value is an array (applyTokens)",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/ai_agents--2026-06-30--3586043--mr-287.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/ai_agents"
+                }
+            }
+        ],
+        "drupal/dropzonejs": [
+            {
+                "package": "drupal/dropzonejs",
+                "description": "Issue #3542463: Fix TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in DropzoneJsUploadForm::validateUploadElement()",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/dropzonejs--2025-08-21--3542463--mr-24.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/dropzonejs"
+                }
+            }
+        ],
+        "drupal/eca_helper": [
+            {
+                "package": "drupal/eca_helper",
+                "description": "fix: #3608313 Guard null event and catch Throwable in Messenger decorator",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/eca_helper--2026-07-04--3608313--mr-16.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/eca_helper"
+                }
+            }
+        ],
+        "openai-php/client": [
+            {
+                "package": "openai-php/client",
+                "description": "fix: PHP 8.4 compatibility - TypeError when API returns null for results array #725",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/openai-php--client--2025-12-30--pr-725.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:openai-php/client"
+                }
+            }
+        ],
+        "drupal/block_class": [
+            {
+                "package": "drupal/block_class",
+                "description": "Issue #3493849: Argument #1 ($array) must be of type array, string given",
+                "url": "https://www.drupal.org/files/issues/2025-01-28/fix-array-merge-type-error-block-class-3493849-6.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/block_class"
+                }
+            }
+        ],
+        "drupal/rabbit_hole": [
+            {
+                "package": "drupal/rabbit_hole",
+                "description": "Issue #3419073: Fix Return value must be of type bool fatal error",
+                "url": "https://raw.githubusercontent.com/Vardot/varbase-patches/refs/heads/patches/rabbit_hole--2026-07-06--3419073--mr-65.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/rabbit_hole"
+                }
+            }
+        ],
+        "drupal/social_auth": [
+            {
+                "package": "drupal/social_auth",
+                "description": "fix: #3578754 Uncaught SocialApiException shows fatal error page when credentials are not configured",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/social_auth--2026-03-13--3578754--mr-40.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/social_auth"
+                }
+            }
+        ],
+        "drupal/content_lock": [
+            {
+                "package": "drupal/content_lock",
+                "description": "feat: #3544019 Form Actions Stay Cached and Disabled After Breaking Lock in Gin Admin Theme",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/content_lock--2026-06-14--3544019--mr-93.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/content_lock"
+                }
+            }
+        ],
+        "drupal/entity_clone": [
+            {
+                "package": "drupal/entity_clone",
+                "description": "Issue #3388460: Fatal error on cloning a menu link (D10 site)",
+                "url": "https://www.drupal.org/files/issues/2023-10-17/3388460-7.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/entity_clone"
+                }
+            }
+        ],
+        "drupal/entity_embed": [
+            {
+                "package": "drupal/entity_embed",
+                "description": "Issue #2679875: Inline Entity Form integration",
+                "url": "https://www.drupal.org/files/issues/2023-11-08/2679875-27.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/entity_embed"
+                }
+            },
+            {
+                "package": "drupal/entity_embed",
+                "description": "Issue #3531672:  Drupal 10.5/11.2 compatability (tooltip broken, cannot edit embedded entities)",
+                "url": "https://www.drupal.org/files/issues/2025-06-30/entity_embed--2025-06-30--3531672--mr-62.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/entity_embed"
+                }
+            },
+            {
+                "package": "drupal/entity_embed",
+                "description": "Issue #3070343: Allow to add a Drupal core link with Link Widget for Image entities using Entity Embed Dialog in CKEditor",
+                "url": "https://www.drupal.org/files/issues/2023-11-02/entity-embed-add-link-image-entity-3070343-37.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/entity_embed"
+                }
+            }
+        ],
+        "drupal/simple_oauth": [
+            {
+                "package": "drupal/simple_oauth",
+                "description": "fix: #3565011 Install oauth2_scope entity type during simple_oauth_install() to prevent EntityTypeManager errors",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/simple_oauth--2026-01-05--3565011--mr-203.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/simple_oauth"
+                }
+            }
+        ],
+        "neilime/php-css-lint": [
+            {
+                "package": "neilime/php-css-lint",
+                "description": "fix: #3498301 PHP 8.4 compatibility to fix PHP 8.4 deprecation warning for implicit nullable parameter in CssLint Linter",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/php-css-lint--2025-12-21--3498301.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:neilime/php-css-lint"
+                }
+            }
+        ],
+        "drupal/password_policy": [
+            {
+                "package": "drupal/password_policy",
+                "description": "fix: #3516906 PHP 8.4 nullable types must be explicit",
+                "url": "https://git.drupalcode.org/project/password_policy/-/commit/999abf8501fd2878dc40b0b4db81315fed60cc03.diff",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/password_policy"
+                }
+            },
+            {
+                "package": "drupal/password_policy",
+                "description": "fix: #3581203 Remove _core default_config_hash from password_policy field config",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/password_policy--2026-03-24--3581203--mr-113.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/password_policy"
+                }
+            },
+            {
+                "package": "drupal/password_policy",
+                "description": "fix: #3581229 Programmatically create Password Policy fields during module installation via Recipes",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/password_policy--2026-03-24--3581229--mr-114.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/password_policy"
+                }
+            }
+        ],
+        "drupal/views_bulk_edit": [
+            {
+                "package": "drupal/views_bulk_edit",
+                "description": "Issue #3544584: Change default Change method to Replace the current value when configuring Modify field values action",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/views_bulk_edit--2025-09-03--3544584--mr-44.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/views_bulk_edit"
+                }
+            }
+        ],
+        "drupal/drimage_improved": [
+            {
+                "package": "drupal/drimage_improved",
+                "description": "fix: #3587334 Missing response and return handling in DrimageSubscriber image delivery",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/drimage_improved--2026-04-28--3587334--mr-25.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/drimage_improved"
+                }
+            }
+        ],
+        "drupal/google_analytics": [
+            {
+                "package": "drupal/google_analytics",
+                "description": "fix: #3562288 PHP 8.4 - Implicit Nullable Parameters for Google Analytics",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/google_analytics--2025-12-09--3562288--mr-45.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/google_analytics"
+                }
+            }
+        ],
+        "drupal/persistent_login": [
+            {
+                "package": "drupal/persistent_login",
+                "description": "Issue #2899530 by josebc: Provide a permission for users to see Persistent Logins tab in their profiles",
+                "url": "https://www.drupal.org/files/issues/persistent_login-user_task_permission-2899530-6.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/persistent_login"
+                }
+            }
+        ],
+        "drupal/drupal_cms_helper": [
+            {
+                "package": "drupal/drupal_cms_helper",
+                "description": "fix: #3573589 Activate Full Content view mode for all new content types",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/drupal_cms_helper--2026-02-15--3573589-mr-806.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/drupal_cms_helper"
+                }
+            }
+        ],
+        "drupal/inline_entity_form": [
+            {
+                "package": "drupal/inline_entity_form",
+                "description": "Issue #3136514: IEF complex widget: Re-ordering / weight sometimes not updated",
+                "url": "https://www.drupal.org/files/issues/2025-01-04/inline_entity_form--2025-01-04--mr-126.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/inline_entity_form"
+                }
+            },
+            {
+                "package": "drupal/inline_entity_form",
+                "description": "Issue #2913571: Add a setting to enable/disable inline editing for existing entities",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/inline_entity_form--2026-06-07--2913571--mr-127.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/inline_entity_form"
+                }
+            }
+        ],
+        "drupal/drupal_cms_admin_ui": [
+            {
+                "package": "drupal/drupal_cms_admin_ui",
+                "description": "fix: #3576540 Redirect non-admin authenticated users to their profile instead of Dashboard",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/drupal_cms_admin_ui--2026-03-03--3576540.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/drupal_cms_admin_ui"
+                }
+            }
+        ],
+        "drupal/layout_builder_perms": [
+            {
+                "package": "drupal/layout_builder_perms",
+                "description": "fix: #3562020 PHP 8.4 implicit nullable parameters across Layout Builder Advanced Permissions",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/layout_builder_perms--2025-12-08--3562020--mr-28.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/layout_builder_perms"
+                }
+            },
+            {
+                "package": "drupal/layout_builder_perms",
+                "description": "Issue #3502237: Fix type error in layout builder perms access manager logger channel factory with LoggerChannelFactoryInterface ",
+                "url": "https://www.drupal.org/files/issues/2025-01-25/layout_builder_perms--2025-01-25--3502237--mr-25.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/layout_builder_perms"
+                }
+            }
+        ],
+        "drupal/node_edit_protection": [
+            {
+                "package": "drupal/node_edit_protection",
+                "description": "Issue #3455823: Fix the warning issue that occurs when pressing the save submit button in the Gin Admin theme",
+                "url": "https://www.drupal.org/files/issues/2024-07-03/3455823-13-warning-popup-node-add-and-edit-save.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/node_edit_protection"
+                }
+            }
+        ],
+        "drupal/social_auth_facebook": [
+            {
+                "package": "drupal/social_auth_facebook",
+                "description": "Issue #3507470: Fix fatal error for validateConfig() method signature mismatch",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/social_auth_facebook--2026-03-12--3507470--mr-8.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/social_auth_facebook"
+                }
+            }
+        ],
+        "drupal/social_auth_linkedin": [
+            {
+                "package": "drupal/social_auth_linkedin",
+                "description": "Issue #3507495: Remove leftover reference to social_auth_linkedin.settings_form to fix Route Provider Error",
+                "url": "https://www.drupal.org/files/issues/2025-02-18/social_auth_linkedin--2025-02-18--3507495--mr-10.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/social_auth_linkedin"
+                }
+            }
+        ],
+        "drupal/ai_provider_anthropic": [
+            {
+                "package": "drupal/ai_provider_anthropic",
+                "description": "fix: #3607044 Chat: requests rejected when the conversation ends with a non-user (assistant/system) message",
+                "url": "https://raw.githubusercontent.com/vardot/varbase-patches/refs/heads/patches/ai_provider_anthropic--2026-06-30--3607044--mr-30.patch",
+                "sha256": null,
+                "depth": null,
+                "extra": {
+                    "provenance": "dependency:drupal/ai_provider_anthropic"
+                }
+            }
+        ]
+    }
+}
