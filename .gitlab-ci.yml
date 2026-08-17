@@ -756,6 +756,7 @@ stylelint:
           - "13-varbase-recipes"
           - "14-ai"
           - "15-quality"
+          - "17-search"
       # The heaviest suites are split by feature-file globs so each parallel job
       # stays short (they run concurrently, so more jobs do NOT add wall-clock -
       # they lower it by shrinking the slowest job). SUITE names the report;
