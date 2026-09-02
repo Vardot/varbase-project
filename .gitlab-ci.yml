@@ -81,7 +81,7 @@ variables:
 .varbase_cache: &varbase_cache
   # Build cache populated by the Install Varbase job: the download caches PLUS
   # the built output trees (vendor, node_modules, the web docroot incl. the
-  # drupal-libraries-sync output and installed files) and the ms-playwright
+  # Composer-installed web/libraries and installed files) and the ms-playwright
   # browsers. The 15 parallel test jobs pull this (see .test_cache) so they skip
   # composer/yarn/playwright entirely and only restore the DB dump (1s).
   key: "varbase-build-$CI_COMMIT_REF_SLUG"
@@ -290,8 +290,8 @@ stylelint:
     - when: manual
       allow_failure: false
   image: node:20
-  # --mode=skip-build skips the package.json postinstall (drupal-libraries-sync,
-  # which needs a composer build); linting only needs the JS dev dependencies.
+  # --mode=skip-build skips the build scripts; linting only needs the JS dev
+  # dependencies. The front-end libraries come from Composer, not from yarn.
   before_script:
     - corepack enable
     - yarn install --mode=skip-build
@@ -483,9 +483,9 @@ stylelint:
     # Back up cucumber.js - varbase-e2e's postinstall can clobber it under yarn 4.
     - cp cucumber.js .cucumber.js.bak
     - corepack enable
-    # Full install runs the package.json postinstall (drupal-libraries-sync),
-    # syncing the front-end libraries into web/libraries - the recipes are
-    # present here from the composer artifact (CircleCI parity).
+    # Full install, for the packages whose own postinstall the tests need. The
+    # front-end libraries under web/libraries are installed by Composer as
+    # drupal-library packages, so nothing here syncs them.
     - yarn install
     - cp .cucumber.js.bak cucumber.js && rm .cucumber.js.bak
     - ./node_modules/.bin/playwright install --with-deps chromium
@@ -671,8 +671,8 @@ stylelint:
     # Build the codebase from composer.lock (brings in web/themes/contrib/
     # vartheme_bs5 with its shipped component stories). No web_db / Apache / DB.
     - !reference [.fragments, prepare_code]
-    # Node.js 20 + yarn. --mode=skip-build skips the composer-bound postinstall
-    # (drupal-libraries-sync), which the static Storybook build does not need.
+    # Node.js 20 + yarn. --mode=skip-build skips the build scripts, which the
+    # static Storybook build does not need.
     - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
     - apt-get install -y nodejs
     - node --version && npm --version

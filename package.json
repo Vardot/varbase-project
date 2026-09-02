@@ -28,46 +28,7 @@
     "test:webkit": "BROWSER=webkit node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:headed": "HEADLESS=false node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
     "test:fast": "SLOW_MO=0 node ./node_modules/@cucumber/cucumber/bin/cucumber.js --config cucumber.js",
-    "generate-reports": "node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js",
-    "drupal-libraries-sync": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js",
-    "postinstall": "node ./recipes/varbase_starter/scripts/drupal-libraries-sync.js"
-  },
-  "dependencies": {
-    "@ckeditor/ckeditor5-media-embed": "^47.6.0",
-    "ace-builds": "~1",
-    "aos": "~2",
-    "dropzone": "~5",
-    "jquery.fancytree": "~2",
-    "swagger-ui-dist": "~3"
-  },
-  "drupal-libraries": {
-    "library-directory": "web/libraries",
-    "libraries": [
-      {
-        "name": "ckeditor5/plugins/media-embed",
-        "package": "@ckeditor/ckeditor5-media-embed"
-      },
-      {
-        "name": "ace",
-        "package": "ace-builds"
-      },
-      {
-        "name": "dropzone",
-        "package": "dropzone/dist"
-      },
-      {
-        "name": "jquery.fancytree",
-        "package": "jquery.fancytree"
-      },
-      {
-        "name": "swagger-ui/dist",
-        "package": "swagger-ui-dist"
-      },
-      {
-        "name": "aos",
-        "package": "aos/dist"
-      }
-    ]
+    "generate-reports": "node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5",

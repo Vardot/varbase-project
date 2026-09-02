@@ -25,10 +25,10 @@ variables:
   IGNORE_PROJECT_DRUPAL_CORE_VERSION: "1"
   YARN_ENABLE_IMMUTABLE_INSTALLS: "false"
 
-# The lint jobs install with `yarn install --mode=skip-build`: the package.json
-# `postinstall` runs recipes/varbase_starter/scripts/drupal-libraries-sync.js,
-# which only exists after a composer build. The lint jobs have no composer
-# build, and eslint/stylelint do not need the Drupal libraries sync.
+# The lint jobs install with `yarn install --mode=skip-build`: they only need the
+# JS dev dependencies, and skipping the build scripts keeps them fast. The
+# front-end libraries under web/libraries come from Composer now, not from a
+# package.json postinstall, so a lint job never needs a composer build.
 
 cspell:
   stage: validate
