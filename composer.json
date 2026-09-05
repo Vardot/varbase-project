@@ -34,7 +34,8 @@
         "drupal/core": "~11.4.0",
         "drush/drush": "~13",
         "vardot/varbase": "11.0.x-dev",
-        "vardot/varbase-patches": "11.0.x-dev"
+        "vardot/varbase-patches": "11.0.x-dev",
+        "drupal/varbase_dev_base": "1.0.x-dev"
     },
     "conflict": {
         "drupal/drupal": "*"
