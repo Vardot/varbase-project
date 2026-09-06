@@ -78,3 +78,31 @@ Feature: Quality - Accessibility (a11y)
      When I go to homepage
       And wait
      Then the page should not violate the accessibility rule "html-has-lang"
+
+  # The two rules a sibling Varbase site template regressed on, named one per
+  # scenario so a failure reads as the rule that broke rather than as a
+  # violation total. color-contrast covers the rendered text of the page; it
+  # does not see an icon-font glyph on a zero-sized label, which is what the
+  # footer social links are.
+  @a11y @local @development @staging @production
+  Scenario: Colour contrast holds on the homepage
+    Given I am an anonymous user
+     When I go to homepage
+      And wait
+     Then the page should not violate the accessibility rule "color-contrast"
+
+  @a11y @local @development @staging @production
+  Scenario: The homepage carries a top-level heading
+    Given I am an anonymous user
+     When I go to homepage
+      And wait
+     Then the page should not violate the accessibility rule "page-has-heading-one"
+
+  # page-has-heading-one only asks for at least one h1. A second one is its own
+  # defect: a screen-reader user jumping by heading level lands twice.
+  @a11y @local @development @staging @production
+  Scenario: The homepage carries exactly one top-level heading
+    Given I am an anonymous user
+     When I go to homepage
+      And wait
+     Then the page should have exactly one h1
