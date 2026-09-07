@@ -27,7 +27,7 @@ FEATURES="tests/features/13-varbase-recipes/**/*.feature" ddev yarn test:chromiu
 | `13-12-varbase-webform-base.feature` | Varbase Recipe - Webform Base (contact form) | 2 |
 | `13-13-varbase-api-base.feature` | Varbase Recipe - API Base (JSON:API + OpenAPI) | 1 |
 | `13-14-varbase-auth-base.feature` | Varbase Recipe - Auth Base (social authentication) | 1 |
-| `13-15-varbase-i18n-base.feature` | Varbase Recipe - i18n Base (languages + translation) | 1 |
+| `13-15-varbase-i18n-base.feature` | Varbase Recipe - i18n Base (languages, TMGMT availability, Canvas Page translation, editorial translation permissions) | 4 |
 | `13-16-varbase-dev-base.feature` | Varbase Recipe - Dev Base (config sync tooling) | 1 |
 
-**Total: 18 scenarios across 17 feature files.**
+**Total: 21 scenarios across 17 feature files.**
