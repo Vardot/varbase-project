@@ -41,7 +41,7 @@
     "@storybook/server": "^10",
     "@storybook/server-webpack5": "^10",
     "@types/node": "^25.5.0",
-    "@vardot/varbase-e2e": "^2",
+    "@vardot/varbase-e2e": "^2.0.4",
     "eslint": "^8.0.0",
     "eslint-plugin-storybook": "^10",
     "fork-ts-checker-webpack-plugin": "~8 || ~9",
