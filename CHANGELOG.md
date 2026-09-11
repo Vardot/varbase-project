@@ -1,3 +1,15 @@
+# 11.0.8
+
+Ships [Varbase 11.0.0](https://www.drupal.org/project/varbase/releases/11.0.0) on Drupal core 11.4.6, with the Varbase Starter site template at 1.0.2.
+
+### Changed since [11.0.7](https://www.drupal.org/project/varbase_project/releases/11.0.7):
+* task: Update **Varbase Starter** to 1.0.2, **Varbase Admin Base** to 1.0.2 and `vardot/varbase-patches` to 11.0.43.
+* task: Update **Drupal Canvas** to 1.11.0, **Drush** to 13.8.0, **AI Integration ECA** to 1.0.0, the **Amazee.io AI provider** to 1.4.3 and **Drupal CMS Content Type Base** to 2.1.5.
+* chore: Require the released `vardot/varbase: ~11.0.0` and `vardot/varbase-patches: ~11.0.0` lines (were `11.0.x-dev`).
+
+### Fixed since [11.0.7](https://www.drupal.org/project/varbase_project/releases/11.0.7):
+* ci: Do not run the `Create reports` job when the Varbase functional testing matrix did not run, so a release tag can no longer publish an acceptance testing report with no test results behind it.
+
 # 11.0.7
 
 Ships [Varbase 11.0.0](https://www.drupal.org/project/varbase/releases/11.0.0), the first stable release of the 11.0.x line, and the three site templates at 1.0.1.
