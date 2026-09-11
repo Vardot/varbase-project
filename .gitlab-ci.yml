@@ -830,12 +830,15 @@ stylelint:
   rules:
     # Auto-run in post-test whenever the test chain ran (release refs or the app
     # changed), even if a test failed, so the full report + status is always
-    # published. Skipped only when no test ran (nothing to report).
+    # published. Otherwise it stays a manual play button, exactly like the
+    # varbase-e2e matrix it reports on, so the two can never disagree about
+    # whether tests ran.
     - if: '$CI_COMMIT_TAG || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: always
     - changes: *varbase_app_changes
       when: always
-    - when: never
+    - when: manual
+      allow_failure: false
   image: node:20
   # Always build the reports, even when a test job failed - so failures are
   # captured. `dependencies` (not `needs`) pulls the artifacts from ALL matrix
@@ -860,6 +863,12 @@ stylelint:
   # yarn install, NO browser download - all of that arrives via the build cache.
   script:
     # Merge every folder's cucumber JSON array into one combined report.
+    - |
+      if ! ls tests/reports/cucumber_report_*.json >/dev/null 2>&1; then
+        echo "No tests/reports/cucumber_report_*.json artifacts arrived from the varbase-e2e matrix."
+        echo "The test matrix did not run or did not produce a report, so no report can be built."
+        exit 1
+      fi
     - jq -s 'add' tests/reports/cucumber_report_*.json > tests/reports/cucumber_report.json
     # Human-readable report name: varbase--{branch|tag}--automated-functional-testing-report--{date}--{time}
     - export REPORT="varbase--${CI_COMMIT_REF_SLUG}--automated-functional-testing-report--$(date +%Y-%m-%d)--$(date +%H-%M)"
