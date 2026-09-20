@@ -777,8 +777,19 @@ stylelint:
         FEATURES: "tests/features/09-drupal-canvas/09-02-*.feature"
       - SUITE: "09-drupal-canvas-c"
         FEATURES: "tests/features/09-drupal-canvas/09-{03,04,05}-*.feature"
+      # 09-06 used to hold the whole default-pattern coverage in one job. The
+      # Canvas editor is a heavy React app whose toolbar intermittently fails to
+      # mount once one browser session has built and published many pages, so
+      # the long job failed on load rather than on the feature. Three shorter
+      # sessions run concurrently, so this lowers wall-clock as well.
       - SUITE: "09-drupal-canvas-d"
         FEATURES: "tests/features/09-drupal-canvas/09-06-*.feature"
+      - SUITE: "09-drupal-canvas-e"
+        FEATURES: "tests/features/09-drupal-canvas/09-07-*.feature"
+        CUCUMBER_RETRY: "2"
+      - SUITE: "09-drupal-canvas-f"
+        FEATURES: "tests/features/09-drupal-canvas/09-08-*.feature"
+        CUCUMBER_RETRY: "2"
       - SUITE: "12-content-access-and-lock-a"
         FEATURES: "tests/features/12-content-access-and-lock/12-01-*.feature"
       - SUITE: "12-content-access-and-lock-b"

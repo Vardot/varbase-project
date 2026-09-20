@@ -17,8 +17,11 @@ module.exports = {
     // Retry once. The full Varbase suite drives a single heavy site for ~20
     // minutes; late scenarios occasionally trip a step/assertion timeout
     // purely from cumulative load (not a real defect). One retry absorbs
-    // those transient timeouts. Override per run with --retry N.
-    retry: 1,
+    // those transient timeouts. Override per run with --retry N, or per CI
+    // job with CUCUMBER_RETRY - the Canvas editor suites set 2, since a
+    // scenario there rebuilds and republishes a page through the React editor
+    // and one bad mount can still lose the first retry.
+    retry: Number(process.env.CUCUMBER_RETRY || 1),
     // tsx/cjs registers a require() hook so cucumber-js loads both `.js`
     // and `.ts` step files with no build step (varbase-e2e 2.0 dropped
     // ts-node in favour of tsx).
