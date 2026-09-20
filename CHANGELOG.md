@@ -1,3 +1,12 @@
+# 11.0.9
+
+Ships [Varbase 11.0.0](https://www.drupal.org/project/varbase/releases/11.0.0) on Drupal core 11.4.7, with the Varbase Starter site template at 1.0.2.
+
+### Changed since [11.0.8](https://www.drupal.org/project/varbase_project/releases/11.0.8):
+* [#3624092](https://www.drupal.org/i/3624092) task: Update `composer.lock` and `patches.lock.json` for **Drupal core** 11.4.7 ([SA-CORE-2026-013](https://www.drupal.org/security/SA-CORE-2026-013)), `vardot/varbase-patches` 11.0.46 and `vardot/drupal-core-patches` 11.4.0.7.
+* [#3624092](https://www.drupal.org/i/3624092) task: Update **Vartheme BS5** to 5.0.3, **Varbase Webform Base** to 1.0.2, **Canvas Override** to 1.0.1, **AI** to 1.4.9, **ECA** to 3.1.8 and **Entity Usage** to 2.3.0.
+* chore: Require the released `vardot/varbase: ~11.0.0` and `vardot/varbase-patches: ~11.0.0` lines (were `11.0.x-dev`).
+
 # 11.0.8
 
 Ships [Varbase 11.0.0](https://www.drupal.org/project/varbase/releases/11.0.0) on Drupal core 11.4.6, with the Varbase Starter site template at 1.0.2.
