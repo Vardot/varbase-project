@@ -1,6 +1,6 @@
 // cucumber-js configuration for the Varbase varbase-e2e BDD suite.
 //
-// Drives the whole site through the browser with varbase-e2e (>= 2.0.4).
+// Drives the whole site through the browser with varbase-e2e (>= 2.0.5).
 //   yarn test                # all features (tests/features/**)
 //   yarn test:chromium       # force chromium
 //   yarn test:headed         # headed debug run

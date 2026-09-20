@@ -34,10 +34,10 @@ Feature: Drupal Canvas - default patterns insert and render (part 2), and reuse
       And I should see "<marker>"
       And I should not see "The website encountered an unexpected error"
 
-    # A representative sample of patterns (the FAQ Accordion plus four more),
-    # each visually distinct with its own on-page text. The remaining default
-    # patterns are covered for availability by the "library offers all 14"
-    # scenario above.
+    # The rest of the representative sample started in 09-07, each visually
+    # distinct with its own on-page text. The remaining default patterns are
+    # covered for availability by the "library offers all 14" scenario in
+    # 09-06.
     Examples:
       | label                 | slug        | marker                                 |
       | Feature Cards         | feature     | Multilingual                           |

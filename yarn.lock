@@ -2118,9 +2118,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vardot/varbase-e2e@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "@vardot/varbase-e2e@npm:2.0.4"
+"@vardot/varbase-e2e@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@vardot/varbase-e2e@npm:2.0.5"
   dependencies:
     "@axe-core/playwright": "npm:^4.11.3"
     "@cucumber/cucumber": "npm:*"
@@ -2139,7 +2139,7 @@ __metadata:
   bin:
     generate-reports: bin/generate-reports.js
     init-varbase-e2e: bin/init-varbase-e2e.js
-  checksum: 10c0/59b71a65b6af2028788ee31d515de173f2ed9d4487021597a89a096bda47aff86c229ca29b274b86c3c1554d010bf2196580ae7c1dc5cb1aedb850f1a5062cc0
+  checksum: 10c0/a035ef147f62f462545097f8dc280c6b67baaa30321c657037fd1afa5e79c1d28e9f45e2a87eb81785d798729a781704786b3b224da3afc8761911178fea8cf6
   languageName: node
   linkType: hard
 
@@ -7566,7 +7566,7 @@ __metadata:
     "@storybook/server": "npm:^10"
     "@storybook/server-webpack5": "npm:^10"
     "@types/node": "npm:^25.5.0"
-    "@vardot/varbase-e2e": "npm:^2.0.4"
+    "@vardot/varbase-e2e": "npm:^2.0.5"
     eslint: "npm:^8.0.0"
     eslint-plugin-storybook: "npm:^10"
     fork-ts-checker-webpack-plugin: "npm:~8 || ~9"
