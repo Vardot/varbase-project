@@ -1,3 +1,9 @@
+# 10.1.5
+
+### Changed since [10.1.4](https://www.drupal.org/project/varbase_project/releases/10.1.4):
+* Ship without committed lock files, on purpose: `composer.lock`, `patches.lock.json` and `yarn.lock` are not shipped, so `composer create-project drupal/varbase_project:~10.1.0` resolves the current releases (`drupal/varbase_core` 10.1.68 with **Tagify** 2.0.5, and `vardot/varbase-patches` 10.1.92 with the Tagify 2.x patch and the **CKEditor 5 Premium Features** fix for Drupal core 11.4.9 ([#3629880](https://www.drupal.org/i/3629880)), on **Drupal core** 11.4.9). Committed locks return in a follow-up release.
+* [#3621612](https://www.drupal.org/i/3621612) task: Update `@vardot/varbase-e2e` to `^2.0.4`.
+
 # 10.1.4
 
 ### Changed since [10.1.3](https://www.drupal.org/project/varbase_project/releases/10.1.3):
