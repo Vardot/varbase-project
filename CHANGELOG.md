@@ -1,3 +1,12 @@
+# 11.0.11
+
+Ships [Varbase 11.0.0](https://www.drupal.org/project/varbase/releases/11.0.0) on Drupal core 11.4.9, with the Varbase Starter site template at 1.0.5.
+
+### Changed since [11.0.10](https://www.drupal.org/project/varbase_project/releases/11.0.10):
+* [#3629850](https://www.drupal.org/i/3629850) task: Ship without committed lock files, on purpose: `composer.lock` and `patches.lock.json` are no longer shipped and `yarn.lock` is removed, so `composer create-project drupal/varbase_project:~11` resolves the current releases (**Drupal core** 11.4.9, **Tagify** 2.0.5, `vardot/varbase-patches` 11.0.48, `vardot/drupal-core-patches` 11.4.0.8 and **Varbase Admin Base** 1.0.6). Committed locks return in a follow-up release.
+* [#3629855](https://www.drupal.org/i/3629855) fix: Varbase Admin Base 1.0.6 requires and installs **Menu Block**, so the welcome dashboard's Add content block is found on install.
+* chore: Require the released `vardot/varbase: ~11.0.0` and `vardot/varbase-patches: ~11.0.0` lines (were `11.0.x-dev`).
+
 # 11.0.10
 
 Ships [Varbase 11.0.0](https://www.drupal.org/project/varbase/releases/11.0.0) on Drupal core 11.4.8, with the Varbase Starter site template at 1.0.4.
