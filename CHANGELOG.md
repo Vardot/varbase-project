@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [9.2.3] - 2026-10-10
+
+- task: [#3629870](https://www.drupal.org/project/varbase_project/issues/3629870) Ship without committed lock files, on purpose: no `composer.lock` or `patches.lock.json`, and `yarn.lock` is removed, so `composer create-project` resolves the current releases. Committed locks return in a follow-up release.
+- task: [#3621613](https://www.drupal.org/project/varbase_project/issues/3621613) Update @vardot/varbase-e2e to ^2.0.4
+- Drupal core [11.4.9](https://www.drupal.org/project/drupal/releases/11.4.9) (09 Oct 2026)
+
 ## [9.2.2] - 2026-08-14
 
 - task: [#3614575](https://www.drupal.org/project/varbase_project/issues/3614575) Add the default .gitlab and .github issue and merge request templates (3/3)
