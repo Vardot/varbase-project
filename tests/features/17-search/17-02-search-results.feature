@@ -7,8 +7,8 @@
 # Approach:     Go straight to /search with a keyword in the query string, the same URL the
 #               header search produces, then assert what the visitor reads. Search for
 #               "Varbase", which the Varbase Starter demo content always contains.
-# Structure:    Views page display at /search rendering search-indexed content, with its own
-#               exposed filter bar from Vartheme (Bootstrap 5).
+# Structure:    Canvas page at /search holding the search view's results block, with its
+#               own exposed keyword form from Varbase Starter.
 # Operations:   1 heading and filter bar - 2 keyword survives the round trip -
 #               3 results are listed and linked - 4 result summary is shown -
 #               5 searching again from the results page works - 6 empty state.
@@ -17,11 +17,9 @@
 #               and never a stale result list. Result links are clicked scoped to their row:
 #               a title like "About Varbase" also appears in the main nav and the footer.
 #
-# Two inputs are named "keywords" on this page: the collapsed header one inside
-# .icon-toggle__panel and the visible results one inside .vb-filter-bar. Every step below
-# scopes to .vb-filter-bar. A bare input[name='keywords'] selector matches the hidden header
-# field first. Do not match on the accessible name either: both fields can carry the same
-# label, which makes a label-based lookup ambiguous.
+# Two inputs are named "keywords" on this page, the header one and the results one, and
+# both can carry the same label. The search steps scope to the results form; their
+# selectors are in tests/selectors/default-theme.json.
 @regression @any @content @search
 Feature: Frontend Pages - Search results - Results page and empty state
       As a site visitor
@@ -34,33 +32,33 @@ Feature: Frontend Pages - Search results - Results page and empty state
      When I go to "/search?keywords=Varbase"
       And wait
      Then I should see "Search"
-      And ".vb-filter-bar input[name='keywords']" should be visible
-      And ".vb-filter-bar input[name='keywords']" should have attribute "placeholder" with value "Search by keyword"
+      And the search results keyword field should be visible
+      And the search results keyword field should show the placeholder "Search by keyword"
 
   @check @local @development @staging @production
   Scenario: Check that the search results page keeps the keyword the visitor searched for
     Given I am an anonymous user
      When I go to "/search?keywords=Varbase"
       And wait
-     Then ".vb-filter-bar input[name='keywords']" should have value "Varbase"
+     Then the search results keyword field should hold "Varbase"
 
   @critical @check @local @development @staging @production
   Scenario: Check that matching content is listed on the search results page
     Given I am an anonymous user
      When I go to "/search?keywords=Varbase"
       And wait
-     Then "div.views-row" should be visible
-      And I should not see "There are no results for your search, please try another query."
+     Then every search result should link to its content
+      And I should not see "No results match your search. Try other keywords or clear the filters."
 
   @check @local @development @staging @production
   Scenario: Check that each search result is a link the visitor can follow
     Given I am an anonymous user
      When I go to "/search?keywords=Varbase"
       And wait
-     Then "div.views-row a" should be visible
-     When I click on the element ".views-row a[href='/about-varbase']"
+     Then every search result should link to its content
+     When I follow the first search result
       And wait
-     Then I should be on the "/about-varbase" page
+     Then I should be on the page of the search result I followed
       And I should not see "Page not found"
 
   @check @local @development @staging @production
@@ -75,17 +73,16 @@ Feature: Frontend Pages - Search results - Results page and empty state
     Given I am an anonymous user
      When I go to "/search?keywords=Varbase"
       And wait
-      And I fill in the field ".vb-filter-bar input[name='keywords']" with "Blog"
-      And I click on the element ".vb-filter-bar input[type='submit']"
+      And I search again from the results page for "Blog"
       And wait until the URL contains "keywords=Blog"
      Then current url should have the "keywords" parameter with the "Blog" value
-      And ".vb-filter-bar input[name='keywords']" should have value "Blog"
+      And the search results keyword field should hold "Blog"
 
   @check @local @development @staging @production
   Scenario: Check that a search with no matches shows the empty state notice
     Given I am an anonymous user
      When I go to "/search?keywords=zzqqxxnoresultshere"
       And wait
-     Then I should see "There are no results for your search, please try another query."
+     Then I should see "No results match your search. Try other keywords or clear the filters."
       And I should not see "Page not found"
       And I should not see "The website encountered an unexpected error"

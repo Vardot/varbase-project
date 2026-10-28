@@ -42,6 +42,12 @@ webmaster_password="$(tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </de
 # ------------------------------------------------------------------
 # Install Varbase with the Varbase profile
 # ------------------------------------------------------------------
+# Turn off Drupal CMS telemetry; profile installs do not read DRUPAL_CMS_TELEMETRY.
+SETTINGS=/var/www/html/web/sites/default/settings.php
+if [ -f "$SETTINGS" ] && ! grep -q drupal_cms_telemetry "$SETTINGS"; then
+  chmod u+w "$SETTINGS" && echo "\$settings['drupal_cms_telemetry'] = FALSE;" >> "$SETTINGS"
+fi
+
 echo ""
 echo "--- Installing Varbase with drush site:install ---"
 drush site:install varbase --yes \

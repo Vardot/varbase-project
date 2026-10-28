@@ -10,7 +10,11 @@
     "contact form": "form.webform-submission-form",
     "blog view": ".view-blog",
     "canvas patterns library": "[data-testid='canvas-library-patterns-tab-content']",
-    "canvas components library": "[data-testid='canvas-library-components-tab-content']"
+    "canvas components library": "[data-testid='canvas-library-components-tab-content']",
+    "search results keyword field": "#views-exposed-form-search-results-block input[name='keywords']",
+    "search results search button": "#views-exposed-form-search-results-block .form-submit",
+    "search result": ".view-display-id-results_block .views-row",
+    "search result link": ".view-display-id-results_block .views-row a[href]"
   },
   "xpath": {}
 }

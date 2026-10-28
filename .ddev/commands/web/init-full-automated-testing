@@ -18,6 +18,12 @@ if [ "$BOOTSTRAP" != "Successful" ]; then
   echo "  Drupal is not installed. Running full Varbase install..."
   echo ""
 
+  # Turn off Drupal CMS telemetry; profile installs do not read DRUPAL_CMS_TELEMETRY.
+  SETTINGS=/var/www/html/web/sites/default/settings.php
+  if [ -f "$SETTINGS" ] && ! grep -q drupal_cms_telemetry "$SETTINGS"; then
+    chmod u+w "$SETTINGS" && echo "\$settings['drupal_cms_telemetry'] = FALSE;" >> "$SETTINGS"
+  fi
+
   drush site:install varbase --yes \
     --account-name=webmaster \
     --account-pass="dD.123123ddd" \

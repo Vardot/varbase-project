@@ -76,6 +76,7 @@ variables:
   COMPOSER_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/composer"
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.cache/yarn"
   PLAYWRIGHT_BROWSERS_PATH: "${CI_PROJECT_DIR}/.cache/ms-playwright"
+  DRUPAL_CMS_TELEMETRY: "0"
 
 # Shared cache definition referenced by the build / install / test jobs.
 .varbase_cache: &varbase_cache
@@ -553,6 +554,9 @@ stylelint:
     - !reference [.fragments, node_playwright]
   script:
     # = Install Varbase =
+    # Profile installs read the settings line, not DRUPAL_CMS_TELEMETRY.
+    - cp -n $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/default.settings.php $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/settings.php
+    - echo "\$settings['drupal_cms_telemetry'] = FALSE;" >> $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/settings.php
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT site:install varbase
         --db-url=$SIMPLETEST_DB
         --account-name=webmaster --account-pass=dD.123123ddd --account-mail=webmaster@vardot.com

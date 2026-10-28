@@ -58,6 +58,10 @@ composer create-project drupal/varbase_project:11.0.x-dev PROJECT_DIR_NAME --sta
 2. Run `ddev start`.
 3. Install Varbase: `ddev install-varbase full` or `ddev install-varbase minimal`.
 
+### Telemetry
+
+Drupal CMS telemetry is off here: DDEV and CI set `DRUPAL_CMS_TELEMETRY=0`, and the install commands add `$settings['drupal_cms_telemetry'] = FALSE;` to `settings.php`, which a profile install needs. On other hosts, add that line to `settings.php` yourself.
+
 ### DDEV Commands
 
 | Command | Description |
