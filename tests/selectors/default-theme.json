@@ -14,7 +14,10 @@
     "search results keyword field": "#views-exposed-form-search-results-block input[name='keywords']",
     "search results search button": "#views-exposed-form-search-results-block .form-submit",
     "search result": ".view-display-id-results_block .views-row",
-    "search result link": ".view-display-id-results_block .views-row a[href]"
+    "search result link": ".view-display-id-results_block .views-row a[href]",
+    "header search button": "button.icon-toggle__button",
+    "header search box": ".icon-toggle__panel input[name='keywords']",
+    "header search close button": "button.icon-toggle__close"
   },
   "xpath": {}
 }

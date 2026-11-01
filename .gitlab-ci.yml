@@ -123,6 +123,9 @@ composer:
     - git config --global --add safe.directory '*'
   script:
     - composer validate --no-check-all --no-check-publish
+    # The Events, News and Podcasts recipes are not part of Varbase itself; the
+    # testing site template (tests/recipes/varbase_testing_site) installs them.
+    - composer require --no-update "drupal/varbase_events_base:~1.0.0" "drupal/varbase_news_base:~1.0.0" "drupal/varbase_podcasts_base:~2.0.0"
     # --prefer-dist pulls dist archives instead of cloning full .git histories.
     # Dev packages (drupal/varbase, drupal/webshare, …) cloned as source carry
     # large .git histories that blow the build artifact past the GitLab
@@ -557,10 +560,25 @@ stylelint:
     # Profile installs read the settings line, not DRUPAL_CMS_TELEMETRY.
     - cp -n $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/default.settings.php $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/settings.php
     - echo "\$settings['drupal_cms_telemetry'] = FALSE;" >> $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/settings.php
+    # Varbase AI Readable Base: let /llms.txt past fast_404 (the step its README documents).
+    - echo "\$settings['fast404_exts'] = '/^(?!\/robots)^(?!\/llms\.txt\$)^(?!\/system\/files).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)\$/i';" >> $CI_PROJECT_DIR/$_WEB_ROOT/sites/default/settings.php
+    # The testing site template is Varbase Starter plus Events, News and
+    # Podcasts. Those three are applied during the install: applied to an
+    # installed site they stop on config validation errors.
+    - cp -r $CI_PROJECT_DIR/tests/recipes/varbase_testing_site $CI_PROJECT_DIR/recipes/
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT site:install varbase
         --db-url=$SIMPLETEST_DB
         --account-name=webmaster --account-pass=dD.123123ddd --account-mail=webmaster@vardot.com
         --site-name="Varbase Test" --locale=en -y
+        installer_site_template_form.add_ons=varbase_testing_site
+    # = Test content for the events, news, podcasts and search scenarios =
+    # Seeded before the AI recipes: AI Taxonomy Tagging adds a status field to
+    # Utility pages that a node created outside the form fails to validate.
+    - |
+      for r in varbase_events_base_test_content varbase_news_base_test_content varbase_podcasts_base_test_content varbase_search_base_test_content; do
+        $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
+        $CI_PROJECT_DIR/bin/dr recipe $CI_PROJECT_DIR/tests/recipes/$r || exit 1
+      done
     # = Top-level base + AI recipes (sub-recipes apply transitively) =
     # Drupal 11.4 recipes are applied with core's `dr recipe` runner: Drush 13.x
     # has NO `recipe` command (it errors "Command 'recipe' is not defined"), so
@@ -590,6 +608,14 @@ stylelint:
     # them explicitly so their admin pages exist (config actions are optional).
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild || true
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable ai_logging ai_observability ai_automators -y || true
+    # The AI recipes Varbase ships but does not apply by default, so their
+    # scenarios in 14-ai run. None of them needs a provider key to apply.
+    # AI Search Base and AI Answers stay out: they need a vector database.
+    - |
+      for r in varbase_ai_readable_base varbase_ai_seo varbase_ai_chatbot_base varbase_ai_content_operations_base varbase_ai_figma_base; do
+        $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
+        $CI_PROJECT_DIR/bin/dr recipe $CI_PROJECT_DIR/recipes/$r || exit 1
+      done
     # The AI editor-assistant recipe adds the ai_ckeditor "AI Assistant" button
     # to the full_html toolbar. Rendering that plugin's settings subform on the
     # text-format edit page performs a live AI-provider lookup, which hangs on
@@ -615,6 +641,7 @@ stylelint:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance css.preprocess 1 -y
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.performance js.preprocess 1 -y
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT config:set system.logging error_level all -y
+    - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT search-api:index content
     - !reference [.fragments, dump_db]
   allow_failure: false
 
@@ -758,9 +785,10 @@ stylelint:
           - "10-content-permissions"
           - "11-content-workflow"
           - "13-varbase-recipes"
-          - "14-ai"
           - "15-quality"
-          - "17-search"
+          - "16-eca-workflow-modeler"
+          - "18-events"
+          - "19-news"
       # The heaviest suites are split by feature-file globs so each parallel job
       # stays short (they run concurrently, so more jobs do NOT add wall-clock -
       # they lower it by shrinking the slowest job). SUITE names the report;
@@ -798,6 +826,20 @@ stylelint:
         FEATURES: "tests/features/12-content-access-and-lock/12-01-*.feature"
       - SUITE: "12-content-access-and-lock-b"
         FEATURES: "tests/features/12-content-access-and-lock/12-02-*.feature"
+      - SUITE: "14-ai-a"
+        FEATURES: "tests/features/14-ai/14-{00,01,02,03,04,05,06,07,08,09,10,11,12,13}-*.feature"
+      - SUITE: "14-ai-b"
+        FEATURES: "tests/features/14-ai/14-{14,15,16,17,18,19,20,21,22,23,24,25,26}-*.feature"
+      - SUITE: "17-search-a"
+        FEATURES: "tests/features/17-search/17-{01,02,03,04}-*.feature"
+      - SUITE: "17-search-b"
+        FEATURES: "tests/features/17-search/17-{05,06,07,08}-*.feature"
+      - SUITE: "20-podcasts-a"
+        FEATURES: "tests/features/20-podcasts/20-{01,02,03,04,05,06}-*.feature"
+      - SUITE: "20-podcasts-b"
+        FEATURES: "tests/features/20-podcasts/20-{07,08,09,10,11,12}-*.feature"
+      - SUITE: "20-podcasts-c"
+        FEATURES: "tests/features/20-podcasts/20-{13,14,15,16,17}-*.feature"
   # Override the parent's services - we only need the database. Playwright
   # bundles its own Chromium, so Selenium and chromedriver are not needed.
   services:

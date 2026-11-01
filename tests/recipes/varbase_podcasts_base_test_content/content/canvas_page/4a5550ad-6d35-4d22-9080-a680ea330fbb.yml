@@ -1,0 +1,30 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 4a5550ad-6d35-4d22-9080-a680ea330fbb
+  default_langcode: en
+default:
+  status:
+  - value: true
+  owner:
+  - target_id: 1
+  title:
+  - value: Podcasts
+  components:
+  - uuid: 9b211871-99d8-484d-a396-17b74c4b153d
+    component_id: sdc.vartheme_bs5.heading
+    inputs:
+      heading_text: Podcasts
+      level: 1
+      text_size: h1
+      align: text-start
+  - uuid: f81b29b6-89f4-4feb-a018-77994115d1a0
+    component_id: block.views_block.podcasts-all
+    inputs:
+      label_display: '0'
+      label: Podcasts
+      views_label: ''
+      items_per_page: null
+  path:
+  - alias: /podcasts
+    langcode: en

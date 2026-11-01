@@ -1,0 +1,23 @@
+{
+  "css": {
+    "episode title": "main h1",
+    "episode player": "main video[controls], main audio[controls]",
+    "episode cover art": "main [data-component-id='vartheme_bs5:image'], main picture, main img",
+    "episode share row": "main [data-component-id='vartheme_bs5:share']",
+    "podcasts pager": ".pager__items, ul.pagination",
+    "podcast title field": "#edit-title-0-value",
+    "audio media button": "#edit-field-audio-open-button",
+    "audio file upload": "input[name^='files[field_audio']",
+    "audio link field": "#edit-field-audio-url-0-uri",
+    "duration field": "#edit-field-duration-0-value",
+    "episode number field": "#edit-field-episode-number-0-value",
+    "remote audio url field": "#edit-field-media-oembed-audio-0-value",
+    "breadcrumb home link": "nav[aria-label='breadcrumb'] a[href='/']",
+    "podcasts next page link": "a[rel='next']",
+    "podcast reference field": "#edit-field-podcast-0-target-id",
+    "podcast listing item": ".view-podcasts .views-view-grid > div, .view-podcasts .views-row",
+    "episode card": ".podcast-episode--card",
+    "podcasts tag filter": "select[name='industry']"
+  },
+  "xpath": {}
+}

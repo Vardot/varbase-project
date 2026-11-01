@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 6f945fe3-3cf0-5be3-9dbd-772345eb7157
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  revision_log:
+    -
+      value: 'Created by the Varbase Search Base test content recipe'
+  status:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Varbase Example Search Page 02'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /varbase-example-search-page-02
+      langcode: en
+  field_description:
+    -
+      value: 'Example page number 02 for the Varbase Search Base functional testing suite.'
+  field_content:
+    -
+      value: '<p>Varbasesearchtest fixture body for Varbase Example Search Page 02.</p>'
+      format: full_html

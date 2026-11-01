@@ -1,0 +1,37 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: f31efdfb-fc48-4ba4-b48b-6395ea25153b
+  default_langcode: en
+default:
+  status:
+  - value: true
+  owner:
+  - target_id: 1
+  title:
+  - value: Podcast episodes
+  components:
+  - uuid: 867b8a11-3f9d-492e-bd88-666acaa79bec
+    component_id: sdc.vartheme_bs5.heading
+    inputs:
+      heading_text: Podcast episodes
+      level: 1
+      text_size: h1
+      align: text-start
+  - uuid: 597ae43e-c1ce-45b9-ac0d-f2d972ac4ef2
+    component_id: block.views_exposed_filter_block.podcast_episodes-all
+    inputs:
+      label_display: '0'
+      label: Filter podcast episodes
+      views_label: ''
+  - uuid: 6c23f158-bb02-4670-a81d-8be648ecdefb
+    component_id: block.views_block.podcast_episodes-all
+    inputs:
+      label_display: '0'
+      label: Podcast episodes
+      views_label: ''
+      items_per_page: null
+      exposed: {}
+  path:
+  - alias: /podcast-episodes
+    langcode: en

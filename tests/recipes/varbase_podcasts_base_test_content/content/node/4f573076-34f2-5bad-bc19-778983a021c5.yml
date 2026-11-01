@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4f573076-34f2-5bad-bc19-778983a021c5
+  bundle: podcast
+  default_langcode: en
+  depends:
+    9c2c217c-bcef-5f55-a45a-75ed0b7a011a: media
+    ea7d56c9-c038-5922-a05d-4d7bcd77e6f2: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  revision_log:
+    -
+      value: 'Created new Podcast'
+  status:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Varbase Example Podcast Two'
+  created:
+    -
+      value: 1755930000
+  changed:
+    -
+      value: 1755930000
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /podcasts/varbase-example-podcast-two
+      langcode: en
+  field_description:
+    -
+      value: 'Example podcast two used by the Varbase Podcasts Base functional testing suite.'
+  field_content:
+    -
+      value: '<p>Show notes for example podcast two.</p>'
+      format: full_html
+  field_host:
+    -
+      value: 'Vardot'
+  field_featured_image:
+    -
+      entity: 9c2c217c-bcef-5f55-a45a-75ed0b7a011a
+  field_tags:
+    -
+      entity: ea7d56c9-c038-5922-a05d-4d7bcd77e6f2
+  field_listen_links:
+    -
+      uri: 'https://podcasts.apple.com/podcast/varbase-example-podcast-two'
+      title: 'Apple Podcasts'
+      options: {  }
+    -
+      uri: 'https://open.spotify.com/show/varbase-example-podcast-two'
+      title: Spotify
+      options: {  }

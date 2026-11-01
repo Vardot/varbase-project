@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 3d0c8d80-8968-5593-afb1-952ac46766ca
+  bundle: blog
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  revision_log:
+    -
+      value: 'Created by the Varbase Search Base test content recipe'
+  status:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Varbase Example Search Blog 05'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /varbase-example-search-blog-05
+      langcode: en
+  field_description:
+    -
+      value: 'Example blog number 05 for the Varbase Search Base functional testing suite.'
+  field_content:
+    -
+      value: '<p>Varbasesearchtest fixture body for Varbase Example Search Blog 05.</p>'
+      format: full_html

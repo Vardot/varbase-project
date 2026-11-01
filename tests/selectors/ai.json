@@ -1,0 +1,15 @@
+{
+  "css": {
+    "suggest tags button": "button:has-text('Suggest tags'), input[value='Suggest tags']",
+    "generate with ai button": "input.ai-alt-text-generation",
+    "alternative text field": "input[name='field_media_image[0][alt]']",
+    "assistant button": "button[aria-label='Open AI assistant']",
+    "chat input": "deep-chat [aria-label='Ask me anything']",
+    "ai figma settings form": "form#ai-figma-settings, form[data-drupal-selector='ai-figma-settings']"
+  },
+  "xpath": {
+    "second suggest tags button": "(//button[normalize-space()='Suggest tags'] | //input[@value='Suggest tags'])[2]",
+    "allow the image AI this time": "//*[contains(@class,'context-notice')][contains(.,'Transfer image and meta data')]//button[contains(.,'Yes (this time)')]",
+    "allow the chat assistant this time": "//*[contains(@class,'context-notice')][contains(.,'Load service chatbot')]//button[contains(.,'Yes (this time)')]"
+  }
+}

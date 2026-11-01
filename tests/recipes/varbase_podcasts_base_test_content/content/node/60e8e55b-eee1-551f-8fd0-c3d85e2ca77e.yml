@@ -1,0 +1,74 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 60e8e55b-eee1-551f-8fd0-c3d85e2ca77e
+  bundle: podcast_episode
+  default_langcode: en
+  depends:
+    9a04c1bc-874a-5fa4-86b3-cbba60c8f4de: node
+    3f1b0c2e-8a44-5b17-9c6d-1e2f3a4b5c6d: media
+    9c2c217c-bcef-5f55-a45a-75ed0b7a011a: media
+    ea7d56c9-c038-5922-a05d-4d7bcd77e6f2: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  revision_log:
+    -
+      value: 'Created new Podcast episode'
+  status:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Varbase Example Episode 07'
+  created:
+    -
+      value: 1755974800
+  changed:
+    -
+      value: 1755974800
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /podcasts/varbase-example-podcast-one/varbase-example-episode-07
+      langcode: en
+  field_description:
+    -
+      value: 'Example podcast episode number 07 used by the Varbase Podcasts Base functional testing suite. This episode has an uploaded audio file.'
+  field_content:
+    -
+      value: '<p>Transcript for example podcast episode 07.</p>'
+      format: full_html
+  field_duration:
+    -
+      value: '31 Mins'
+  field_episode_number:
+    -
+      value: 7
+  field_featured_image:
+    -
+      entity: 9c2c217c-bcef-5f55-a45a-75ed0b7a011a
+  field_tags:
+    -
+      entity: ea7d56c9-c038-5922-a05d-4d7bcd77e6f2
+  field_audio:
+    -
+      entity: 3f1b0c2e-8a44-5b17-9c6d-1e2f3a4b5c6d
+  field_podcast:
+    -
+      entity: 9a04c1bc-874a-5fa4-86b3-cbba60c8f4de

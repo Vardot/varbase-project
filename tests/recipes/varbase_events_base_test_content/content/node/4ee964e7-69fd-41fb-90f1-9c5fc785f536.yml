@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4ee964e7-69fd-41fb-90f1-9c5fc785f536
+  bundle: event
+  default_langcode: en
+  depends:
+    f494cedf-46c1-46f2-953d-0124dde05359: taxonomy_term
+    db5a2077-ea69-4bed-9027-87cb50e4d3cf: media
+    b8c6091a-761e-40cf-a930-8938dd26456c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  revision_log:
+    -
+      value: 'Created new Event'
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Varbase Example Event 01'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /events/varbase-example-event-01
+      langcode: en
+  body:
+    -
+      value: '<p>Body paragraph for example event 01 (Workshop).</p>'
+      format: full_html
+      summary: ''
+  field_description:
+    -
+      value: 'Example event 01 for the events listing tests.'
+  field_event_categories:
+    -
+      entity: f494cedf-46c1-46f2-953d-0124dde05359
+  field_featured_image:
+    -
+      entity: db5a2077-ea69-4bed-9027-87cb50e4d3cf
+  field_location:
+    -
+      value: 'Example Hall 01, 1 Test Avenue'
+  field_tags:
+    -
+      entity: b8c6091a-761e-40cf-a930-8938dd26456c
+  field_when:
+    -
+      value: 1799132400
+      end_value: 1799136000
+      duration: 60
+      rrule: 0
+      rrule_index: 0
+      timezone: ''

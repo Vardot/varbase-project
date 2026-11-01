@@ -1,0 +1,8 @@
+name: 'Varbase Testing Site'
+description: 'Testing-only site template for the Varbase functional testing suite: Varbase Starter plus the Events, News and Podcasts recipes. Applied only by the test pipeline.'
+type: Site
+recipes:
+  - varbase_starter
+  - varbase_events_base
+  - varbase_news_base
+  - varbase_podcasts_base

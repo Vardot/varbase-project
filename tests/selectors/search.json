@@ -1,0 +1,11 @@
+{
+  "css": {
+    "search results form": "#views-exposed-form-search-results-block",
+    "search date form": "#views-exposed-form-search-date-block",
+    "search keywords": "role=textbox[name=\"Search by keyword\"]",
+    "search results": ".view-display-id-results_block",
+    "search pager": "role=navigation[name=\"Pagination\"]",
+    "content type facet": ".block-facet-blocksearch-content-type"
+  },
+  "xpath": {}
+}

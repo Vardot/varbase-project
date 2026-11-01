@@ -1,0 +1,98 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 4a9eec2e-7469-5885-8d72-967d18560002
+  default_langcode: en
+default:
+  status:
+  - value: true
+  owner:
+  - target_id: 1
+  title:
+  - value: Search
+  components:
+  - uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    component_id: sdc.vartheme_bs5.section
+    inputs:
+      container_type: container
+      columns: 67-33
+      gutter: gx-5 gy-5
+      vertical_alignment: align-items-start
+      padding_block_start: pt-5
+      padding_block_end: pb-5
+      section_header: true
+  - parent_uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    slot: header_slot
+    uuid: ac4da0b7-b0ff-54e2-acb8-39b12b61a18b
+    component_id: sdc.vartheme_bs5.heading
+    inputs:
+      heading_text: Search
+      level: 1
+      text_size: h1
+      align: text-start
+  - parent_uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    slot: header_slot
+    uuid: c8ed58c9-28a8-5c7d-81e3-2e4971994113
+    component_id: block.views_exposed_filter_block.search-results_block
+    inputs:
+      label_display: '0'
+      label: 'Exposed form: search-results_block'
+      views_label: ''
+  - parent_uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    slot: col_1
+    uuid: 436cae9d-af0a-50fb-8624-948596bdf9e4
+    component_id: block.views_block.search-results_block
+    inputs:
+      label_display: '0'
+      label: Search results
+      views_label: ''
+      items_per_page: null
+      exposed: {}
+  - parent_uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    slot: col_2
+    uuid: 36532efb-089a-5d43-a323-7d335163e7c7
+    component_id: sdc.vartheme_bs5.heading
+    inputs:
+      heading_text: Content Type
+      level: 2
+      text_size: h6
+      font_weight: fw-medium
+      align: text-start
+  - parent_uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    slot: col_2
+    uuid: 0924f566-4d3b-5be0-bc33-482b0476296e
+    component_id: block.facet_block.search_content_type
+    inputs:
+      label: Content Type
+      label_display: '0'
+  - parent_uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    slot: col_2
+    uuid: 7a865b8f-5621-58b7-b8b1-f6369fd9b25a
+    component_id: sdc.vartheme_bs5.divider
+    inputs:
+      border_width: border-1
+      border_color: border-black
+      opacity: opacity-100
+      margin_top: mt-3
+      margin_bottom: mb-3
+  - parent_uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    slot: col_2
+    uuid: e91e1ac0-d26d-5009-b66c-615834b45ff0
+    component_id: sdc.vartheme_bs5.heading
+    inputs:
+      heading_text: Date Published
+      level: 2
+      text_size: h6
+      font_weight: fw-medium
+      align: text-start
+  - parent_uuid: 968362f4-0799-5caa-ac6e-15eedc3dc112
+    slot: col_2
+    uuid: 23209cc6-0b09-520d-86d5-4278523e5eca
+    component_id: block.views_exposed_filter_block.search-date_block
+    inputs:
+      label: Date Published
+      label_display: '0'
+      views_label: ''
+  path:
+  - alias: /search
+    langcode: en

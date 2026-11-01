@@ -1,0 +1,3 @@
+name: 'Varbase Search Base Test Content'
+description: 'Testing-only content for the Varbase Search Base functional testing suite. Creates 15 published nodes carrying one shared keyword — 9 Blog post and 6 Utility page — of which 3 are authored over a year ago, so the keyword bar, the Content Type facet counts, the Date Published filter and the results pager have deterministic data to assert against. Applied only by the test pipeline — not for production sites.'
+type: 'Content'

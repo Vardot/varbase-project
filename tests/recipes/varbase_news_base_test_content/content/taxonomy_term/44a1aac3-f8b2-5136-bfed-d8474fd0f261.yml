@@ -1,0 +1,26 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 44a1aac3-f8b2-5136-bfed-d8474fd0f261
+  bundle: news_categories
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Announcements'
+  weight:
+    -
+      value: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null

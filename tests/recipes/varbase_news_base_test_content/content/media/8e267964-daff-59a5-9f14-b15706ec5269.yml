@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8e267964-daff-59a5-9f14-b15706ec5269
+  bundle: image
+  default_langcode: en
+  depends:
+    d2f50293-84a1-5f16-9b8a-204e69928945: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  revision_log_message:
+    -
+      value: 'Created new Image'
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Varbase Example Image'
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Varbase example image'
+      title: 'Varbase Example Image'
+      width: 240
+      height: 160
+      entity: d2f50293-84a1-5f16-9b8a-204e69928945

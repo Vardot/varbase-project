@@ -1,0 +1,30 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: f104d55f-1bd6-5d9b-82c7-7df4fa126460
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: varbase-example-episode.wav
+  uri:
+    -
+      value: 'public://varbase-example/varbase-example-episode.wav'
+  filemime:
+    -
+      value: audio/wav
+  filesize:
+    -
+      value: 844
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1756000000
+  changed:
+    -
+      value: 1756000000

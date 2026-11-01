@@ -1,0 +1,3 @@
+name: 'Varbase Events Base Test Content'
+description: 'Testing-only content for the Varbase Events Base functional testing suite. Creates 15 published example events (8 Workshop, 7 Conference) that share one tag, plus a sample image media item, so the listing, result-summary, exposed-filter, pager, related-events and featured-image scenarios have deterministic data to assert against. Applied only by the test pipeline — not for production sites.'
+type: 'Content'

@@ -1,0 +1,58 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 8a77b009-8c1f-54ac-9dc8-9e6169f076cc
+  bundle: news
+  default_langcode: en
+  depends:
+    38f26b0c-a24e-59f8-9a14-f75b7d084080: taxonomy_term
+    8e267964-daff-59a5-9f14-b15706ec5269: media
+    ec7a822a-d24f-5d49-a96f-2827265a316f: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  revision_log:
+    -
+      value: 'Created new News post'
+  status:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Varbase Example News 11'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /news/varbase-example-news-11
+      langcode: en
+  field_description:
+    -
+      value: 'Example news post number 11 used by the Varbase News Base functional testing suite.'
+  field_content:
+    -
+      value: '<p>Body content for example news post 11 (Press Releases).</p>'
+      format: full_html
+  field_news_categories:
+    -
+      entity: 38f26b0c-a24e-59f8-9a14-f75b7d084080
+  field_featured_image:
+    -
+      entity: 8e267964-daff-59a5-9f14-b15706ec5269
+  field_tags:
+    -
+      entity: ec7a822a-d24f-5d49-a96f-2827265a316f

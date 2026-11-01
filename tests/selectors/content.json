@@ -1,0 +1,19 @@
+{
+  "css": {
+    "event when date": "[name=\"field_when[0][time_wrapper][value][date]\"]",
+    "event when time": "[name=\"field_when[0][time_wrapper][value][time]\"]",
+    "event location field": "#edit-field-location-0-value",
+    "event type field": "#edit-field-event-categories-target-id",
+    "news title field": "#edit-title-0-value",
+    "news categories field": "#edit-field-news-categories",
+    "events keyword filter": "form[id^=\"views-exposed-form-events\"] input[name=\"search\"]",
+    "events type filter": "select[name=\"event_categories\"]",
+    "news type filter": "select[name=\"type\"]",
+    "listing result summary": ".vb-result-summary, .view-header",
+    "listing pager": ".pager__items, ul.pagination",
+    "workflow modeler canvas": ".react-flow",
+    "workflow modeler step": ".react-flow__node",
+    "workflow modeler start step": ".react-flow__node-start"
+  },
+  "xpath": {}
+}

@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: d2f50293-84a1-5f16-9b8a-204e69928945
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: varbase-example-image.png
+  uri:
+    -
+      value: 'public://varbase-example/varbase-example-image.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 532
+  status:
+    -
+      value: true

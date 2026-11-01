@@ -1,0 +1,26 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: ec7a822a-d24f-5d49-a96f-2827265a316f
+  bundle: tags
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Varbase Example Tag'
+  weight:
+    -
+      value: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null

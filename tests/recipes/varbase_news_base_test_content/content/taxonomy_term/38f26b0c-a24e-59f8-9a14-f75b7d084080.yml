@@ -1,0 +1,26 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 38f26b0c-a24e-59f8-9a14-f75b7d084080
+  bundle: news_categories
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Press Releases'
+  weight:
+    -
+      value: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null

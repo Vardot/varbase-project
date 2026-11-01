@@ -1,0 +1,3 @@
+name: 'Varbase News Base Test Content'
+description: 'Testing-only content for the Varbase News Base functional testing suite. Creates 15 published example news posts (8 Announcements, 7 Press Releases) that share one tag, plus a sample image media item, so the listing, result-summary, exposed-filter, pager and featured-image scenarios have deterministic data to assert against. Applied only by the test pipeline — not for production sites.'
+type: 'Content'

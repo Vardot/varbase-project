@@ -100,7 +100,7 @@ module.exports = {
         css: {},
         xpath: {},
         filesPath: './tests/selectors/',
-        files: ['default-theme.json'],
+        files: ['default-theme.json', 'search.json', 'content.json', 'podcasts.json', 'ai.json'],
         offset: 60,
         breakpoints: {
           xs:   { width: 375,  height: 667  },

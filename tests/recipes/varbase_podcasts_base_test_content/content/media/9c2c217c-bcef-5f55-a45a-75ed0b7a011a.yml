@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9c2c217c-bcef-5f55-a45a-75ed0b7a011a
+  bundle: image
+  default_langcode: en
+  depends:
+    8e89b1f0-ce56-5156-ba47-d49f8ee2d163: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  revision_log_message:
+    -
+      value: 'Created new Image'
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Varbase Example Podcast Cover'
+  created:
+    -
+      value: 1756000000
+  changed:
+    -
+      value: 1756000000
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Varbase example podcast cover art'
+      title: 'Varbase Example Podcast Cover'
+      width: 240
+      height: 160
+      entity: 8e89b1f0-ce56-5156-ba47-d49f8ee2d163

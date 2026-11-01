@@ -1,0 +1,30 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 8e89b1f0-ce56-5156-ba47-d49f8ee2d163
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: varbase-example-podcast-cover.png
+  uri:
+    -
+      value: 'public://varbase-example/varbase-example-podcast-cover.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 532
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1756000000
+  changed:
+    -
+      value: 1756000000
