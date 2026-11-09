@@ -40,7 +40,7 @@ Moving with modern automated functional testing setup for end-to-end testing.
 ## Prerequisites
 
 - [DDEV](https://ddev.readthedocs.io/) local development environment
-- Node.js >= 20
+- Node.js >= 24
 - Yarn 4 (enabled via corepack)
 
 ## Quick Start (Fresh Build)
@@ -263,7 +263,7 @@ CI runs on GitLab CI.
 
 ### Test the CI locally with gitlab-ci-local
 
-Requires Docker running (it pulls the `node:20` image; the first run downloads it).
+Requires Docker running (it pulls the `node:24` image; the first run downloads it).
 
 ```bash
 cd /path/to/varbase_project

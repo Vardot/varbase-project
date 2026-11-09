@@ -9,7 +9,7 @@ use_dns_when_possible: true
 composer_version: "2"
 corepack_enable: true
 php_version: "8.4"
-nodejs_version: "20"
+nodejs_version: "24"
 dbimage_extra_packages: [sudo]
 webimage_extra_packages:
   - php${DDEV_PHP_VERSION}-yaml

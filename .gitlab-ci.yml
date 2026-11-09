@@ -91,27 +91,35 @@ variables:
 # ms-playwright browsers. The parallel test jobs pull this (see .test_cache) so
 # they skip composer/yarn/playwright entirely and only restore the DB dump (1s).
 .varbase_cache: &varbase_cache
-  key: "varbase-build-$CI_COMMIT_REF_SLUG"
-  paths:
-    - .cache/composer
-    - .cache/yarn
-    - .cache/ms-playwright
-    - vendor
-    - node_modules
-    - docroot
-    - bin
+  # Downloads are reused across pipelines of the branch.
+  - key: "varbase-downloads-$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/composer
+      - .cache/yarn
+      - .cache/ms-playwright
+  # The built tree is shared only inside one pipeline: ScriptHandler::removeGitDirectories
+  # strips the .git of -dev source installs, so a later pipeline could not update them.
+  - key: "varbase-build-$CI_PIPELINE_ID"
+    paths:
+      - vendor
+      - node_modules
+      - docroot
+      - bin
 
 .test_cache: &test_cache
-  key: "varbase-build-$CI_COMMIT_REF_SLUG"
-  policy: pull
-  paths:
-    - .cache/composer
-    - .cache/yarn
-    - .cache/ms-playwright
-    - vendor
-    - node_modules
-    - docroot
-    - bin
+  - key: "varbase-downloads-$CI_COMMIT_REF_SLUG"
+    policy: pull
+    paths:
+      - .cache/composer
+      - .cache/yarn
+      - .cache/ms-playwright
+  - key: "varbase-build-$CI_PIPELINE_ID"
+    policy: pull
+    paths:
+      - vendor
+      - node_modules
+      - docroot
+      - bin
 
 # Override composer job to build straight from this project's composer.json.
 #
@@ -211,7 +219,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:22
+  image: node:24
   before_script:
     - npm install -g cspell@10.2.2
   script:
@@ -292,7 +300,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:22
+  image: node:24
   # --mode=skip-build skips the package.json postinstall (drupal-libraries-sync,
   # which needs a composer build); linting only needs the JS dev dependencies.
   before_script:
@@ -323,7 +331,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:22
+  image: node:24
   before_script:
     - corepack enable
     - yarn install --mode=skip-build
@@ -481,7 +489,7 @@ stylelint:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:dump --gzip --result-file=$CI_PROJECT_DIR/varbase-db.sql
   node_playwright: &node_playwright
-    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version && npm --version
     - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
@@ -507,7 +515,7 @@ stylelint:
     # Composer autoloader is a fast dump against the cached vendor/ (no resolve).
     - composer dump-autoload --optimize --no-interaction || true
     # Node runtime for cucumber-js (node_modules + browsers are cached).
-    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version
     # System libs Chromium needs (the browser itself is cached).
@@ -702,7 +710,7 @@ stylelint:
 # on a plain node image with varbase-e2e + a Chromium for the PDF - no Drupal.
 "📊 Create reports":
   stage: post-test
-  image: node:22
+  image: node:24
   # Always build the reports, even when a test job failed - so failures are
   # captured. `dependencies` (not `needs`) pulls the artifacts from ALL matrix
   # jobs of the test stage without gating on their success.

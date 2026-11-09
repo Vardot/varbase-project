@@ -4,8 +4,8 @@
     "license": "GPL-2.0-or-later",
     "private": true,
     "engines": {
-        "yarn": ">= 4.9.3",
-        "node": ">= 20.0"
+        "yarn": ">= 4.18.1",
+        "node": ">= 24.0"
     },
     "scripts": {
         "test": "./node_modules/.bin/cucumber-js --config cucumber.js --tags \"not @wip\"",
@@ -22,20 +22,20 @@
         "postinstall": "node ./docroot/profiles/varbase/scripts/drupal-libraries-sync.js"
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-media-embed": "~45.2.0",
-        "ace-builds": "~1",
-        "aos": "~2",
-        "blazy": "~1",
-        "c3": "0.7.*",
-        "chart.js": "~4",
-        "d3": "~5",
-        "dropzone": "~5",
-        "imagesloaded": "~4",
-        "jquery.fancytree": "~2",
-        "masonry-layout": "~4",
-        "objectFitPolyfill": "~2",
-        "slick-carousel": "~1",
-        "swagger-ui-dist": "~3"
+        "@ckeditor/ckeditor5-media-embed": "^45.2.0",
+        "ace-builds": "^1.0.0",
+        "aos": "^2.0.0",
+        "blazy": "^1.0.0",
+        "c3": "^0.7.0",
+        "chart.js": "^4.0.0",
+        "d3": "^5.0.0",
+        "dropzone": "^5.0.0",
+        "imagesloaded": "^4.0.0",
+        "jquery.fancytree": "^2.0.0",
+        "masonry-layout": "^4.0.0",
+        "objectFitPolyfill": "^2.0.0",
+        "slick-carousel": "^1.0.0",
+        "swagger-ui-dist": "^3.0.0"
     },
     "drupal-libraries": {
         "library-directory": "docroot/libraries",
@@ -118,5 +118,5 @@
         "@cucumber/cucumber": "12.9.0",
         "@cucumber/pretty-formatter": "1.0.1"
     },
-    "packageManager": "yarn@4.9.3"
+    "packageManager": "yarn@4.18.1"
 }
