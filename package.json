@@ -4,8 +4,8 @@
   "license": "GPL-2.0-or-later",
   "private": true,
   "engines": {
-    "yarn": ">= 4.9.3",
-    "node": ">= 20.0"
+    "yarn": ">= 4.18.1",
+    "node": ">= 24.0"
   },
   "scripts": {
     "storybook:generate-all-stories": "drush storybook:generate-all-stories --omit-server-url --force",
@@ -31,41 +31,41 @@
     "generate-reports": "node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5",
-    "@storybook/addon-a11y": "^10",
-    "@storybook/addon-docs": "^10",
-    "@storybook/addon-links": "^10",
-    "@storybook/addon-webpack5-compiler-swc": "^4",
-    "@storybook/builder-webpack5": "^10",
-    "@storybook/cli": "^10",
-    "@storybook/server": "^10",
-    "@storybook/server-webpack5": "^10",
+    "@chromatic-com/storybook": "^5.0.0",
+    "@storybook/addon-a11y": "^10.0.0",
+    "@storybook/addon-docs": "^10.0.0",
+    "@storybook/addon-links": "^10.0.0",
+    "@storybook/addon-webpack5-compiler-swc": "^4.0.0",
+    "@storybook/builder-webpack5": "^10.0.0",
+    "@storybook/cli": "^10.0.0",
+    "@storybook/server": "^10.0.0",
+    "@storybook/server-webpack5": "^10.0.0",
     "@types/node": "^25.5.0",
     "@vardot/varbase-e2e": "^2.0.7",
     "eslint": "^8.0.0",
-    "eslint-plugin-storybook": "^10",
-    "fork-ts-checker-webpack-plugin": "~8 || ~9",
+    "eslint-plugin-storybook": "^10.0.0",
+    "fork-ts-checker-webpack-plugin": "^9.0.0",
     "jquery": "^3.7.0",
-    "platformsh-config": "~2",
+    "platformsh-config": "^2.0.0",
     "prettier": "^2.1.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "safe-identifier": "^0.4.2",
-    "storybook": "^10",
-    "stylelint": "~16",
+    "storybook": "^10.0.0",
+    "stylelint": "^16.0.0",
     "stylelint-checkstyle-formatter": "^0.1.2",
-    "stylelint-order": "~6.0",
+    "stylelint-order": "^6.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
-    "webpack": "~5",
-    "webpack-cli": "~5"
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0"
   },
   "resolutions": {
     "webpack": "^5",
     "@cucumber/cucumber": "12.9.0",
     "@cucumber/pretty-formatter": "1.0.1"
   },
-  "packageManager": "yarn@4.17.0",
+  "packageManager": "yarn@4.18.1",
   "overrides": {
     "@cucumber/cucumber": "12.9.0",
     "@cucumber/pretty-formatter": "1.0.1"

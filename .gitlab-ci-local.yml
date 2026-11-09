@@ -7,7 +7,7 @@
 # and the browser job needs the composer-built Varbase site artifact).
 #
 # This file mirrors the jobs that ARE reproducible locally: the validate-stage
-# linters on Node 20 (varbase-e2e >=2.0 declares engines.node ">=20").
+# linters on Node 24, the floor Drupal core declares in core/package.json.
 #
 # Usage:
 #   npx gitlab-ci-local --file .gitlab-ci-local.yml            # all jobs
@@ -32,7 +32,7 @@ variables:
 
 cspell:
   stage: validate
-  image: node:20
+  image: node:24
   before_script:
     - npm install -g cspell
   script:
@@ -41,7 +41,7 @@ cspell:
 
 eslint:
   stage: validate
-  image: node:20
+  image: node:24
   before_script:
     - corepack enable
     - yarn install --mode=skip-build
@@ -53,7 +53,7 @@ eslint:
 
 stylelint:
   stage: validate
-  image: node:20
+  image: node:24
   before_script:
     - corepack enable
     - yarn install --mode=skip-build

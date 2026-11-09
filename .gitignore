@@ -85,3 +85,10 @@ CURSOR.md
 
 .gitlab-ci-local/
 .gitlab-ci-test.yml
+
+# JavaScript lockfiles are not committed: installs resolve from package.json
+# (packageManager yarn@4.18.1, engines). CI installs with
+# YARN_ENABLE_IMMUTABLE_INSTALLS=false for that reason.
+yarn.lock
+package-lock.json
+pnpm-lock.yaml

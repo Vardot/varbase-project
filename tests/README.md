@@ -270,7 +270,7 @@ CI runs on GitLab CI.
 
 ### Test the CI locally with gitlab-ci-local
 
-Requires Docker running (it pulls the `node:20` image; the first run downloads it).
+Requires Docker running (it pulls the `node:24` image; the first run downloads it).
 
 ```bash
 cd /path/to/varbase_project

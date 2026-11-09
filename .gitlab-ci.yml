@@ -212,7 +212,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:20
+  image: node:24
   before_script:
     - npm install -g cspell
   script:
@@ -275,7 +275,7 @@ stylelint:
       PY
   allow_failure: false
 
-# Node 20+ required: varbase-e2e >= 2.0 declares engines.node ">=20".
+# Node 24, the floor Drupal core declares in core/package.json.
 "🟨 ESLint":
   stage: validate
   rules:
@@ -293,7 +293,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:20
+  image: node:24
   # --mode=skip-build skips the build scripts; linting only needs the JS dev
   # dependencies. The front-end libraries come from Composer, not from yarn.
   before_script:
@@ -323,7 +323,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:20
+  image: node:24
   before_script:
     - corepack enable
     - yarn install --mode=skip-build
@@ -480,7 +480,7 @@ stylelint:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:dump --gzip --result-file=$CI_PROJECT_DIR/varbase-db.sql
   node_playwright: &node_playwright
-    - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version && npm --version
     - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
@@ -503,7 +503,7 @@ stylelint:
     # Composer autoloader is a fast dump against the cached vendor/ (no resolve).
     - composer dump-autoload --optimize --no-interaction || true
     # Node runtime for cucumber-js (node_modules + browsers are cached).
-    - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version
     # System libs Chromium needs (browsers themselves are cached). --dry-run
@@ -702,9 +702,9 @@ stylelint:
     # Build the codebase from composer.lock (brings in web/themes/contrib/
     # vartheme_bs5 with its shipped component stories). No web_db / Apache / DB.
     - !reference [.fragments, prepare_code]
-    # Node.js 20 + yarn. --mode=skip-build skips the build scripts, which the
+    # Node.js 24 + yarn. --mode=skip-build skips the build scripts, which the
     # static Storybook build does not need.
-    - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version && npm --version
     - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
@@ -896,7 +896,7 @@ stylelint:
       when: always
     - when: manual
       allow_failure: false
-  image: node:20
+  image: node:24
   # Always build the reports, even when a test job failed - so failures are
   # captured. `dependencies` (not `needs`) pulls the artifacts from ALL matrix
   # jobs of the test stage without gating on their success.
