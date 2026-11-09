@@ -9,14 +9,14 @@ Feature: Admin management - Standard User Management - Users with permission to 
     Given I am a logged in user with the "webmaster" user
      When I go to "/admin/content/media/bulk-upload/media_bulk_upload"
       And wait
-     Then I should see "Multiple upload"
+     Then I should see "Media bulk upload"
 
   @javascript @check @local @development @staging @production
   Scenario: Check that an anonymous users can not bulk upload media
     Given I am an anonymous user
      When I go to "/admin/content/media/bulk-upload/media_bulk_upload"
       And wait
-     Then I should not see "Multiple upload"
+     Then I should not see "Media bulk upload"
       And I should see "Access denied"
 
   @javascript @check @local @development @staging @production
@@ -24,7 +24,7 @@ Feature: Admin management - Standard User Management - Users with permission to 
     Given I am a logged in user with the "Normal user" user
      When I go to "/admin/content/media/bulk-upload/media_bulk_upload"
       And wait
-     Then I should not see "Multiple upload"
+     Then I should not see "Media bulk upload"
       And I should see "Access denied"
 
   @javascript @check @local @development @staging @production
@@ -32,25 +32,28 @@ Feature: Admin management - Standard User Management - Users with permission to 
     Given I am a logged in user with the "Editor" user
      When I go to "/admin/content/media/bulk-upload/media_bulk_upload"
       And wait
-     Then I should see "Multiple upload"
+     Then I should see "Media bulk upload"
 
   @javascript @check @local @development @staging @production
   Scenario: Check that Content Admin users bulk upload media
     Given I am a logged in user with the "Content admin" user
      When I go to "/admin/content/media/bulk-upload/media_bulk_upload"
       And wait
-     Then I should see "Multiple upload"
+     Then I should see "Media bulk upload"
 
   @javascript @check @local @development @staging @production
-  Scenario: Check that SEO Admin users can bulk upload media
+  Scenario: Check that SEO Admin users can not bulk upload media
+    # Media Bulk Upload 3.0.6 also requires permission to create media of a
+    # type the bulk upload config handles, and the SEO admin role has none.
     Given I am a logged in user with the "SEO admin" user
      When I go to "/admin/content/media/bulk-upload/media_bulk_upload"
       And wait
-     Then I should see "Multiple upload"
+     Then I should not see "Media bulk upload"
+      And I should see "Access denied"
 
   @javascript @check @local @development @staging @production
   Scenario: Check that Site Admin users can bulk upload media
     Given I am a logged in user with the "Site admin" user
      When I go to "/admin/content/media/bulk-upload/media_bulk_upload"
       And wait
-     Then I should see "Multiple upload"
+     Then I should see "Media bulk upload"

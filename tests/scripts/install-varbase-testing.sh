@@ -439,5 +439,5 @@ $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create "Site ad
 $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:role:add site_admin "Site admin" || true
 $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create "Super admin" --mail="test.super_admin@vardot.com" --password="dD.123123ddd" || true
 $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:role:add administrator "Super admin" || true
-# = Node.js 20 + Playwright Chromium (kept for parity of cached browsers) =
+# = Node.js 24 + Playwright Chromium (kept for parity of cached browsers) =
 # = Dump the prepared+seeded DB for the test jobs =

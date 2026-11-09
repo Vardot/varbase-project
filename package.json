@@ -4,8 +4,8 @@
   "license": "GPL-2.0-or-later",
   "private": true,
   "engines": {
-    "yarn": ">= 4.9.3",
-    "node": ">= 20.0"
+    "yarn": ">= 4.18.1",
+    "node": ">= 24.0"
   },
   "scripts": {
     "storybook:generate-all-stories": "drush storybook:generate-all-stories --force",
@@ -32,14 +32,14 @@
     "generate-reports": "node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-media-embed": "~45.2.0",
-    "ace-builds": "~1",
-    "aos": "~2",
-    "blazy": "~1",
-    "dropzone": "~5",
-    "jquery.fancytree": "~2",
-    "slick-carousel": "~1",
-    "swagger-ui-dist": "~3"
+    "@ckeditor/ckeditor5-media-embed": "^45.2.0",
+    "ace-builds": "^1.0.0",
+    "aos": "^2.0.0",
+    "blazy": "^1.0.0",
+    "dropzone": "^5.0.0",
+    "jquery.fancytree": "^2.0.0",
+    "slick-carousel": "^1.0.0",
+    "swagger-ui-dist": "^3.0.0"
   },
   "drupal-libraries": {
     "library-directory": "docroot/libraries",
@@ -80,44 +80,44 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",
-    "@storybook/addon-a11y": "~8",
-    "@storybook/addon-essentials": "~8",
-    "@storybook/addon-links": "~8",
+    "@storybook/addon-a11y": "^8.0.0",
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-links": "^8.0.0",
     "@storybook/addon-webpack5-compiler-swc": "^2.1.0",
-    "@storybook/blocks": "~8",
-    "@storybook/builder-webpack5": "~8",
-    "@storybook/cli": "~8",
-    "@storybook/components": "~8",
-    "@storybook/core-events": "~8",
-    "@storybook/manager-api": "~8",
-    "@storybook/preview-api": "~8",
-    "@storybook/react": "~8",
-    "@storybook/server": "~8",
-    "@storybook/server-webpack5": "~8",
+    "@storybook/blocks": "^8.0.0",
+    "@storybook/builder-webpack5": "^8.0.0",
+    "@storybook/cli": "^8.0.0",
+    "@storybook/components": "^8.0.0",
+    "@storybook/core-events": "^8.0.0",
+    "@storybook/manager-api": "^8.0.0",
+    "@storybook/preview-api": "^8.0.0",
+    "@storybook/react": "^8.0.0",
+    "@storybook/server": "^8.0.0",
+    "@storybook/server-webpack5": "^8.0.0",
     "@storybook/test": "^8.6.0",
-    "@storybook/theming": "~8",
-    "@storybook/types": "~8",
+    "@storybook/theming": "^8.0.0",
+    "@storybook/types": "^8.0.0",
     "@vardot/varbase-e2e": "^2.0.4",
     "eslint": "^8.0.0",
     "eslint-plugin-storybook": "^0.11.3",
-    "fork-ts-checker-webpack-plugin": "~8 || ~9",
+    "fork-ts-checker-webpack-plugin": "^9.0.0",
     "jquery": "^3.7.0",
     "prettier": "^2.1.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "storybook": "~8",
-    "storybook-addon-root-attributes": "~2",
-    "stylelint": "~16",
+    "storybook": "^8.0.0",
+    "storybook-addon-root-attributes": "^2.0.0",
+    "stylelint": "^16.0.0",
     "stylelint-checkstyle-formatter": "^0.1.2",
-    "stylelint-order": "~6.0",
+    "stylelint-order": "^6.0.0",
     "typescript": "^5.0.0",
-    "webpack": "~5",
-    "webpack-cli": "~5"
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0"
   },
   "resolutions": {
     "webpack": "^5",
     "@cucumber/cucumber": "12.9.0",
     "@cucumber/pretty-formatter": "1.0.1"
   },
-  "packageManager": "yarn@4.9.3"
+  "packageManager": "yarn@4.18.1"
 }

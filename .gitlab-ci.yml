@@ -100,27 +100,35 @@ variables:
 # ms-playwright browsers. The parallel test jobs pull this (see .test_cache) so
 # they skip composer/yarn/playwright entirely and only restore the DB dump (1s).
 .varbase_cache: &varbase_cache
-  key: "varbase-build-v2-$CI_COMMIT_REF_SLUG"
-  paths:
-    - .cache/composer
-    - .cache/yarn
-    - .cache/ms-playwright
-    - vendor
-    - node_modules
-    - docroot
-    - bin
+  # Downloads are reused across pipelines of the branch.
+  - key: "varbase-downloads-$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/composer
+      - .cache/yarn
+      - .cache/ms-playwright
+  # The built tree is shared only inside one pipeline: ScriptHandler::removeGitDirectories
+  # strips the .git of -dev source installs, so a later pipeline could not update them.
+  - key: "varbase-build-$CI_PIPELINE_ID"
+    paths:
+      - vendor
+      - node_modules
+      - docroot
+      - bin
 
 .test_cache: &test_cache
-  key: "varbase-build-v2-$CI_COMMIT_REF_SLUG"
-  policy: pull
-  paths:
-    - .cache/composer
-    - .cache/yarn
-    - .cache/ms-playwright
-    - vendor
-    - node_modules
-    - docroot
-    - bin
+  - key: "varbase-downloads-$CI_COMMIT_REF_SLUG"
+    policy: pull
+    paths:
+      - .cache/composer
+      - .cache/yarn
+      - .cache/ms-playwright
+  - key: "varbase-build-$CI_PIPELINE_ID"
+    policy: pull
+    paths:
+      - vendor
+      - node_modules
+      - docroot
+      - bin
 
 # Override composer job to build straight from this project's composer.json.
 composer:
@@ -200,7 +208,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:20
+  image: node:24
   needs: []
   before_script:
     - npm install -g cspell
@@ -275,7 +283,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:20
+  image: node:24
   needs: []
   before_script:
     - corepack enable
@@ -304,7 +312,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: node:20
+  image: node:24
   needs: []
   before_script:
     - corepack enable
@@ -433,7 +441,7 @@ stylelint:
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT sql:dump --gzip --result-file=$CI_PROJECT_DIR/varbase-db.sql
   node_playwright: &node_playwright
-    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version && npm --version
     - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
@@ -456,7 +464,7 @@ stylelint:
     # Composer autoloader is a fast dump against the cached vendor/ (no resolve).
     - composer dump-autoload --optimize --no-interaction || true
     # Node runtime for cucumber-js (node_modules + browsers are cached).
-    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version
     # System libs Chromium needs (the browser itself is cached).
@@ -536,7 +544,7 @@ stylelint:
     # in the versioned script (mirrors how 11.0.2 calls its recipes +
     # add-testing-users.sh); every step and its rationale is documented there.
     - bash $CI_PROJECT_DIR/tests/scripts/install-varbase-testing.sh
-    # = Node.js 20 + Playwright Chromium (kept for parity of cached browsers) =
+    # = Node.js 24 + Playwright Chromium (kept for parity of cached browsers) =
     - !reference [.fragments, node_playwright]
     # = Dump the prepared+seeded DB for the test jobs =
     - !reference [.fragments, dump_db]
@@ -582,7 +590,7 @@ stylelint:
     expire_in: 7 days
   before_script:
     - !reference [.fragments, prepare_code]
-    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     - apt-get install -y nodejs
     - node --version && npm --version
     - 'test -f .yarnrc.yml || echo "nodeLinker: node-modules" > .yarnrc.yml'
@@ -716,7 +724,7 @@ stylelint:
 # matrix job (plus their screenshots / videos) into one HTML + PDF report.
 "📊 Create reports":
   stage: post-test
-  image: node:22
+  image: node:24
   rules:
     # Auto-run in post-test whenever the test chain ran (release refs or the app
     # changed), even if a test failed, so the full report + status is always
