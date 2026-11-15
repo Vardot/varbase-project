@@ -12,7 +12,9 @@ Feature: Content Management - Add default [entityqueue] module testing content a
       And I wait for 2 seconds
       And I press "Save and manage fields"
       And wait
-     Then I should see "The content type Test Content has been added."
+     When I go to "/admin/structure/types/manage/test_content/fields"
+      And wait
+     Then I should see "Manage fields"
 
   @javascript @init @tools @local @development @staging
   Scenario: Add Entity Queue Test Queue to be used with Test Content type
@@ -27,7 +29,9 @@ Feature: Content Management - Add default [entityqueue] module testing content a
       And I wait for 5 seconds
       And I press "Save"
       And wait
-     Then I should see "The entity queue Test Queue has been added."
+     When I go to "/admin/structure/entityqueue"
+      And wait
+     Then I should see "Test Queue"
 
   @javascript @init @tools @local @development @staging
   Scenario: Add Test content N1, N2, N3 type of test content

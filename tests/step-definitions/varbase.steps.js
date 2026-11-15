@@ -381,7 +381,11 @@ async function robustClick(locator) {
   try {
     await locator.click({ timeout: 5000 });
     return;
-  } catch { /* fall through */ }
+  } catch (e) {
+    // The click landed but the submit it started is slow: clicking again would
+    // submit the form twice, and the button is gone once the page moves on.
+    if (/waiting for scheduled navigations/.test(String(e && e.message))) return;
+  }
   // 2) Not actionable — a fixed overlay covers it (the AI chatbot widget) or the
   //    element is a sticky clone the browser will not point-click on a tall form
   //    (the Landing page paragraphs node form). A coordinate force-click would
@@ -389,12 +393,12 @@ async function robustClick(locator) {
   //    the element. Include `mousedown`: Gin/Drupal bind the node-form sticky
   //    "Save as" submit and the paragraphs add-more buttons to mousedown, so a
   //    plain click() alone would not trigger them.
-  await locator.scrollIntoViewIfNeeded().catch(() => {});
+  await locator.scrollIntoViewIfNeeded({ timeout: 5000 }).catch(() => {});
   await locator.evaluate((el) => {
     for (const type of ['mousedown', 'mouseup', 'click']) {
       el.dispatchEvent(new MouseEvent(type, { bubbles: true, cancelable: true, view: window }));
     }
-  });
+  }, undefined, { timeout: 5000 });
 }
 
 /**
