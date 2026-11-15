@@ -269,8 +269,11 @@ When(/^(I |we )*press( the)* "([^"]*)?"( button)*$/, async function (pronounCase
   try {
     await btn.click({ timeout: 10000 });
   } catch (e) {
+    // The click landed but the submit it started is slow: clicking again would
+    // submit the form twice, and the button is gone once the page moves on.
+    if (/waiting for scheduled navigation/.test(String(e && e.message))) return;
     try {
-      await btn.evaluate((el) => el.click(), { timeout: 5000 });
+      await btn.evaluate((el) => el.click(), undefined, { timeout: 5000 });
     } catch (e2) {
       throw friendly(`Could not press the "${element}" button.`, 'Check the visible text matches exactly (case-sensitive).');
     }
