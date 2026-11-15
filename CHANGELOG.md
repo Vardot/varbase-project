@@ -1,3 +1,13 @@
+# 11.0.12
+
+Ships [Varbase 11.0.1](https://www.drupal.org/project/varbase/releases/11.0.1) on Drupal core 11.4.12, with the Varbase Starter site template at 1.0.11.
+
+### Changed since [11.0.11](https://www.drupal.org/project/varbase_project/releases/11.0.11):
+* [#3633827](https://www.drupal.org/i/3633827) task: Disable Drupal CMS telemetry in CI, DDEV and `settings.php` (`DRUPAL_CMS_TELEMETRY=0`).
+* [#3635498](https://www.drupal.org/i/3635498) task: Update Node.js to >= 24.0 in the `package.json` engines, DDEV and CI.
+* [#3634633](https://www.drupal.org/i/3634633) task: Bring the functional tests of the released Varbase recipes into the Varbase functional testing suite.
+* task: Require the released `vardot/varbase: ~11.0.0` and `vardot/varbase-patches: ~11.0.0` lines (were `11.0.x-dev`).
+
 # 11.0.11
 
 Ships [Varbase 11.0.0](https://www.drupal.org/project/varbase/releases/11.0.0) on Drupal core 11.4.9, with the Varbase Starter site template at 1.0.5.
