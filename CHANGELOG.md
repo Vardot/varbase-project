@@ -1,3 +1,9 @@
+# 10.1.6
+
+### Changed since [10.1.5](https://www.drupal.org/project/varbase_project/releases/10.1.5):
+* [#3635498](https://www.drupal.org/i/3635498) task: Update Node.js to >= 24.0 in the `package.json` engines, DDEV and CI.
+* Resolves **Varbase 10.1.3**, **Varbase AI 2.0.15** (drupal/ai 1.5.2) and **Varbase Patches 10.1.94** with Composer's advisory blocking on.
+
 # 10.1.5
 
 ### Changed since [10.1.4](https://www.drupal.org/project/varbase_project/releases/10.1.4):
