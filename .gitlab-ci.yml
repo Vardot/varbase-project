@@ -79,9 +79,9 @@ variables:
   # Pin Drupal core for the whole 10.1.x line (Drupal ~11.3/11.4).
   DRUPAL_CORE: "11.4.0"
   IGNORE_PROJECT_DRUPAL_CORE_VERSION: "1"
-  # This line works with PHP 8.4 (locks are generated under 8.4); pin the
+  # This line works with PHP 8.5 (locks are generated under 8.5); pin the
   # drupalci job images accordingly (default for core 11.4 is PHP 8.3).
-  _TARGET_PHP: "8.4"
+  _TARGET_PHP: "8.5"
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
   COMPOSER_ALLOW_SUPERUSER: 1
@@ -346,7 +346,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: php:8.4-cli
+  image: php:8.5-cli
   needs: []
   before_script:
     - apt-get update -y && apt-get install -y git unzip
@@ -385,7 +385,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: php:8.4-cli
+  image: php:8.5-cli
   needs: []
   before_script:
     - apt-get update -y && apt-get install -y curl
