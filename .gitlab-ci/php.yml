@@ -1,6 +1,6 @@
 # Defines PHP related variables for Varbase CI.
 variables:
-  PRIMARY_PHP: "8.4-ubuntu"
+  PRIMARY_PHP: "8.5-ubuntu"
   MINIMUM_PHP: "8.4-ubuntu"
 
 # Used in matrix jobs.
@@ -8,4 +8,4 @@ variables:
 #    matrix:
 #      - _TARGET_PHP: !reference [.php_versions]
 .php_versions:
-  [8.4-ubuntu]
+  [8.4-ubuntu, 8.5-ubuntu]
