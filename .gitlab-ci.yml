@@ -68,6 +68,8 @@ stages:
 variables:
   # The varbase_project web-root is docroot/ (not the DrupalCI default web/).
   _WEB_ROOT: "docroot"
+  # PHP 8.5 for the drupalci job images (the default for core 11.4 is PHP 8.3).
+  _TARGET_PHP: "8.5"
   COMPOSER_FLAGS: "--no-strict-lock"
   COMPOSER_MEMORY_LIMIT: "-1"
   COMPOSER_ALLOW_SUPERUSER: 1
@@ -371,7 +373,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: php:8.4-cli
+  image: php:8.5-cli
   needs: []
   before_script:
     - apt-get update -y && apt-get install -y git unzip
@@ -418,7 +420,7 @@ stylelint:
     # must pass.
     - when: manual
       allow_failure: false
-  image: php:8.4-cli
+  image: php:8.5-cli
   needs: []
   before_script:
     - apt-get update -y && apt-get install -y curl

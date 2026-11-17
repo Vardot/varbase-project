@@ -8,7 +8,7 @@ mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
 corepack_enable: true
-php_version: "8.4"
+php_version: "8.5"
 nodejs_version: "24"
 dbimage_extra_packages: [sudo]
 webimage_extra_packages:
