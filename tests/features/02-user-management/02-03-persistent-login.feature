@@ -47,3 +47,11 @@ Feature: User Management - User login session
      When I go to "/admin/config/system/persistent_login"
       And wait
      Then I should see "You are not authorized to access this page."
+
+  @check @local @development @staging @production
+  Scenario: Check that the status report has no Persistent Login error about the session cookie lifetime
+    Given I am a logged in user with the "webmaster" user
+     When I go to "/admin/reports/status"
+      And wait
+     Then I should see "Status report"
+      And I should not see "Session cookie lifetime"

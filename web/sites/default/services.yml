@@ -1,0 +1,16 @@
+# Site-specific service overrides. Drupal loads this file through
+# $settings['container_yamls'] in settings.php. See default.services.yml in this
+# directory for everything that can be set here, with Drupal core's defaults.
+parameters:
+  # Varbase installs Persistent Login, whose "Remember me" keeps people signed
+  # in with its own cookie. The PHP session cookie therefore ends when the
+  # browser closes (cookie_lifetime: 0), as Persistent Login requires. A
+  # parameter set here replaces the whole map, so the other keys repeat Drupal
+  # core's defaults.
+  session.storage.options:
+    gc_probability: 1
+    gc_divisor: 100
+    gc_maxlifetime: 200000
+    cookie_lifetime: 0
+    cookie_samesite: Lax
+    name_suffix: ''
