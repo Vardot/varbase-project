@@ -61,11 +61,7 @@
     "webpack-cli": "^5.0.0"
   },
   "resolutions": {
-    "webpack": "^5",
-    "@cucumber/pretty-formatter": "1.0.1"
+    "webpack": "^5"
   },
-  "packageManager": "yarn@4.18.1",
-  "overrides": {
-    "@cucumber/pretty-formatter": "1.0.1"
-  }
+  "packageManager": "yarn@4.18.1"
 }
