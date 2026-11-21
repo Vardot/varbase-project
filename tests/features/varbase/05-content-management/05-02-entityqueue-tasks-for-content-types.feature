@@ -10,7 +10,6 @@ Feature: Content Management - Standard Entity Queue Management - Have Entity que
       And wait
      Then I should see "Create Test Content"
      When I fill in "Test tab content number 1" for "Title"
-      And I fill in the WYSIWYG field "Body" with the "Test tab content number 1 Body"
       And I press "Save"
       And wait
      Then I should see "Test Content Test tab content number 1 has been created."

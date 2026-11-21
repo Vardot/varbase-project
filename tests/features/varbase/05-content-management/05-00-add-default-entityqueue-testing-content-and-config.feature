@@ -37,7 +37,6 @@ Feature: Content Management - Add default [entityqueue] module testing content a
       And wait
      Then I should see "Create Test Content"
      When I fill in "Test content N1" for "Title"
-      And I fill in the WYSIWYG field "Body" with the "Test content N1 Body"
       And I select "published" from "edit-moderation-state-0-state"
       And I press the "Save" button
       And wait
@@ -46,7 +45,6 @@ Feature: Content Management - Add default [entityqueue] module testing content a
       And wait
      Then I should see "Create Test Content"
      When I fill in "Test content N2" for "Title"
-      And I fill in the WYSIWYG field "Body" with the "Test content N2 Body"
       And I select "published" from "edit-moderation-state-0-state"
       And I press the "Save" button
       And wait
@@ -55,7 +53,6 @@ Feature: Content Management - Add default [entityqueue] module testing content a
       And wait
      Then I should see "Create Test Content"
      When I fill in "Test content N3" for "Title"
-      And I fill in the WYSIWYG field "Body" with the "Test content N3 Body"
       And I select "published" from "edit-moderation-state-0-state"
       And I press the "Save" button
       And wait
