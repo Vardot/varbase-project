@@ -539,6 +539,8 @@ stylelint:
   variables:
     DRUPAL_ADMIN_USERNAME: "webmaster"
     DRUPAL_ADMIN_PASSWORD: "dD.123123ddd"
+    # Proof only: "1" makes amazee.ai unreachable, so the Echo fallback runs.
+    AMAZEE_UNREACHABLE: ""
   artifacts:
     when: on_success
     expire_in: 1 day
@@ -597,6 +599,7 @@ stylelint:
     - $CI_PROJECT_DIR/bin/dr recipe $CI_PROJECT_DIR/recipes/varbase_auth_base || true
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT pm:enable social_auth_facebook social_auth_linkedin -y || true
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild || true
+    - if [ -n "$AMAZEE_UNREACHABLE" ]; then echo "127.0.0.1 api.amazee.ai" >> /etc/hosts; fi
     - $CI_PROJECT_DIR/bin/dr recipe $CI_PROJECT_DIR/recipes/varbase_ai_base || true
     - $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild || true
     - $CI_PROJECT_DIR/bin/dr recipe $CI_PROJECT_DIR/recipes/varbase_ai_context || true
@@ -616,6 +619,12 @@ stylelint:
         $CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT cache:rebuild
         $CI_PROJECT_DIR/bin/dr recipe $CI_PROJECT_DIR/recipes/$r || exit 1
       done
+    # amazee.ai through Drupal CMS AI, or the Echo test provider when amazee.ai
+    # cannot be reached (see tests/README.md, "AI provider").
+    - export DRUSH="$CI_PROJECT_DIR/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT" DR="$CI_PROJECT_DIR/bin/dr"
+    - export DRUPAL_CMS_AI="$CI_PROJECT_DIR/recipes/drupal_cms_ai" SETTINGS_PHP="$CI_PROJECT_DIR/$_WEB_ROOT/sites/default/settings.php"
+    - export AI_RECIPES="$CI_PROJECT_DIR/recipes/varbase_ai_base $CI_PROJECT_DIR/recipes/varbase_ai_context $CI_PROJECT_DIR/recipes/varbase_ai_safety"
+    - . "$CI_PROJECT_DIR/tests/scripts/ai-provider.sh"
     # The AI editor-assistant recipe adds the ai_ckeditor "AI Assistant" button
     # to the full_html toolbar. Rendering that plugin's settings subform on the
     # text-format edit page performs a live AI-provider lookup, which hangs on

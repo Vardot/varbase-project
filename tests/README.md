@@ -268,6 +268,17 @@ CI runs on GitLab CI.
   [`gitlab-ci-local`](https://github.com/firecow/gitlab-ci-local): the linter
   jobs that are reproducible without the drupalci templates + a MySQL service.
 
+### AI provider
+
+The install job applies Varbase AI Base, whose Drupal CMS AI sets up an amazee.ai trial as the default AI
+provider. `tests/scripts/ai-provider.sh` then checks it took. When amazee.ai cannot be reached or refuses the
+trial key, it tries twice more, then enables the AI module's Echo test provider (`echoai`, `gpt-test`) for the
+operations amazee.ai would have, clears the amazee.ai key so no admin page waits on amazee.ai, and prints
+"amazee.ai unavailable: running with the Echo test provider". Varbase AI Safety stays unapplied on Echo, as it
+does today when amazee.ai is down: Echo's reply is not a verdict, so its image check would refuse every upload.
+No scenario in these suites asserts on what a model wrote, so none is skipped. To prove the fallback, run a
+pipeline with the variable `AMAZEE_UNREACHABLE=1`.
+
 ### Test the CI locally with gitlab-ci-local
 
 Requires Docker running (it pulls the `node:24` image; the first run downloads it).
