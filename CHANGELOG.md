@@ -1,3 +1,14 @@
+# 11.0.14
+
+Ships [Varbase 11.0.2](https://www.drupal.org/project/varbase/releases/11.0.2) on Drupal core 11.4.13, with the Varbase Starter site template at 1.0.11.
+
+### Changed since [11.0.12](https://www.drupal.org/project/varbase_project/releases/11.0.12):
+* [#3638902](https://www.drupal.org/i/3638902) fix: Stop unpacking recipes, so the lock of a new project installs: `drupal/core-recipe-unpack` is removed and denied in `allow-plugins`.
+* [#3638901](https://www.drupal.org/i/3638901) fix: Set the session cookie lifetime to 0 for Persistent Login.
+* [#3638900](https://www.drupal.org/i/3638900) task: Change default PHP version to PHP 8.5 in DDEV and CI.
+* [#3638903](https://www.drupal.org/i/3638903) task: Update vardot/varbase-e2e to 2.0.8 for Varbase Project Template (11.0.x).
+* task: Require the released `vardot/varbase: ~11.0.0` and `vardot/varbase-patches: ~11.0.0` lines (were `11.0.x-dev`).
+
 # 11.0.12
 
 Ships [Varbase 11.0.1](https://www.drupal.org/project/varbase/releases/11.0.1) on Drupal core 11.4.12, with the Varbase Starter site template at 1.0.11.
