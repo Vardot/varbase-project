@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## [9.2.5] - 2026-11-23
+
+- task: [#3638900](https://www.drupal.org/project/varbase_project/issues/3638900) Change default PHP version to PHP 8.5 in DDEV and CI
+- Varbase [9.2.3](https://www.drupal.org/project/varbase/releases/9.2.3) and Varbase Patches [9.2.110](https://github.com/Vardot/varbase-patches/releases/tag/9.2.110)
+- Drupal core [11.4.13](https://www.drupal.org/project/drupal/releases/11.4.13) (18 Nov 2026)
+
 ## [9.2.4] - 2026-11-15
 
 - task: [#3635498](https://www.drupal.org/project/varbase_project/issues/3635498) Update Node.js to >= 24.0 in the package.json engines, DDEV and CI
