@@ -1,3 +1,9 @@
+# 10.1.7
+
+### Changed since [10.1.6](https://www.drupal.org/project/varbase_project/releases/10.1.6):
+* [#3638900](https://www.drupal.org/i/3638900) task: Change default PHP version to PHP 8.5 in DDEV and CI.
+* Resolves **Varbase 10.1.4**, **Varbase AI 2.0.16** (drupal/ai 1.5.3) and **Varbase Patches 10.1.100** with Composer's advisory blocking on.
+
 # 10.1.6
 
 ### Changed since [10.1.5](https://www.drupal.org/project/varbase_project/releases/10.1.5):
