@@ -1,3 +1,11 @@
+# 11.0.15
+
+Ships [Varbase 11.0.4](https://www.drupal.org/project/varbase/releases/11.0.4) on Drupal core 11.4.13, with the Varbase Starter site template at 1.0.13.
+
+### Changed since [11.0.14](https://www.drupal.org/project/varbase_project/releases/11.0.14):
+* [#3638908](https://git.drupalcode.org/project/varbase_project/-/work_items/3638908) task: Use caret constraints with `^11.4 || ^12.0` to allow Drupal 11.5 and Drupal 12.
+* task: Require the released `vardot/varbase: ^11.0.4` and `vardot/varbase-patches: ^11.0.61` (were `11.0.x-dev`).
+
 # 11.0.14
 
 Ships [Varbase 11.0.2](https://www.drupal.org/project/varbase/releases/11.0.2) on Drupal core 11.4.13, with the Varbase Starter site template at 1.0.11.
