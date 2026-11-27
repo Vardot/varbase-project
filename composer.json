@@ -23,14 +23,14 @@
         }
     },
     "require": {
-        "composer/installers": "~2",
-        "drupal/core-composer-scaffold": "~11",
-        "drupal/core-project-message": "~11",
-        "cweagans/composer-patches": "~2",
-        "webflo/drupal-finder": "~1.0",
+        "composer/installers": "^2",
+        "drupal/core-composer-scaffold": "~11.4.0",
+        "drupal/core-project-message": "~11.4.0",
+        "cweagans/composer-patches": "^2",
+        "webflo/drupal-finder": "^1.0",
         "vardot/varbase": "10.1.x-dev",
         "vardot/varbase-patches": "10.1.x-dev",
-        "drush/drush": "~13"
+        "drush/drush": "^13"
     },
     "config": {
         "bin-dir": "bin/",
