@@ -1,6 +1,6 @@
 {
     "name": "drupal/varbase_project",
-    "version": "11.0.x-dev",
+    "version": "11.0.16",
     "description": "Project template for Varbase distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
@@ -26,14 +26,14 @@
         "composer/composer": "^2.9",
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^2.0",
-        "drupal/core-composer-scaffold": "^11.4 || ^12.0",
-        "drupal/core-project-message": "^11.4 || ^12.0",
-        "drupal/core-recommended": "^11.4 || ^12.0",
-        "drupal/core-vendor-hardening": "^11.4 || ^12.0",
-        "drupal/core": "^11.4 || ^12.0",
+        "drupal/core-composer-scaffold": "~11.4.0",
+        "drupal/core-project-message": "~11.4.0",
+        "drupal/core-recommended": "~11.4.0",
+        "drupal/core-vendor-hardening": "~11.4.0",
+        "drupal/core": "~11.4.0",
         "drush/drush": "^13",
-        "vardot/varbase": "11.0.x-dev",
-        "vardot/varbase-patches": "11.0.x-dev"
+        "vardot/varbase": "^11.0.5",
+        "vardot/varbase-patches": "^11.0.63"
     },
     "conflict": {
         "drupal/drupal": "*"
